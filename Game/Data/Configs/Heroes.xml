@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Heroes -->
+<heroes>
+    <priest>
+		<hitpoints        attribute="80"/>
+		<speed            attribute="330.0"/>
+		<fireInterval     attribute="1"/>
+		<texture          attribute="Textures::ID::Heroes"/>
+		<textureRect      attribute0="0" attribute1="32" attribute2="32" attribute3="32"/>
+	</priest>
+    <warrior>
+		<hitpoints        attribute="100"/>
+		<speed            attribute="260.0"/>
+		<fireInterval     attribute="2"/>
+		<texture          attribute="Textures::ID::Heroes"/>
+		<textureRect      attribute0="128" attribute1="160" attribute2="32" attribute3="32"/>
+	</warrior>
+    <wizard>
+		<hitpoints        attribute="60"/>
+		<speed            attribute="350.0"/>
+		<fireInterval     attribute="1"/>
+		<texture          attribute="Textures::ID::Heroes"/>
+		<textureRect      attribute0="64" attribute1="128" attribute2="32" attribute3="32"/>
+	</wizard>
+</heroes>
