@@ -9,7 +9,7 @@ namespace States
 		None,
 		Title,
 		Menu,
-		Settings,
+		Credits,
 		Game,
 //		Pause,
 //		GameOver

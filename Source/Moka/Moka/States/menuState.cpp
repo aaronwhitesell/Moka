@@ -29,10 +29,10 @@ MenuState::MenuState(trmb::StateStack& stack, trmb::State::Context context)
 
 	auto settingsButton = std::make_shared<trmb::Button>(context, Fonts::ID::Main, SoundEffects::ID::Button, Textures::ID::Buttons, 200, 50);
 	settingsButton->setPosition(20, 400);
-	settingsButton->setText("Settings");
+	settingsButton->setText("Credits");
 	settingsButton->setCallback([this] ()
 	{
-		requestStackPush(States::ID::Settings);
+		requestStackPush(States::ID::Credits);
 	});
 
 	auto exitButton = std::make_shared<trmb::Button>(context, Fonts::ID::Main, SoundEffects::ID::Button, Textures::ID::Buttons, 200, 50);

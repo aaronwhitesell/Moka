@@ -5,7 +5,7 @@
 //#include "../Game/State/gameOverState.h"
 #include "../States/menuState.h"
 //#include "../Game/State/pauseState.h"
-#include "../States/settingsState.h"
+#include "../States/creditState.h"
 #include "../States/stateIdentifiers.h"
 #include "../States/titleState.h"
 
@@ -21,7 +21,7 @@
 const sf::Time Application::TimePerFrame = sf::seconds(1.f / 60.f);
 
 Application::Application()
-	: mWindow(sf::VideoMode(800, 600), "Vary", sf::Style::Close)
+	: mWindow(sf::VideoMode(800, 600), "Moka", sf::Style::Close)
 	, mTextures()
 	, mFonts()
 	, mPlayer()
@@ -128,6 +128,6 @@ void Application::registerStates()
 	mStateStack.registerState<MenuState>(States::ID::Menu);
 	mStateStack.registerState<GameState>(States::ID::Game);
 //	mStateStack.registerState<PauseState>(States::ID::Pause);
-	mStateStack.registerState<SettingsState>(States::ID::Settings);
+	mStateStack.registerState<CreditState>(States::ID::Credits);
 //	mStateStack.registerState<GameOverState>(States::ID::GameOver);
 }

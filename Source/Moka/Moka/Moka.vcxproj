@@ -84,9 +84,9 @@
     <ClInclude Include="Player\devices.h" />
     <ClInclude Include="Player\player.h" />
     <ClInclude Include="Resources\resourceIdentifiers.h" />
+    <ClInclude Include="States\creditState.h" />
     <ClInclude Include="States\gameState.h" />
     <ClInclude Include="States\menuState.h" />
-    <ClInclude Include="States\settingsState.h" />
     <ClInclude Include="States\stateIdentifiers.h" />
     <ClInclude Include="States\titleState.h" />
   </ItemGroup>
@@ -98,9 +98,9 @@
     <ClCompile Include="Player\controller.cpp" />
     <ClCompile Include="Player\devices.cpp" />
     <ClCompile Include="Player\player.cpp" />
+    <ClCompile Include="States\creditState.cpp" />
     <ClCompile Include="States\gameState.cpp" />
     <ClCompile Include="States\menuState.cpp" />
-    <ClCompile Include="States\settingsState.cpp" />
     <ClCompile Include="States\titleState.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
