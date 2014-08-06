@@ -1,0 +1,12 @@
+Objective: Rid your town of malaria
+
+How can you do this?
+1. Purchase wood and construct a barrel lid ($2)
+2. Purchase wood and mesh, and construct a window screen ($4)
+3. Purchase and plant tomatoes and lemon grass ($1)
+4. Purchase and distribute a insecticide-treated net ($3)
+5. Purchase and distribute RDTs to clinic ($1)
+6. Awareness campaign ($5)
+7. Repair a net ($0.50)
+8. Close doors and windows (free)
+9. Trim overgrown plants (free)

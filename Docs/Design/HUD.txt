@@ -1,0 +1,21 @@
+Information to Display:
+1. Money count
+2. Dialog box
+3. Done button
+
+Actions:
+1. Right Click - Select and print inspection dialog.
+2. Left Click - Select, Context Menu, and print inspection dialog if object was not just inspected with a right click.
+
+Context Menu:
+1. Barrel Lid - Right Click (on barrel) + Construct  Barrel Lid
+2. Window Screen - Right Click (on window) + Construct  Window Screen
+3. Tomato - Right Click (on Grass) + Plant Tomato
+4. Lemon Grass - Right Click (on Grass) + Plant Lemon Grass
+5. ITNs - Right Click (on home) + Deliever Insecticide-Treated Net
+6. RDTs - Right Click (on clinic) + Deliever RDTs
+7. Awareness Campaign - Right Click (on Grass) + Announce Awareness Campaign
+8. Repair a Net - Right Click (on home) + Repair a Net
+9. Close Door - Right Click (on Door) + Close Door
+10. Close Window - Right Click (on Window) + Close Window
+11. Trim overgrown - Right Click (on Overgrown Plants) + Trim Plants

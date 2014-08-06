@@ -1,0 +1,32 @@
+My goal for this game is to create a game that is both fun and educates the player about malaria.  The game is broken into a building phase and a simulation phase.  
+
+The building phase begins with a short introduction and a bird's-eye view of a neighborhood.  The opening dialog explains that the player has just been elected mayor of their town.  However, their otherwise pleasant town has one major issue, malaria.  The player is then asked to look around the neighborhood and identify different ways to combat malaria.  Here are all prevention methods they will discover and their cost.
+
+1. Purchase wood and construct a barrel lid ($2)
+2. Purchase wood and mesh, and construct a window screen ($4)
+3. Purchase and plant tomatoes ($1)
+4. Purchase and plant lemon grass ($1)
+5. Purchase and distribute a insecticide-treated net ($3)
+6. Purchase and distribute RDTs to clinic ($1)
+7. Awareness campaign ($5)
+8. Repair a net ($0.50)
+9. Close doors (Free)
+10. Close windows (Free) 
+11. Trim overgrown plants (Free)
+
+The player's job as mayor is to spend the resources wisely and review the results to develop a new pilot program to fight malaria in their city.  When the player purchases a prevention method for the first time the prevention method will be explained.  Here all the preliminary explanations.
+
+1. Barrel Lid - Covering standing water reduces mosquito breeding grounds.
+2. Window Screen - Window screens keep the mosquitoes out and lets the cool breeze in.
+3. Tomato - Tomatoes around the house will act as a natural repellent.
+4. Lemon Grass - Lemon grass around the house will act as a natural repellent, and you can cook with it.
+5. ITNs - Impregnated bed nets are one of the most effective methods of combating malaria. However, they must be used every night!
+6. RDTs - Rapid detection and treatment increase the patients chances of a full recovery. It can also lower the transmission rate by blocking or reducing the production of gametocytes, which are required to pass the infection to a mosquito and then onward to a human.  (Paraphrase from Malaria Handbook p6)
+7. Awareness Campaign - Awareness campaigns increase the likelihood a citizen will use a bed net or RDT. Organize them near homes and clinics for the most benefit. Running multiple campaigns can have a bonus effect as citizens become experts and share with family and neighbors.
+8. Repair a Net - Small holes in bed nets can be fixed, simply with needle and thread.
+9. Close Door or Window - In Africa, malaria-carrying mosquitos typically bite between dusk and dawn. Do not forget to close windows and doors between those times! (Paraphrased from Malaria Handbook p14)
+10. Trim Overgrown Plant - Overgrown plants can create mosquito friendly habitats.
+
+To add more depth to the game, some prevention methods synergize with other prevention methods.  For example, if you hold an awareness campaign near a home with a repaired bed net the effect is stronger than the three prevention methods (bed net, repaired net, and awareness campaign) used separately.  When the discovery of a new synergy is made the player is notified with an achievement message.  In this example, I dubbed the discovery "The Hat Trick," and then give a short explanation of the game mechanic.
+
+The building phase is over when you have spent all your money, or the player decides they are done.  The town darkens as night approaches and the buzz of mosquitoes are heard.  This begins the simulation phase, which analyzes the effectiveness of the prevention methods used verses simulated mosquitoes.  During this phase targeted messages are directed at the player as major events occur in the simulation.  For instance, when the first resident contracts malaria a message will pop up explaining the symptoms of malaria and when a person should go to the doctor and ask for a RDT.  After two minutes the simulation phase is over and the player is presented with a scoreboard that is made to look like a powerpoint presentation in a staff meeting.  The detailed scoreboard helps highlight what aspects of the player's strategy was effective and was not.  The game is now over, but the player is invited to play again and try to devise a even more successful pilot program.  Each time the player plays through the game they will have a chance to see more messages.  There will be fifty to a hundred different unique malaria related messages.  These facts can be tailored to a specific organization's message or region where the game is distributed.

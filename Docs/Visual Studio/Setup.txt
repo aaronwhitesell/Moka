@@ -1,0 +1,47 @@
+File Structure
+Moka
+-Assets
+-Docs
+-Game:
+-Source\Moka\Moka: location of cpp files
+-Temp: location of output and intermediate files
+
+Project Setup
+1. FILE -> New Project...
+2. Installed -> Templates -> Visual C++ -> General
+3. Empty Project
+4. Name and Solution Name
+5. (checked) Create directory for solution
+6. Verify Location + Ok
+
+Project Configuration
+1. Project Properties -> Configuration Properties -> General -> Output Directory
+   (Debug) $(SolutionDir)..\..\Temp\DebugWin32VS2013\
+   (Release) $(SolutionDir)..\..\Temp\ReleaseWin32VS2013\
+2. Project Properties -> Configuration Properties -> General -> Intermediate Directory
+   (Debug) $(SolutionDir)..\..\Temp\DebugWin32VS2013\$(Configuration)\
+   (Release) $(SolutionDir)..\..\Temp\ReleaseWin32VS2013\$(Configuration)\
+3. Project Properties -> Configuration Properties -> Debugging -> Working Directory
+   (All Configurations) $(SolutionDir)..\..\Game
+4. Necessary, because of a bug in VS2012 and VS2013.
+   Project Properties -> Configuration Properties -> Debugging -> Environment
+   (All Configurations) PATH=%PATH%;$(SolutionDir)..\..\Game
+
+Trambo Configuration
+1. Project Properties -> Configuration Properties -> C++ -> Additional Include Directories
+   (All Configurations) $(SolutionDir)..\..\..\Trambo\Include (WARNING: links directly to Trambo project)
+2. Project Properties -> Configuration Properties -> Linker -> Additional Library Directories
+   (Debug) $(SolutionDir)..\..\..\Trambo\Lib\DebugWin32VS2013 (WARNING: links directly to Trambo project)
+   (Release) $(SolutionDir)..\..\..\Trambo\Lib\ReleaseWin32VS2013 (WARNING: links directly to Trambo project)
+3. Project Properties -> Configuration Properties -> Linker -> Input -> Additional Depedencies
+   (Debug) Trambo-d.lib
+   (Release) Trambo.lib
+
+SFML Configuration
+1. Project Properties -> Configuration Properties -> C++ -> Additional Include Directories
+   (All Configurations) $(SolutionDir)..\3rdParty\SFML-2.1\include
+2. Project Properties -> Configuration Properties -> Linker -> Additional Library Directories 
+   (All Configurations) $(SolutionDir)..\3rdParty\SFML-2.1\lib
+3. Project Properties -> Configuration Properties -> Linker -> Input -> Additional Depedencies
+   (Debug) sfml-audio-d.lib, sfml-graphics-d.lib, sfml-system-d.lib, sfml-window-d.lib
+   (Release) sfml-audio.lib, sfml-graphics.lib, sfml-system.lib, sfml-window.lib

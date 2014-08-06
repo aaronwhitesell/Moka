@@ -1,0 +1,67 @@
+Introduction:
+Congratulations, you have just been elected the new mayor of Pleasantville! Pleasantville is a wonderful place, but it has one big problem, malaria.  Help the residents of your town develop a effective strategy to fight malaria.  First, have a look around a neighborhood of Pleasantville and identify different ways to combat malaria.  Then spend your resources wisely.  Afterwards, we will have a board meeting and check the effectiveness of your plan.
+
+Finished spending resources:
+1. 100% - 
+2. 75% to 99% - Good job! Lets check the results in a staff meeting!
+3. 50% to 73% -
+4. 26% to 49% - Hrm, lets check the results in a staff meeting.
+5. 01% to 25% -
+6. 0% - You have spent no money!  Don't count on a reelection!
+
+Displayed when item is inspected (selected):
+1. Open barrel - You have found standing water.
+2. Closed barrel - The barrel is covered.
+3. Open window w/ no screen - You have noticed an open window with no screen.
+4. Open window w/ screen - You have noticed an open window with a screen.
+5. Closed window - The window is closed.  
+6. Tomato plant - The tomatoes look ready to be picked.
+7. Lemon grass - You smell the scent of lemon grass.
+8. Open door - You have noticed an open door.
+9. Closed door - You have noticed a closed door.
+10. Overgrown plants - You think the plant looks wild and overgrown.
+11. Trimmed plants - You think the plant looks well maintained.
+12. Home - # of beds, # of nets, condition of nets, are residents sleeping in their nets?
+13. Clinic - How well stocked is the clinic?  Does the doctor believe patients are getting RDTs and following the treatment?
+
+Confirmation of purchase:
+1. Barrel Lid - Constructed a barrel lid.
+2. Window Screen - Constructed a window screen.
+3. Tomato - Planted tomatoes.
+4. Lemon Grass - Planted lemon grass.
+5. ITNs - Delievered an insecticide-treated net.
+6. RDTs - Delievered RDTs.
+7. Awareness Campaign - Planned to hold a Awareness Campaign here.
+8. Repair a Net - A net was repaired.
+9. Close Door - The door was closed.
+10. Close Window - The window was closed.
+11. Trim Overgrown Plant - The plant was trimmed. 
+
+Displayed when item is placed for 1st time:
+1. Barrel Lid - Covering standing water reduces mosquito breeding grounds.
+2. Window Screen - Window screens keep the mosquitoes out and lets the cool breeze in.
+3. Tomato - Tomatoes around the house will act as a natural repellent.
+3. Lemon Grass - Lemon grass around the house will act as a natural repellent, and you can cook with it.
+4. ITNs - Impregnated bed nets are one of the most effective methods of combating malaria. However, they must be used every night!
+5. RDTs - Rapid detection and treatment increase the patients chances of a full recovery. It can also lower the transmission rate by blocking or reducing the production of gametocytes, which are required to pass the infection to a mosquito and then onward to a human.  (Paraphrase from Malaria Handbook p6)
+6. Awareness Campaign - Awareness campaigns increase the likelihood a citizen will use a bed net or RDT. Organize them near homes and clinics for the most benefit. Running multiple campaigns can have a bonus effect as citizens become experts and share with family and neighbors.
+7. Repair a Net - Small holes in bed nets can be fixed simply with needle and thread.
+8. Close Door or Window - In Africa, malaria-carrying mosquitos typically bite between dusk and dawn. Do not forget to close windows and doors between those hours! (Paraphrased from Malaria Handbook p14)
+9. Trim Overgrown Plant - Overgrown plants can create mosquito friendly habitats.
+
+Content Menu:
+1. Barrel Lid - Construct Barrel Lid
+2. Window Screen - Construct Window Screen
+3. Tomato - Plant Tomato
+4. Lemon Grass - Plant Lemon Grass
+5. ITNs - Deliever Insecticide-Treated Net
+6. RDTs - Deliever RDTs
+7. Awareness Campaign - Announce Awareness Campaign
+8. Repair a Net - Repair a Net
+9. Close Door - Close Door
+10. Close Window - Close Window
+11. Trim overgrown - Trim Plants
+
+Achievements:
+1. The Goal Keeper (80% bed net use every night)
+2. The Hat Trick (net, repaired net, and an awareness campaign)

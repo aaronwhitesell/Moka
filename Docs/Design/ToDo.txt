@@ -1,0 +1,12 @@
+1. Start new project w/ base game project
+2. Remove Hero class and add mouse control
+3. Add class for interactive game objects and their properties
+4. Implement 1 action for interactive game objects
+5. Add class for dialog text
+6. Localization scheme
+7. HUD
+8. Simulation mode
+9. Scoreboard
+10. Display malaria facts
+11. Research malaria strings
+

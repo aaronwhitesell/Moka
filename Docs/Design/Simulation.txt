@@ -1,0 +1,40 @@
+Probabilities:
+By default ever map tile has an equal probablity of having a mosquito swarm. However, tiles with uncovered barrels of water or overgrown plants have an increased probablity of having mosquito swarms in the immediate area.  Each swarm randomly moves from tile to tile.  Each home has a predetermined number of residents.  If a mosquito swarm and a resident come in contact from dusk to dawn there is a probability malaria will be transmitted.  Infected residents increase the default rate of transmission in future collisions of mosquito swarms and residents.
+
+1. Barrel lids 
+* Lower probability mosquito swarms back to default probablity.
+2. Window screens 
+* Lower probability mosquito swarms can move from outside to inside a house.
+* Also, lowers probability of mosquito swarms inside a house.
+3. Planting tomatoes and lemon grass 
+* Lower probability of mosquito swarms in immediate area.  
+* If planted near door or windows lower probability of mosquito swarms can move from outside to inside a house.
+4. A distributed insecticide-treated net
+* A net is not guaranteed to be used.  
+* However, if it is used it greatly reduces the probability of a mosquito swarm and a resident coming in contact during sleeping hours.
+* Insecticide-treated net lowers probability of mosquito swarms inside a house.
+* If 80% of the residents have and use their net, then the default transmission is reduced by a to be determined percent.
+5. Distribute RDTs to clinic
+* RDTs and treatment is not guaranteed to be used.
+* However, if it is used then the transmission rate between a mosquito swarm and a resident is lowered.  However, it is not lowered below the default transmission rate.
+6. Awareness campaigns 
+* Near homes they will increase the probability a net will be used in those homes. 
+** It also increases the probability the net is used correctly.  Lowering the probability mosquito swarms can move from outside a net to inside a net.
+* Near clinics they will increase the probability RDTs and treatment will be used in homes near the clinics.
+** It also increases the probability the treatment is used correctly.  Increasing the probability a resident will be cured.
+7. Repairing a net
+* Lower probability mosquito swarms can move from outside a net to inside a net
+8. Closed doors and windows 
+* Lower probability mosquito swarms can move from outside to inside a house.
+9. Trim overgrown plants
+* Lower probability of mosquito swarms back to default probablity.
+
+Synergies:
+1. Awareness campaigns by houses with nets will increase bed net usage.
+2. Awareness campaigns by clinics with RDTs will increase RDT usage of surrounding homes.
+3. A second awareness campaign by houses with nets will further increase bed net usage and correct usage.
+4. A second awareness campaign by clinics with RDTs will further increase RDT usage and correct usage of treatments of surrounding homes.
+5. A repaired net combined with a awareness campaign will lower the probability a mosquito swarm can move from outside to inside a net to 0%.
+6. Homes with no standing water and trimmed plants around them have a bonus to lowering the probability of a mosquito swarm around the home (can be lowered below default probability).
+7. Homes with Insecticide-treated nets and window screens have a bonus to lowering the probability of a mosquito swarm inside the homes (can be lowered below default probability).
+8. Homes with trimmed plants and closed doors and windows have a bonus to lowering the probability of a mosquito swarm moving from outside to inside the home.
