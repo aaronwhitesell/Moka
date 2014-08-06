@@ -4,6 +4,12 @@
 
 
 Controller::Controller()
+: mUp(0x84b05719)
+, mDown(0xa95ea771)
+, mLeft(0x84e6c13c)
+, mRight(0x19e343e8)
+, mJump(0x6955d309)
+, mShoot(0x3e6524cd)
 {
 	// ALW - Create a map of event guids and corresponding actions
 	mActionBindings.createAction(mUp);
@@ -22,32 +28,32 @@ Controller::Controller()
 	mActionBindings.assignMouseButtonAsButtonBinding(trmb::MouseButtonAsButton(sf::Mouse::Left,	 trmb::MouseButtonAsButton::ButtonType::RealTime), mShoot);
 }
 
-const trmb::ActionBinding::EventGuid Controller::getUp() const
+trmb::ActionBinding::EventGuid Controller::getUp() const
 {
 	return mUp;
 }
 
-const trmb::ActionBinding::EventGuid Controller::getDown() const
+trmb::ActionBinding::EventGuid Controller::getDown() const
 {
 	return mDown;
 }
 
-const trmb::ActionBinding::EventGuid Controller::getLeft() const
+trmb::ActionBinding::EventGuid Controller::getLeft() const
 {
 	return mLeft;
 }
 
-const trmb::ActionBinding::EventGuid Controller::getRight() const
+trmb::ActionBinding::EventGuid Controller::getRight() const
 {
 	return mRight;
 }
 
-const trmb::ActionBinding::EventGuid Controller::getJump() const
+trmb::ActionBinding::EventGuid Controller::getJump() const
 {
 	return mJump;
 }
 
-const trmb::ActionBinding::EventGuid Controller::getShoot() const
+trmb::ActionBinding::EventGuid Controller::getShoot() const
 {
 	return mShoot;
 }
