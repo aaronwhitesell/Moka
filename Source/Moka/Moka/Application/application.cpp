@@ -10,6 +10,7 @@
 #include "../States/titleState.h"
 
 #include "Trambo/States/state.h"
+#include "Trambo/Utilities/utility.h"
 
 #include <SFML/System/Clock.hpp>
 #include <SFML/Window/Event.hpp>
@@ -85,7 +86,8 @@ void Application::processInput()
 	sf::Event event;
 	while (mWindow.pollEvent(event))
 	{
-		mStateStack.handleEvent(event);
+		if (trmb::isWindowFocused(mWindow))
+			mStateStack.handleEvent(event);
 
 		if (event.type == sf::Event::Closed)
 			mWindow.close();
@@ -94,7 +96,8 @@ void Application::processInput()
 
 void Application::update(sf::Time dt)
 {
-	mStateStack.update(dt);
+	if (trmb::isWindowFocused(mWindow))
+		mStateStack.update(dt);
 }
 
 void Application::render()
