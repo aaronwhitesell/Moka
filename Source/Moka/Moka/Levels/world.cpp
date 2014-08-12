@@ -1,6 +1,7 @@
 #include "world.h"
 #include "../Resources/resourceIdentifiers.h"
 
+#include "Trambo/Events/event.h"
 #include "Trambo/SceneNodes/mapLayerNode.h"
 #include "Trambo/SceneNodes/spriteNode.h"
 #include "Trambo/Sounds/soundPlayer.h"
@@ -12,7 +13,9 @@
 
 
 World::World(sf::RenderTarget& outputTarget, trmb::FontHolder& fonts, trmb::SoundPlayer& sounds)
-: mTarget(outputTarget)
+: mFullscreen(0x5a0d2314)
+, mWindowed(0x11e3c735)
+, mTarget(outputTarget)
 , mTextures()
 , mFonts(fonts)
 , mSounds(sounds)
@@ -32,6 +35,15 @@ void World::update(sf::Time dt)
 {
 	mSceneGraph.update(dt);					// ALW - Update the hero along with the rest of the scene graph
 	mCamera.update(mHero->getPosition());	// ALW - Update the camera position
+}
+
+void World::handleEvent(const trmb::Event &gameEvent)
+{
+	// ALW - Currently, fullscreen and windowed mode are the same.
+	if (mFullscreen == gameEvent.getType() || mWindowed == gameEvent.getType())
+	{
+		mCamera.setSize(mTarget.getDefaultView().getSize());
+	}
 }
 
 void World::draw()

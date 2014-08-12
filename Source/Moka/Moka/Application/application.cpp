@@ -32,6 +32,7 @@ Application::Application()
 	, mStatisticsText()
 	, mStatisticsUpdateTime()
 	, mStatisticsNumFrames(0)
+	, mToggleFullscreen(mWindow)
 {
 	mWindow.setKeyRepeatEnabled(false);
 
@@ -86,6 +87,8 @@ void Application::processInput()
 	sf::Event event;
 	while (mWindow.pollEvent(event))
 	{
+		mToggleFullscreen.handleEvent(event);
+
 		if (trmb::isWindowFocused(mWindow))
 			mStateStack.handleEvent(event);
 
@@ -102,7 +105,8 @@ void Application::update(sf::Time dt)
 
 void Application::render()
 {
-	mWindow.clear();
+	// ALW - Clear the background to match menu.
+	mWindow.clear(sf::Color(18u, 1u, 34u, 255u));
 
 	mStateStack.draw();
 

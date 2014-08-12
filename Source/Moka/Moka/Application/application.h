@@ -1,6 +1,7 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
+#include "toggleFullscreen.h"
 #include "../Player/player.h"
 
 #include "Trambo/Resources/resourceHolder.h"
@@ -44,6 +45,8 @@ private:
 	sf::Text				mStatisticsText;
 	sf::Time				mStatisticsUpdateTime;
 	std::size_t				mStatisticsNumFrames;
+
+	ToggleFullscreen		mToggleFullscreen;
 };
 
 #endif

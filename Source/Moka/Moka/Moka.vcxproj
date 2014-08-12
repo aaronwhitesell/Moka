@@ -78,6 +78,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Application\application.h" />
+    <ClInclude Include="Application\toggleFullscreen.h" />
     <ClInclude Include="Entities\hero.h" />
     <ClInclude Include="Levels\world.h" />
     <ClInclude Include="Player\controller.h" />
@@ -92,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\application.cpp" />
+    <ClCompile Include="Application\toggleFullscreen.cpp" />
     <ClCompile Include="Entities\hero.cpp" />
     <ClCompile Include="Levels\world.cpp" />
     <ClCompile Include="main.cpp" />

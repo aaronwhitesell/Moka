@@ -2,50 +2,65 @@
 #include "stateIdentifiers.h"
 #include "../Resources/resourceIdentifiers.h"
 
-#include "Trambo/GUI/button.h"
+#include "Trambo/Events/event.h"
 #include "Trambo/Sounds/musicPlayer.h"
+#include "Trambo/Utilities/utility.h"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/View.hpp>
 #include <SFML/System/Time.hpp>
 #include <SFML/Window/Event.hpp>
 
+#include <cmath>
+
 
 MenuState::MenuState(trmb::StateStack& stack, trmb::State::Context context)
 : trmb::State(stack, context)
+, mFullscreen(0x5a0d2314)
+, mWindowed(0x11e3c735)
 , mGUIContainer(context.window)
 {
+	const sf::Vector2f center = sf::Vector2f(context.window->getSize() / 2u);
+
 	sf::Texture& texture = context.textures->get(Textures::ID::TitleScreen);
 	mBackgroundSprite.setTexture(texture);
+	trmb::centerOrigin(mBackgroundSprite);
+	mBackgroundSprite.setPosition(center);
 
-	auto playButton = std::make_shared<trmb::Button>(context, Fonts::ID::Main, SoundEffects::ID::Button, Textures::ID::Buttons, 200, 50);
-	playButton->setPosition(20, 350);
-	playButton->setText("Play");
-	playButton->setCallback([this] ()
+	// ALW - Calculate x, y coordinates relative to the center of the window,
+	// ALW - so GUI elements are equidistance from the center in any resolution.
+	const float x = center.x - 350.0f;
+	const float y = center.y - 50.0f;
+	const float buttonHeight = 50.0f;
+
+	mPlayButton = std::make_shared<trmb::Button>(context, Fonts::ID::Main, SoundEffects::ID::Button, Textures::ID::Buttons, 200, 50);
+	mPlayButton->setPosition(x, y);
+	mPlayButton->setText("Play");
+	mPlayButton->setCallback([this] ()
 	{
 		requestStackPop();
 		requestStackPush(States::ID::Game);
 	});
 
-	auto settingsButton = std::make_shared<trmb::Button>(context, Fonts::ID::Main, SoundEffects::ID::Button, Textures::ID::Buttons, 200, 50);
-	settingsButton->setPosition(20, 400);
-	settingsButton->setText("Credits");
-	settingsButton->setCallback([this] ()
+	mCreditButton = std::make_shared<trmb::Button>(context, Fonts::ID::Main, SoundEffects::ID::Button, Textures::ID::Buttons, 200, 50);
+	mCreditButton->setPosition(x, y + buttonHeight);
+	mCreditButton->setText("Credits");
+	mCreditButton->setCallback([this]()
 	{
 		requestStackPush(States::ID::Credits);
 	});
 
-	auto exitButton = std::make_shared<trmb::Button>(context, Fonts::ID::Main, SoundEffects::ID::Button, Textures::ID::Buttons, 200, 50);
-	exitButton->setPosition(20, 450);
-	exitButton->setText("Exit");
-	exitButton->setCallback([this] ()
+	mExitButton = std::make_shared<trmb::Button>(context, Fonts::ID::Main, SoundEffects::ID::Button, Textures::ID::Buttons, 200, 50);
+	mExitButton->setPosition(x, y + 2.0f * buttonHeight);
+	mExitButton->setText("Exit");
+	mExitButton->setCallback([this]()
 	{
 		requestStackPop();
 	});
 
-	mGUIContainer.pack(playButton);
-	mGUIContainer.pack(settingsButton);
-	mGUIContainer.pack(exitButton);
+	mGUIContainer.pack(mPlayButton);
+	mGUIContainer.pack(mCreditButton);
+	mGUIContainer.pack(mExitButton);
 
 	// Play menu theme
 	context.music->play(Music::ID::MenuTheme);
@@ -70,4 +85,24 @@ bool MenuState::handleEvent(const sf::Event& event)
 {
 	mGUIContainer.handleEvent(event);
 	return false;
+}
+
+void MenuState::handleEvent(const trmb::Event &gameEvent)
+{
+	// ALW - Currently, fullscreen and windowed mode are the same.
+	if (mFullscreen == gameEvent.getType() || mWindowed == gameEvent.getType())
+	{
+		const sf::Vector2f center = sf::Vector2f(getContext().window->getSize() / 2u);
+		mBackgroundSprite.setPosition(center);
+
+		// ALW - Calculate x, y coordinates relative to the center of the window,
+		// ALW - so GUI elements are equidistance from the center in any resolution.
+		const float x = center.x - 350.0f;
+		const float y = center.y - 50.0f;
+		const float buttonHeight = 50.0f;
+
+		mPlayButton->setPosition(sf::Vector2f(x, y));
+		mCreditButton->setPosition(sf::Vector2f(x, y + buttonHeight));
+		mExitButton->setPosition(sf::Vector2f(x, y + 2.0f * buttonHeight));
+	}
 }
