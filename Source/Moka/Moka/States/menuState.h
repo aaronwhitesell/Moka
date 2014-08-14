@@ -7,6 +7,7 @@
 #include "Trambo/States/state.h"
 
 #include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Text.hpp>
 
 #include <memory>
 
@@ -40,10 +41,15 @@ private:
 
 
 private:
+	void					repositionGUI();
+
+
+private:
 	const EventGuid					mFullscreen; // ALW - Matches the GUID in the ToggleFullscreen class.
 	const EventGuid					mWindowed;   // ALW - Matches the GUID in the ToggleFullscreen class.
 
 	sf::Sprite						mBackgroundSprite;
+	sf::Text						mText;
 	std::shared_ptr<trmb::Button>	mPlayButton;
 	std::shared_ptr<trmb::Button>	mCreditButton;
 	std::shared_ptr<trmb::Button>	mExitButton;

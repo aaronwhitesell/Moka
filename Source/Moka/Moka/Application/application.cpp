@@ -12,6 +12,7 @@
 #include "Trambo/States/state.h"
 #include "Trambo/Utilities/utility.h"
 
+#include <SFML/Graphics/Color.hpp>
 #include <SFML/System/Clock.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/VideoMode.hpp>
@@ -37,6 +38,7 @@ Application::Application()
 	mWindow.setKeyRepeatEnabled(false);
 
 	mFonts.load(Fonts::ID::Main, "Data/Fonts/Sansation.ttf");
+	mFonts.load(Fonts::ID::Title, "Data/Fonts/Lazy Sans.ttf");
 
 	mTextures.load(Textures::ID::TitleScreen, "Data/Textures/TitleScreen.png");
 	mTextures.load(Textures::ID::Buttons, "Data/Textures/Buttons.png");
@@ -106,7 +108,7 @@ void Application::update(sf::Time dt)
 void Application::render()
 {
 	// ALW - Clear the background to match menu.
-	mWindow.clear(sf::Color(18u, 1u, 34u, 255u));
+	mWindow.clear(sf::Color(141u, 196u, 53u, 255u));
 
 	mStateStack.draw();
 

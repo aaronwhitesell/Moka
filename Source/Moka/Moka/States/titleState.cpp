@@ -14,6 +14,8 @@ TitleState::TitleState(trmb::StateStack& stack, trmb::State::Context context)
 , mShowText(true)
 , mTextEffectTime(sf::Time::Zero)
 {
+	// ALW - Calculate x, y coordinates relative to the center of the window,
+	// ALW - so GUI elements are equidistance from the center in any resolution.
 	sf::Vector2f center = sf::Vector2f(context.window->getSize() / 2u);
 
 	sf::Texture& texture = context.textures->get(Textures::ID::TitleScreen);
@@ -24,7 +26,7 @@ TitleState::TitleState(trmb::StateStack& stack, trmb::State::Context context)
 	mText.setFont(context.fonts->get(Fonts::ID::Main));
 	mText.setString("Press any key to start");
 	trmb::centerOrigin(mText);
-	mText.setPosition(center);
+	mText.setPosition(center - sf::Vector2f(0.0f, 50.0f));
 }
 
 void TitleState::draw()

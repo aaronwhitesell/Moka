@@ -17,6 +17,7 @@ namespace Fonts
 	enum class ID
 	{
 		Main,
+		Title,
 	};
 }
 
