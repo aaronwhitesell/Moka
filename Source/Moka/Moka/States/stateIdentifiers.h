@@ -11,7 +11,7 @@ namespace States
 		Menu,
 		Credits,
 		Game,
-//		Pause,
+		Pause,
 //		GameOver
 	};
 }

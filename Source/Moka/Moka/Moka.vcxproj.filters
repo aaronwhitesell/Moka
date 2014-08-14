@@ -83,6 +83,9 @@
     <ClInclude Include="Application\toggleFullscreen.h">
       <Filter>Header Files\Application</Filter>
     </ClInclude>
+    <ClInclude Include="States\pauseState.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\application.cpp">
@@ -120,6 +123,9 @@
     </ClCompile>
     <ClCompile Include="Application\toggleFullscreen.cpp">
       <Filter>Source Files\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="States\pauseState.cpp">
+      <Filter>Source Files\States</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -88,6 +88,7 @@
     <ClInclude Include="States\creditState.h" />
     <ClInclude Include="States\gameState.h" />
     <ClInclude Include="States\menuState.h" />
+    <ClInclude Include="States\pauseState.h" />
     <ClInclude Include="States\stateIdentifiers.h" />
     <ClInclude Include="States\titleState.h" />
   </ItemGroup>
@@ -103,6 +104,7 @@
     <ClCompile Include="States\creditState.cpp" />
     <ClCompile Include="States\gameState.cpp" />
     <ClCompile Include="States\menuState.cpp" />
+    <ClCompile Include="States\pauseState.cpp" />
     <ClCompile Include="States\titleState.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

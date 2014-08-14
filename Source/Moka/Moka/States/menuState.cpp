@@ -12,8 +12,6 @@
 #include <SFML/System/Time.hpp>
 #include <SFML/Window/Event.hpp>
 
-#include <cmath>
-
 
 MenuState::MenuState(trmb::StateStack& stack, trmb::State::Context context)
 : trmb::State(stack, context)
