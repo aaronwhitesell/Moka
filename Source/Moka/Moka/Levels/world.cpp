@@ -84,8 +84,8 @@ void World::buildScene()
 	mSceneLayers[Foreground]->attachChild(std::move(layer2));
 
 	// Add player's character
-	std::unique_ptr<Hero> player(new Hero(Hero::Type::Wizard, mTextures, mFonts, mWorldBounds));
+	std::unique_ptr<Hero> player(new Hero(mWorldBounds, mCamera.getView()));
 	mHero = player.get();
 	mHero->setPosition(mSpawnPosition);
-	mSceneLayers[Middleground]->attachChild(std::move(player));
+	mSceneLayers[Foreground]->attachChild(std::move(player));
 }
