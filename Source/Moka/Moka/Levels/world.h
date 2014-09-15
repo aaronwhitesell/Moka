@@ -44,7 +44,6 @@ private:
 
 
 private:
-	void								loadTextures();
 	void								buildScene();
 
 

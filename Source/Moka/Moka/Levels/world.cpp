@@ -27,7 +27,6 @@ World::World(sf::RenderTarget& outputTarget, trmb::FontHolder& fonts, trmb::Soun
 , mMap("Data/Maps/World.tmx")
 , mHero(nullptr)
 {
-	loadTextures();
 	buildScene();
 }
 
@@ -53,11 +52,6 @@ void World::draw()
 {
 	mTarget.setView(mCamera.getView());
 	mTarget.draw(mSceneGraph);
-}
-
-void World::loadTextures()
-{
-	mTextures.load(Textures::ID::Heroes, "Data/Textures/Heroes.png");
 }
 
 void World::buildScene()
