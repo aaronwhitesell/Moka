@@ -1,0 +1,15 @@
+Tiles: RPG Pack
+Author: Kenney
+Use: used freely for personal and commercial purposes
+License: CC0 (http://creativecommons.org/publicdomain/zero/1.0/)
+Instructions: Credit Kenney or www.kenney.nl
+
+Font: Sansation
+Author: Bernd Montag
+Use: used freely for personal and commercial purposes
+
+Font: Lazy Sans
+Author: Soja
+Use: used freely for personal and commercial purposes
+
+
