@@ -47,6 +47,7 @@ private:
 	std::size_t				mStatisticsNumFrames;
 
 	ToggleFullscreen		mToggleFullscreen;
+	bool					mUpdateSkipped;
 };
 
 #endif

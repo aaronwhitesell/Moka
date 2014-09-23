@@ -23,17 +23,18 @@
 const sf::Time Application::TimePerFrame = sf::seconds(1.f / 60.f);
 
 Application::Application()
-	: mWindow(sf::VideoMode(800, 600), "Moka", sf::Style::Close)
-	, mTextures()
-	, mFonts()
-	, mPlayer()
-	, mMusic()
-	, mSounds()
-	, mStateStack(trmb::State::Context(mWindow, mTextures, mFonts, mPlayer, mMusic, mSounds))
-	, mStatisticsText()
-	, mStatisticsUpdateTime()
-	, mStatisticsNumFrames(0)
-	, mToggleFullscreen(mWindow)
+: mWindow(sf::VideoMode(800, 600), "Moka", sf::Style::Close)
+, mTextures()
+, mFonts()
+, mPlayer()
+, mMusic()
+, mSounds()
+, mStateStack(trmb::State::Context(mWindow, mTextures, mFonts, mPlayer, mMusic, mSounds))
+, mStatisticsText()
+, mStatisticsUpdateTime()
+, mStatisticsNumFrames(0)
+, mToggleFullscreen(mWindow)
+, mUpdateSkipped(false)
 {
 	mWindow.setKeyRepeatEnabled(false);
 
@@ -74,9 +75,16 @@ void Application::run()
 			processInput();
 			update(TimePerFrame);
 
-			// ALW - Stack might be empty after call to update(sf::Time)
-			if (mStateStack.isEmpty())
-				mWindow.close();
+			// ALW - An update may be skipped, because the application lost focus.
+			// ALW - Don't close the window until an update() has run and then the
+			// ALW - mStateStack is empty. Breakpoints were causing the window to
+			// ALW - close.
+			if (!mUpdateSkipped)
+			{
+				// ALW - Stack might be empty after call to update(sf::Time)
+				if (mStateStack.isEmpty())
+					mWindow.close();
+			}
 		}
 
 		updateStatistics(dt);
@@ -102,7 +110,12 @@ void Application::processInput()
 void Application::update(sf::Time dt)
 {
 	if (trmb::isWindowFocused(mWindow))
+	{
 		mStateStack.update(dt);
+		mUpdateSkipped = false;
+	}
+	else
+		mUpdateSkipped = true;
 }
 
 void Application::render()
