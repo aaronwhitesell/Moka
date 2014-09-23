@@ -25,8 +25,8 @@ class Hero : public trmb::Entity, public trmb::EventHandler // inherits SceneNod
 {
 public:
 							Hero(sf::FloatRect worldBounds, const sf::View &view);
-							Hero(Hero &) = delete;
-	Hero &					operator=(Hero &) = delete;
+							Hero(const Hero &) = delete;
+	Hero &					operator=(const Hero &) = delete;
 
 	virtual void			handleEvent(const trmb::Event &gameEvent);
 	virtual void			updateCurrent(sf::Time dt);
