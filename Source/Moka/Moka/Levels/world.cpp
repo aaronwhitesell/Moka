@@ -1,4 +1,6 @@
 #include "world.h"
+#include "../Entities/preventionNode.h"
+#include "../GameObjects/preventionObject.h"
 #include "../Resources/resourceIdentifiers.h"
 
 #include "Trambo/Events/event.h"
@@ -8,14 +10,17 @@
 
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderTexture.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 
 #include <algorithm>
+#include <vector>
 
 
-World::World(sf::RenderTarget& outputTarget, trmb::FontHolder& fonts, trmb::SoundPlayer& sounds)
+World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlayer& sounds)
 : mFullscreen(0x5a0d2314)
 , mWindowed(0x11e3c735)
-, mTarget(outputTarget)
+, mWindow(window)
+, mTarget(window)
 , mTextures()
 , mFonts(fonts)
 , mSounds(sounds)
@@ -23,8 +28,9 @@ World::World(sf::RenderTarget& outputTarget, trmb::FontHolder& fonts, trmb::Soun
 , mSceneLayers()
 , mWorldBounds(0.f, 0.f, 1600.0, 1600.0)
 , mSpawnPosition(mWorldBounds.width / 2.f, mWorldBounds.height / 2.f)
-, mCamera(outputTarget.getDefaultView(), mWorldBounds)
+, mCamera(window.getDefaultView(), mWorldBounds)
 , mMap("Data/Maps/World.tmx")
+, mObjectGroups("Data/Maps/World.tmx")
 , mHero(nullptr)
 {
 	buildScene();
@@ -71,11 +77,18 @@ void World::buildScene()
 
 	// Add tiled houses
 	std::unique_ptr<trmb::MapLayerNode> layer1(new trmb::MapLayerNode(mMap, 1));
-	mSceneLayers[Foreground]->attachChild(std::move(layer1));
+	mSceneLayers[Middleground]->attachChild(std::move(layer1));
 
 	// Add tiled roofs
 	std::unique_ptr<trmb::MapLayerNode> layer2(new trmb::MapLayerNode(mMap, 2));
-	mSceneLayers[Foreground]->attachChild(std::move(layer2));
+	mSceneLayers[Middleground]->attachChild(std::move(layer2));
+
+	// ALW - Add prevention objects
+	std::vector<PreventionObject>::const_iterator prevObjIter = begin(mObjectGroups.getPreventionGroup().getPreventionObjects());
+	std::vector<PreventionObject>::const_iterator prevObjIterEnd = end(mObjectGroups.getPreventionGroup().getPreventionObjects());
+
+	for (; prevObjIter != prevObjIterEnd; ++prevObjIter)
+		mSceneLayers[Prevention]->attachChild(std::move(std::unique_ptr<PreventionNode>(new PreventionNode(mWindow, mCamera.getView(), *prevObjIter))));
 
 	// Add player's character
 	std::unique_ptr<Hero> player(new Hero(mWorldBounds, mCamera.getView()));

@@ -16,14 +16,18 @@ namespace sf
 class Controller
 {
 public:
+	typedef unsigned long EventGuid;
+
+
+public:
 	enum Action
 	{
 		MoveUp,
 		MoveDown,
 		MoveLeft,
 		MoveRight,
-		Jump,
-		Shoot,
+		LeftClick,
+		RightClick,
 		ActionCount
 	};
 
@@ -33,32 +37,25 @@ public:
 							Controller(const Controller &) = delete;
 	Controller &			operator=(const Controller &) = delete;
 
-	trmb::ActionBinding::EventGuid	getUp() const;
-	trmb::ActionBinding::EventGuid	getDown() const;
-	trmb::ActionBinding::EventGuid	getLeft() const;
-	trmb::ActionBinding::EventGuid	getRight() const;
-	trmb::ActionBinding::EventGuid	getJump() const;
-	trmb::ActionBinding::EventGuid	getShoot() const;
-
 	const std::vector<trmb::ActionBinding::ActionSharedPtr> &	getActions() const;
 
-	sf::Keyboard::Key       getInputFromKeyboardKeyAsButtonBinding(trmb::ActionBinding::EventGuid eventGuid) const;
-	sf::Mouse::Button       getInputFromMouseButtonAsButtonBinding(trmb::ActionBinding::EventGuid eventGuid) const;
+	sf::Keyboard::Key       getInputFromKeyboardKeyAsButtonBinding(EventGuid eventGuid) const;
+	sf::Mouse::Button       getInputFromMouseButtonAsButtonBinding(EventGuid eventGuid) const;
 
 	void					update();
 	void					handleEvent(const sf::Event &inputEvent);
 
-	void					assignKeyboardKeyAsButtonBinding(const trmb::KeyboardKeyAsButton &keyboardKeyAsButton, trmb::ActionBinding::EventGuid eventGuid);
-	void					assignMouseButtonAsButtonBinding(const trmb::MouseButtonAsButton &MouseButtonAsButton, trmb::ActionBinding::EventGuid eventGuid);
+	void					assignKeyboardKeyAsButtonBinding(const trmb::KeyboardKeyAsButton &keyboardKeyAsButton, EventGuid eventGuid);
+	void					assignMouseButtonAsButtonBinding(const trmb::MouseButtonAsButton &MouseButtonAsButton, EventGuid eventGuid);
 
 
 private:
-	const trmb::ActionBinding::EventGuid	mUp;
-	const trmb::ActionBinding::EventGuid	mDown;
-	const trmb::ActionBinding::EventGuid	mLeft;
-	const trmb::ActionBinding::EventGuid	mRight;
-	const trmb::ActionBinding::EventGuid	mJump;
-	const trmb::ActionBinding::EventGuid	mShoot;
+	const EventGuid	mUp;
+	const EventGuid	mDown;
+	const EventGuid	mLeft;
+	const EventGuid	mRight;
+	const EventGuid	mLeftClick;
+	const EventGuid	mRightClick;
 
 
 private:

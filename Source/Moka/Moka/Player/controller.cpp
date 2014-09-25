@@ -8,26 +8,26 @@ Controller::Controller()
 , mDown(0xa95ea771)
 , mLeft(0x84e6c13c)
 , mRight(0x19e343e8)
-, mJump(0x6955d309)
-, mShoot(0x3e6524cd)
+, mRightClick(0x3e6524cd)
+, mLeftClick(0x6955d309)
 {
 	// ALW - Create a map of event guids and corresponding actions
 	mActionBindings.createAction(mUp);
 	mActionBindings.createAction(mDown);
 	mActionBindings.createAction(mLeft);
 	mActionBindings.createAction(mRight);
-	mActionBindings.createAction(mJump);
-	mActionBindings.createAction(mShoot);
+	mActionBindings.createAction(mRightClick);
+	mActionBindings.createAction(mLeftClick);
 
 	// ALW - Create a map of keyboard buttons and corresponding actions (default bindings)
 	mActionBindings.assignKeyboardKeyAsButtonBinding(trmb::KeyboardKeyAsButton(sf::Keyboard::W,  trmb::KeyboardKeyAsButton::ButtonType::RealTime), mUp);
 	mActionBindings.assignKeyboardKeyAsButtonBinding(trmb::KeyboardKeyAsButton(sf::Keyboard::S,  trmb::KeyboardKeyAsButton::ButtonType::RealTime), mDown);
 	mActionBindings.assignKeyboardKeyAsButtonBinding(trmb::KeyboardKeyAsButton(sf::Keyboard::A,  trmb::KeyboardKeyAsButton::ButtonType::RealTime), mLeft);
 	mActionBindings.assignKeyboardKeyAsButtonBinding(trmb::KeyboardKeyAsButton(sf::Keyboard::D,  trmb::KeyboardKeyAsButton::ButtonType::RealTime), mRight);
-	mActionBindings.assignMouseButtonAsButtonBinding(trmb::MouseButtonAsButton(sf::Mouse::Right, trmb::MouseButtonAsButton::ButtonType::RealTime), mJump);
-	mActionBindings.assignMouseButtonAsButtonBinding(trmb::MouseButtonAsButton(sf::Mouse::Left,	 trmb::MouseButtonAsButton::ButtonType::RealTime), mShoot);
+	mActionBindings.assignMouseButtonAsButtonBinding(trmb::MouseButtonAsButton(sf::Mouse::Right, trmb::MouseButtonAsButton::ButtonType::RealTime), mRightClick);
+	mActionBindings.assignMouseButtonAsButtonBinding(trmb::MouseButtonAsButton(sf::Mouse::Left, trmb::MouseButtonAsButton::ButtonType::RealTime),  mLeftClick);
 }
-
+/*
 trmb::ActionBinding::EventGuid Controller::getUp() const
 {
 	return mUp;
@@ -57,7 +57,7 @@ trmb::ActionBinding::EventGuid Controller::getShoot() const
 {
 	return mShoot;
 }
-
+*/
 const std::vector<trmb::ActionBinding::ActionSharedPtr> & Controller::getActions() const
 {
 	return mActionBindings.getActions();

@@ -2,6 +2,7 @@
 #define WORLD_H
 
 #include "../Entities/hero.h"
+#include "../GameObjects/objectGroups.h"
 
 #include "Trambo/Camera/camera.h"
 #include "Trambo/Events/eventHandler.h"
@@ -19,6 +20,7 @@
 namespace sf
 {
 	class RenderTarget;
+	class RenderWindow;
 }
 
 namespace trmb
@@ -30,7 +32,7 @@ namespace trmb
 class World : public trmb::EventHandler
 {
 public:
-										World(sf::RenderTarget &outputTarget, trmb::FontHolder &fonts, trmb::SoundPlayer &sounds);
+										World(sf::RenderWindow &window, trmb::FontHolder &fonts, trmb::SoundPlayer &sounds);
 										World(const World &) = delete;
 	World &								operator=(const World &) = delete;
 
@@ -52,6 +54,7 @@ private:
 	{
 		Background,
 		Middleground,
+		Prevention,
 		Foreground,
 		LayerCount
 	};
@@ -61,6 +64,7 @@ private:
 	const EventGuid								mFullscreen; // ALW - Matches the GUID in the ToggleFullscreen class.
 	const EventGuid								mWindowed;   // ALW - Matches the GUID in the ToggleFullscreen class.
 
+	sf::RenderWindow							&mWindow;
 	sf::RenderTarget							&mTarget;
 	trmb::TextureHolder							mTextures;
 	trmb::FontHolder							&mFonts;
@@ -74,6 +78,7 @@ private:
 
 	trmb::Camera								mCamera;
 	trmb::Map									mMap;
+	ObjectGroups								mObjectGroups;
 	Hero										*mHero;
 };
 

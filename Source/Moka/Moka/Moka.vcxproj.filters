@@ -42,6 +42,24 @@
     <Filter Include="Source Files\Application">
       <UniqueIdentifier>{ba0db8ec-ef22-4afe-915c-3e9ad5dbcaeb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameObjects">
+      <UniqueIdentifier>{e5632b2d-e632-444f-bebb-48181035abbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects">
+      <UniqueIdentifier>{d8413216-fe42-4adc-9acc-7655b687a131}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\3rdParty">
+      <UniqueIdentifier>{354f845c-7178-43de-bd4c-761333494ab0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\3rdParty">
+      <UniqueIdentifier>{78d3f5aa-6503-46c8-a35d-2213b8298d45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\3rdParty\TinyXML2">
+      <UniqueIdentifier>{4cc75dce-c4a8-4061-b3c7-687d72b66885}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\3rdParty\TinyXML2">
+      <UniqueIdentifier>{1b3a8da0-2f61-40bf-82be-282627cd7399}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\application.h">
@@ -86,6 +104,21 @@
     <ClInclude Include="States\pauseState.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
+    <ClInclude Include="GameObjects\objectGroups.h">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\preventionGroup.h">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\preventionObject.h">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3rdParty\TinyXML2\tinyxml2.h">
+      <Filter>Header Files\3rdParty\TinyXML2</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\preventionNode.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\application.cpp">
@@ -126,6 +159,21 @@
     </ClCompile>
     <ClCompile Include="States\pauseState.cpp">
       <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\objectGroups.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\preventionGroup.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\preventionObject.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdParty\TinyXML2\tinyxml2.cpp">
+      <Filter>Source Files\3rdParty\TinyXML2</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\preventionNode.cpp">
+      <Filter>Source Files\Entities</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

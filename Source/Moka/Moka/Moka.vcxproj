@@ -77,9 +77,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\3rdParty\TinyXML2\tinyxml2.h" />
     <ClInclude Include="Application\application.h" />
     <ClInclude Include="Application\toggleFullscreen.h" />
     <ClInclude Include="Entities\hero.h" />
+    <ClInclude Include="Entities\preventionNode.h" />
+    <ClInclude Include="GameObjects\objectGroups.h" />
+    <ClInclude Include="GameObjects\preventionGroup.h" />
+    <ClInclude Include="GameObjects\preventionObject.h" />
     <ClInclude Include="Levels\world.h" />
     <ClInclude Include="Player\controller.h" />
     <ClInclude Include="Player\devices.h" />
@@ -93,9 +98,14 @@
     <ClInclude Include="States\titleState.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\3rdParty\TinyXML2\tinyxml2.cpp" />
     <ClCompile Include="Application\application.cpp" />
     <ClCompile Include="Application\toggleFullscreen.cpp" />
     <ClCompile Include="Entities\hero.cpp" />
+    <ClCompile Include="Entities\preventionNode.cpp" />
+    <ClCompile Include="GameObjects\objectGroups.cpp" />
+    <ClCompile Include="GameObjects\preventionGroup.cpp" />
+    <ClCompile Include="GameObjects\preventionObject.cpp" />
     <ClCompile Include="Levels\world.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player\controller.cpp" />
