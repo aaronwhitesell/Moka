@@ -1,5 +1,5 @@
 #include "world.h"
-#include "../Entities/preventionNode.h"
+#include "../SceneNodes/preventionNode.h"
 #include "../GameObjects/preventionObject.h"
 #include "../Resources/resourceIdentifiers.h"
 
@@ -91,7 +91,7 @@ void World::buildScene()
 		mSceneLayers[Prevention]->attachChild(std::move(std::unique_ptr<PreventionNode>(new PreventionNode(mWindow, mCamera.getView(), *prevObjIter))));
 
 	// Add player's character
-	std::unique_ptr<Hero> player(new Hero(mWorldBounds, mCamera.getView()));
+	std::unique_ptr<HeroNode> player(new HeroNode(mWorldBounds, mCamera.getView()));
 	mHero = player.get();
 	mHero->setPosition(mSpawnPosition);
 	mSceneLayers[Foreground]->attachChild(std::move(player));

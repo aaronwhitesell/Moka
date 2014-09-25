@@ -1,5 +1,5 @@
-#ifndef HERO_H
-#define HERO_H
+#ifndef HERO_NODE_H
+#define HERO_NODE_H
 
 #include "Trambo/Events/eventHandler.h"
 #include "Trambo/SceneNodes/entity.h"
@@ -21,12 +21,12 @@ namespace trmb
 	class Event;
 }
 
-class Hero : public trmb::Entity, public trmb::EventHandler // inherits SceneNode indirectly
+class HeroNode : public trmb::Entity, public trmb::EventHandler // inherits SceneNode indirectly
 {
 public:
-							Hero(sf::FloatRect worldBounds, const sf::View &view);
-							Hero(const Hero &) = delete;
-	Hero &					operator=(const Hero &) = delete;
+							HeroNode(sf::FloatRect worldBounds, const sf::View &view);
+							HeroNode(const HeroNode &) = delete;
+	HeroNode &				operator=(const HeroNode &) = delete;
 
 	virtual void			handleEvent(const trmb::Event &gameEvent);
 	virtual void			updateCurrent(sf::Time dt);

@@ -1,7 +1,7 @@
 #ifndef WORLD_H
 #define WORLD_H
 
-#include "../Entities/hero.h"
+#include "../SceneNodes/heroNode.h"
 #include "../GameObjects/objectGroups.h"
 
 #include "Trambo/Camera/camera.h"
@@ -79,7 +79,7 @@ private:
 	trmb::Camera								mCamera;
 	trmb::Map									mMap;
 	ObjectGroups								mObjectGroups;
-	Hero										*mHero;
+	HeroNode									*mHero;
 };
 
 #endif

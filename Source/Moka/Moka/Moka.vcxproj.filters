@@ -21,9 +21,6 @@
     <Filter Include="Header Files\Levels">
       <UniqueIdentifier>{7b125951-a73a-4183-b538-aa0a434e38c8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Entities">
-      <UniqueIdentifier>{5ddde4a3-89b7-43c0-ab99-17c5f0edf021}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Application">
       <UniqueIdentifier>{a7313420-9b43-4dd5-84d3-dc6f9fe458b0}</UniqueIdentifier>
     </Filter>
@@ -35,9 +32,6 @@
     </Filter>
     <Filter Include="Source Files\Levels">
       <UniqueIdentifier>{18beb165-4755-4ca5-89d1-2b7b48baed69}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Entities">
-      <UniqueIdentifier>{83778868-2135-4935-a5e1-54b31174bfbe}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Application">
       <UniqueIdentifier>{ba0db8ec-ef22-4afe-915c-3e9ad5dbcaeb}</UniqueIdentifier>
@@ -60,13 +54,16 @@
     <Filter Include="Source Files\3rdParty\TinyXML2">
       <UniqueIdentifier>{1b3a8da0-2f61-40bf-82be-282627cd7399}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\SceneNodes">
+      <UniqueIdentifier>{72a757b2-ebae-4b95-b65b-1dbcd3dc2640}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SceneNodes">
+      <UniqueIdentifier>{967089fb-a3d8-4bc5-ba59-f03b9a4455a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\application.h">
       <Filter>Header Files\Application</Filter>
-    </ClInclude>
-    <ClInclude Include="Entities\hero.h">
-      <Filter>Header Files\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Levels\world.h">
       <Filter>Header Files\Levels</Filter>
@@ -116,16 +113,16 @@
     <ClInclude Include="..\..\3rdParty\TinyXML2\tinyxml2.h">
       <Filter>Header Files\3rdParty\TinyXML2</Filter>
     </ClInclude>
-    <ClInclude Include="Entities\preventionNode.h">
-      <Filter>Header Files\Entities</Filter>
+    <ClInclude Include="SceneNodes\preventionNode.h">
+      <Filter>Header Files\SceneNodes</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneNodes\heroNode.h">
+      <Filter>Header Files\SceneNodes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\application.cpp">
       <Filter>Source Files\Application</Filter>
-    </ClCompile>
-    <ClCompile Include="Entities\hero.cpp">
-      <Filter>Source Files\Entities</Filter>
     </ClCompile>
     <ClCompile Include="Levels\world.cpp">
       <Filter>Source Files\Levels</Filter>
@@ -172,8 +169,11 @@
     <ClCompile Include="..\..\3rdParty\TinyXML2\tinyxml2.cpp">
       <Filter>Source Files\3rdParty\TinyXML2</Filter>
     </ClCompile>
-    <ClCompile Include="Entities\preventionNode.cpp">
-      <Filter>Source Files\Entities</Filter>
+    <ClCompile Include="SceneNodes\preventionNode.cpp">
+      <Filter>Source Files\SceneNodes</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNodes\heroNode.cpp">
+      <Filter>Source Files\SceneNodes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

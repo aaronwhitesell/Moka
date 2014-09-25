@@ -1,4 +1,4 @@
-#include "hero.h"
+#include "heroNode.h"
 
 #include "Trambo/Events/event.h"
 
@@ -12,7 +12,7 @@
 #include <cmath>
 
 
-Hero::Hero(sf::FloatRect worldBounds, const sf::View &view)
+HeroNode::HeroNode(sf::FloatRect worldBounds, const sf::View &view)
 : Entity()
 , mView(view)
 , mWorldBounds(worldBounds)
@@ -24,7 +24,7 @@ Hero::Hero(sf::FloatRect worldBounds, const sf::View &view)
 //	mDebugShape.setSize(sf::Vector2f(16.0f, 16.0f));
 }
 
-void Hero::handleEvent(const trmb::Event &gameEvent)
+void HeroNode::handleEvent(const trmb::Event &gameEvent)
 {
 	// ALW - These GUIDs match the GUIDs in the Controller class.
 	const EventGuid up    = 0x84b05719;
@@ -51,7 +51,7 @@ void Hero::handleEvent(const trmb::Event &gameEvent)
 	}
 }
 
-void Hero::updateCurrent(sf::Time dt)
+void HeroNode::updateCurrent(sf::Time dt)
 {
 	correctDiagonalVelocity();
 	accelerate(trmb::Entity::getVelocity() * getMaxSpeed());
@@ -59,7 +59,7 @@ void Hero::updateCurrent(sf::Time dt)
 	correctPosition();
 }
 
-float Hero::getMaxSpeed() const
+float HeroNode::getMaxSpeed() const
 {
 	return 350.0f;
 }
@@ -69,7 +69,7 @@ float Hero::getMaxSpeed() const
 //	target.draw(mDebugShape, states);
 //}
 
-void Hero::correctPosition()
+void HeroNode::correctPosition()
 {
 	// ALW - If the camera moves outside the boundaries of the world then
 	// ALW - move it back to the world boundary.
@@ -92,7 +92,7 @@ void Hero::correctPosition()
 	setPosition(position);
 }
 
-void Hero::correctDiagonalVelocity()
+void HeroNode::correctDiagonalVelocity()
 {
 	sf::Vector2f velocity = getVelocity();
 

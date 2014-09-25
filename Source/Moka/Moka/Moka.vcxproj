@@ -80,8 +80,6 @@
     <ClInclude Include="..\..\3rdParty\TinyXML2\tinyxml2.h" />
     <ClInclude Include="Application\application.h" />
     <ClInclude Include="Application\toggleFullscreen.h" />
-    <ClInclude Include="Entities\hero.h" />
-    <ClInclude Include="Entities\preventionNode.h" />
     <ClInclude Include="GameObjects\objectGroups.h" />
     <ClInclude Include="GameObjects\preventionGroup.h" />
     <ClInclude Include="GameObjects\preventionObject.h" />
@@ -90,6 +88,8 @@
     <ClInclude Include="Player\devices.h" />
     <ClInclude Include="Player\player.h" />
     <ClInclude Include="Resources\resourceIdentifiers.h" />
+    <ClInclude Include="SceneNodes\heroNode.h" />
+    <ClInclude Include="SceneNodes\preventionNode.h" />
     <ClInclude Include="States\creditState.h" />
     <ClInclude Include="States\gameState.h" />
     <ClInclude Include="States\menuState.h" />
@@ -101,8 +101,6 @@
     <ClCompile Include="..\..\3rdParty\TinyXML2\tinyxml2.cpp" />
     <ClCompile Include="Application\application.cpp" />
     <ClCompile Include="Application\toggleFullscreen.cpp" />
-    <ClCompile Include="Entities\hero.cpp" />
-    <ClCompile Include="Entities\preventionNode.cpp" />
     <ClCompile Include="GameObjects\objectGroups.cpp" />
     <ClCompile Include="GameObjects\preventionGroup.cpp" />
     <ClCompile Include="GameObjects\preventionObject.cpp" />
@@ -111,6 +109,8 @@
     <ClCompile Include="Player\controller.cpp" />
     <ClCompile Include="Player\devices.cpp" />
     <ClCompile Include="Player\player.cpp" />
+    <ClCompile Include="SceneNodes\heroNode.cpp" />
+    <ClCompile Include="SceneNodes\preventionNode.cpp" />
     <ClCompile Include="States\creditState.cpp" />
     <ClCompile Include="States\gameState.cpp" />
     <ClCompile Include="States\menuState.cpp" />
