@@ -1,5 +1,5 @@
 #include "preventionNode.h"
-#include "../GameObjects/preventionObject.h"
+#include "../GameObjects/interactiveObject.h"
 
 #include "Trambo/Events/event.h"
 
@@ -10,13 +10,13 @@
 #include <SFML/Graphics/View.hpp>
 
 
-PreventionNode::PreventionNode(sf::RenderWindow &window, const sf::View &view, const PreventionObject &preventionObject)
+PreventionNode::PreventionNode(sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject)
 : mWindow(window)
 , mView(view)
-, mPreventionObject(preventionObject)
+, mInteractiveObject(interactiveObject)
 {
-	mHightlight.setSize(static_cast<sf::Vector2f>(sf::Vector2i(mPreventionObject.getWidth(), mPreventionObject.getHeight())));
-	mHightlight.setPosition(static_cast<sf::Vector2f>(sf::Vector2i(mPreventionObject.getX(), mPreventionObject.getY())));
+	mHightlight.setSize(static_cast<sf::Vector2f>(sf::Vector2i(mInteractiveObject.getWidth(), mInteractiveObject.getHeight())));
+	mHightlight.setPosition(static_cast<sf::Vector2f>(sf::Vector2i(mInteractiveObject.getX(), mInteractiveObject.getY())));
 }
 
 void PreventionNode::updateSelection()
@@ -24,10 +24,10 @@ void PreventionNode::updateSelection()
 	const sf::Vector2i relativeToWindow = sf::Mouse::getPosition(mWindow);
 	const sf::Vector2f relativeToWorld = mWindow.mapPixelToCoords(relativeToWindow, mView);
 	const sf::Vector2f MousePosition(relativeToWorld.x, relativeToWorld.y);
-	const sf::FloatRect PrevObjRect(static_cast<sf::FloatRect>(sf::IntRect(mPreventionObject.getX(),
-		mPreventionObject.getY(), mPreventionObject.getWidth(), mPreventionObject.getHeight())));
+	const sf::FloatRect interactiveObjRect(static_cast<sf::FloatRect>(sf::IntRect(mInteractiveObject.getX(),
+		mInteractiveObject.getY(), mInteractiveObject.getWidth(), mInteractiveObject.getHeight())));
 
-	if (PrevObjRect.contains(MousePosition))
+	if (interactiveObjRect.contains(MousePosition))
 		mIsSelected = true;
 	else
 		mIsSelected = false;

@@ -1,13 +1,13 @@
-#ifndef PREVENTION_OBJECT_H
-#define PREVENTION_OBJECT_H
+#ifndef INTERACTIVE_OBJECT_H
+#define INTERACTIVE_OBJECT_H
 
 #include <string>
 
 
-class PreventionObject
+class InteractiveObject
 {
 public:
-							PreventionObject(std::string name, std::string type, std::string attachedTo, int x, int y, int width, int height);
+							InteractiveObject(std::string name, std::string type, std::string attachedTo, int x, int y, int width, int height);
 							// ALW - Allow copy construction and assignment
 
 	const std::string &		getName() const;

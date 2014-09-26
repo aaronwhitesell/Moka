@@ -1890,7 +1890,7 @@
    <tile gid="0"/>
   </data>
  </layer>
- <objectgroup name="Prevention" width="25" height="25">
+ <objectgroup name="Interactive" width="25" height="25">
   <object name="House 0" type="House" x="128" y="320" width="64" height="192">
    <properties>
     <property name="AttachedTo" value="Standalone"/>

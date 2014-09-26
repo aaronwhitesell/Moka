@@ -80,9 +80,9 @@
     <ClInclude Include="..\..\3rdParty\TinyXML2\tinyxml2.h" />
     <ClInclude Include="Application\application.h" />
     <ClInclude Include="Application\toggleFullscreen.h" />
+    <ClInclude Include="GameObjects\interactiveGroup.h" />
+    <ClInclude Include="GameObjects\interactiveObject.h" />
     <ClInclude Include="GameObjects\objectGroups.h" />
-    <ClInclude Include="GameObjects\preventionGroup.h" />
-    <ClInclude Include="GameObjects\preventionObject.h" />
     <ClInclude Include="Levels\world.h" />
     <ClInclude Include="Player\controller.h" />
     <ClInclude Include="Player\devices.h" />
@@ -103,9 +103,9 @@
     <ClCompile Include="..\..\3rdParty\TinyXML2\tinyxml2.cpp" />
     <ClCompile Include="Application\application.cpp" />
     <ClCompile Include="Application\toggleFullscreen.cpp" />
+    <ClCompile Include="GameObjects\interactiveGroup.cpp" />
+    <ClCompile Include="GameObjects\interactiveObject.cpp" />
     <ClCompile Include="GameObjects\objectGroups.cpp" />
-    <ClCompile Include="GameObjects\preventionGroup.cpp" />
-    <ClCompile Include="GameObjects\preventionObject.cpp" />
     <ClCompile Include="Levels\world.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player\controller.cpp" />

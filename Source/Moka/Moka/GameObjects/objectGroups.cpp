@@ -10,16 +10,16 @@ ObjectGroups::ObjectGroups(const std::string &filename)
 	read(filename);
 }
 
-const PreventionGroup & ObjectGroups::getPreventionGroup() const
+const InteractiveGroup & ObjectGroups::getInteractiveGroup() const
 {
-	return mPreventionGroup;
+	return mInteractiveGroup;
 }
 
 void ObjectGroups::read(const std::string &filename)
 {
 	tinyxml2::XMLDocument config;
 	loadFile(filename, config);
-	readPreventionGroup(config);
+	readInteractiveGroup(config);
 }
 
 void ObjectGroups::loadFile(const std::string &filename, tinyxml2::XMLDocument &config)
@@ -30,7 +30,7 @@ void ObjectGroups::loadFile(const std::string &filename, tinyxml2::XMLDocument &
 	}
 }
 
-void ObjectGroups::readPreventionGroup(tinyxml2::XMLDocument &config)
+void ObjectGroups::readInteractiveGroup(tinyxml2::XMLDocument &config)
 {
 	tinyxml2::XMLElement *map = config.FirstChildElement("map");
 	assert(("ALW - Logic Error: There is no map to read! This must be a incorrectly formatted TMX file.", map));
@@ -38,23 +38,23 @@ void ObjectGroups::readPreventionGroup(tinyxml2::XMLDocument &config)
 	tinyxml2::XMLElement *objectGroup = map->FirstChildElement("objectgroup");
 	assert(("ALW - Logic Error: There must be at least one object group!", objectGroup));
 
-	std::string objectGroupName = "Prevention";
+	std::string objectGroupName = "Interactive";
 	while (objectGroupName != objectGroup->Attribute("name"))
 	{
 		objectGroup = objectGroup->NextSiblingElement("objectgroup");
-		assert(("ALW - Logic Error: There must be an object group named Prevention!", objectGroup));
+		assert(("ALW - Logic Error: There must be an object group named Interactive!", objectGroup));
 	}
 	
 	assert(("ALW - Logic Error : There is no name attribute!", objectGroup->Attribute("name")));
-	mPreventionGroup.setName(static_cast<std::string>(objectGroup->Attribute("name")));
+	mInteractiveGroup.setName(static_cast<std::string>(objectGroup->Attribute("name")));
 	assert(("ALW - Logic Error : There is no width attribute!", objectGroup->Attribute("width")));
-	mPreventionGroup.setWidth(objectGroup->IntAttribute("width"));
+	mInteractiveGroup.setWidth(objectGroup->IntAttribute("width"));
 	assert(("ALW - Logic Error : There is no height attribute!", objectGroup->Attribute("height")));
-	mPreventionGroup.setHeight(objectGroup->IntAttribute("height"));
+	mInteractiveGroup.setHeight(objectGroup->IntAttribute("height"));
 
-	std::vector<PreventionObject> preventionObjects;
+	std::vector<InteractiveObject> interactiveObjects;
 	tinyxml2::XMLElement *object = objectGroup->FirstChildElement("object");
-	assert(("ALW - Logic Error: The Prevention object group is empty!", objectGroup));
+	assert(("ALW - Logic Error: The Interactive object group is empty!", objectGroup));
 	for (; object != nullptr; object = object->NextSiblingElement("object"))
 	{
 		assert(("ALW - Logic Error : There is no name attribute!", object->Attribute("name")));
@@ -86,8 +86,8 @@ void ObjectGroups::readPreventionGroup(tinyxml2::XMLDocument &config)
 		else
 			assert(("ALW - Logic Error : There was no attachedTo property!", false));
 
-		preventionObjects.push_back(PreventionObject(name, type, attachedTo, x, y, width, height));
+		interactiveObjects.push_back(InteractiveObject(name, type, attachedTo, x, y, width, height));
 	}
 
-	mPreventionGroup.setPreventionObjects(preventionObjects);
+	mInteractiveGroup.setInteractiveObjects(interactiveObjects);
 }

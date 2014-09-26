@@ -21,13 +21,13 @@ namespace trmb
 	class Event;
 }
 
-class PreventionObject;
+class InteractiveObject;
 
 class HouseNode : public InteractiveNode // inherits SceneNode and EventHandler indirectly
 {
 public:
 								HouseNode(sf::RenderWindow &window, const sf::View &view
-									, const PreventionObject &preventionObject, std::vector<sf::IntRect> attachedRects);
+									, const InteractiveObject &interactiveObject, std::vector<sf::IntRect> attachedRects);
 								HouseNode(const HouseNode &) = delete;
 	HouseNode &					operator=(const HouseNode &) = delete;
 
@@ -39,7 +39,7 @@ protected:
 private:
 	const sf::RenderWindow		&mWindow;
 	const sf::View				&mView;
-	const PreventionObject		&mPreventionObject;
+	const InteractiveObject		&mInteractiveObject;
 	std::vector<sf::IntRect>	mAttachedRects;
 };
 

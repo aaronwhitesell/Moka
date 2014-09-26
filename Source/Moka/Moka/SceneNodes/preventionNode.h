@@ -17,12 +17,12 @@ namespace trmb
 	class Event;
 }
 
-class PreventionObject;
+class InteractiveObject;
 
 class PreventionNode : public InteractiveNode
 {
 public:
-								PreventionNode(sf::RenderWindow &window, const sf::View &view, const PreventionObject &preventionObject);
+								PreventionNode(sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject);
 								PreventionNode(const PreventionNode &) = delete;
 	PreventionNode &			operator=(const PreventionNode &) = delete;
 
@@ -34,7 +34,7 @@ protected:
 private:
 	const sf::RenderWindow		&mWindow;
 	const sf::View				&mView;
-	const PreventionObject		&mPreventionObject;
+	const InteractiveObject		&mInteractiveObject;
 };
 
 #endif

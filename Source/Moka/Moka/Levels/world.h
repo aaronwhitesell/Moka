@@ -50,7 +50,7 @@ private:
 
 private:
 	void								buildScene();
-	std::vector<sf::IntRect>			buildAttachedRects(const PreventionObject &prevObj);
+	std::vector<sf::IntRect>			buildAttachedRects(const InteractiveObject &interactiveObj);
 
 
 private:
@@ -58,7 +58,7 @@ private:
 	{
 		Background,
 		Middleground,
-		Prevention,
+		Interactive,
 		Foreground,
 		LayerCount
 	};
