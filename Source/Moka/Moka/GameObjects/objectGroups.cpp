@@ -69,7 +69,24 @@ void ObjectGroups::readPreventionGroup(tinyxml2::XMLDocument &config)
 		int width = object->IntAttribute("width");
 		assert(("ALW - Logic Error : There is no x attribute!", object->IntAttribute("height")));
 		int height = object->IntAttribute("height");
-		preventionObjects.push_back(PreventionObject(name, type, x, y, width, height));
+
+		tinyxml2::XMLElement *properties = object->FirstChildElement("properties");
+		assert(("ALW - Logic Error: There are no properties!", properties));
+		tinyxml2::XMLElement *property = properties->FirstChildElement("property");
+		assert(("ALW - Logic Error: There is no property!", property));
+		assert(("ALW - Logic Error : There is no name attribute for the property!", property->Attribute("name")));
+		std::string propertyName = property->Attribute("name");
+
+		std::string attachedTo;
+		if (propertyName == "AttachedTo")
+		{
+			assert(("ALW - Logic Error : There is no value for the attachedTo property!", property->Attribute("value")));
+			attachedTo = property->Attribute("value");
+		}
+		else
+			assert(("ALW - Logic Error : There was no attachedTo property!", false));
+
+		preventionObjects.push_back(PreventionObject(name, type, attachedTo, x, y, width, height));
 	}
 
 	mPreventionGroup.setPreventionObjects(preventionObjects);

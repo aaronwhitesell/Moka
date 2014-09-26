@@ -14,7 +14,10 @@
 #include <SFML/Graphics/View.hpp>
 #include <SFML/System/Vector2.hpp>
 
+#include <SFML/Graphics/Rect.hpp>
+
 #include <array>
+#include <vector>
 
 
 namespace sf
@@ -47,6 +50,7 @@ private:
 
 private:
 	void								buildScene();
+	std::vector<sf::IntRect>			buildAttachedRects(const PreventionObject &prevObj);
 
 
 private:

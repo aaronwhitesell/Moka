@@ -1,4 +1,5 @@
 #include "world.h"
+#include "../SceneNodes/HouseNode.h"
 #include "../SceneNodes/preventionNode.h"
 #include "../GameObjects/preventionObject.h"
 #include "../Resources/resourceIdentifiers.h"
@@ -13,7 +14,6 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 
 #include <algorithm>
-#include <vector>
 
 
 World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlayer& sounds)
@@ -84,15 +84,41 @@ void World::buildScene()
 	mSceneLayers[Middleground]->attachChild(std::move(layer2));
 
 	// ALW - Add prevention objects
-	std::vector<PreventionObject>::const_iterator prevObjIter = begin(mObjectGroups.getPreventionGroup().getPreventionObjects());
-	std::vector<PreventionObject>::const_iterator prevObjIterEnd = end(mObjectGroups.getPreventionGroup().getPreventionObjects());
+	std::vector<PreventionObject>::const_iterator iter    = begin(mObjectGroups.getPreventionGroup().getPreventionObjects());
+	std::vector<PreventionObject>::const_iterator iterEnd = end(mObjectGroups.getPreventionGroup().getPreventionObjects());
 
-	for (; prevObjIter != prevObjIterEnd; ++prevObjIter)
-		mSceneLayers[Prevention]->attachChild(std::move(std::unique_ptr<PreventionNode>(new PreventionNode(mWindow, mCamera.getView(), *prevObjIter))));
+	for (; iter != iterEnd; ++iter)
+	{
+		if (iter->getType() == "House")
+			mSceneLayers[Prevention]->attachChild(std::move(std::unique_ptr<HouseNode>(
+				new HouseNode(mWindow, mCamera.getView(), *iter, buildAttachedRects(*iter)))));
+		else if (iter->getType() == "Prevention Method")
+			mSceneLayers[Prevention]->attachChild(std::move(std::unique_ptr<PreventionNode>(
+				new PreventionNode(mWindow, mCamera.getView(), *iter))));
+		else
+			assert(("ALW - Logic Error: The prevention object type is not handled!", false));
+	}
 
 	// Add player's character
 	std::unique_ptr<HeroNode> player(new HeroNode(mWorldBounds, mCamera.getView()));
 	mHero = player.get();
 	mHero->setPosition(mSpawnPosition);
 	mSceneLayers[Foreground]->attachChild(std::move(player));
+}
+
+std::vector<sf::IntRect> World::buildAttachedRects(const PreventionObject &prevObj)
+{
+	std::vector<PreventionObject>::const_iterator iter    = begin(mObjectGroups.getPreventionGroup().getPreventionObjects());
+	std::vector<PreventionObject>::const_iterator iterEnd = end(mObjectGroups.getPreventionGroup().getPreventionObjects());
+	std::vector<sf::IntRect> attachedRects;
+
+	// ALW - Store all the rects of objects (windows, doors, etc) with the house they are attached to. Later
+	// ALW - the HouseNode object can use these rects to detect whether it is clicked or an attached object is.
+	for (; iter != iterEnd; ++iter)
+	{
+		if (prevObj.getName() == iter->getAttachedTo())
+			attachedRects.emplace_back(sf::IntRect(iter->getX(), iter->getY(), iter->getWidth(), iter->getHeight()));
+	}
+
+	return attachedRects;
 }

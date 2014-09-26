@@ -89,6 +89,8 @@
     <ClInclude Include="Player\player.h" />
     <ClInclude Include="Resources\resourceIdentifiers.h" />
     <ClInclude Include="SceneNodes\heroNode.h" />
+    <ClInclude Include="SceneNodes\houseNode.h" />
+    <ClInclude Include="SceneNodes\interactiveNode.h" />
     <ClInclude Include="SceneNodes\preventionNode.h" />
     <ClInclude Include="States\creditState.h" />
     <ClInclude Include="States\gameState.h" />
@@ -110,6 +112,8 @@
     <ClCompile Include="Player\devices.cpp" />
     <ClCompile Include="Player\player.cpp" />
     <ClCompile Include="SceneNodes\heroNode.cpp" />
+    <ClCompile Include="SceneNodes\houseNode.cpp" />
+    <ClCompile Include="SceneNodes\interactiveNode.cpp" />
     <ClCompile Include="SceneNodes\preventionNode.cpp" />
     <ClCompile Include="States\creditState.cpp" />
     <ClCompile Include="States\gameState.cpp" />
