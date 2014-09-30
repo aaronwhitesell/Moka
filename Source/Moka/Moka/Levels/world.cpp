@@ -16,14 +16,14 @@
 #include <algorithm>
 
 
-World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlayer& sounds)
+World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlayer& soundPlayer)
 : mFullscreen(0x5a0d2314)
 , mWindowed(0x11e3c735)
 , mWindow(window)
 , mTarget(window)
 , mTextures()
 , mFonts(fonts)
-, mSounds(sounds)
+, mSoundPlayer(soundPlayer)
 , mSceneGraph()
 , mSceneLayers()
 , mWorldBounds(0.f, 0.f, 1600.0, 1600.0)
@@ -91,10 +91,10 @@ void World::buildScene()
 	{
 		if (iter->getType() == "House")
 			mSceneLayers[Interactive]->attachChild(std::move(std::unique_ptr<HouseNode>(
-				new HouseNode(mWindow, mCamera.getView(), *iter, buildAttachedRects(*iter)))));
+				new HouseNode(mWindow, mCamera.getView(), *iter, buildAttachedRects(*iter), mSoundPlayer))));
 		else if (iter->getType() == "Prevention Method")
 			mSceneLayers[Interactive]->attachChild(std::move(std::unique_ptr<PreventionNode>(
-				new PreventionNode(mWindow, mCamera.getView(), *iter))));
+				new PreventionNode(mWindow, mCamera.getView(), *iter, mSoundPlayer))));
 		else
 			assert(("ALW - Logic Error: The interactive object type is not handled!", false));
 	}

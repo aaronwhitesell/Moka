@@ -35,7 +35,7 @@ namespace trmb
 class World : public trmb::EventHandler
 {
 public:
-										World(sf::RenderWindow &window, trmb::FontHolder &fonts, trmb::SoundPlayer &sounds);
+										World(sf::RenderWindow &window, trmb::FontHolder &fonts, trmb::SoundPlayer &soundPlayer);
 										World(const World &) = delete;
 	World &								operator=(const World &) = delete;
 
@@ -72,7 +72,7 @@ private:
 	sf::RenderTarget							&mTarget;
 	trmb::TextureHolder							mTextures;
 	trmb::FontHolder							&mFonts;
-	trmb::SoundPlayer							&mSounds;
+	trmb::SoundPlayer							&mSoundPlayer;
 	
 	trmb::SceneNode								mSceneGraph;
 	std::array<trmb::SceneNode *, LayerCount>	mSceneLayers;

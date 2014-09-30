@@ -1,7 +1,9 @@
 #include "preventionNode.h"
 #include "../GameObjects/interactiveObject.h"
+#include "../Resources/resourceIdentifiers.h"
 
 #include "Trambo/Events/event.h"
+#include "Trambo/Sounds/soundPlayer.h"
 
 #include <SFML/Window/Mouse.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
@@ -10,10 +12,12 @@
 #include <SFML/Graphics/View.hpp>
 
 
-PreventionNode::PreventionNode(sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject)
+PreventionNode::PreventionNode(sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject
+	, trmb::SoundPlayer &soundPlayer)
 : mWindow(window)
 , mView(view)
 , mInteractiveObject(interactiveObject)
+, mSoundPlayer(soundPlayer)
 {
 	mHightlight.setSize(static_cast<sf::Vector2f>(sf::Vector2i(mInteractiveObject.getWidth(), mInteractiveObject.getHeight())));
 	mHightlight.setPosition(static_cast<sf::Vector2f>(sf::Vector2i(mInteractiveObject.getX(), mInteractiveObject.getY())));
@@ -28,7 +32,10 @@ void PreventionNode::updateSelection()
 		mInteractiveObject.getY(), mInteractiveObject.getWidth(), mInteractiveObject.getHeight())));
 
 	if (interactiveObjRect.contains(MousePosition))
+	{
 		mIsSelected = true;
+		mSoundPlayer.play(SoundEffects::ID::Button);
+	}
 	else
 		mIsSelected = false;
 }

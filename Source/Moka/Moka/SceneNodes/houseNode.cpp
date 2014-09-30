@@ -1,7 +1,9 @@
 #include "HouseNode.h"
 #include "../GameObjects/interactiveObject.h"
+#include "../Resources/resourceIdentifiers.h"
 
 #include "Trambo/Events/event.h"
+#include "Trambo/Sounds/soundPlayer.h"
 
 #include <SFML/Window/Mouse.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
@@ -10,12 +12,13 @@
 #include <SFML/Graphics/View.hpp>
 
 
-HouseNode::HouseNode(sf::RenderWindow &window, const sf::View &view
-	, const InteractiveObject &interactiveObject, std::vector<sf::IntRect> attachedRects)
+HouseNode::HouseNode(sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject
+	, std::vector<sf::IntRect> attachedRects, trmb::SoundPlayer &soundPlayer)
 : mWindow(window)
 , mView(view)
 , mInteractiveObject(interactiveObject)
 , mAttachedRects(attachedRects)
+, mSoundPlayer(soundPlayer)
 {
 	mHightlight.setSize(static_cast<sf::Vector2f>(sf::Vector2i(mInteractiveObject.getWidth(), mInteractiveObject.getHeight())));
 	mHightlight.setPosition(static_cast<sf::Vector2f>(sf::Vector2i(mInteractiveObject.getX(), mInteractiveObject.getY())));
@@ -44,4 +47,7 @@ void HouseNode::updateSelection()
 		if (static_cast<sf::FloatRect>(*iter).contains(MousePosition))
 			mIsSelected = false;
 	}
+
+	if (mIsSelected)
+		mSoundPlayer.play(SoundEffects::ID::Button);
 }
