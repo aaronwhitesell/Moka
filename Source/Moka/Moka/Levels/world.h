@@ -1,6 +1,7 @@
 #ifndef WORLD_H
 #define WORLD_H
 
+#include "../HUD/chatBox.h"
 #include "../SceneNodes/heroNode.h"
 #include "../GameObjects/objectGroups.h"
 
@@ -82,6 +83,7 @@ private:
 
 	trmb::Camera								mCamera;
 	trmb::Map									mMap;
+	ChatBox										mChatBox;
 	ObjectGroups								mObjectGroups;
 	HeroNode									*mHero;
 };

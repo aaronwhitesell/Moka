@@ -30,6 +30,7 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mSpawnPosition(mWorldBounds.width / 2.f, mWorldBounds.height / 2.f)
 , mCamera(window.getDefaultView(), mWorldBounds)
 , mMap("Data/Maps/World.tmx")
+, mChatBox(window, fonts, soundPlayer)
 , mObjectGroups("Data/Maps/World.tmx")
 , mHero(nullptr)
 {
@@ -58,6 +59,7 @@ void World::draw()
 {
 	mTarget.setView(mCamera.getView());
 	mTarget.draw(mSceneGraph);
+	mTarget.draw(mChatBox);
 }
 
 void World::buildScene()
@@ -91,10 +93,10 @@ void World::buildScene()
 	{
 		if (iter->getType() == "House")
 			mSceneLayers[Interactive]->attachChild(std::move(std::unique_ptr<HouseNode>(
-				new HouseNode(mWindow, mCamera.getView(), *iter, buildAttachedRects(*iter), mSoundPlayer))));
+				new HouseNode(mWindow, mCamera.getView(), *iter, buildAttachedRects(*iter), mSoundPlayer, mChatBox))));
 		else if (iter->getType() == "Prevention Method")
 			mSceneLayers[Interactive]->attachChild(std::move(std::unique_ptr<PreventionNode>(
-				new PreventionNode(mWindow, mCamera.getView(), *iter, mSoundPlayer))));
+				new PreventionNode(mWindow, mCamera.getView(), *iter, mSoundPlayer, mChatBox))));
 		else
 			assert(("ALW - Logic Error: The interactive object type is not handled!", false));
 	}

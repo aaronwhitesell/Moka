@@ -18,13 +18,14 @@ namespace trmb
 	class SoundPlayer;
 }
 
+class ChatBox;
 class InteractiveObject;
 
 class PreventionNode : public InteractiveNode
 {
 public:
 								PreventionNode(sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject
-									, trmb::SoundPlayer &soundPlayer);
+									, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox);
 								PreventionNode(const PreventionNode &) = delete;
 	PreventionNode &			operator=(const PreventionNode &) = delete;
 
@@ -38,6 +39,7 @@ private:
 	const sf::View				&mView;
 	const InteractiveObject		&mInteractiveObject;
 	trmb::SoundPlayer			&mSoundPlayer;
+	ChatBox						&mChatBox;
 };
 
 #endif

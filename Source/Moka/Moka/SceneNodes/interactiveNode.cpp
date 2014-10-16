@@ -9,6 +9,9 @@
 InteractiveNode::InteractiveNode()
 : mRightClick(0x6955d309)
 , mLeftClick(0x3e6524cd)
+, mCreateTextPrompt(0x25e87fd8)
+, mClearTextPrompt(0xc1523265)
+, mDisableInput(false)
 , mIsSelected(false)
 {
 	mHightlight.setFillColor(sf::Color(0u, 0u, 0u, 50u));
@@ -18,8 +21,19 @@ InteractiveNode::InteractiveNode()
 
 void InteractiveNode::handleEvent(const trmb::Event& gameEvent)
 {
-	if (isLeftClick(gameEvent) || isRightClick(gameEvent))
-		updateSelection();
+	if (mCreateTextPrompt == gameEvent.getType())
+	{
+		mDisableInput = true;
+		mIsSelected = false;
+	}
+	else if (mClearTextPrompt == gameEvent.getType())
+		mDisableInput = false;
+
+	if (!mDisableInput)
+	{
+		if (isLeftClick(gameEvent) || isRightClick(gameEvent))
+			updateSelection();
+	}
 }
 
 void InteractiveNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const

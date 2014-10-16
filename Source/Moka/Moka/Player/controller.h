@@ -54,6 +54,7 @@ private:
 	const EventGuid	mDown;
 	const EventGuid	mLeft;
 	const EventGuid	mRight;
+	const EventGuid mEnter;
 	const EventGuid	mLeftClick;
 	const EventGuid	mRightClick;
 

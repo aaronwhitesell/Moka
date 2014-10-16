@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Text -->
+<text>
+    <en>
+	    <prompt          attribute="Press Enter"/>
+		<greeting		 attribute="Congratulations, you have just been elected the new mayor of Pleasantville! 
+Pleasantville is a wonderful place, but it has one big problem; malaria. Help the residents of your town develop an 
+effective strategy to fight malaria. First, have a look around a neighborhood of Pleasantville and identify different 
+ways to combat malaria. Then spend your resources wisely. Afterwards, we will have a board meeting and check the 
+effectiveness of your plan."/>
+	    <inspectHouse     attribute="You see a house."/>
+	    <inspectPrevMeth  attribute="You see a malaria prevention method."/>
+	</en>
+    <fr>
+	    <prompt          attribute="fr: Press Enter"/>
+		<greeting        attribute="fr: Congratulations, you have just been elected the new mayor of Pleasantville! 
+Pleasantville is a wonderful place, but it has one big problem; malaria. Help the residents of your town develop an 
+effective strategy to fight malaria. First, have a look around a neighborhood of Pleasantville and identify different 
+ways to combat malaria. Then spend your resources wisely. Afterwards, we will have a board meeting and check the 
+effectiveness of your plan."/>
+	    <inspectHouse     attribute="fr: You see a house."/>
+	    <inspectPrevMeth  attribute="fr: You see a malaria prevention method."/>
+	</fr>
+    <mg>
+	    <prompt          attribute="mg: Press Enter"/>
+		<greeting        attribute="mg: Congratulations, you have just been elected the new mayor of Pleasantville! 
+Pleasantville is a wonderful place, but it has one big problem; malaria.  Help the residents of your town develop an 
+effective strategy to fight malaria.  First, have a look around a neighborhood of Pleasantville and identify different 
+ways to combat malaria.  Then spend your resources wisely.  Afterwards, we will have a board meeting and check the 
+effectiveness of your plan."/>
+	    <inspectHouse     attribute="mg: You see a house."/>
+	    <inspectPrevMeth  attribute="mg: You see a malaria prevention method."/>
+	</mg>
+</text>

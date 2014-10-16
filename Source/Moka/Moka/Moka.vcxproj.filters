@@ -66,6 +66,12 @@
     <Filter Include="Source Files\SceneNodes\Interactive">
       <UniqueIdentifier>{3dd3cd03-9209-4056-a467-952ef6d76244}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\HUD">
+      <UniqueIdentifier>{faf59160-63b8-4193-ac66-196a39800b07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\HUD">
+      <UniqueIdentifier>{be852d98-b3f0-49d7-95c4-38ae327a7a6f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\application.h">
@@ -131,6 +137,9 @@
     <ClInclude Include="GameObjects\interactiveObject.h">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
+    <ClInclude Include="HUD\chatBox.h">
+      <Filter>Header Files\HUD</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\application.cpp">
@@ -192,6 +201,9 @@
     </ClCompile>
     <ClCompile Include="GameObjects\interactiveObject.cpp">
       <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD\chatBox.cpp">
+      <Filter>Source Files\HUD</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

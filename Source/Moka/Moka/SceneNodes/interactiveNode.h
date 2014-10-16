@@ -45,11 +45,14 @@ private:
 protected:
 	sf::RectangleShape	mHightlight;
 	bool				mIsSelected;
+	bool				mDisableInput;
 
 
 private:
-	const EventGuid		mRightClick; // ALW - Matches the GUID in the Controller class.
-	const EventGuid		mLeftClick;  // ALW - Matches the GUID in the Controller class.
+	const EventGuid		mRightClick;	   // ALW - Matches the GUID in the Controller class.
+	const EventGuid		mLeftClick;		   // ALW - Matches the GUID in the Controller class.
+	const EventGuid		mCreateTextPrompt; // ALW - Matches the GUID in the ChatBox class.
+	const EventGuid		mClearTextPrompt;  // ALW - Matches the GUID in the ChatBox class.
 };
 
 #endif

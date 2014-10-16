@@ -9,6 +9,7 @@
 #include "../States/stateIdentifiers.h"
 #include "../States/titleState.h"
 
+#include "Trambo/Localize/localize.h"
 #include "Trambo/States/state.h"
 #include "Trambo/Utilities/utility.h"
 
@@ -37,6 +38,9 @@ Application::Application()
 , mUpdateSkipped(false)
 {
 	mWindow.setKeyRepeatEnabled(false);
+
+	trmb::Localize::getInstance().setFilePath("Data/Text/Text.xml");
+	trmb::Localize::getInstance().setLanguage("en");
 
 	mFonts.load(Fonts::ID::Main, "Data/Fonts/Sansation.ttf");
 	mFonts.load(Fonts::ID::Title, "Data/Fonts/Lazy Sans.ttf");
