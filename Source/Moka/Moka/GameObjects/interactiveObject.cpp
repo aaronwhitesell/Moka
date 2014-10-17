@@ -1,7 +1,7 @@
 #include "interactiveObject.h"
 
 
-InteractiveObject::InteractiveObject(std::string name, std::string type, std::string attachedTo, int x, int y, int width, int height)
+InteractiveObject::InteractiveObject(std::string name, std::string type, std::string attachedTo, float x, float y, float width, float height)
 : mName(name)
 , mType(type)
 , mAttachedTo(attachedTo)
@@ -27,22 +27,22 @@ const std::string & InteractiveObject::getAttachedTo() const
 	return mAttachedTo;
 }
 
-int InteractiveObject::getX() const
+float InteractiveObject::getX() const
 {
 	return mX;
 }
 
-int InteractiveObject::getY() const
+float InteractiveObject::getY() const
 {
 	return mY;
 }
 
-int InteractiveObject::getWidth() const
+float InteractiveObject::getWidth() const
 {
 	return mWidth;
 }
 
-int InteractiveObject::getHeight() const
+float InteractiveObject::getHeight() const
 {
 	return mHeight;
 }

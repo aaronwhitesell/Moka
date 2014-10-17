@@ -22,17 +22,17 @@ PreventionNode::PreventionNode(sf::RenderWindow &window, const sf::View &view, c
 , mSoundPlayer(soundPlayer)
 , mChatBox(chatBox)
 {
-	mHightlight.setSize(static_cast<sf::Vector2f>(sf::Vector2i(mInteractiveObject.getWidth(), mInteractiveObject.getHeight())));
-	mHightlight.setPosition(static_cast<sf::Vector2f>(sf::Vector2i(mInteractiveObject.getX(), mInteractiveObject.getY())));
+	mHightlight.setSize(sf::Vector2f(mInteractiveObject.getWidth(), mInteractiveObject.getHeight()));
+	mHightlight.setPosition(sf::Vector2f(mInteractiveObject.getX(), mInteractiveObject.getY()));
 }
 
 void PreventionNode::updateSelection()
 {
 	const sf::Vector2i relativeToWindow = sf::Mouse::getPosition(mWindow);
 	const sf::Vector2f relativeToWorld = mWindow.mapPixelToCoords(relativeToWindow, mView);
-	const sf::Vector2f mousePosition(relativeToWorld.x, relativeToWorld.y);
-	const sf::FloatRect interactiveObjRect(static_cast<sf::FloatRect>(sf::IntRect(mInteractiveObject.getX(),
-		mInteractiveObject.getY(), mInteractiveObject.getWidth(), mInteractiveObject.getHeight())));
+	const sf::Vector2f mousePosition = relativeToWorld;
+	const sf::FloatRect interactiveObjRect = sf::FloatRect(mInteractiveObject.getX(),
+		mInteractiveObject.getY(), mInteractiveObject.getWidth(), mInteractiveObject.getHeight());
 
 	if (interactiveObjRect.contains(mousePosition))
 	{

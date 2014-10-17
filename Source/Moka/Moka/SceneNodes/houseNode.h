@@ -29,7 +29,7 @@ class HouseNode : public InteractiveNode // inherits SceneNode and EventHandler 
 {
 public:
 								HouseNode(sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject
-									, std::vector<sf::IntRect> attachedRects, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox);
+									, std::vector<sf::FloatRect> attachedRects, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox);
 								HouseNode(const HouseNode &) = delete;
 	HouseNode &					operator=(const HouseNode &) = delete;
 
@@ -42,7 +42,7 @@ private:
 	const sf::RenderWindow		&mWindow;
 	const sf::View				&mView;
 	const InteractiveObject		&mInteractiveObject;
-	std::vector<sf::IntRect>	mAttachedRects;
+	std::vector<sf::FloatRect>	mAttachedRects;
 	trmb::SoundPlayer			&mSoundPlayer;
 	ChatBox						&mChatBox;
 };

@@ -62,13 +62,13 @@ void ObjectGroups::readInteractiveGroup(tinyxml2::XMLDocument &config)
 		assert(("ALW - Logic Error : There is no type attribute!", object->Attribute("type")));
 		std::string type = object->Attribute("type");
 		assert(("ALW - Logic Error : There is no x attribute!", object->IntAttribute("x")));
-		int x = object->IntAttribute("x");
+		float x = object->FloatAttribute("x");
 		assert(("ALW - Logic Error : There is no x attribute!", object->IntAttribute("y")));
-		int y = object->IntAttribute("y");
+		float y = object->FloatAttribute("y");
 		assert(("ALW - Logic Error : There is no x attribute!", object->IntAttribute("width")));
-		int width = object->IntAttribute("width");
+		float width = object->FloatAttribute("width");
 		assert(("ALW - Logic Error : There is no x attribute!", object->IntAttribute("height")));
-		int height = object->IntAttribute("height");
+		float height = object->FloatAttribute("height");
 
 		tinyxml2::XMLElement *properties = object->FirstChildElement("properties");
 		assert(("ALW - Logic Error: There are no properties!", properties));

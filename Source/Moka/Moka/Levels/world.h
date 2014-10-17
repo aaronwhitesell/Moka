@@ -51,7 +51,7 @@ private:
 
 private:
 	void								buildScene();
-	std::vector<sf::IntRect>			buildAttachedRects(const InteractiveObject &interactiveObj);
+	std::vector<sf::FloatRect>			buildAttachedRects(const InteractiveObject &interactiveObj);
 
 
 private:

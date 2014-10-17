@@ -108,18 +108,18 @@ void World::buildScene()
 	mSceneLayers[Foreground]->attachChild(std::move(player));
 }
 
-std::vector<sf::IntRect> World::buildAttachedRects(const InteractiveObject &interactiveObj)
+std::vector<sf::FloatRect> World::buildAttachedRects(const InteractiveObject &interactiveObj)
 {
 	std::vector<InteractiveObject>::const_iterator iter    = begin(mObjectGroups.getInteractiveGroup().getInteractiveObjects());
 	std::vector<InteractiveObject>::const_iterator iterEnd = end(mObjectGroups.getInteractiveGroup().getInteractiveObjects());
-	std::vector<sf::IntRect> attachedRects;
+	std::vector<sf::FloatRect> attachedRects;
 
 	// ALW - Store all the rects of objects (windows, doors, etc) with the house they are attached to. Later
 	// ALW - the HouseNode object can use these rects to detect whether it is clicked or an attached object is.
 	for (; iter != iterEnd; ++iter)
 	{
 		if (interactiveObj.getName() == iter->getAttachedTo())
-			attachedRects.emplace_back(sf::IntRect(iter->getX(), iter->getY(), iter->getWidth(), iter->getHeight()));
+			attachedRects.emplace_back(sf::FloatRect(iter->getX(), iter->getY(), iter->getWidth(), iter->getHeight()));
 	}
 
 	return attachedRects;
