@@ -1,0 +1,39 @@
+Getting Started
+1. Download SFML source from http://www.sfml-dev.org/
+2. Download the latest version of cMake
+3. Open command prompt
+   Start -> All Programs -> Visual Studio 2013 -> Visual Studio Tools -> VS2013 x86 Native Tools Command Prompt
+4. Show the compiler being used
+   cl <enter>
+5. Launch cMake with command prompt
+   "C:\Program Files (x86)\CMake\bin\cmake-gui.exe"
+
+cMake Configuration
+1. Where is the source code:
+   C:/Users/MyName/Desktop/SFML-2.1
+2. Where to build the binaries:
+   (Debug) C:/Users/MyName/Desktop/SFML-2.1-Debug
+   (Release) C:/Users/MyName/Desktop/SFML-2.1-Release
+3. Build directory does not exist, should I create it? - Yes
+4. Specify the generator for this project - NMake Makefiles
+5. BUILD_SHARED_LIBS - Yes
+6. CMAKE_BUILD_TYPE - Debug / Release
+7. CMAKE_INSTALL_PREFIX - C:/Program Files (x86)/SFML
+8. GLEW_INCLUDE_PATH - C:/Users/Aaron Whitesell/Desktop/SFML-2.1/extlibs/headers
+9. GLEW_LIBRARY - C:/Users/Aaron Whitesell/Desktop/SFML-2.1/extlibs/libs-msvc/x86/glew.lib
+10. SFML_BUILD_DOC - No
+11. SFML_BUILD_EXAMPLES - No
+12. SFML_USE_STATIC_STD_LIBS - No
+
+cMake Build
+1. Press <configure> to update and display new values in red
+2. Press <Generate> to generate selected build files
+
+Run nMake with command prompt
+1. Change to the directory with the Makefile
+   (Debug) cd "C:/Users/MyName/Desktop/SFML-2.1-Debug"
+   (Release) cd "C:/Users/MyName/Desktop/SFML-2.1-Release"
+2. nMake all
+3. lib and dll files can be found in
+   (Debug) C:/Users/MyName/Desktop/SFML-2.1-Debug/lib
+   (Release) C:/Users/MyName/Desktop/SFML-2.1-Release/lib
