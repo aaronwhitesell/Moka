@@ -9,8 +9,9 @@ Controller::Controller()
 , mLeft(0x84e6c13c)
 , mRight(0x19e343e8)
 , mEnter(0xff349d1d)
+, mLeftClickPress(0x6955d309)
+, mLeftClickRelease(0x128b8b25)
 , mRightClick(0x3e6524cd)
-, mLeftClick(0x6955d309)
 {
 	// ALW - Create a map of event guids and corresponding actions
 	mActionBindings.createAction(mUp);
@@ -18,17 +19,19 @@ Controller::Controller()
 	mActionBindings.createAction(mLeft);
 	mActionBindings.createAction(mRight);
 	mActionBindings.createAction(mEnter);
+	mActionBindings.createAction(mLeftClickPress);
+	mActionBindings.createAction(mLeftClickRelease);
 	mActionBindings.createAction(mRightClick);
-	mActionBindings.createAction(mLeftClick);
 
 	// ALW - Create a map of keyboard buttons and corresponding actions (default bindings)
-	mActionBindings.assignKeyboardKeyAsButtonBinding(trmb::KeyboardKeyAsButton(sf::Keyboard::W,      trmb::KeyboardKeyAsButton::ButtonType::RealTime), mUp);
-	mActionBindings.assignKeyboardKeyAsButtonBinding(trmb::KeyboardKeyAsButton(sf::Keyboard::S,      trmb::KeyboardKeyAsButton::ButtonType::RealTime), mDown);
-	mActionBindings.assignKeyboardKeyAsButtonBinding(trmb::KeyboardKeyAsButton(sf::Keyboard::A,      trmb::KeyboardKeyAsButton::ButtonType::RealTime), mLeft);
-	mActionBindings.assignKeyboardKeyAsButtonBinding(trmb::KeyboardKeyAsButton(sf::Keyboard::D,      trmb::KeyboardKeyAsButton::ButtonType::RealTime), mRight);
-	mActionBindings.assignKeyboardKeyAsButtonBinding(trmb::KeyboardKeyAsButton(sf::Keyboard::Return, trmb::KeyboardKeyAsButton::ButtonType::OnPress),  mEnter);
-	mActionBindings.assignMouseButtonAsButtonBinding(trmb::MouseButtonAsButton(sf::Mouse::Right,     trmb::MouseButtonAsButton::ButtonType::OnPress),  mRightClick);
-	mActionBindings.assignMouseButtonAsButtonBinding(trmb::MouseButtonAsButton(sf::Mouse::Left,      trmb::MouseButtonAsButton::ButtonType::OnPress),  mLeftClick);
+	mActionBindings.assignKeyboardKeyAsButtonBinding(trmb::KeyboardKeyAsButton(sf::Keyboard::W,      trmb::KeyboardKeyAsButton::ButtonType::RealTime),  mUp);
+	mActionBindings.assignKeyboardKeyAsButtonBinding(trmb::KeyboardKeyAsButton(sf::Keyboard::S,      trmb::KeyboardKeyAsButton::ButtonType::RealTime),  mDown);
+	mActionBindings.assignKeyboardKeyAsButtonBinding(trmb::KeyboardKeyAsButton(sf::Keyboard::A,      trmb::KeyboardKeyAsButton::ButtonType::RealTime),  mLeft);
+	mActionBindings.assignKeyboardKeyAsButtonBinding(trmb::KeyboardKeyAsButton(sf::Keyboard::D,      trmb::KeyboardKeyAsButton::ButtonType::RealTime),  mRight);
+	mActionBindings.assignKeyboardKeyAsButtonBinding(trmb::KeyboardKeyAsButton(sf::Keyboard::Return, trmb::KeyboardKeyAsButton::ButtonType::OnPress),   mEnter);
+	mActionBindings.assignMouseButtonAsButtonBinding(trmb::MouseButtonAsButton(sf::Mouse::Left,		 trmb::MouseButtonAsButton::ButtonType::OnPress),   mLeftClickPress);
+	mActionBindings.assignMouseButtonAsButtonBinding(trmb::MouseButtonAsButton(sf::Mouse::Left,		 trmb::MouseButtonAsButton::ButtonType::OnRelease), mLeftClickRelease);
+	mActionBindings.assignMouseButtonAsButtonBinding(trmb::MouseButtonAsButton(sf::Mouse::Right,     trmb::MouseButtonAsButton::ButtonType::OnPress),   mRightClick);
 }
 
 const std::vector<trmb::ActionBinding::ActionSharedPtr> & Controller::getActions() const
