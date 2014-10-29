@@ -11,12 +11,16 @@ namespace sf
 {
 	class RenderStates;
 	class RenderTarget;
+	class RenderWindow;
+	class View;
 }
 
 namespace trmb
 {
 	class Event;
 }
+
+class InteractiveObject;
 
 class InteractiveNode : public trmb::SceneNode, trmb::EventHandler
 {
@@ -25,34 +29,33 @@ private:
 
 
 public:
-						InteractiveNode();
-						InteractiveNode(const InteractiveNode &) = delete;
-	InteractiveNode &	operator=(const InteractiveNode &) = delete;
+								InteractiveNode(sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject);
+								InteractiveNode(const InteractiveNode &) = delete;
+	InteractiveNode &			operator=(const InteractiveNode &) = delete;
 
-	virtual void		handleEvent(const trmb::Event &gameEvent);
-
-
-protected:
-	virtual void		drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const;
-	virtual void		updateSelection() = 0;
-
-
-private:
-	bool				isLeftClick(const trmb::Event& gameEvent) const;
-	bool				isRightClick(const trmb::Event& gameEvent) const;
+	virtual void				handleEvent(const trmb::Event &gameEvent) override;
 
 
 protected:
-	sf::RectangleShape	mHightlight;
-	bool				mIsSelected;
-	bool				mDisableInput;
+	virtual bool				isMouseOverObject() const;
+	virtual void				activate() = 0;
+	virtual void				drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const override;
+
+
+protected:
+	const sf::RenderWindow		&mWindow;
+	const sf::View				&mView;
+	const InteractiveObject		&mInteractiveObject;
+	const EventGuid				mLeftClickPress;   // ALW - Matches the GUID in the Controller class.
+	sf::RectangleShape			mHightlight;
+	bool						mSelected;
+	bool						mPreviousSelectedState;
+	bool						mDisableInput;
 
 
 private:
-	const EventGuid		mRightClick;	   // ALW - Matches the GUID in the Controller class.
-	const EventGuid		mLeftClick;		   // ALW - Matches the GUID in the Controller class.
-	const EventGuid		mCreateTextPrompt; // ALW - Matches the GUID in the ChatBox class.
-	const EventGuid		mClearTextPrompt;  // ALW - Matches the GUID in the ChatBox class.
+	const EventGuid				mCreateTextPrompt; // ALW - Matches the GUID in the ChatBox class.
+	const EventGuid				mClearTextPrompt;  // ALW - Matches the GUID in the ChatBox class.
 };
 
 #endif

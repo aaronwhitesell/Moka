@@ -1,18 +1,25 @@
 #include "InteractiveNode.h"
+#include "../GameObjects/interactiveObject.h"
 
 #include "Trambo/Events/event.h"
 
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/View.hpp>
+#include <SFML/Window/Mouse.hpp>
 
 
-InteractiveNode::InteractiveNode()
-: mRightClick(0x6955d309)
-, mLeftClick(0x3e6524cd)
+InteractiveNode::InteractiveNode(sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject)
+: mWindow(window)
+, mView(view)
+, mInteractiveObject(interactiveObject)
+, mLeftClickPress(0x6955d309)
 , mCreateTextPrompt(0x25e87fd8)
 , mClearTextPrompt(0xc1523265)
+, mSelected(false)
+, mPreviousSelectedState(false)
 , mDisableInput(false)
-, mIsSelected(false)
 {
 	mHightlight.setFillColor(sf::Color(0u, 0u, 0u, 50u));
 	mHightlight.setOutlineColor(sf::Color(0u, 0u, 0u, 125u));
@@ -24,40 +31,33 @@ void InteractiveNode::handleEvent(const trmb::Event& gameEvent)
 	if (mCreateTextPrompt == gameEvent.getType())
 	{
 		mDisableInput = true;
-		mIsSelected = false;
+		mSelected = false;
 	}
 	else if (mClearTextPrompt == gameEvent.getType())
 		mDisableInput = false;
+}
 
-	if (!mDisableInput)
+bool InteractiveNode::isMouseOverObject() const
+{
+	const sf::Vector2i relativeToWindow = sf::Mouse::getPosition(mWindow);
+	const sf::Vector2f relativeToWorld = mWindow.mapPixelToCoords(relativeToWindow, mView);
+	const sf::Vector2f mousePosition = relativeToWorld;
+
+	const sf::FloatRect interactiveObjRect = sf::FloatRect(mInteractiveObject.getX(),
+		mInteractiveObject.getY(), mInteractiveObject.getWidth(), mInteractiveObject.getHeight());
+
+	bool ret = false;
+	if (interactiveObjRect.contains(mousePosition))
 	{
-		if (isLeftClick(gameEvent) || isRightClick(gameEvent))
-			updateSelection();
+		// ALW - Mouse cursor is over the object.
+		ret = true;
 	}
+
+	return ret;
 }
 
 void InteractiveNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const
 {
-	if (mIsSelected)
+	if (mSelected)
 		target.draw(mHightlight, states);
-}
-
-bool InteractiveNode::isLeftClick(const trmb::Event& gameEvent) const
-{
-	bool ret = false;
-
-	if (mLeftClick == gameEvent.getType())
-		ret = true;
-
-	return ret;
-}
-
-bool InteractiveNode::isRightClick(const trmb::Event& gameEvent) const
-{
-	bool ret = false;
-
-	if (mRightClick == gameEvent.getType())
-		ret = true;
-
-	return ret;
 }

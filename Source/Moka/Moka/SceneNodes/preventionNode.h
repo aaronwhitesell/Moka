@@ -29,15 +29,14 @@ public:
 								PreventionNode(const PreventionNode &) = delete;
 	PreventionNode &			operator=(const PreventionNode &) = delete;
 
+	virtual void				handleEvent(const trmb::Event &gameEvent) override final;
+
 
 protected:
-	virtual void				updateSelection() final;
+	virtual void				activate() override final;
 
 
 private:
-	const sf::RenderWindow		&mWindow;
-	const sf::View				&mView;
-	const InteractiveObject		&mInteractiveObject;
 	trmb::SoundPlayer			&mSoundPlayer;
 	ChatBox						&mChatBox;
 };

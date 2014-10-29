@@ -16,9 +16,7 @@
 
 PreventionNode::PreventionNode(sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject
 	, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
-: mWindow(window)
-, mView(view)
-, mInteractiveObject(interactiveObject)
+: InteractiveNode(window, view, interactiveObject)
 , mSoundPlayer(soundPlayer)
 , mChatBox(chatBox)
 {
@@ -26,31 +24,42 @@ PreventionNode::PreventionNode(sf::RenderWindow &window, const sf::View &view, c
 	mHightlight.setPosition(sf::Vector2f(mInteractiveObject.getX(), mInteractiveObject.getY()));
 }
 
-void PreventionNode::updateSelection()
+void PreventionNode::handleEvent(const trmb::Event &gameEvent)
 {
-	const sf::Vector2i relativeToWindow = sf::Mouse::getPosition(mWindow);
-	const sf::Vector2f relativeToWorld = mWindow.mapPixelToCoords(relativeToWindow, mView);
-	const sf::Vector2f mousePosition = relativeToWorld;
-	const sf::FloatRect interactiveObjRect = sf::FloatRect(mInteractiveObject.getX(),
-		mInteractiveObject.getY(), mInteractiveObject.getWidth(), mInteractiveObject.getHeight());
+	InteractiveNode::handleEvent(gameEvent);
 
-	if (interactiveObjRect.contains(mousePosition))
+	if (!mDisableInput)
 	{
-		mSoundPlayer.play(SoundEffects::ID::Button);
-		// ALW - ChatBox::UpdateText() can generate a mCreatePrompt event when an interactive object
-		// ALW - is selected. This asynchronous event will force InteractiveNode classes to ignore 
-		// ALW - left and right click events. Then if <enter> is pressed an mEnter event will be
-		// ALW - generated allowing InteractiveNode classes to handle left and right click events.
-		// ALW - However, if another interactive object is selected that occurs before the currently
-		// ALW - selected interactive object in the SceneNode then this newly selected interactive
-		// ALW - object will cause ChatBox::UpdateText() to be called which generates a mCreatePrompt.
-		// ALW - InteractiveNodes are then forced to ignore left and right click events, so the original
-		// ALW - interactive object will be left selected. To remedy this all InteractiveNodes deselect
-		// ALW - themselves when a mCreatePrompt is generated. Immediately afterwards the InteractiveNode
-		// ALW - that generated the mCreatePrompt is reselected.
-		mChatBox.updateText(trmb::Localize::getInstance().getString("inspectPrevMeth"));
-		mIsSelected = true;
+		if (mLeftClickPress == gameEvent.getType())
+		{
+			mPreviousSelectedState = mSelected;
+
+			if (isMouseOverObject())
+			{
+				mSelected = true;
+				if (!mPreviousSelectedState)
+					activate();
+			}
+			else
+				mSelected = false;
+		}
 	}
-	else
-		mIsSelected = false;
+}
+
+void PreventionNode::activate()
+{
+	mSoundPlayer.play(SoundEffects::ID::Button);
+	// ALW - ChatBox::UpdateText() can generate a mCreatePrompt event when an interactive object
+	// ALW - is selected. This asynchronous event will force InteractiveNode classes to ignore
+	// ALW - left and right click events. Then if <enter> is pressed an mEnter event will be
+	// ALW - generated allowing InteractiveNode classes to handle left and right click events.
+	// ALW - However, if another interactive object is selected that occurs before the currently
+	// ALW - selected interactive object in the SceneNode then this newly selected interactive
+	// ALW - object will cause ChatBox::UpdateText() to be called which generates a mCreatePrompt.
+	// ALW - InteractiveNodes are then forced to ignore left and right click events, so the original
+	// ALW - interactive object will be left selected. To remedy this all InteractiveNodes deselect
+	// ALW - themselves when a mCreatePrompt is generated. Immediately afterwards the InteractiveNode
+	// ALW - that generated the mCreatePrompt is reselected.
+	mChatBox.updateText(trmb::Localize::getInstance().getString("inspectPrevMeth"));
+	mSelected = true;
 }
