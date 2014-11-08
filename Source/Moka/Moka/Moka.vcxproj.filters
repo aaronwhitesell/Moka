@@ -72,12 +72,6 @@
     <Filter Include="Source Files\HUD">
       <UniqueIdentifier>{be852d98-b3f0-49d7-95c4-38ae327a7a6f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\HUD\Buttons">
-      <UniqueIdentifier>{ec465fa4-8919-4977-9a18-ddcf73d228af}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\HUD\Buttons">
-      <UniqueIdentifier>{9650c600-6756-45fc-a213-3acac0cffd2d}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\application.h">
@@ -146,9 +140,6 @@
     <ClInclude Include="HUD\chatBox.h">
       <Filter>Header Files\HUD</Filter>
     </ClInclude>
-    <ClInclude Include="HUD\button.h">
-      <Filter>Header Files\HUD\Buttons</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\application.cpp">
@@ -213,9 +204,6 @@
     </ClCompile>
     <ClCompile Include="HUD\chatBox.cpp">
       <Filter>Source Files\HUD</Filter>
-    </ClCompile>
-    <ClCompile Include="HUD\button.cpp">
-      <Filter>Source Files\HUD\Buttons</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
