@@ -10,7 +10,7 @@
 #include <SFML/Window/Mouse.hpp>
 
 
-InteractiveNode::InteractiveNode(sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject)
+InteractiveNode::InteractiveNode(const sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject)
 : mWindow(window)
 , mView(view)
 , mInteractiveObject(interactiveObject)
@@ -21,6 +21,8 @@ InteractiveNode::InteractiveNode(sf::RenderWindow &window, const sf::View &view,
 , mPreviousSelectedState(false)
 , mDisableInput(false)
 {
+	mHightlight.setSize(sf::Vector2f(mInteractiveObject.getWidth(), mInteractiveObject.getHeight()));
+	mHightlight.setPosition(sf::Vector2f(mInteractiveObject.getX(), mInteractiveObject.getY()));
 	mHightlight.setFillColor(sf::Color(0u, 0u, 0u, 50u));
 	mHightlight.setOutlineColor(sf::Color(0u, 0u, 0u, 125u));
 	mHightlight.setOutlineThickness(2.0f);

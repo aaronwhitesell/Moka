@@ -29,7 +29,7 @@ private:
 
 
 public:
-								InteractiveNode(sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject);
+								InteractiveNode(const sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject);
 								InteractiveNode(const InteractiveNode &) = delete;
 	InteractiveNode &			operator=(const InteractiveNode &) = delete;
 
@@ -38,6 +38,8 @@ public:
 
 protected:
 	virtual bool				isMouseOverObject() const;
+
+private:
 	virtual void				activate() = 0;
 	virtual void				drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const override;
 

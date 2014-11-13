@@ -24,7 +24,7 @@ class InteractiveObject;
 class PreventionNode : public InteractiveNode
 {
 public:
-								PreventionNode(sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject
+								PreventionNode(const sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject
 									, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox);
 								PreventionNode(const PreventionNode &) = delete;
 	PreventionNode &			operator=(const PreventionNode &) = delete;
@@ -32,7 +32,7 @@ public:
 	virtual void				handleEvent(const trmb::Event &gameEvent) override final;
 
 
-protected:
+private:
 	virtual void				activate() override final;
 
 

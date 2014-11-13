@@ -31,9 +31,11 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mCamera(window.getDefaultView(), mWorldBounds)
 , mMap("Data/Maps/World.tmx")
 , mChatBox(window, fonts, soundPlayer)
+, mHouseUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
 , mObjectGroups("Data/Maps/World.tmx")
 , mHero(nullptr)
 {
+	centerOrigin(mHouseUI, true, false);
 	buildScene();
 }
 
@@ -93,7 +95,7 @@ void World::buildScene()
 	{
 		if (iter->getType() == "House")
 			mSceneLayers[Interactive]->attachChild(std::move(std::unique_ptr<HouseNode>(
-				new HouseNode(mWindow, mCamera.getView(), *iter, buildAttachedRects(*iter), mSoundPlayer, mChatBox))));
+			new HouseNode(mWindow, mCamera.getView(), *iter, buildAttachedRects(*iter), mSoundPlayer, mChatBox, mHouseUI))));
 		else if (iter->getType() == "Prevention Method")
 			mSceneLayers[Interactive]->attachChild(std::move(std::unique_ptr<PreventionNode>(
 				new PreventionNode(mWindow, mCamera.getView(), *iter, mSoundPlayer, mChatBox))));

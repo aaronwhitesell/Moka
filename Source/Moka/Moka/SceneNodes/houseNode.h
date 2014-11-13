@@ -24,12 +24,14 @@ namespace trmb
 
 class ChatBox;
 class InteractiveObject;
+class HouseUI;
 
 class HouseNode : public InteractiveNode // inherits SceneNode and EventHandler indirectly
 {
 public:
-								HouseNode(sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject
-									, std::vector<sf::FloatRect> attachedRects, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox);
+								HouseNode(const sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject
+									, std::vector<sf::FloatRect> attachedRects, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox
+									, HouseUI &mHouseUI);
 								HouseNode(const HouseNode &) = delete;
 	HouseNode &					operator=(const HouseNode &) = delete;
 
@@ -38,13 +40,26 @@ public:
 
 protected:
 	virtual bool				isMouseOverObject() const override final;
+
+
+private:
+	virtual void				drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const override final;
+	virtual void				updateCurrent(sf::Time dt) override final;
 	virtual void				activate() override final;
+	bool						isMouseOverHouseUI() const;
+	void						updateHouseUI();
+
+	void						incrementPurchaseClick();
+	void						decrementPurchaseClick();
+	void						incrementRepairClick();
+	void						decrementRepairClick();
 
 
 private:
 	std::vector<sf::FloatRect>	mAttachedRects;
 	trmb::SoundPlayer			&mSoundPlayer;
 	ChatBox						&mChatBox;
+	HouseUI				        &mHouseUI;
 };
 
 #endif

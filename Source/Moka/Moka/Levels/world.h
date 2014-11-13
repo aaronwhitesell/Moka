@@ -2,6 +2,7 @@
 #define WORLD_H
 
 #include "../HUD/chatBox.h"
+#include "../HUD/houseUI.h"
 #include "../SceneNodes/heroNode.h"
 #include "../GameObjects/objectGroups.h"
 
@@ -69,7 +70,7 @@ private:
 	const EventGuid								mFullscreen; // ALW - Matches the GUID in the ToggleFullscreen class.
 	const EventGuid								mWindowed;   // ALW - Matches the GUID in the ToggleFullscreen class.
 
-	sf::RenderWindow							&mWindow;
+	const sf::RenderWindow						&mWindow;
 	sf::RenderTarget							&mTarget;
 	trmb::TextureHolder							mTextures;
 	trmb::FontHolder							&mFonts;
@@ -84,6 +85,7 @@ private:
 	trmb::Camera								mCamera;
 	trmb::Map									mMap;
 	ChatBox										mChatBox;
+	HouseUI										mHouseUI;
 	ObjectGroups								mObjectGroups;
 	HeroNode									*mHero;
 };

@@ -14,14 +14,12 @@
 #include <SFML/Graphics/View.hpp>
 
 
-PreventionNode::PreventionNode(sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject
+PreventionNode::PreventionNode(const sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject
 	, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
 : InteractiveNode(window, view, interactiveObject)
 , mSoundPlayer(soundPlayer)
 , mChatBox(chatBox)
 {
-	mHightlight.setSize(sf::Vector2f(mInteractiveObject.getWidth(), mInteractiveObject.getHeight()));
-	mHightlight.setPosition(sf::Vector2f(mInteractiveObject.getX(), mInteractiveObject.getY()));
 }
 
 void PreventionNode::handleEvent(const trmb::Event &gameEvent)
