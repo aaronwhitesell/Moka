@@ -140,6 +140,9 @@
     <ClInclude Include="HUD\chatBox.h">
       <Filter>Header Files\HUD</Filter>
     </ClInclude>
+    <ClInclude Include="HUD\houseUI.h">
+      <Filter>Header Files\HUD</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\application.cpp">
@@ -203,6 +206,9 @@
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="HUD\chatBox.cpp">
+      <Filter>Source Files\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD\houseUI.cpp">
       <Filter>Source Files\HUD</Filter>
     </ClCompile>
   </ItemGroup>

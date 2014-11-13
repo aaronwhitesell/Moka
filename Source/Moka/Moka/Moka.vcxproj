@@ -84,6 +84,7 @@
     <ClInclude Include="GameObjects\interactiveObject.h" />
     <ClInclude Include="GameObjects\objectGroups.h" />
     <ClInclude Include="HUD\chatBox.h" />
+    <ClInclude Include="HUD\houseUI.h" />
     <ClInclude Include="Levels\world.h" />
     <ClInclude Include="Player\controller.h" />
     <ClInclude Include="Player\devices.h" />
@@ -108,6 +109,7 @@
     <ClCompile Include="GameObjects\interactiveObject.cpp" />
     <ClCompile Include="GameObjects\objectGroups.cpp" />
     <ClCompile Include="HUD\chatBox.cpp" />
+    <ClCompile Include="HUD\houseUI.cpp" />
     <ClCompile Include="Levels\world.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player\controller.cpp" />
