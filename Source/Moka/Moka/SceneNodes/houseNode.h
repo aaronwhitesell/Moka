@@ -1,5 +1,5 @@
-#ifndef TRAMBO_HOUSE_NODE_H
-#define TRAMBO_HOUSE_NODE_H
+#ifndef HOUSE_NODE_H
+#define HOUSE_NODE_H
 
 #include "interactiveNode.h"
 

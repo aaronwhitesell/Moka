@@ -1,4 +1,4 @@
-#include "HouseNode.h"
+#include "houseNode.h"
 #include "../GameObjects/interactiveObject.h"
 #include "../HUD/chatBox.h"
 #include "../HUD/optionsUI.h"
