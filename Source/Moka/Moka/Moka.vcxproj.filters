@@ -143,6 +143,9 @@
     <ClInclude Include="HUD\optionsUI.h">
       <Filter>Header Files\HUD</Filter>
     </ClInclude>
+    <ClInclude Include="SceneNodes\clinicNode.h">
+      <Filter>Header Files\SceneNodes\Interactive</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\application.cpp">
@@ -210,6 +213,9 @@
     </ClCompile>
     <ClCompile Include="HUD\optionsUI.cpp">
       <Filter>Source Files\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNodes\clinicNode.cpp">
+      <Filter>Source Files\SceneNodes\Interactive</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

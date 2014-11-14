@@ -1,4 +1,5 @@
 #include "world.h"
+#include "../SceneNodes/clinicNode.h"
 #include "../SceneNodes/HouseNode.h"
 #include "../SceneNodes/preventionNode.h"
 #include "../GameObjects/interactiveObject.h"
@@ -31,15 +32,12 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mCamera(window.getDefaultView(), mWorldBounds)
 , mMap("Data/Maps/World.tmx")
 , mChatBox(window, fonts, soundPlayer)
+, mClinicUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
 , mHouseUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
 , mObjectGroups("Data/Maps/World.tmx")
 , mHero(nullptr)
 {
-	mHouseUI.setTabSize(sf::Vector2f(75.0f, 20.0f));
-	mHouseUI.setLHSTabText("Purchase");
-	mHouseUI.setRHSTabText("Repair");
-	centerOrigin(mHouseUI, true, false);
-
+	configureUIs();
 	buildScene();
 }
 
@@ -66,6 +64,19 @@ void World::draw()
 	mTarget.setView(mCamera.getView());
 	mTarget.draw(mSceneGraph);
 	mTarget.draw(mChatBox);
+}
+
+void World::configureUIs()
+{
+	mClinicUI.setTabSize(sf::Vector2f(75.0f, 20.0f));
+	mClinicUI.setLHSTabText("RDT");
+	mClinicUI.setRHSTabText("ACT");
+	centerOrigin(mClinicUI, true, false);
+
+	mHouseUI.setTabSize(sf::Vector2f(75.0f, 20.0f));
+	mHouseUI.setLHSTabText("Bed Net");
+	mHouseUI.setRHSTabText("Repair");
+	centerOrigin(mHouseUI, true, false);
 }
 
 void World::buildScene()
@@ -95,16 +106,27 @@ void World::buildScene()
 	std::vector<InteractiveObject>::const_iterator iter    = begin(mObjectGroups.getInteractiveGroup().getInteractiveObjects());
 	std::vector<InteractiveObject>::const_iterator iterEnd = end(mObjectGroups.getInteractiveGroup().getInteractiveObjects());
 
-	for (; iter != iterEnd; ++iter)
+	for (; iter != end(mObjectGroups.getInteractiveGroup().getInteractiveObjects()); ++iter)
 	{
-		if (iter->getType() == "House")
+		if (iter->getType() == "Clinic")
+		{
+			mSceneLayers[Interactive]->attachChild(std::move(std::unique_ptr<ClinicNode>(
+				new ClinicNode(mWindow, mCamera.getView(), *iter, buildAttachedRects(*iter), mSoundPlayer, mChatBox, mClinicUI))));
+		}
+		else if (iter->getType() == "House")
+		{
 			mSceneLayers[Interactive]->attachChild(std::move(std::unique_ptr<HouseNode>(
-			new HouseNode(mWindow, mCamera.getView(), *iter, buildAttachedRects(*iter), mSoundPlayer, mChatBox, mHouseUI))));
+				new HouseNode(mWindow, mCamera.getView(), *iter, buildAttachedRects(*iter), mSoundPlayer, mChatBox, mHouseUI))));
+		}
 		else if (iter->getType() == "Prevention Method")
+		{
 			mSceneLayers[Interactive]->attachChild(std::move(std::unique_ptr<PreventionNode>(
 				new PreventionNode(mWindow, mCamera.getView(), *iter, mSoundPlayer, mChatBox))));
+		}
 		else
+		{
 			assert(("ALW - Logic Error: The interactive object type is not handled!", false));
+		}
 	}
 
 	// Add player's character

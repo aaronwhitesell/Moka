@@ -51,6 +51,7 @@ private:
 
 
 private:
+	void								configureUIs();
 	void								buildScene();
 	std::vector<sf::FloatRect>			buildAttachedRects(const InteractiveObject &interactiveObj);
 
@@ -85,6 +86,7 @@ private:
 	trmb::Camera								mCamera;
 	trmb::Map									mMap;
 	ChatBox										mChatBox;
+	OptionsUI									mClinicUI;
 	OptionsUI									mHouseUI;
 	ObjectGroups								mObjectGroups;
 	HeroNode									*mHero;

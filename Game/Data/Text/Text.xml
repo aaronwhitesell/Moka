@@ -8,6 +8,7 @@ Pleasantville is a wonderful place, but it has one big problem; malaria. Help th
 effective strategy to fight malaria. First, have a look around a neighborhood of Pleasantville and identify different 
 ways to combat malaria. Then spend your resources wisely. Afterwards, we will have a board meeting and check the 
 effectiveness of your plan."/>
+	    <inspectClinic    attribute="You see a clinic."/>
 	    <inspectHouse     attribute="You see a house."/>
 	    <inspectPrevMeth  attribute="You see a malaria prevention method."/>
 	</en>
@@ -18,6 +19,7 @@ Pleasantville is a wonderful place, but it has one big problem; malaria. Help th
 effective strategy to fight malaria. First, have a look around a neighborhood of Pleasantville and identify different 
 ways to combat malaria. Then spend your resources wisely. Afterwards, we will have a board meeting and check the 
 effectiveness of your plan."/>
+	    <inspectClinic    attribute="fr: You see a clinic."/>
 	    <inspectHouse     attribute="fr: You see a house."/>
 	    <inspectPrevMeth  attribute="fr: You see a malaria prevention method."/>
 	</fr>
@@ -28,6 +30,7 @@ Pleasantville is a wonderful place, but it has one big problem; malaria.  Help t
 effective strategy to fight malaria.  First, have a look around a neighborhood of Pleasantville and identify different 
 ways to combat malaria.  Then spend your resources wisely.  Afterwards, we will have a board meeting and check the 
 effectiveness of your plan."/>
+	    <inspectClinic    attribute="mg: You see a clinic."/>
 	    <inspectHouse     attribute="mg: You see a house."/>
 	    <inspectPrevMeth  attribute="mg: You see a malaria prevention method."/>
 	</mg>
