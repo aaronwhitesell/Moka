@@ -35,7 +35,11 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mObjectGroups("Data/Maps/World.tmx")
 , mHero(nullptr)
 {
+	mHouseUI.setTabSize(sf::Vector2f(75.0f, 20.0f));
+	mHouseUI.setLHSTabText("Purchase");
+	mHouseUI.setRHSTabText("Repair");
 	centerOrigin(mHouseUI, true, false);
+
 	buildScene();
 }
 

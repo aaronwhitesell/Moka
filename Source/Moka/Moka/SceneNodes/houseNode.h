@@ -24,14 +24,14 @@ namespace trmb
 
 class ChatBox;
 class InteractiveObject;
-class HouseUI;
+class OptionsUI;
 
 class HouseNode : public InteractiveNode // inherits SceneNode and EventHandler indirectly
 {
 public:
 								HouseNode(const sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject
 									, std::vector<sf::FloatRect> attachedRects, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox
-									, HouseUI &mHouseUI);
+									, OptionsUI &mHouseUI);
 								HouseNode(const HouseNode &) = delete;
 	HouseNode &					operator=(const HouseNode &) = delete;
 
@@ -59,7 +59,7 @@ private:
 	std::vector<sf::FloatRect>	mAttachedRects;
 	trmb::SoundPlayer			&mSoundPlayer;
 	ChatBox						&mChatBox;
-	HouseUI				        &mHouseUI;
+	OptionsUI				    &mHouseUI;
 };
 
 #endif

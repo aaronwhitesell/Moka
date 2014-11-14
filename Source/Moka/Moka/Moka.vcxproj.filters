@@ -140,7 +140,7 @@
     <ClInclude Include="HUD\chatBox.h">
       <Filter>Header Files\HUD</Filter>
     </ClInclude>
-    <ClInclude Include="HUD\houseUI.h">
+    <ClInclude Include="HUD\optionsUI.h">
       <Filter>Header Files\HUD</Filter>
     </ClInclude>
   </ItemGroup>
@@ -208,7 +208,7 @@
     <ClCompile Include="HUD\chatBox.cpp">
       <Filter>Source Files\HUD</Filter>
     </ClCompile>
-    <ClCompile Include="HUD\houseUI.cpp">
+    <ClCompile Include="HUD\optionsUI.cpp">
       <Filter>Source Files\HUD</Filter>
     </ClCompile>
   </ItemGroup>

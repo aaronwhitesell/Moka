@@ -2,7 +2,7 @@
 #define WORLD_H
 
 #include "../HUD/chatBox.h"
-#include "../HUD/houseUI.h"
+#include "../HUD/optionsUI.h"
 #include "../SceneNodes/heroNode.h"
 #include "../GameObjects/objectGroups.h"
 
@@ -85,7 +85,7 @@ private:
 	trmb::Camera								mCamera;
 	trmb::Map									mMap;
 	ChatBox										mChatBox;
-	HouseUI										mHouseUI;
+	OptionsUI									mHouseUI;
 	ObjectGroups								mObjectGroups;
 	HeroNode									*mHero;
 };

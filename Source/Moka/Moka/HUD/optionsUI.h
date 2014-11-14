@@ -1,5 +1,5 @@
-#ifndef HOUSE_UI_H
-#define HOUSE_UI_H
+#ifndef OPTIONS_UI_H
+#define OPTIONS_UI_H
 
 #include "Trambo/HUD/gameTab.h"
 #include "Trambo/HUD/incDec.h"
@@ -10,6 +10,8 @@
 #include <SFML/Graphics/Transformable.hpp>
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
+
+#include <string>
 
 
 namespace sf
@@ -25,7 +27,7 @@ namespace trmb
 	class SoundPlayer;
 }
 
-class HouseUI : public sf::Transformable, public sf::Drawable
+class OptionsUI : public sf::Transformable, public sf::Drawable
 {
 public:
 	using Callback = trmb::GameTab::Callback;
@@ -33,16 +35,17 @@ public:
 
 
 public:
-							HouseUI(Fonts::ID font, trmb::FontHolder &fonts, SoundEffects::ID soundEffect
+							OptionsUI(Fonts::ID font, trmb::FontHolder &fonts, SoundEffects::ID soundEffect
 								, trmb::SoundPlayer &soundPlayer, EventGuid leftClickPress, EventGuid leftClickRelease);
-							HouseUI(const HouseUI &) = delete;
-	HouseUI&				operator=(const HouseUI &) = delete;
+							OptionsUI(const OptionsUI &) = delete;
+	OptionsUI&				operator=(const OptionsUI &) = delete;
 
 	sf::Vector2f			getSize() const;
 	sf::FloatRect			getRect() const;
 
-	void					setPurchaseCallback(Callback callback);
-	void					setRepairCallback(Callback callback);
+	void					setTabSize(sf::Vector2f size);
+	void					setLHSTabText(std::string string);
+	void					setRHSTabText(std::string string);
 
 	void					handler(const sf::RenderWindow &window, const sf::View &view, const sf::Transform &transform);
 	void					updateIncDecCallbacks(Callback incPurchaseCallback, Callback decPurchaseCallback
@@ -56,12 +59,19 @@ private:
 
 private:
 	virtual void			draw(sf::RenderTarget &target, sf::RenderStates states) const override final;
-	void					purchase();
-	void					repair();
+	void					standardizeCharacterSize();
+	void					buildUI();
+	void					lhsTab();
+	void					rhsTab();
 
 
 private:
-	trmb::TabContainer		mOptionTabs;
+	const sf::Vector2f		mFrameBuffer;
+	const float				mOutLineThickness;
+	sf::Vector2f			mTabSize;
+	int						mTabCount;
+
+	trmb::TabContainer		mTabs;
 	trmb::IncDec			mIncDecUI;
 	float					mHorizontalBuffer;
 	float					mVerticalBuffer;
@@ -71,8 +81,8 @@ private:
 	sf::Vector2f            mBackgroundDefaultSize;
 	sf::Vector2f            mBackgroundExpandedSize;
 
-	TabPtr					mPurchaseTab;
-	TabPtr					mRepairTab;
+	TabPtr					mLHSTab;
+	TabPtr					mRHSTab;
 
 	Callback                mIncPurchaseCallback;
 	Callback                mDecPurchaseCallback;
@@ -80,6 +90,6 @@ private:
 	Callback                mDecRepairCallback;
 };
 
-void	centerOrigin(HouseUI &button, bool centerXAxis = true, bool centerYAxis = true);
+void	centerOrigin(OptionsUI &button, bool centerXAxis = true, bool centerYAxis = true);
 
 #endif

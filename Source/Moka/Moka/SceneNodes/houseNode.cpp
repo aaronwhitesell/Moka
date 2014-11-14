@@ -1,7 +1,7 @@
 #include "HouseNode.h"
 #include "../GameObjects/interactiveObject.h"
 #include "../HUD/chatBox.h"
-#include "../HUD/houseUI.h"
+#include "../HUD/optionsUI.h"
 #include "../Resources/resourceIdentifiers.h"
 
 #include "Trambo/Events/event.h"
@@ -16,7 +16,7 @@
 
 
 HouseNode::HouseNode(const sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject
-	, std::vector<sf::FloatRect> attachedRects, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox, HouseUI &mHouseUI)
+	, std::vector<sf::FloatRect> attachedRects, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox, OptionsUI &mHouseUI)
 : InteractiveNode(window, view, interactiveObject)
 , mAttachedRects(attachedRects)
 , mSoundPlayer(soundPlayer)
@@ -148,9 +148,9 @@ void HouseNode::updateHouseUI()
 		, mInteractiveObject.getY() + mInteractiveObject.getHeight() + verticalBuffer));
 
 	mHouseUI.updateIncDecCallbacks(std::bind(&HouseNode::incrementPurchaseClick, this)
-			                          , std::bind(&HouseNode::decrementPurchaseClick, this)
-			                          , std::bind(&HouseNode::incrementRepairClick, this)
-			                          , std::bind(&HouseNode::decrementRepairClick, this));
+		, std::bind(&HouseNode::decrementPurchaseClick, this)
+		, std::bind(&HouseNode::incrementRepairClick, this)
+		, std::bind(&HouseNode::decrementRepairClick, this));
 }
 
 void HouseNode::incrementPurchaseClick()
