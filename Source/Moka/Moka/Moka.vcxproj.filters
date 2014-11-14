@@ -72,6 +72,12 @@
     <Filter Include="Source Files\HUD">
       <UniqueIdentifier>{be852d98-b3f0-49d7-95c4-38ae327a7a6f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\SceneNodes\Interactive\Buildings">
+      <UniqueIdentifier>{6ca6930d-b547-4ece-83ec-41249681bb52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SceneNodes\Interactive\Buildings">
+      <UniqueIdentifier>{145d045a-3f0d-4f60-936c-410a33f6bf27}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\application.h">
@@ -125,9 +131,6 @@
     <ClInclude Include="SceneNodes\interactiveNode.h">
       <Filter>Header Files\SceneNodes\Interactive</Filter>
     </ClInclude>
-    <ClInclude Include="SceneNodes\houseNode.h">
-      <Filter>Header Files\SceneNodes\Interactive</Filter>
-    </ClInclude>
     <ClInclude Include="SceneNodes\preventionNode.h">
       <Filter>Header Files\SceneNodes\Interactive</Filter>
     </ClInclude>
@@ -144,7 +147,13 @@
       <Filter>Header Files\HUD</Filter>
     </ClInclude>
     <ClInclude Include="SceneNodes\clinicNode.h">
-      <Filter>Header Files\SceneNodes\Interactive</Filter>
+      <Filter>Header Files\SceneNodes\Interactive\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneNodes\houseNode.h">
+      <Filter>Header Files\SceneNodes\Interactive\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneNodes\buildingNode.h">
+      <Filter>Header Files\SceneNodes\Interactive\Buildings</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -196,9 +205,6 @@
     <ClCompile Include="SceneNodes\interactiveNode.cpp">
       <Filter>Source Files\SceneNodes\Interactive</Filter>
     </ClCompile>
-    <ClCompile Include="SceneNodes\houseNode.cpp">
-      <Filter>Source Files\SceneNodes\Interactive</Filter>
-    </ClCompile>
     <ClCompile Include="SceneNodes\preventionNode.cpp">
       <Filter>Source Files\SceneNodes\Interactive</Filter>
     </ClCompile>
@@ -215,7 +221,13 @@
       <Filter>Source Files\HUD</Filter>
     </ClCompile>
     <ClCompile Include="SceneNodes\clinicNode.cpp">
-      <Filter>Source Files\SceneNodes\Interactive</Filter>
+      <Filter>Source Files\SceneNodes\Interactive\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNodes\houseNode.cpp">
+      <Filter>Source Files\SceneNodes\Interactive\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNodes\buildingNode.cpp">
+      <Filter>Source Files\SceneNodes\Interactive\Buildings</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

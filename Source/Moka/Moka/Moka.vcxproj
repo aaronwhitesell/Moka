@@ -90,6 +90,7 @@
     <ClInclude Include="Player\devices.h" />
     <ClInclude Include="Player\player.h" />
     <ClInclude Include="Resources\resourceIdentifiers.h" />
+    <ClInclude Include="SceneNodes\buildingNode.h" />
     <ClInclude Include="SceneNodes\clinicNode.h" />
     <ClInclude Include="SceneNodes\heroNode.h" />
     <ClInclude Include="SceneNodes\houseNode.h" />
@@ -116,6 +117,7 @@
     <ClCompile Include="Player\controller.cpp" />
     <ClCompile Include="Player\devices.cpp" />
     <ClCompile Include="Player\player.cpp" />
+    <ClCompile Include="SceneNodes\buildingNode.cpp" />
     <ClCompile Include="SceneNodes\clinicNode.cpp" />
     <ClCompile Include="SceneNodes\heroNode.cpp" />
     <ClCompile Include="SceneNodes\houseNode.cpp" />

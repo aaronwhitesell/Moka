@@ -1,5 +1,5 @@
-#ifndef TRAMBO_INTERACTIVE_NODE_H
-#define TRAMBO_INTERACTIVE_NODE_H
+#ifndef INTERACTIVE_NODE_H
+#define INTERACTIVE_NODE_H
 
 #include "Trambo/Events/eventHandler.h"
 #include "Trambo/SceneNodes/sceneNode.h"
@@ -38,6 +38,7 @@ public:
 
 protected:
 	virtual bool				isMouseOverObject() const;
+
 
 private:
 	virtual void				activate() = 0;
