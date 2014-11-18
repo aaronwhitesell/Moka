@@ -155,6 +155,9 @@
     <ClInclude Include="SceneNodes\buildingNode.h">
       <Filter>Header Files\SceneNodes\Interactive\Buildings</Filter>
     </ClInclude>
+    <ClInclude Include="HUD\undoUI.h">
+      <Filter>Header Files\HUD</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\application.cpp">
@@ -228,6 +231,9 @@
     </ClCompile>
     <ClCompile Include="SceneNodes\buildingNode.cpp">
       <Filter>Source Files\SceneNodes\Interactive\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD\undoUI.cpp">
+      <Filter>Source Files\HUD</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
