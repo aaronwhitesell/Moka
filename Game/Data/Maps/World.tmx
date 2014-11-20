@@ -2011,82 +2011,82 @@
     <property name="AttachedTo" value="Clinic 0"/>
    </properties>
   </object>
-  <object name="Barrel 0" type="Prevention Method" x="210" y="403" width="28" height="45">
+  <object name="Barrel 0" type="Barrel" x="210" y="403" width="28" height="45">
    <properties>
     <property name="AttachedTo" value="Standalone"/>
    </properties>
   </object>
-  <object name="Barrel 1" type="Prevention Method" x="210" y="467" width="28" height="45">
+  <object name="Barrel 1" type="Barrel" x="210" y="467" width="28" height="45">
    <properties>
     <property name="AttachedTo" value="Standalone"/>
    </properties>
   </object>
-  <object name="Barrel 2" type="Prevention Method" x="146" y="659" width="28" height="45">
+  <object name="Barrel 2" type="Barrel" x="146" y="659" width="28" height="45">
    <properties>
     <property name="AttachedTo" value="Standalone"/>
    </properties>
   </object>
-  <object name="Barrel 3" type="Prevention Method" x="274" y="723" width="28" height="45">
+  <object name="Barrel 3" type="Barrel" x="274" y="723" width="28" height="45">
    <properties>
     <property name="AttachedTo" value="Standalone"/>
    </properties>
   </object>
-  <object name="Barrel 4" type="Prevention Method" x="402" y="723" width="28" height="45">
+  <object name="Barrel 4" type="Barrel" x="402" y="723" width="28" height="45">
    <properties>
     <property name="AttachedTo" value="Standalone"/>
    </properties>
   </object>
-  <object name="Barrel 5" type="Prevention Method" x="530" y="595" width="28" height="45">
+  <object name="Barrel 5" type="Barrel" x="530" y="595" width="28" height="45">
    <properties>
     <property name="AttachedTo" value="Standalone"/>
    </properties>
   </object>
-  <object name="Barrel 6" type="Prevention Method" x="658" y="659" width="28" height="45">
+  <object name="Barrel 6" type="Barrel" x="658" y="659" width="28" height="45">
    <properties>
     <property name="AttachedTo" value="Standalone"/>
    </properties>
   </object>
-  <object name="Barrel 7" type="Prevention Method" x="1298" y="467" width="28" height="45">
+  <object name="Barrel 7" type="Barrel" x="1298" y="467" width="28" height="45">
    <properties>
     <property name="AttachedTo" value="Standalone"/>
    </properties>
   </object>
-  <object name="Barrel 8" type="Prevention Method" x="1426" y="659" width="28" height="45">
+  <object name="Barrel 8" type="Barrel" x="1426" y="659" width="28" height="45">
    <properties>
     <property name="AttachedTo" value="Standalone"/>
    </properties>
   </object>
-  <object name="Barrel 9" type="Prevention Method" x="1490" y="659" width="28" height="45">
+  <object name="Barrel 9" type="Barrel" x="1490" y="659" width="28" height="45">
    <properties>
     <property name="AttachedTo" value="Standalone"/>
    </properties>
   </object>
-  <object name="Barrel 10" type="Prevention Method" x="1554" y="787" width="28" height="45">
+  <object name="Barrel 10" type="Barrel" x="1554" y="787" width="28" height="45">
    <properties>
     <property name="AttachedTo" value="Standalone"/>
    </properties>
   </object>
-  <object name="Barrel 11" type="Prevention Method" x="402" y="1235" width="28" height="45">
+  <object name="Barrel 11" type="Barrel" x="402" y="1235" width="28" height="45">
    <properties>
     <property name="AttachedTo" value="Clinic 0"/>
    </properties>
   </object>
-  <object name="Barrel 12" type="Prevention Method" x="978" y="1171" width="28" height="45">
+  <object name="Barrel 12" type="Barrel" x="978" y="1171" width="28" height="45">
    <properties>
     <property name="AttachedTo" value="Standalone"/>
    </properties>
   </object>
-  <object name="Barrel 13" type="Prevention Method" x="978" y="1235" width="28" height="45">
+  <object name="Barrel 13" type="Barrel" x="978" y="1235" width="28" height="45">
    <properties>
     <property name="AttachedTo" value="Standalone"/>
    </properties>
   </object>
-  <object name="Barrel 14" type="Prevention Method" x="1106" y="1043" width="28" height="45">
+  <object name="Barrel 14" type="Barrel" x="1106" y="1043" width="28" height="45">
    <properties>
     <property name="AttachedTo" value="Standalone"/>
    </properties>
   </object>
-  <object name="Barrel 15" type="Prevention Method" x="1298" y="1299" width="28" height="45">
+  <object name="Barrel 15" type="Barrel" x="1298" y="1299" width="28" height="45">
    <properties>
     <property name="AttachedTo" value="Standalone"/>
    </properties>

@@ -1,7 +1,7 @@
 #include "world.h"
+#include "../SceneNodes/barrelNode.h"
 #include "../SceneNodes/clinicNode.h"
 #include "../SceneNodes/HouseNode.h"
-#include "../SceneNodes/preventionNode.h"
 #include "../GameObjects/interactiveObject.h"
 #include "../Resources/resourceIdentifiers.h"
 
@@ -32,6 +32,7 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mCamera(window.getDefaultView(), mWorldBounds)
 , mMap("Data/Maps/World.tmx")
 , mChatBox(window, fonts, soundPlayer)
+, mBarrelUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
 , mClinicUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
 , mHouseUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
 , mObjectGroups("Data/Maps/World.tmx")
@@ -68,6 +69,10 @@ void World::draw()
 
 void World::configureUIs()
 {
+	mBarrelUI.addUIElem("Cover", "Undo");
+	mBarrelUI.setSize(sf::Vector2f(75.0f, 20.0f));
+	centerOrigin(mBarrelUI, true, false);
+
 	mClinicUI.setTabSize(sf::Vector2f(75.0f, 20.0f));
 	mClinicUI.setLHSTabText("RDT");
 	mClinicUI.setRHSTabText("ACT");
@@ -108,24 +113,25 @@ void World::buildScene()
 
 	for (; iter != end(mObjectGroups.getInteractiveGroup().getInteractiveObjects()); ++iter)
 	{
-		if (iter->getType() == "Clinic")
+		if (iter->getType() == "Barrel")
+		{
+			mSceneLayers[Interactive]->attachChild(std::move(std::unique_ptr<BarrelNode>(
+				new BarrelNode(*iter, mWindow, mCamera.getView(), mBarrelUI, mSoundPlayer, mChatBox))));
+		}
+		else if (iter->getType() == "Clinic")
 		{
 			mSceneLayers[Interactive]->attachChild(std::move(std::unique_ptr<ClinicNode>(
-				new ClinicNode(mWindow, mCamera.getView(), *iter, buildAttachedRects(*iter), mSoundPlayer, mChatBox, mClinicUI))));
+				new ClinicNode(*iter, mWindow, mCamera.getView(), mClinicUI, buildAttachedRects(*iter), mSoundPlayer, mChatBox))));
 		}
 		else if (iter->getType() == "House")
 		{
 			mSceneLayers[Interactive]->attachChild(std::move(std::unique_ptr<HouseNode>(
-				new HouseNode(mWindow, mCamera.getView(), *iter, buildAttachedRects(*iter), mSoundPlayer, mChatBox, mHouseUI))));
-		}
-		else if (iter->getType() == "Prevention Method")
-		{
-			mSceneLayers[Interactive]->attachChild(std::move(std::unique_ptr<PreventionNode>(
-				new PreventionNode(mWindow, mCamera.getView(), *iter, mSoundPlayer, mChatBox))));
+				new HouseNode(*iter, mWindow, mCamera.getView(), mHouseUI, buildAttachedRects(*iter), mSoundPlayer, mChatBox))));
 		}
 		else
 		{
-			assert(("ALW - Logic Error: The interactive object type is not handled!", false));
+			// ALW - TODO - Uncomment when all object types have been handled.
+			//assert(("ALW - Logic Error: The interactive object type is not handled!", false));
 		}
 	}
 

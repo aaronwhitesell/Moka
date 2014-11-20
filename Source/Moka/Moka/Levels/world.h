@@ -3,6 +3,7 @@
 
 #include "../HUD/chatBox.h"
 #include "../HUD/optionsUI.h"
+#include "../HUD/undoUI.h"
 #include "../SceneNodes/heroNode.h"
 #include "../GameObjects/objectGroups.h"
 
@@ -86,6 +87,7 @@ private:
 	trmb::Camera								mCamera;
 	trmb::Map									mMap;
 	ChatBox										mChatBox;
+	UndoUI										mBarrelUI;
 	OptionsUI									mClinicUI;
 	OptionsUI									mHouseUI;
 	ObjectGroups								mObjectGroups;

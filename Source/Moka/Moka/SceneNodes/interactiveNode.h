@@ -11,8 +11,6 @@ namespace sf
 {
 	class RenderStates;
 	class RenderTarget;
-	class RenderWindow;
-	class View;
 }
 
 namespace trmb
@@ -24,32 +22,26 @@ class InteractiveObject;
 
 class InteractiveNode : public trmb::SceneNode, trmb::EventHandler
 {
-private:
+protected:
 	typedef unsigned long EventGuid;
 
 
 public:
-								InteractiveNode(const sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject);
+								InteractiveNode(const InteractiveObject &interactiveObject);
 								InteractiveNode(const InteractiveNode &) = delete;
 	InteractiveNode &			operator=(const InteractiveNode &) = delete;
 
 	virtual void				handleEvent(const trmb::Event &gameEvent) override;
 
 
-protected:
-	virtual bool				isMouseOverObject() const;
-
-
 private:
-	virtual void				activate() = 0;
 	virtual void				drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const override;
+	virtual bool				isMouseOverObject() const = 0;
+	virtual void				activate() = 0;
 
 
 protected:
-	const sf::RenderWindow		&mWindow;
-	const sf::View				&mView;
 	const InteractiveObject		&mInteractiveObject;
-	const EventGuid				mLeftClickPress;   // ALW - Matches the GUID in the Controller class.
 	sf::RectangleShape			mHightlight;
 	bool						mSelected;
 	bool						mPreviousSelectedState;

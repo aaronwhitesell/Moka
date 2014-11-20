@@ -26,9 +26,9 @@ class OptionsUI;
 class ClinicNode : public BuildingNode // inherits SceneNode, EventHandler, and InteractiveNode indirectly
 {
 public:
-									ClinicNode(const sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject
-										, std::vector<sf::FloatRect> attachedRects, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox
-										, OptionsUI &optionsUI);
+									ClinicNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window
+										, const sf::View &view, OptionsUI &optionsUI, std::vector<sf::FloatRect> attachedRects
+										, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox);
 									ClinicNode(const ClinicNode &) = delete;
 	ClinicNode &					operator=(const ClinicNode &) = delete;
 

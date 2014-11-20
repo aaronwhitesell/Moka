@@ -78,6 +78,12 @@
     <Filter Include="Source Files\SceneNodes\Interactive\Buildings">
       <UniqueIdentifier>{145d045a-3f0d-4f60-936c-410a33f6bf27}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\SceneNodes\Interactive\PrevMeth">
+      <UniqueIdentifier>{60736aed-5298-420e-861a-a456d0f9e361}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SceneNodes\Interactive\PrevMeth">
+      <UniqueIdentifier>{47a72e5b-fdb7-4270-9ec9-c4a808631cfb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\application.h">
@@ -131,9 +137,6 @@
     <ClInclude Include="SceneNodes\interactiveNode.h">
       <Filter>Header Files\SceneNodes\Interactive</Filter>
     </ClInclude>
-    <ClInclude Include="SceneNodes\preventionNode.h">
-      <Filter>Header Files\SceneNodes\Interactive</Filter>
-    </ClInclude>
     <ClInclude Include="GameObjects\interactiveGroup.h">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
@@ -157,6 +160,12 @@
     </ClInclude>
     <ClInclude Include="HUD\undoUI.h">
       <Filter>Header Files\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneNodes\preventionNode.h">
+      <Filter>Header Files\SceneNodes\Interactive\PrevMeth</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneNodes\barrelNode.h">
+      <Filter>Header Files\SceneNodes\Interactive\PrevMeth</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -208,9 +217,6 @@
     <ClCompile Include="SceneNodes\interactiveNode.cpp">
       <Filter>Source Files\SceneNodes\Interactive</Filter>
     </ClCompile>
-    <ClCompile Include="SceneNodes\preventionNode.cpp">
-      <Filter>Source Files\SceneNodes\Interactive</Filter>
-    </ClCompile>
     <ClCompile Include="GameObjects\interactiveGroup.cpp">
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
@@ -234,6 +240,12 @@
     </ClCompile>
     <ClCompile Include="HUD\undoUI.cpp">
       <Filter>Source Files\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNodes\preventionNode.cpp">
+      <Filter>Source Files\SceneNodes\Interactive\PrevMeth</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNodes\barrelNode.cpp">
+      <Filter>Source Files\SceneNodes\Interactive\PrevMeth</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

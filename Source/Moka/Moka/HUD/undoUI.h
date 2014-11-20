@@ -9,7 +9,9 @@
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
 
+#include <deque>
 #include <memory>
+#include <utility>
 #include <vector>
 
 
@@ -31,6 +33,7 @@ class UndoUI : public sf::Transformable, public sf::Drawable
 {
 public:
 	using Callback = trmb::UndoUIElem::Callback;
+	using CallbackPair = std::pair<Callback, Callback>;
 	using EventGuid = unsigned long;
 
 
@@ -44,9 +47,11 @@ public:
 	sf::FloatRect			getRect() const;
 
 	void					setSize(sf::Vector2f size);
+	void					setUIElemState(const std::deque<bool> &flags);
+	void					setCallbacks(const std::vector<CallbackPair> &callback);
 
 	void					handler(const sf::RenderWindow &window, const sf::View &view, const sf::Transform &transform);
-	void					addUIElem(std::string doString, std::string undoString, Callback doCallback, Callback undoCallback);
+	void					addUIElem(std::string doString, std::string undoString);
 
 
 private:

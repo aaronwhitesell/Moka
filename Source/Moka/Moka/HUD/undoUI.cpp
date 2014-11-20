@@ -55,6 +55,32 @@ void UndoUI::setSize(sf::Vector2f size)
 	buildUI();
 }
 
+void UndoUI::setUIElemState(const std::deque<bool> &flags)
+{
+	assert(("The number of boolean flags must match the number of UI elements!", flags.size() == mUIElems.size()));
+
+	std::deque<bool>::const_iterator iter = begin(flags);
+
+	for (const auto& uiElem : mUIElems)
+	{
+		uiElem->setState(*iter);
+		++iter;
+	}
+}
+
+void UndoUI::setCallbacks(const std::vector<CallbackPair> &callbacks)
+{
+	assert(("The number of callbacks must match the number of UI elements!", callbacks.size() == mUIElems.size()));
+
+	std::vector<CallbackPair>::const_iterator iter = begin(callbacks);
+
+	for (const auto& uiElem : mUIElems)
+	{
+		uiElem->setCallbacks(iter->first, iter->second);
+		++iter;
+	}
+}
+
 void UndoUI::handler(const sf::RenderWindow &window, const sf::View &view, const sf::Transform &transform)
 {
 	sf::Transform combinedTransform = getTransform() * transform;
@@ -77,7 +103,7 @@ void UndoUI::draw(sf::RenderTarget &target, sf::RenderStates states) const
 	}
 }
 
-void UndoUI::addUIElem(std::string doString, std::string undoString, Callback doCallback, Callback undoCallback)
+void UndoUI::addUIElem(std::string doString, std::string undoString)
 {
 	mUIElems.emplace_back(std::unique_ptr<trmb::UndoUIElem>(new trmb::UndoUIElem(mFont, mFonts, mSoundEffect, mSoundPlayer
 		, mLeftClickPress, mLeftClickRelease)));

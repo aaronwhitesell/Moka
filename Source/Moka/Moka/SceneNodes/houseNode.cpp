@@ -11,9 +11,9 @@
 #include <SFML/Graphics/View.hpp>
 
 
-HouseNode::HouseNode(const sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject
-	, std::vector<sf::FloatRect> attachedRects, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox, OptionsUI &optionsUI)
-: BuildingNode(window, view, interactiveObject, attachedRects, optionsUI)
+HouseNode::HouseNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view
+	, OptionsUI &optionsUI, std::vector<sf::FloatRect> attachedRects, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
+: BuildingNode(interactiveObject, window, view, optionsUI, attachedRects)
 , mSoundPlayer(soundPlayer)
 , mChatBox(chatBox)
 {

@@ -29,26 +29,30 @@ class OptionsUI;
 class BuildingNode : public InteractiveNode // inherits SceneNode and EventHandler indirectly
 {
 public:
-								BuildingNode(const sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject
-									, std::vector<sf::FloatRect> attachedRects, OptionsUI &optionsUI);
+								BuildingNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window
+									, const sf::View &view, OptionsUI &optionsUI, std::vector<sf::FloatRect> attachedRects);
 								BuildingNode(const BuildingNode &) = delete;
 	BuildingNode &				operator=(const BuildingNode &) = delete;
 
 	virtual void				handleEvent(const trmb::Event &gameEvent) override final;
 
 
-protected:
-	OptionsUI				    &mOptionsUI;
-
 private:
-	virtual void				activate() = 0;
 	virtual void				drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const override final;
 	virtual void				updateCurrent(sf::Time dt) override final;
+	virtual void				activate() = 0;
 	virtual bool				isMouseOverObject() const override final;
 	bool						isMouseOverOptionsUI() const;
 
 
+protected:
+	OptionsUI				    &mOptionsUI;
+
+
 private:
+	const EventGuid				mLeftClickPress;   // ALW - Matches the GUID in the Controller class.
+	const sf::RenderWindow		&mWindow;
+	const sf::View				&mView;
 	std::vector<sf::FloatRect>	mAttachedRects;
 };
 

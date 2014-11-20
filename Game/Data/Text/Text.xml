@@ -8,9 +8,9 @@ Pleasantville is a wonderful place, but it has one big problem; malaria. Help th
 effective strategy to fight malaria. First, have a look around a neighborhood of Pleasantville and identify different 
 ways to combat malaria. Then spend your resources wisely. Afterwards, we will have a board meeting and check the 
 effectiveness of your plan."/>
+	    <inspectBarrel    attribute="You see a barrel full of water. Would you like to fasten a cover to the barrel?"/>
 	    <inspectClinic    attribute="You see a clinic."/>
 	    <inspectHouse     attribute="You see a house."/>
-	    <inspectPrevMeth  attribute="You see a malaria prevention method."/>
 	</en>
     <fr>
 	    <prompt          attribute="fr: Press Enter"/>
@@ -19,9 +19,9 @@ Pleasantville is a wonderful place, but it has one big problem; malaria. Help th
 effective strategy to fight malaria. First, have a look around a neighborhood of Pleasantville and identify different 
 ways to combat malaria. Then spend your resources wisely. Afterwards, we will have a board meeting and check the 
 effectiveness of your plan."/>
+	    <inspectBarrel    attribute="fr: You see a barrel full of water. Would you like to cover it?"/>
 	    <inspectClinic    attribute="fr: You see a clinic."/>
 	    <inspectHouse     attribute="fr: You see a house."/>
-	    <inspectPrevMeth  attribute="fr: You see a malaria prevention method."/>
 	</fr>
     <mg>
 	    <prompt          attribute="mg: Press Enter"/>
@@ -30,8 +30,8 @@ Pleasantville is a wonderful place, but it has one big problem; malaria.  Help t
 effective strategy to fight malaria.  First, have a look around a neighborhood of Pleasantville and identify different 
 ways to combat malaria.  Then spend your resources wisely.  Afterwards, we will have a board meeting and check the 
 effectiveness of your plan."/>
+	    <inspectBarrel    attribute="mg: You see a barrel full of water. Would you like to cover it?"/>
 	    <inspectClinic    attribute="mg: You see a clinic."/>
 	    <inspectHouse     attribute="mg: You see a house."/>
-	    <inspectPrevMeth  attribute="mg: You see a malaria prevention method."/>
 	</mg>
 </text>

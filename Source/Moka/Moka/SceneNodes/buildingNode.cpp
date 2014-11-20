@@ -11,11 +11,14 @@
 #include <SFML/Window/Mouse.hpp>
 
 
-BuildingNode::BuildingNode(const sf::RenderWindow &window, const sf::View &view, const InteractiveObject &interactiveObject
-	, std::vector<sf::FloatRect> attachedRects, OptionsUI &optionsUI)
-: InteractiveNode(window, view, interactiveObject)
-, mAttachedRects(attachedRects)
+BuildingNode::BuildingNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view
+	, OptionsUI &optionsUI, std::vector<sf::FloatRect> attachedRects)
+: InteractiveNode(interactiveObject)
 , mOptionsUI(optionsUI)
+, mLeftClickPress(0x6955d309)
+, mWindow(window)
+, mView(view)
+, mAttachedRects(attachedRects)
 {
 }
 
@@ -70,24 +73,6 @@ void BuildingNode::updateCurrent(sf::Time)
 	mOptionsUI.handler(mWindow, mView, transform);
 }
 
-bool BuildingNode::isMouseOverOptionsUI() const
-{
-	bool ret = false;
-
-	// ALW - If the building is selected then the UI element is displayed, so the UI element's position has been set.
-	const sf::Vector2i relativeToWindow = sf::Mouse::getPosition(mWindow);
-	const sf::Vector2f relativeToWorld = mWindow.mapPixelToCoords(relativeToWindow, mView);
-	const sf::Vector2f mousePosition = relativeToWorld;
-	const sf::FloatRect rect = mOptionsUI.getRect();
-
-	if (rect.contains(mousePosition))
-	{
-		ret = true;
-	}
-
-	return ret;
-}
-
 bool BuildingNode::isMouseOverObject() const
 {
 	const sf::Vector2i relativeToWindow = sf::Mouse::getPosition(mWindow);
@@ -116,3 +101,20 @@ bool BuildingNode::isMouseOverObject() const
 	return ret;
 }
 
+bool BuildingNode::isMouseOverOptionsUI() const
+{
+	bool ret = false;
+
+	// ALW - If the building is selected then the UI element is displayed, so the UI element's position has been set.
+	const sf::Vector2i relativeToWindow = sf::Mouse::getPosition(mWindow);
+	const sf::Vector2f relativeToWorld = mWindow.mapPixelToCoords(relativeToWindow, mView);
+	const sf::Vector2f mousePosition = relativeToWorld;
+	const sf::FloatRect rect = mOptionsUI.getRect();
+
+	if (rect.contains(mousePosition))
+	{
+		ret = true;
+	}
+
+	return ret;
+}

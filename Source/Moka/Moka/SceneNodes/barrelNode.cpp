@@ -1,7 +1,6 @@
-#include "clinicNode.h"
+#include "barrelNode.h"
 #include "../GameObjects/interactiveObject.h"
 #include "../HUD/chatBox.h"
-#include "../HUD/optionsUI.h"
 #include "../Resources/resourceIdentifiers.h"
 
 #include "Trambo/Localize/localize.h"
@@ -11,17 +10,19 @@
 #include <SFML/Graphics/View.hpp>
 
 
-ClinicNode::ClinicNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view
-	, OptionsUI &optionsUI, std::vector<sf::FloatRect> attachedRects, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
-: BuildingNode(interactiveObject, window, view, optionsUI, attachedRects)
+BarrelNode::BarrelNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view, UndoUI &undoUI
+	, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
+: PreventionNode(interactiveObject, window, view, undoUI)
 , mSoundPlayer(soundPlayer)
 , mChatBox(chatBox)
 {
+	mCallbackPairs.emplace_back(CallbackPair(std::bind(&BarrelNode::lidClick, this), std::bind(&BarrelNode::undoClick, this)));
+	mUIElemStates.emplace_back(true);
 }
 
-void ClinicNode::activate()
+void BarrelNode::activate()
 {
-	updateOptionsUI();
+	updateUndoUI();	
 	mSoundPlayer.play(SoundEffects::ID::Button);
 	// ALW - ChatBox::UpdateText() can generate a mCreatePrompt event when an interactive object
 	// ALW - is selected. This asynchronous event will force InteractiveNode classes to ignore
@@ -34,38 +35,29 @@ void ClinicNode::activate()
 	// ALW - interactive object will be left selected. To remedy this all InteractiveNodes deselect
 	// ALW - themselves when a mCreatePrompt is generated. Immediately afterwards the InteractiveNode
 	// ALW - that generated the mCreatePrompt is reselected.
-	mChatBox.updateText(trmb::Localize::getInstance().getString("inspectClinic"));
+	mChatBox.updateText(trmb::Localize::getInstance().getString("inspectBarrel"));
 	mSelected = true;
 }
 
-void ClinicNode::updateOptionsUI()
+void BarrelNode::updateUndoUI()
 {
 	const float verticalBuffer = 10.0f;
-	mOptionsUI.setPosition(sf::Vector2f(mInteractiveObject.getX() + mInteractiveObject.getWidth() / 2.0f
+	mUndoUI.setPosition(sf::Vector2f(mInteractiveObject.getX() + mInteractiveObject.getWidth() / 2.0f
 		, mInteractiveObject.getY() + mInteractiveObject.getHeight() + verticalBuffer));
 
-	mOptionsUI.updateIncDecCallbacks(std::bind(&ClinicNode::incrementPurchaseRDTClick, this)
-		, std::bind(&ClinicNode::decrementPurchaseRDTClick, this)
-		, std::bind(&ClinicNode::incrementPurchaseACTClick, this)
-		, std::bind(&ClinicNode::decrementPurchaseACTClick, this));
+	mUndoUI.setCallbacks(mCallbackPairs);
+
+	mUndoUI.setUIElemState(mUIElemStates);
 }
 
-void ClinicNode::incrementPurchaseRDTClick()
+void BarrelNode::lidClick()
 {
-	// ALW - TODO - Increment resource
+	mUIElemStates.front() = false;
+	// ALW - TODO - Add lid
 }
 
-void ClinicNode::decrementPurchaseRDTClick()
+void BarrelNode::undoClick()
 {
-	// ALW - TODO - Decrement resource
-}
-
-void ClinicNode::incrementPurchaseACTClick()
-{
-	// ALW - TODO - Increment resource
-}
-
-void ClinicNode::decrementPurchaseACTClick()
-{
-	// ALW - TODO - Decrement resource
+	mUIElemStates.front() = true;
+	// ALW - TODO - Remove lid
 }
