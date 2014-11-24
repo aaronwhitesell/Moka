@@ -83,6 +83,12 @@ void OptionsUI::setRHSTabText(std::string string)
 	standardizeCharacterSize();
 }
 
+void OptionsUI::setCharacterSize(unsigned int size)
+{
+	mLHSTab->setCharacterSize(size);
+	mRHSTab->setCharacterSize(size);
+}
+
 void OptionsUI::handler(const sf::RenderWindow &window, const sf::View &view, const sf::Transform &transform)
 {
 	sf::Transform combinedTransform = getTransform() * transform;

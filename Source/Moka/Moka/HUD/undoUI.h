@@ -47,6 +47,7 @@ public:
 	sf::FloatRect			getRect() const;
 
 	void					setSize(sf::Vector2f size);
+	void					setCharacterSize(unsigned int size);
 	void					setUIElemState(const std::deque<bool> &flags);
 	void					setCallbacks(const std::vector<CallbackPair> &callback);
 

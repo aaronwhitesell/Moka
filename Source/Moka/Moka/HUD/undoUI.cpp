@@ -47,12 +47,20 @@ sf::FloatRect UndoUI::getRect() const
 
 void UndoUI::setSize(sf::Vector2f size)
 {
-	for (const auto& uiElem : mUIElems)
+	for (const auto &uiElem : mUIElems)
 	{
 		uiElem->setSize(size);
 	}
 
 	buildUI();
+}
+
+void UndoUI::setCharacterSize(unsigned int size)
+{
+	for (const auto &uiElem : mUIElems)
+	{
+		uiElem->setCharacterSize(size);
+	}
 }
 
 void UndoUI::setUIElemState(const std::deque<bool> &flags)
@@ -61,7 +69,7 @@ void UndoUI::setUIElemState(const std::deque<bool> &flags)
 
 	std::deque<bool>::const_iterator iter = begin(flags);
 
-	for (const auto& uiElem : mUIElems)
+	for (const auto &uiElem : mUIElems)
 	{
 		uiElem->setState(*iter);
 		++iter;
@@ -74,7 +82,7 @@ void UndoUI::setCallbacks(const std::vector<CallbackPair> &callbacks)
 
 	std::vector<CallbackPair>::const_iterator iter = begin(callbacks);
 
-	for (const auto& uiElem : mUIElems)
+	for (const auto &uiElem : mUIElems)
 	{
 		uiElem->setCallbacks(iter->first, iter->second);
 		++iter;
@@ -124,7 +132,7 @@ void UndoUI::buildUI()
 		sf::Vector2f uiElemOffset = mFrameBuffer;
 		sf::Vector2f backgroundSize;
 
-		for (const auto& uiElems : mUIElems)
+		for (const auto &uiElems : mUIElems)
 		{
 			uiElems->setPosition(uiElemOffset);
 			uiElemOffset.x = uiElems->getPosition().x + uiElems->getSize().x + mHorizontalBuffer;

@@ -46,6 +46,7 @@ public:
 	void					setTabSize(sf::Vector2f size);
 	void					setLHSTabText(std::string string);
 	void					setRHSTabText(std::string string);
+	void					setCharacterSize(unsigned int size);
 
 	void					handler(const sf::RenderWindow &window, const sf::View &view, const sf::Transform &transform);
 	void					updateIncDecCallbacks(Callback incPurchaseCallback, Callback decPurchaseCallback

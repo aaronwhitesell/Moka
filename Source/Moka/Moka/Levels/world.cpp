@@ -70,18 +70,23 @@ void World::draw()
 
 void World::configureUIs()
 {
+	const unsigned int characterSize = 13;
+
 	mBarrelUI.addUIElem("Cover", "Undo");
 	mBarrelUI.setSize(sf::Vector2f(75.0f, 20.0f));
+	mBarrelUI.setCharacterSize(characterSize);
 	centerOrigin(mBarrelUI, true, false);
 
 	mClinicUI.setTabSize(sf::Vector2f(75.0f, 20.0f));
 	mClinicUI.setLHSTabText("RDT");
 	mClinicUI.setRHSTabText("ACT");
+	mClinicUI.setCharacterSize(characterSize);
 	centerOrigin(mClinicUI, true, false);
 
 	mHouseUI.setTabSize(sf::Vector2f(75.0f, 20.0f));
 	mHouseUI.setLHSTabText("Bed Net");
 	mHouseUI.setRHSTabText("Repair");
+	mHouseUI.setCharacterSize(characterSize);
 	centerOrigin(mHouseUI, true, false);
 }
 
