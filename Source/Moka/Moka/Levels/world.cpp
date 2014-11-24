@@ -35,6 +35,7 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mBarrelUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
 , mClinicUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
 , mHouseUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
+, mUIBundle(mBarrelUI, mClinicUI, mHouseUI)
 , mObjectGroups("Data/Maps/World.tmx")
 , mHero(nullptr)
 {
@@ -116,17 +117,17 @@ void World::buildScene()
 		if (iter->getType() == "Barrel")
 		{
 			mSceneLayers[Interactive]->attachChild(std::move(std::unique_ptr<BarrelNode>(
-				new BarrelNode(*iter, mWindow, mCamera.getView(), mBarrelUI, mSoundPlayer, mChatBox))));
+				new BarrelNode(*iter, mWindow, mCamera.getView(), mUIBundle, mSoundPlayer, mChatBox))));
 		}
 		else if (iter->getType() == "Clinic")
 		{
 			mSceneLayers[Interactive]->attachChild(std::move(std::unique_ptr<ClinicNode>(
-				new ClinicNode(*iter, mWindow, mCamera.getView(), mClinicUI, buildAttachedRects(*iter), mSoundPlayer, mChatBox))));
+				new ClinicNode(*iter, mWindow, mCamera.getView(), mUIBundle, buildAttachedRects(*iter), mSoundPlayer, mChatBox))));
 		}
 		else if (iter->getType() == "House")
 		{
 			mSceneLayers[Interactive]->attachChild(std::move(std::unique_ptr<HouseNode>(
-				new HouseNode(*iter, mWindow, mCamera.getView(), mHouseUI, buildAttachedRects(*iter), mSoundPlayer, mChatBox))));
+				new HouseNode(*iter, mWindow, mCamera.getView(), mUIBundle, buildAttachedRects(*iter), mSoundPlayer, mChatBox))));
 		}
 		else
 		{

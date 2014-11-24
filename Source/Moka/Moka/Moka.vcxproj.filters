@@ -167,6 +167,9 @@
     <ClInclude Include="SceneNodes\barrelNode.h">
       <Filter>Header Files\SceneNodes\Interactive\PrevMeth</Filter>
     </ClInclude>
+    <ClInclude Include="Levels\uiBundle.h">
+      <Filter>Header Files\Levels</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\application.cpp">
@@ -246,6 +249,9 @@
     </ClCompile>
     <ClCompile Include="SceneNodes\barrelNode.cpp">
       <Filter>Source Files\SceneNodes\Interactive\PrevMeth</Filter>
+    </ClCompile>
+    <ClCompile Include="Levels\uiBundle.cpp">
+      <Filter>Source Files\Levels</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

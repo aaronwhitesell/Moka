@@ -1,6 +1,7 @@
 #ifndef WORLD_H
 #define WORLD_H
 
+#include "uiBundle.h"
 #include "../HUD/chatBox.h"
 #include "../HUD/optionsUI.h"
 #include "../HUD/undoUI.h"
@@ -90,6 +91,7 @@ private:
 	UndoUI										mBarrelUI;
 	OptionsUI									mClinicUI;
 	OptionsUI									mHouseUI;
+	UIBundle									mUIBundle;
 	ObjectGroups								mObjectGroups;
 	HeroNode									*mHero;
 };

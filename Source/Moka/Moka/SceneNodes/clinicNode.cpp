@@ -2,21 +2,81 @@
 #include "../GameObjects/interactiveObject.h"
 #include "../HUD/chatBox.h"
 #include "../HUD/optionsUI.h"
+#include "../HUD/undoUI.h"
+#include "../Levels/uiBundle.h"
 #include "../Resources/resourceIdentifiers.h"
 
+#include "Trambo/Events/event.h"
 #include "Trambo/Localize/localize.h"
 #include "Trambo/Sounds/soundPlayer.h"
 
+#include <SFML/Graphics/RenderStates.hpp>
+#include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/View.hpp>
 
 
 ClinicNode::ClinicNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view
-	, OptionsUI &optionsUI, std::vector<sf::FloatRect> attachedRects, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
-: BuildingNode(interactiveObject, window, view, optionsUI, attachedRects)
+	, UIBundle &mUIBundle, std::vector<sf::FloatRect> attachedRects, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
+: BuildingNode(interactiveObject, window, view, mUIBundle, attachedRects)
+, mLeftClickPress(0x6955d309)
 , mSoundPlayer(soundPlayer)
 , mChatBox(chatBox)
 {
+}
+
+void ClinicNode::handleEvent(const trmb::Event &gameEvent)
+{
+	InteractiveNode::handleEvent(gameEvent);
+
+	if (!mDisableInput)
+	{
+		if (mLeftClickPress == gameEvent.getType())
+		{
+			mPreviousSelectedState = mSelected;
+			if (mSelected && !isMouseOverUI(mUIBundle.getClinicUI().getRect()))
+			{
+				mSelected = false;
+			}
+
+			if (isMouseOverObject()
+				&& !isMouseOverUI(mUIBundle.getBarrelUI().getRect())
+				&& !isMouseOverUI(mUIBundle.getClinicUI().getRect())
+				&& !isMouseOverUI(mUIBundle.getHouseUI().getRect()))
+			{
+				mSelected = true;
+				if (!mPreviousSelectedState)
+					activate();
+			}
+
+			if (mPreviousSelectedState && !mSelected)
+			{
+				// ALW - The clinic was unselected.
+				mUIBundle.getClinicUI().deactivate();
+			}
+		}
+	}
+}
+
+void ClinicNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const
+{
+	if (mSelected)
+	{
+		target.draw(mHightlight, states);
+		target.draw(mUIBundle.getClinicUI(), states);
+	}
+}
+
+void ClinicNode::updateCurrent(sf::Time)
+{
+	// ALW - Do not apply the InteractiveNode's transform, because there are multiple instances that share a single OptionsUI. If the 
+	// ALW - transform is applied then the OptionsUI would be at the location specified by the translation of multiple InteractiveNodes
+	// ALW - which is not correct. The workaround is to let the InteractiveNode's position default to 0.0f, 0.0f and then use the
+	// ALW - InteractiveObjects coordinates to position the OptionsUI in the world. This way the InteractiveNode's transform does not
+	// ALW - need to be applied to the OptionsUI. To keep the handler interface consistent the Identity transform is passed in and applied.
+	sf::Transform transform = sf::Transform::Identity;
+
+	mUIBundle.getClinicUI().handler(mWindow, mView, transform);
 }
 
 void ClinicNode::activate()
@@ -41,10 +101,10 @@ void ClinicNode::activate()
 void ClinicNode::updateOptionsUI()
 {
 	const float verticalBuffer = 10.0f;
-	mOptionsUI.setPosition(sf::Vector2f(mInteractiveObject.getX() + mInteractiveObject.getWidth() / 2.0f
+	mUIBundle.getClinicUI().setPosition(sf::Vector2f(mInteractiveObject.getX() + mInteractiveObject.getWidth() / 2.0f
 		, mInteractiveObject.getY() + mInteractiveObject.getHeight() + verticalBuffer));
 
-	mOptionsUI.updateIncDecCallbacks(std::bind(&ClinicNode::incrementPurchaseRDTClick, this)
+	mUIBundle.getClinicUI().updateIncDecCallbacks(std::bind(&ClinicNode::incrementPurchaseRDTClick, this)
 		, std::bind(&ClinicNode::decrementPurchaseRDTClick, this)
 		, std::bind(&ClinicNode::incrementPurchaseACTClick, this)
 		, std::bind(&ClinicNode::decrementPurchaseACTClick, this));

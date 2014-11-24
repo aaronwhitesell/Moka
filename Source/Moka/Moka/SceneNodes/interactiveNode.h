@@ -4,6 +4,7 @@
 #include "Trambo/Events/eventHandler.h"
 #include "Trambo/SceneNodes/sceneNode.h"
 
+#include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 
 
@@ -11,6 +12,8 @@ namespace sf
 {
 	class RenderStates;
 	class RenderTarget;
+	class RenderWindow;
+	class View;
 }
 
 namespace trmb
@@ -19,6 +22,7 @@ namespace trmb
 }
 
 class InteractiveObject;
+class UIBundle;
 
 class InteractiveNode : public trmb::SceneNode, trmb::EventHandler
 {
@@ -27,7 +31,8 @@ protected:
 
 
 public:
-								InteractiveNode(const InteractiveObject &interactiveObject);
+								InteractiveNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window
+									, const sf::View &view, UIBundle &uiBundle);
 								InteractiveNode(const InteractiveNode &) = delete;
 	InteractiveNode &			operator=(const InteractiveNode &) = delete;
 
@@ -41,7 +46,14 @@ private:
 
 
 protected:
+	bool						isMouseOverUI(sf::FloatRect rect) const;
+
+
+protected:
 	const InteractiveObject		&mInteractiveObject;
+	const sf::RenderWindow		&mWindow;
+	const sf::View				&mView;
+	UIBundle					&mUIBundle;
 	sf::RectangleShape			mHightlight;
 	bool						mSelected;
 	bool						mPreviousSelectedState;

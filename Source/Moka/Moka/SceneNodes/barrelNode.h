@@ -5,11 +5,15 @@
 #include "../HUD/undoUI.h"
 
 #include <deque>
+#include <vector>
 
 
 namespace sf
 {
+	class RenderStates;
+	class RenderTarget;
 	class RenderWindow;
+	class Time;
 	class View;
 }
 
@@ -21,6 +25,7 @@ namespace trmb
 
 class ChatBox;
 class InteractiveObject;
+class UIBundle;
 
 class BarrelNode : public PreventionNode
 {
@@ -30,12 +35,16 @@ private:
 
 public:
 								BarrelNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window
-									, const sf::View &view, UndoUI &undoUI, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox);
+									, const sf::View &view, UIBundle &uiBundle, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox);
 								BarrelNode(const BarrelNode &) = delete;
 	BarrelNode &				operator=(const BarrelNode &) = delete;
 
+	virtual void				handleEvent(const trmb::Event &gameEvent) override final;
+
 
 private:
+	virtual void				drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const override final;
+	virtual void				updateCurrent(sf::Time dt) override final;
 	virtual void				activate() override final;
 	void						updateUndoUI();
 
@@ -44,6 +53,7 @@ private:
 
 
 private:
+	const EventGuid				mLeftClickPress;   // ALW - Matches the GUID in the Controller class.
 	trmb::SoundPlayer			&mSoundPlayer;
 	ChatBox						&mChatBox;
 
