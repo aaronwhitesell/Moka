@@ -53,6 +53,7 @@ private:
 
 
 private:
+	void								updateSoundPlayer();
 	void								configureUIs();
 	void								buildScene();
 	std::vector<sf::FloatRect>			buildAttachedRects(const InteractiveObject &interactiveObj);

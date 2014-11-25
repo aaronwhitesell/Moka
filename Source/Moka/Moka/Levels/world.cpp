@@ -51,6 +51,7 @@ void World::update(sf::Time dt)
 {
 	mSceneGraph.update(dt);					// ALW - Update the hero along with the rest of the scene graph
 	mCamera.update(mHero->getPosition());	// ALW - Update the camera position
+	updateSoundPlayer();
 }
 
 void World::handleEvent(const trmb::Event &gameEvent)
@@ -70,6 +71,12 @@ void World::draw()
 	mTarget.setView(mCamera.getView());
 	mTarget.draw(mSceneGraph);
 	mTarget.draw(mChatBox);
+}
+
+void World::updateSoundPlayer()
+{
+	// ALW - Delete sound effects that have finished playing.
+	mSoundPlayer.removeStoppedSounds();
 }
 
 void World::configureUIs()
