@@ -9,6 +9,7 @@ effective strategy to fight malaria. First, have a look around a neighborhood of
 ways to combat malaria. Then spend your resources wisely. Afterwards, we will have a board meeting and check the 
 effectiveness of your plan."/>
 	    <inspectBarrel    attribute="You see a barrel full of water. Would you like to fasten a cover to the barrel?"/>
+		<inspectDoor      attribute="You see a door. Would you like to close it?"/>
 		<inspectWindow    attribute="You see a window. Would you like to install a mosquito screen or close it?"/>
 	    <inspectClinic    attribute="You see a clinic."/>
 	    <inspectHouse     attribute="You see a house."/>
@@ -21,6 +22,7 @@ effective strategy to fight malaria. First, have a look around a neighborhood of
 ways to combat malaria. Then spend your resources wisely. Afterwards, we will have a board meeting and check the 
 effectiveness of your plan."/>
 	    <inspectBarrel    attribute="fr: You see a barrel full of water. Would you like to cover it?"/>
+		<inspectDoor      attribute="fr: You see a door. Would you like to close it?"/>
 		<inspectWindow    attribute="fr: You see a window. Would you like to install a mosquito screen or close it?"/>
 	    <inspectClinic    attribute="fr: You see a clinic."/>
 	    <inspectHouse     attribute="fr: You see a house."/>
@@ -33,6 +35,7 @@ effective strategy to fight malaria.  First, have a look around a neighborhood o
 ways to combat malaria.  Then spend your resources wisely.  Afterwards, we will have a board meeting and check the 
 effectiveness of your plan."/>
 	    <inspectBarrel    attribute="mg: You see a barrel full of water. Would you like to cover it?"/>
+		<inspectDoor      attribute="mg: You see a door. Would you like to close it?"/>
 		<inspectWindow    attribute="mg: You see a window. Would you like to install a mosquito screen or close it?"/>
 	    <inspectClinic    attribute="mg: You see a clinic."/>
 	    <inspectHouse     attribute="mg: You see a house."/>

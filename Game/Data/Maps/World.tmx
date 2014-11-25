@@ -2001,12 +2001,12 @@
     <property name="AttachedTo" value="Clinic 0"/>
    </properties>
   </object>
-  <object name="Door 0" type="Prevention Method" x="1219" y="452" width="58" height="60">
+  <object name="Door 0" type="Door" x="1219" y="452" width="58" height="60">
    <properties>
     <property name="AttachedTo" value="House 6"/>
    </properties>
   </object>
-  <object name="Door 1" type="Prevention Method" x="515" y="1220" width="58" height="60">
+  <object name="Door 1" type="Door" x="515" y="1220" width="58" height="60">
    <properties>
     <property name="AttachedTo" value="Clinic 0"/>
    </properties>

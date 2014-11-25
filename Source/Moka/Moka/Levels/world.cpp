@@ -1,5 +1,6 @@
 #include "world.h"
 #include "../SceneNodes/barrelNode.h"
+#include "../SceneNodes/doorNode.h"
 #include "../SceneNodes/windowNode.h"
 #include "../SceneNodes/clinicNode.h"
 #include "../SceneNodes/HouseNode.h"
@@ -34,10 +35,11 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mMap("Data/Maps/World.tmx")
 , mChatBox(window, fonts, soundPlayer)
 , mBarrelUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
+, mDoorUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
 , mWindowUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
 , mClinicUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
 , mHouseUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
-, mUIBundle(mBarrelUI, mWindowUI, mClinicUI, mHouseUI)
+, mUIBundle(mBarrelUI, mDoorUI, mWindowUI, mClinicUI, mHouseUI)
 , mObjectGroups("Data/Maps/World.tmx")
 , mHero(nullptr)
 {
@@ -78,6 +80,11 @@ void World::configureUIs()
 	mBarrelUI.setSize(sf::Vector2f(75.0f, 20.0f));
 	mBarrelUI.setCharacterSize(characterSize);
 	centerOrigin(mBarrelUI, true, false);
+
+	mDoorUI.addUIElem("Close", "Undo");
+	mDoorUI.setSize(sf::Vector2f(75.0f, 20.0f));
+	mDoorUI.setCharacterSize(characterSize);
+	centerOrigin(mDoorUI, true, false);
 
 	mWindowUI.addUIElem("Screen", "Undo");
 	mWindowUI.addUIElem("Close", "Undo");
@@ -131,6 +138,11 @@ void World::buildScene()
 		{
 			mSceneLayers[Interactive]->attachChild(std::move(std::unique_ptr<BarrelNode>(
 				new BarrelNode(*iter, mWindow, mCamera.getView(), mUIBundle, mSoundPlayer, mChatBox))));
+		}
+		else if (iter->getType() == "Door")
+		{
+			mSceneLayers[Interactive]->attachChild(std::move(std::unique_ptr<DoorNode>(
+				new DoorNode(*iter, mWindow, mCamera.getView(), mUIBundle, mSoundPlayer, mChatBox))));
 		}
 		else if (iter->getType() == "Window")
 		{

@@ -1,4 +1,4 @@
-#include "barrelNode.h"
+#include "doorNode.h"
 #include "../GameObjects/interactiveObject.h"
 #include "../HUD/chatBox.h"
 #include "../HUD/optionsUI.h"
@@ -15,18 +15,18 @@
 #include <SFML/Graphics/View.hpp>
 
 
-BarrelNode::BarrelNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view
+DoorNode::DoorNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view
 	, UIBundle &uiBundle, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
 : PreventionNode(interactiveObject, window, view, uiBundle)
 , mLeftClickPress(0x6955d309)
 , mSoundPlayer(soundPlayer)
 , mChatBox(chatBox)
 {
-	mCallbackPairs.emplace_back(CallbackPair(std::bind(&BarrelNode::addLid, this), std::bind(&BarrelNode::undoLid, this)));
+	mCallbackPairs.emplace_back(CallbackPair(std::bind(&DoorNode::closeDoor, this), std::bind(&DoorNode::openDoor, this)));
 	mUIElemStates.emplace_back(true);
 }
 
-void BarrelNode::handleEvent(const trmb::Event &gameEvent)
+void DoorNode::handleEvent(const trmb::Event &gameEvent)
 {
 	InteractiveNode::handleEvent(gameEvent);
 
@@ -35,7 +35,7 @@ void BarrelNode::handleEvent(const trmb::Event &gameEvent)
 		if (mLeftClickPress == gameEvent.getType())
 		{
 			mPreviousSelectedState = mSelected;
-			if (mSelected && !isMouseOverUI(mUIBundle.getBarrelUI().getRect()))
+			if (mSelected && !isMouseOverUI(mUIBundle.getDoorUI().getRect()))
 			{
 				mSelected = false;
 			}
@@ -55,16 +55,16 @@ void BarrelNode::handleEvent(const trmb::Event &gameEvent)
 	}
 }
 
-void BarrelNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const
+void DoorNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	if (mSelected)
 	{
 		target.draw(mHightlight, states);
-		target.draw(mUIBundle.getBarrelUI(), states);
+		target.draw(mUIBundle.getDoorUI(), states);
 	}
 }
 
-void BarrelNode::updateCurrent(sf::Time)
+void DoorNode::updateCurrent(sf::Time)
 {
 	// ALW - Do not apply the InteractiveNode's transform, because there are multiple instances that share a single UndoUI. If the 
 	// ALW - transform is applied then the UndoUI would be at the location specified by the translation of multiple InteractiveNodes
@@ -73,10 +73,10 @@ void BarrelNode::updateCurrent(sf::Time)
 	// ALW - need to be applied to the UndoUI. To keep the handler interface consistent the Identity transform is passed in and applied.
 	sf::Transform transform = sf::Transform::Identity;
 
-	mUIBundle.getBarrelUI().handler(mWindow, mView, transform);
+	mUIBundle.getDoorUI().handler(mWindow, mView, transform);
 }
 
-void BarrelNode::activate()
+void DoorNode::activate()
 {
 	updateUndoUI();	
 	mSoundPlayer.play(SoundEffects::ID::Button);
@@ -91,29 +91,29 @@ void BarrelNode::activate()
 	// ALW - interactive object will be left selected. To remedy this all InteractiveNodes deselect
 	// ALW - themselves when a mCreatePrompt is generated. Immediately afterwards the InteractiveNode
 	// ALW - that generated the mCreatePrompt is reselected.
-	mChatBox.updateText(trmb::Localize::getInstance().getString("inspectBarrel"));
+	mChatBox.updateText(trmb::Localize::getInstance().getString("inspectDoor"));
 	mSelected = true;
 }
 
-void BarrelNode::updateUndoUI()
+void DoorNode::updateUndoUI()
 {
 	const float verticalBuffer = 10.0f;
-	mUIBundle.getBarrelUI().setPosition(sf::Vector2f(mInteractiveObject.getX() + mInteractiveObject.getWidth() / 2.0f
+	mUIBundle.getDoorUI().setPosition(sf::Vector2f(mInteractiveObject.getX() + mInteractiveObject.getWidth() / 2.0f
 		, mInteractiveObject.getY() + mInteractiveObject.getHeight() + verticalBuffer));
 
-	mUIBundle.getBarrelUI().setCallbacks(mCallbackPairs);
+	mUIBundle.getDoorUI().setCallbacks(mCallbackPairs);
 
-	mUIBundle.getBarrelUI().setUIElemState(mUIElemStates);
+	mUIBundle.getDoorUI().setUIElemState(mUIElemStates);
 }
 
-void BarrelNode::addLid()
+void DoorNode::closeDoor()
 {
 	mUIElemStates.front() = false;
-	// ALW - TODO - Add lid
+	// ALW - TODO - Close door
 }
 
-void BarrelNode::undoLid()
+void DoorNode::openDoor()
 {
 	mUIElemStates.front() = true;
-	// ALW - TODO - Remove lid
+	// ALW - TODO - Open door
 }

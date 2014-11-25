@@ -1,8 +1,9 @@
 #include "uiBundle.h"
 
 
-UIBundle::UIBundle(UndoUI &barrelUI, UndoUI &windowUI, OptionsUI &clinicUI, OptionsUI &houseUI)
+UIBundle::UIBundle(UndoUI &barrelUI, UndoUI &doorUI, UndoUI &windowUI, OptionsUI &clinicUI, OptionsUI &houseUI)
 : mBarrelUI(barrelUI)
+, mDoorUI(doorUI)
 , mWindowUI(windowUI)
 , mClinicUI(clinicUI)
 , mHouseUI(houseUI)
@@ -12,6 +13,11 @@ UIBundle::UIBundle(UndoUI &barrelUI, UndoUI &windowUI, OptionsUI &clinicUI, Opti
 UndoUI & UIBundle::getBarrelUI() const
 {
 	return mBarrelUI;
+}
+
+UndoUI & UIBundle::getDoorUI() const
+{
+	return mDoorUI;
 }
 
 UndoUI & UIBundle::getWindowUI() const

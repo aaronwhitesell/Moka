@@ -89,6 +89,7 @@ private:
 	trmb::Map									mMap;
 	ChatBox										mChatBox;
 	UndoUI										mBarrelUI;
+	UndoUI										mDoorUI;
 	UndoUI										mWindowUI;
 	OptionsUI									mClinicUI;
 	OptionsUI									mHouseUI;

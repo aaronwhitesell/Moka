@@ -44,6 +44,7 @@ void WindowNode::handleEvent(const trmb::Event &gameEvent)
 
 			if (isMouseOverObject()
 				&& !isMouseOverUI(mUIBundle.getBarrelUI().getRect())
+				&& !isMouseOverUI(mUIBundle.getDoorUI().getRect())
 				&& !isMouseOverUI(mUIBundle.getWindowUI().getRect())
 				&& !isMouseOverUI(mUIBundle.getClinicUI().getRect())
 				&& !isMouseOverUI(mUIBundle.getHouseUI().getRect()))

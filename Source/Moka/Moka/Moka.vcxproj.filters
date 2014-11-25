@@ -173,6 +173,9 @@
     <ClInclude Include="SceneNodes\windowNode.h">
       <Filter>Header Files\SceneNodes\Interactive\PrevMeth</Filter>
     </ClInclude>
+    <ClInclude Include="SceneNodes\doorNode.h">
+      <Filter>Header Files\SceneNodes\Interactive\PrevMeth</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\application.cpp">
@@ -257,6 +260,9 @@
       <Filter>Source Files\Levels</Filter>
     </ClCompile>
     <ClCompile Include="SceneNodes\windowNode.cpp">
+      <Filter>Source Files\SceneNodes\Interactive\PrevMeth</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNodes\doorNode.cpp">
       <Filter>Source Files\SceneNodes\Interactive\PrevMeth</Filter>
     </ClCompile>
   </ItemGroup>
