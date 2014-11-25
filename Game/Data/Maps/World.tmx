@@ -1941,62 +1941,62 @@
     <property name="AttachedTo" value="Standalone"/>
    </properties>
   </object>
-  <object name="Small Window 0" type="Prevention Method" x="144" y="463" width="32" height="38">
+  <object name="Small Window 0" type="Window" x="144" y="463" width="32" height="38">
    <properties>
     <property name="AttachedTo" value="House 0"/>
    </properties>
   </object>
-  <object name="Small Window 1" type="Prevention Method" x="272" y="463" width="32" height="38">
+  <object name="Small Window 1" type="Window" x="272" y="463" width="32" height="38">
    <properties>
     <property name="AttachedTo" value="House 1"/>
    </properties>
   </object>
-  <object name="Small Window 2" type="Prevention Method" x="208" y="719" width="32" height="38">
+  <object name="Small Window 2" type="Window" x="208" y="719" width="32" height="38">
    <properties>
     <property name="AttachedTo" value="House 2"/>
    </properties>
   </object>
-  <object name="Small Window 3" type="Prevention Method" x="336" y="719" width="32" height="38">
+  <object name="Small Window 3" type="Window" x="336" y="719" width="32" height="38">
    <properties>
     <property name="AttachedTo" value="House 3"/>
    </properties>
   </object>
-  <object name="Small Window 4" type="Prevention Method" x="464" y="719" width="32" height="38">
+  <object name="Small Window 4" type="Window" x="464" y="719" width="32" height="38">
    <properties>
     <property name="AttachedTo" value="House 4"/>
    </properties>
   </object>
-  <object name="Small Window 5" type="Prevention Method" x="592" y="719" width="32" height="38">
+  <object name="Small Window 5" type="Window" x="592" y="719" width="32" height="38">
    <properties>
     <property name="AttachedTo" value="House 5"/>
    </properties>
   </object>
-  <object name="Small Window 6" type="Prevention Method" x="1424" y="847" width="32" height="38">
+  <object name="Small Window 6" type="Window" x="1424" y="847" width="32" height="38">
    <properties>
     <property name="AttachedTo" value="House 7"/>
    </properties>
   </object>
-  <object name="Small Window 7" type="Prevention Method" x="1488" y="847" width="32" height="38">
+  <object name="Small Window 7" type="Window" x="1488" y="847" width="32" height="38">
    <properties>
     <property name="AttachedTo" value="House 7"/>
    </properties>
   </object>
-  <object name="Medium Window 0" type="Prevention Method" x="1168" y="395" width="32" height="44">
+  <object name="Medium Window 0" type="Window" x="1168" y="395" width="32" height="44">
    <properties>
     <property name="AttachedTo" value="House 6"/>
    </properties>
   </object>
-  <object name="Medium Window 1" type="Prevention Method" x="1232" y="395" width="32" height="44">
+  <object name="Medium Window 1" type="Window" x="1232" y="395" width="32" height="44">
    <properties>
     <property name="AttachedTo" value="House 6"/>
    </properties>
   </object>
-  <object name="Medium Window 2" type="Prevention Method" x="464" y="1163" width="32" height="44">
+  <object name="Medium Window 2" type="Window" x="464" y="1163" width="32" height="44">
    <properties>
     <property name="AttachedTo" value="Clinic 0"/>
    </properties>
   </object>
-  <object name="Medium Window 3" type="Prevention Method" x="528" y="1163" width="32" height="44">
+  <object name="Medium Window 3" type="Window" x="528" y="1163" width="32" height="44">
    <properties>
     <property name="AttachedTo" value="Clinic 0"/>
    </properties>

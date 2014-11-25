@@ -22,7 +22,7 @@ BarrelNode::BarrelNode(const InteractiveObject &interactiveObject, const sf::Ren
 , mSoundPlayer(soundPlayer)
 , mChatBox(chatBox)
 {
-	mCallbackPairs.emplace_back(CallbackPair(std::bind(&BarrelNode::lidClick, this), std::bind(&BarrelNode::undoClick, this)));
+	mCallbackPairs.emplace_back(CallbackPair(std::bind(&BarrelNode::addLid, this), std::bind(&BarrelNode::undoLid, this)));
 	mUIElemStates.emplace_back(true);
 }
 
@@ -42,6 +42,7 @@ void BarrelNode::handleEvent(const trmb::Event &gameEvent)
 
 			if (isMouseOverObject()
 				&& !isMouseOverUI(mUIBundle.getBarrelUI().getRect())
+				&& !isMouseOverUI(mUIBundle.getWindowUI().getRect())
 				&& !isMouseOverUI(mUIBundle.getClinicUI().getRect())
 				&& !isMouseOverUI(mUIBundle.getHouseUI().getRect()))
 			{
@@ -104,13 +105,13 @@ void BarrelNode::updateUndoUI()
 	mUIBundle.getBarrelUI().setUIElemState(mUIElemStates);
 }
 
-void BarrelNode::lidClick()
+void BarrelNode::addLid()
 {
 	mUIElemStates.front() = false;
 	// ALW - TODO - Add lid
 }
 
-void BarrelNode::undoClick()
+void BarrelNode::undoLid()
 {
 	mUIElemStates.front() = true;
 	// ALW - TODO - Remove lid

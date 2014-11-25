@@ -45,10 +45,10 @@ private:
 	virtual void				activate() override final;
 	void						updateOptionsUI();
 
-	void						incrementPurchaseBedNetClick();
-	void						decrementPurchaseBedNetClick();
-	void						incrementRepairClick();
-	void						decrementRepairClick();
+	void						incrementPurchaseBedNet();
+	void						decrementPurchaseBedNet();
+	void						incrementRepair();
+	void						decrementRepair();
 
 
 private:

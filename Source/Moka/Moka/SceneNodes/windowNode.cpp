@@ -1,8 +1,7 @@
-#include "houseNode.h"
+#include "windowNode.h"
 #include "../GameObjects/interactiveObject.h"
 #include "../HUD/chatBox.h"
 #include "../HUD/optionsUI.h"
-#include "../HUD/undoUI.h"
 #include "../Levels/uiBundle.h"
 #include "../Resources/resourceIdentifiers.h"
 
@@ -16,16 +15,20 @@
 #include <SFML/Graphics/View.hpp>
 
 
-HouseNode::HouseNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view, UIBundle &uiBundle
-	, std::vector<sf::FloatRect> attachedRects, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
-: BuildingNode(interactiveObject, window, view, uiBundle, attachedRects)
+WindowNode::WindowNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view
+	, UIBundle &uiBundle, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
+: PreventionNode(interactiveObject, window, view, uiBundle)
 , mLeftClickPress(0x6955d309)
 , mSoundPlayer(soundPlayer)
 , mChatBox(chatBox)
 {
+	mCallbackPairs.emplace_back(CallbackPair(std::bind(&WindowNode::addScreen, this), std::bind(&WindowNode::undoScreen, this)));
+	mCallbackPairs.emplace_back(CallbackPair(std::bind(&WindowNode::closeWindow, this), std::bind(&WindowNode::openWindow, this)));
+	mUIElemStates.emplace_back(true);
+	mUIElemStates.emplace_back(true);
 }
 
-void HouseNode::handleEvent(const trmb::Event &gameEvent)
+void WindowNode::handleEvent(const trmb::Event &gameEvent)
 {
 	InteractiveNode::handleEvent(gameEvent);
 
@@ -34,12 +37,12 @@ void HouseNode::handleEvent(const trmb::Event &gameEvent)
 		if (mLeftClickPress == gameEvent.getType())
 		{
 			mPreviousSelectedState = mSelected;
-			if (mSelected && !isMouseOverUI(mUIBundle.getHouseUI().getRect()))
+			if (mSelected && !isMouseOverUI(mUIBundle.getWindowUI().getRect()))
 			{
 				mSelected = false;
 			}
 
-			if (isMouseOverObject() 
+			if (isMouseOverObject()
 				&& !isMouseOverUI(mUIBundle.getBarrelUI().getRect())
 				&& !isMouseOverUI(mUIBundle.getWindowUI().getRect())
 				&& !isMouseOverUI(mUIBundle.getClinicUI().getRect())
@@ -49,40 +52,34 @@ void HouseNode::handleEvent(const trmb::Event &gameEvent)
 				if (!mPreviousSelectedState)
 					activate();
 			}
-
-			if (mPreviousSelectedState && !mSelected)
-			{
-				// ALW - The house was unselected.
-				mUIBundle.getHouseUI().deactivate();
-			}
 		}
 	}
 }
 
-void HouseNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const
+void WindowNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	if (mSelected)
 	{
 		target.draw(mHightlight, states);
-		target.draw(mUIBundle.getHouseUI(), states);
+		target.draw(mUIBundle.getWindowUI(), states);
 	}
 }
 
-void HouseNode::updateCurrent(sf::Time)
+void WindowNode::updateCurrent(sf::Time)
 {
-	// ALW - Do not apply the InteractiveNode's transform, because there are multiple instances that share a single OptionsUI. If the 
-	// ALW - transform is applied then the OptionsUI would be at the location specified by the translation of multiple InteractiveNodes
+	// ALW - Do not apply the InteractiveNode's transform, because there are multiple instances that share a single UndoUI. If the 
+	// ALW - transform is applied then the UndoUI would be at the location specified by the translation of multiple InteractiveNodes
 	// ALW - which is not correct. The workaround is to let the InteractiveNode's position default to 0.0f, 0.0f and then use the
-	// ALW - InteractiveObjects coordinates to position the OptionsUI in the world. This way the InteractiveNode's transform does not
-	// ALW - need to be applied to the OptionsUI. To keep the handler interface consistent the Identity transform is passed in and applied.
+	// ALW - InteractiveObjects coordinates to position the UndoUI in the world. This way the InteractiveNode's transform does not
+	// ALW - need to be applied to the UndoUI. To keep the handler interface consistent the Identity transform is passed in and applied.
 	sf::Transform transform = sf::Transform::Identity;
 
-	mUIBundle.getHouseUI().handler(mWindow, mView, transform);
+	mUIBundle.getWindowUI().handler(mWindow, mView, transform);
 }
 
-void HouseNode::activate()
+void WindowNode::activate()
 {
-	updateOptionsUI();
+	updateUndoUI();	
 	mSoundPlayer.play(SoundEffects::ID::Button);
 	// ALW - ChatBox::UpdateText() can generate a mCreatePrompt event when an interactive object
 	// ALW - is selected. This asynchronous event will force InteractiveNode classes to ignore
@@ -95,38 +92,41 @@ void HouseNode::activate()
 	// ALW - interactive object will be left selected. To remedy this all InteractiveNodes deselect
 	// ALW - themselves when a mCreatePrompt is generated. Immediately afterwards the InteractiveNode
 	// ALW - that generated the mCreatePrompt is reselected.
-	mChatBox.updateText(trmb::Localize::getInstance().getString("inspectHouse"));
+	mChatBox.updateText(trmb::Localize::getInstance().getString("inspectWindow"));
 	mSelected = true;
 }
 
-void HouseNode::updateOptionsUI()
+void WindowNode::updateUndoUI()
 {
 	const float verticalBuffer = 10.0f;
-	mUIBundle.getHouseUI().setPosition(sf::Vector2f(mInteractiveObject.getX() + mInteractiveObject.getWidth() / 2.0f
+	mUIBundle.getWindowUI().setPosition(sf::Vector2f(mInteractiveObject.getX() + mInteractiveObject.getWidth() / 2.0f
 		, mInteractiveObject.getY() + mInteractiveObject.getHeight() + verticalBuffer));
 
-	mUIBundle.getHouseUI().updateIncDecCallbacks(std::bind(&HouseNode::incrementPurchaseBedNet, this)
-		, std::bind(&HouseNode::decrementPurchaseBedNet, this)
-		, std::bind(&HouseNode::incrementRepair, this)
-		, std::bind(&HouseNode::decrementRepair, this));
+	mUIBundle.getWindowUI().setCallbacks(mCallbackPairs);
+
+	mUIBundle.getWindowUI().setUIElemState(mUIElemStates);
 }
 
-void HouseNode::incrementPurchaseBedNet()
+void WindowNode::addScreen()
 {
-	// ALW - TODO - Increment resource
+	mUIElemStates.front() = false;
+	// ALW - TODO - Add screen
 }
 
-void HouseNode::decrementPurchaseBedNet()
+void WindowNode::undoScreen()
 {
-	// ALW - TODO - Decrement resource
+	mUIElemStates.front() = true;
+	// ALW - TODO - Remove screen
 }
 
-void HouseNode::incrementRepair()
+void WindowNode::closeWindow()
 {
-	// ALW - TODO - Increment resource
+	mUIElemStates.front() = false;
+	// ALW - TODO - Close window
 }
 
-void HouseNode::decrementRepair()
+void WindowNode::openWindow()
 {
-	// ALW - TODO - Decrement resource
+	mUIElemStates.front() = true;
+	// ALW - TODO - Open window
 }

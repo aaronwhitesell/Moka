@@ -99,6 +99,7 @@
     <ClInclude Include="SceneNodes\houseNode.h" />
     <ClInclude Include="SceneNodes\interactiveNode.h" />
     <ClInclude Include="SceneNodes\preventionNode.h" />
+    <ClInclude Include="SceneNodes\windowNode.h" />
     <ClInclude Include="States\creditState.h" />
     <ClInclude Include="States\gameState.h" />
     <ClInclude Include="States\menuState.h" />
@@ -129,6 +130,7 @@
     <ClCompile Include="SceneNodes\houseNode.cpp" />
     <ClCompile Include="SceneNodes\interactiveNode.cpp" />
     <ClCompile Include="SceneNodes\preventionNode.cpp" />
+    <ClCompile Include="SceneNodes\windowNode.cpp" />
     <ClCompile Include="States\creditState.cpp" />
     <ClCompile Include="States\gameState.cpp" />
     <ClCompile Include="States\menuState.cpp" />

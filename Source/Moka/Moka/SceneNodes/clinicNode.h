@@ -45,10 +45,10 @@ private:
 	virtual void				activate() override final;
 	void						updateOptionsUI();
 
-	void						incrementPurchaseRDTClick();
-	void						decrementPurchaseRDTClick();
-	void						incrementPurchaseACTClick();
-	void						decrementPurchaseACTClick();
+	void						incrementPurchaseRDT();
+	void						decrementPurchaseRDT();
+	void						incrementPurchaseACT();
+	void						decrementPurchaseACT();
 
 
 private:

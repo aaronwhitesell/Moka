@@ -170,6 +170,9 @@
     <ClInclude Include="Levels\uiBundle.h">
       <Filter>Header Files\Levels</Filter>
     </ClInclude>
+    <ClInclude Include="SceneNodes\windowNode.h">
+      <Filter>Header Files\SceneNodes\Interactive\PrevMeth</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\application.cpp">
@@ -252,6 +255,9 @@
     </ClCompile>
     <ClCompile Include="Levels\uiBundle.cpp">
       <Filter>Source Files\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNodes\windowNode.cpp">
+      <Filter>Source Files\SceneNodes\Interactive\PrevMeth</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

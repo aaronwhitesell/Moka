@@ -1,5 +1,5 @@
-#ifndef BARREL_NODE_H
-#define BARREL_NODE_H
+#ifndef WINDOW_NODE_H
+#define WINDOW_NODE_H
 
 #include "PreventionNode.h"
 #include "../HUD/undoUI.h"
@@ -27,17 +27,17 @@ class ChatBox;
 class InteractiveObject;
 class UIBundle;
 
-class BarrelNode : public PreventionNode
+class WindowNode : public PreventionNode
 {
 private:
 	using CallbackPair = UndoUI::CallbackPair;
 
 
 public:
-								BarrelNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window
+								WindowNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window
 									, const sf::View &view, UIBundle &uiBundle, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox);
-								BarrelNode(const BarrelNode &) = delete;
-	BarrelNode &				operator=(const BarrelNode &) = delete;
+								WindowNode(const WindowNode &) = delete;
+	WindowNode &				operator=(const WindowNode &) = delete;
 
 	virtual void				handleEvent(const trmb::Event &gameEvent) override final;
 
@@ -48,8 +48,10 @@ private:
 	virtual void				activate() override final;
 	void						updateUndoUI();
 
-	void						addLid();
-	void						undoLid();
+	void						addScreen();
+	void						undoScreen();
+	void						closeWindow();
+	void						openWindow();
 
 
 private:

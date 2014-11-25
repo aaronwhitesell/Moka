@@ -41,6 +41,7 @@ void ClinicNode::handleEvent(const trmb::Event &gameEvent)
 
 			if (isMouseOverObject()
 				&& !isMouseOverUI(mUIBundle.getBarrelUI().getRect())
+				&& !isMouseOverUI(mUIBundle.getWindowUI().getRect())
 				&& !isMouseOverUI(mUIBundle.getClinicUI().getRect())
 				&& !isMouseOverUI(mUIBundle.getHouseUI().getRect()))
 			{
@@ -104,28 +105,28 @@ void ClinicNode::updateOptionsUI()
 	mUIBundle.getClinicUI().setPosition(sf::Vector2f(mInteractiveObject.getX() + mInteractiveObject.getWidth() / 2.0f
 		, mInteractiveObject.getY() + mInteractiveObject.getHeight() + verticalBuffer));
 
-	mUIBundle.getClinicUI().updateIncDecCallbacks(std::bind(&ClinicNode::incrementPurchaseRDTClick, this)
-		, std::bind(&ClinicNode::decrementPurchaseRDTClick, this)
-		, std::bind(&ClinicNode::incrementPurchaseACTClick, this)
-		, std::bind(&ClinicNode::decrementPurchaseACTClick, this));
+	mUIBundle.getClinicUI().updateIncDecCallbacks(std::bind(&ClinicNode::incrementPurchaseRDT, this)
+		, std::bind(&ClinicNode::decrementPurchaseRDT, this)
+		, std::bind(&ClinicNode::incrementPurchaseACT, this)
+		, std::bind(&ClinicNode::decrementPurchaseACT, this));
 }
 
-void ClinicNode::incrementPurchaseRDTClick()
+void ClinicNode::incrementPurchaseRDT()
 {
 	// ALW - TODO - Increment resource
 }
 
-void ClinicNode::decrementPurchaseRDTClick()
+void ClinicNode::decrementPurchaseRDT()
 {
 	// ALW - TODO - Decrement resource
 }
 
-void ClinicNode::incrementPurchaseACTClick()
+void ClinicNode::incrementPurchaseACT()
 {
 	// ALW - TODO - Increment resource
 }
 
-void ClinicNode::decrementPurchaseACTClick()
+void ClinicNode::decrementPurchaseACT()
 {
 	// ALW - TODO - Decrement resource
 }
