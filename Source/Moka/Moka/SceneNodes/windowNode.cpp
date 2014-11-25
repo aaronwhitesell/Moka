@@ -110,24 +110,28 @@ void WindowNode::updateUndoUI()
 
 void WindowNode::addScreen()
 {
-	mUIElemStates.front() = false;
+	const std::size_t screenElement = 0;
+	mUIElemStates.at(screenElement) = false;
 	// ALW - TODO - Add screen
 }
 
 void WindowNode::undoScreen()
 {
-	mUIElemStates.front() = true;
+	const std::size_t screenElement = 0;
+	mUIElemStates.at(screenElement) = true;
 	// ALW - TODO - Remove screen
 }
 
 void WindowNode::closeWindow()
 {
-	mUIElemStates.front() = false;
+	const std::size_t windowElement = 1;
+	mUIElemStates.at(windowElement) = false;
 	// ALW - TODO - Close window
 }
 
 void WindowNode::openWindow()
 {
-	mUIElemStates.front() = true;
+	const std::size_t windowElement = 1;
+	mUIElemStates.at(windowElement) = true;
 	// ALW - TODO - Open window
 }
