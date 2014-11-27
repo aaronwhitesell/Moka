@@ -52,9 +52,11 @@ private:
 
 
 private:
+	const trmb::Event			mClinicUIActivated;
 	const EventGuid				mLeftClickPress;   // ALW - Matches the GUID in the Controller class.
 	trmb::SoundPlayer			&mSoundPlayer;
 	ChatBox						&mChatBox;
+	bool						mClinicUIActive;
 };
 
 #endif

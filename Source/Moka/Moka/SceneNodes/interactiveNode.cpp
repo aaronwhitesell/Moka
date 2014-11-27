@@ -65,3 +65,8 @@ bool InteractiveNode::isMouseOverUI(sf::FloatRect rect) const
 
 	return ret;
 }
+
+void InteractiveNode::sendEvent(const trmb::Event &gameEvent)
+{
+	EventHandler::sendEvent(gameEvent);
+}

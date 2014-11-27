@@ -51,7 +51,9 @@ public:
 	void					handler(const sf::RenderWindow &window, const sf::View &view, const sf::Transform &transform);
 	void					updateIncDecCallbacks(Callback incPurchaseCallback, Callback decPurchaseCallback
 								, Callback incRepairCallback, Callback decRepairCallback);
-	void					deactivate();
+	void					reset();
+	void					enable();
+	void					disable();
 
 
 private:

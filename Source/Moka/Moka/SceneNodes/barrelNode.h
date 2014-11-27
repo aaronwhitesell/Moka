@@ -53,9 +53,11 @@ private:
 
 
 private:
+	const trmb::Event			mBarrelUIActivated;
 	const EventGuid				mLeftClickPress;   // ALW - Matches the GUID in the Controller class.
 	trmb::SoundPlayer			&mSoundPlayer;
 	ChatBox						&mChatBox;
+	bool						mBarrelUIActive;
 
 	// ALW - STL containers are used here, so the interface of the UndoUI class is the same for an instance of UndoUI with 
 	// ALW - one or multiple UI elements.

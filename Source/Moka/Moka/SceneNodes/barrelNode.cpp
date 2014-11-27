@@ -18,6 +18,7 @@
 BarrelNode::BarrelNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view
 	, UIBundle &uiBundle, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
 : PreventionNode(interactiveObject, window, view, uiBundle)
+, mBarrelUIActivated(0x10a1b42f)
 , mLeftClickPress(0x6955d309)
 , mSoundPlayer(soundPlayer)
 , mChatBox(chatBox)
@@ -32,7 +33,16 @@ void BarrelNode::handleEvent(const trmb::Event &gameEvent)
 
 	if (!mDisableInput)
 	{
-		if (mLeftClickPress == gameEvent.getType())
+		if (mBarrelUIActivated.getType() == gameEvent.getType())
+		{
+			// ALW - This is a workaround to fix an issue where an object had selection and then another object of the same
+			// ALW - type (barrel, door, window, clinic, house) was selected earlier in the SceneNode. What happened was
+			// ALW - the newly selected object would enable the UI, but then the previously selected object would disable the
+			// ALW - UI. This was not an issue in the reverse order. Now when an object is selected it sends a UI activated
+			// ALW - message, so an object later in the SceneNode knows not to disable the UI.
+			mBarrelUIActive = true;
+		}
+		else if (mLeftClickPress == gameEvent.getType())
 		{
 			mPreviousSelectedState = mSelected;
 			if (mSelected && !isMouseOverUI(mUIBundle.getBarrelUI().getRect()))
@@ -51,6 +61,15 @@ void BarrelNode::handleEvent(const trmb::Event &gameEvent)
 				if (!mPreviousSelectedState)
 					activate();
 			}
+
+			if (mPreviousSelectedState && !mSelected && !mBarrelUIActive)
+			{
+				// ALW - The object was unselected, because the click did not occur on an object of the same type.
+				// ALW - Therefore, the UI is not in use. Disable the UI.
+				mUIBundle.getBarrelUI().disable();
+			}
+
+			mBarrelUIActive = false;
 		}
 	}
 }
@@ -80,6 +99,7 @@ void BarrelNode::activate()
 {
 	updateUndoUI();	
 	mSoundPlayer.play(SoundEffects::ID::Button);
+	InteractiveNode::sendEvent(mBarrelUIActivated);
 	// ALW - ChatBox::UpdateText() can generate a mCreatePrompt event when an interactive object
 	// ALW - is selected. This asynchronous event will force InteractiveNode classes to ignore
 	// ALW - left and right click events. Then if <enter> is pressed an mEnter event will be
@@ -97,6 +117,8 @@ void BarrelNode::activate()
 
 void BarrelNode::updateUndoUI()
 {
+	mUIBundle.getBarrelUI().enable();
+
 	const float verticalBuffer = 10.0f;
 	mUIBundle.getBarrelUI().setPosition(sf::Vector2f(mInteractiveObject.getX() + mInteractiveObject.getWidth() / 2.0f
 		, mInteractiveObject.getY() + mInteractiveObject.getHeight() + verticalBuffer));

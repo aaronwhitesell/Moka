@@ -106,7 +106,7 @@ void OptionsUI::updateIncDecCallbacks(Callback incPurchaseCallback, Callback dec
 	mDecRepairCallback = decRepairCallback;
 }
 
-void OptionsUI::deactivate()
+void OptionsUI::reset()
 {
 	// ALW - Resize background
 	mBackground.setSize(mBackgroundDefaultSize);
@@ -117,6 +117,18 @@ void OptionsUI::deactivate()
 	// ALW - Deactivate IncDec UI
 	mDrawIncDecUI = false;
 	mIncDecUI.setCallbacks(nullptr, nullptr);
+}
+
+void OptionsUI::enable()
+{
+	mTabs.enable();
+	mIncDecUI.enable();
+}
+
+void OptionsUI::disable()
+{
+	mTabs.disable();
+	mIncDecUI.disable();
 }
 
 void OptionsUI::draw(sf::RenderTarget &target, sf::RenderStates states) const

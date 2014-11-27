@@ -53,6 +53,8 @@ public:
 
 	void					handler(const sf::RenderWindow &window, const sf::View &view, const sf::Transform &transform);
 	void					addUIElem(std::string doString, std::string undoString);
+	void					enable();
+	void					disable();
 
 
 private:

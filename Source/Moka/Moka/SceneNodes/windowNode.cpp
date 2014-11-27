@@ -18,9 +18,11 @@
 WindowNode::WindowNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view
 	, UIBundle &uiBundle, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
 : PreventionNode(interactiveObject, window, view, uiBundle)
+, mWindowUIActivated(0x961e8d0b)
 , mLeftClickPress(0x6955d309)
 , mSoundPlayer(soundPlayer)
 , mChatBox(chatBox)
+, mWindowUIActive(false)
 {
 	mCallbackPairs.emplace_back(CallbackPair(std::bind(&WindowNode::addScreen, this), std::bind(&WindowNode::undoScreen, this)));
 	mCallbackPairs.emplace_back(CallbackPair(std::bind(&WindowNode::closeWindow, this), std::bind(&WindowNode::openWindow, this)));
@@ -34,7 +36,16 @@ void WindowNode::handleEvent(const trmb::Event &gameEvent)
 
 	if (!mDisableInput)
 	{
-		if (mLeftClickPress == gameEvent.getType())
+		if (mWindowUIActivated.getType() == gameEvent.getType())
+		{
+			// ALW - This is a workaround to fix an issue where an object had selection and then another object of the same
+			// ALW - type (barrel, door, window, clinic, house) was selected earlier in the SceneNode. What happened was
+			// ALW - the newly selected object would enable the UI, but then the previously selected object would disable the
+			// ALW - UI. This was not an issue in the reverse order. Now when an object is selected it sends a UI activated
+			// ALW - message, so an object later in the SceneNode knows not to disable the UI.
+			mWindowUIActive = true;
+		}
+		else if (mLeftClickPress == gameEvent.getType())
 		{
 			mPreviousSelectedState = mSelected;
 			if (mSelected && !isMouseOverUI(mUIBundle.getWindowUI().getRect()))
@@ -53,6 +64,15 @@ void WindowNode::handleEvent(const trmb::Event &gameEvent)
 				if (!mPreviousSelectedState)
 					activate();
 			}
+
+			if (mPreviousSelectedState && !mSelected && !mWindowUIActive)
+			{
+				// ALW - The object was unselected, because the click did not occur on an object of the same type.
+				// ALW - Therefore, the UI is not in use. Disable the UI.
+				mUIBundle.getWindowUI().disable();
+			}
+
+			mWindowUIActive = false;
 		}
 	}
 }
@@ -82,6 +102,7 @@ void WindowNode::activate()
 {
 	updateUndoUI();	
 	mSoundPlayer.play(SoundEffects::ID::Button);
+	InteractiveNode::sendEvent(mWindowUIActivated);
 	// ALW - ChatBox::UpdateText() can generate a mCreatePrompt event when an interactive object
 	// ALW - is selected. This asynchronous event will force InteractiveNode classes to ignore
 	// ALW - left and right click events. Then if <enter> is pressed an mEnter event will be
@@ -99,6 +120,8 @@ void WindowNode::activate()
 
 void WindowNode::updateUndoUI()
 {
+	mUIBundle.getWindowUI().enable();
+
 	const float verticalBuffer = 10.0f;
 	mUIBundle.getWindowUI().setPosition(sf::Vector2f(mInteractiveObject.getX() + mInteractiveObject.getWidth() / 2.0f
 		, mInteractiveObject.getY() + mInteractiveObject.getHeight() + verticalBuffer));

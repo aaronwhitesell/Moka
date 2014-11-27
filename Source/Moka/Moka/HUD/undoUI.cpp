@@ -76,6 +76,22 @@ void UndoUI::setUIElemState(const std::deque<bool> &flags)
 	}
 }
 
+void UndoUI::enable()
+{
+	for (const auto &uiElem : mUIElems)
+	{
+		uiElem->enable();
+	}
+}
+
+void UndoUI::disable()
+{
+	for (const auto &uiElem : mUIElems)
+	{
+		uiElem->disable();
+	}
+}
+
 void UndoUI::setCallbacks(const std::vector<CallbackPair> &callbacks)
 {
 	assert(("The number of callbacks must match the number of UI elements!", callbacks.size() == mUIElems.size()));
