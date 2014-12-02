@@ -67,9 +67,12 @@ void WindowNode::handleEvent(const trmb::Event &gameEvent)
 
 			if (mPreviousSelectedState && !mSelected && !mWindowUIActive)
 			{
-				// ALW - The object was unselected, because the click did not occur on an object of the same type.
-				// ALW - Therefore, the UI is not in use. Disable the UI.
-				mUIBundle.getWindowUI().disable();
+				// ALW - Two scenarios are possible. First, an object earlier in the SceneNode is unselected. The UI
+				// ALW - will be hidden. This behavior is ok, because if an object later in the SceneNode
+				// ALW - is then selected it will unhide itself. Next, the object may be unselected, because the click
+				// ALW - did not occur on an object of the same type. Here the UI is not in use, so resetting and hiding
+				// ALW - the UI is the desired behavior.
+				mUIBundle.getWindowUI().hide();
 			}
 
 			mWindowUIActive = false;
@@ -120,7 +123,7 @@ void WindowNode::activate()
 
 void WindowNode::updateUndoUI()
 {
-	mUIBundle.getWindowUI().enable();
+	mUIBundle.getWindowUI().unhide();
 
 	const float verticalBuffer = 10.0f;
 	mUIBundle.getWindowUI().setPosition(sf::Vector2f(mInteractiveObject.getX() + mInteractiveObject.getWidth() / 2.0f

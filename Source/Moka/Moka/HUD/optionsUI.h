@@ -54,6 +54,8 @@ public:
 	void					reset();
 	void					enable();
 	void					disable();
+	void					unhide();
+	void					hide();
 
 
 private:
@@ -79,6 +81,11 @@ private:
 	float					mHorizontalBuffer;
 	float					mVerticalBuffer;
 	bool					mDrawIncDecUI;
+
+	bool					mDisable;
+
+	sf::Vector2f			mRestoreBackgroundSize;
+	bool					mRestoreValuesInitialized;
 
 	sf::RectangleShape		mBackground;
 	sf::Vector2f            mBackgroundDefaultSize;

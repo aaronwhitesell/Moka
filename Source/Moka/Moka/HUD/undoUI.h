@@ -55,6 +55,9 @@ public:
 	void					addUIElem(std::string doString, std::string undoString);
 	void					enable();
 	void					disable();
+	void					unhide();
+	void					hide();
+
 
 
 private:
@@ -79,6 +82,11 @@ private:
 	const float				mOutLineThickness;
 	const sf::Vector2f		mFrameBuffer;
 	float					mHorizontalBuffer;
+
+	bool					mDisable;
+
+	sf::Vector2f			mRestoreBackgroundSize;
+	bool					mRestoreValuesInitialized;
 
 	UIElemVec				mUIElems;
 	sf::RectangleShape		mBackground;

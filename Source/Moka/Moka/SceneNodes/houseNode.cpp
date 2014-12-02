@@ -50,7 +50,7 @@ void HouseNode::handleEvent(const trmb::Event &gameEvent)
 				mSelected = false;
 			}
 
-			if (isMouseOverObject() 
+			if (isMouseOverObject()
 				&& !isMouseOverUI(mUIBundle.getBarrelUI().getRect())
 				&& !isMouseOverUI(mUIBundle.getDoorUI().getRect())
 				&& !isMouseOverUI(mUIBundle.getWindowUI().getRect())
@@ -70,10 +70,13 @@ void HouseNode::handleEvent(const trmb::Event &gameEvent)
 			}
 			else if (mPreviousSelectedState && !mSelected && !mHouseUIActive)
 			{
-				// ALW - The object was unselected, because the click did not occur on an object of the same type.
-				// ALW - Therefore, the UI is not in use. Reset and disable the UI.
+				// ALW - Two scenarios are possible. First, an object earlier in the SceneNode is unselected. The UI
+				// ALW - will be reset and hidden. This behavior is ok, because if an object later in the SceneNode
+				// ALW - is then selected it will unhide itself. Next, the object may be unselected, because the click
+				// ALW - did not occur on an object of the same type. Here the UI is not in use, so resetting and hiding
+				// ALW - the UI is the desired behavior.
 				mUIBundle.getHouseUI().reset();
-				mUIBundle.getHouseUI().disable();
+				mUIBundle.getHouseUI().hide();
 			}
 
 			mHouseUIActive = false;
@@ -124,7 +127,7 @@ void HouseNode::activate()
 
 void HouseNode::updateOptionsUI()
 {
-	mUIBundle.getHouseUI().enable();
+	mUIBundle.getHouseUI().unhide();
 
 	const float verticalBuffer = 10.0f;
 	mUIBundle.getHouseUI().setPosition(sf::Vector2f(mInteractiveObject.getX() + mInteractiveObject.getWidth() / 2.0f

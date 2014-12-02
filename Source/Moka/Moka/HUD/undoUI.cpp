@@ -21,6 +21,9 @@ UndoUI::UndoUI(Fonts::ID font, trmb::FontHolder &fonts, SoundEffects::ID soundEf
 , mOutLineThickness(1.0f)
 , mFrameBuffer(sf::Vector2f(7.0f, 7.0f))
 , mHorizontalBuffer(1.0f)
+, mDisable(false)
+, mRestoreBackgroundSize()
+, mRestoreValuesInitialized(false)
 {
 	mBackground.setPosition(0.0f, 0.0f);
 	mBackground.setFillColor(sf::Color(0u, 0u, 0u, 200u));
@@ -78,6 +81,7 @@ void UndoUI::setUIElemState(const std::deque<bool> &flags)
 
 void UndoUI::enable()
 {
+	mDisable = false;
 	for (const auto &uiElem : mUIElems)
 	{
 		uiElem->enable();
@@ -86,9 +90,43 @@ void UndoUI::enable()
 
 void UndoUI::disable()
 {
+	mDisable = true;
 	for (const auto &uiElem : mUIElems)
 	{
 		uiElem->disable();
+	}
+}
+
+void UndoUI::unhide()
+{
+	if (!mRestoreValuesInitialized)
+	{
+		// ALW - On the first pass unhide() will be called before hide(), so initialize the unhide values.
+		mRestoreBackgroundSize = mBackground.getSize();
+		mRestoreValuesInitialized = true;
+	}
+
+	mBackground.setSize(mRestoreBackgroundSize);
+
+	for (const auto &uiElem : mUIElems)
+	{
+		uiElem->unhide();
+	}
+
+	enable();
+}
+
+void UndoUI::hide()
+{
+	disable();
+
+	mRestoreBackgroundSize = mBackground.getSize();
+	const sf::Vector2f hideBackground = sf::Vector2f(0.0f, 0.0f);
+	mBackground.setSize(hideBackground);
+
+	for (const auto &uiElem : mUIElems)
+	{
+		uiElem->hide();
 	}
 }
 
@@ -107,11 +145,14 @@ void UndoUI::setCallbacks(const std::vector<CallbackPair> &callbacks)
 
 void UndoUI::handler(const sf::RenderWindow &window, const sf::View &view, const sf::Transform &transform)
 {
-	sf::Transform combinedTransform = getTransform() * transform;
-
-	for (const auto &uiElem : mUIElems)
+	if (!mDisable)
 	{
-		uiElem->handler(window, view, combinedTransform);
+		sf::Transform combinedTransform = getTransform() * transform;
+
+		for (const auto &uiElem : mUIElems)
+		{
+			uiElem->handler(window, view, combinedTransform);
+		}
 	}
 }
 

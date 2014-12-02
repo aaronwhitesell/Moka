@@ -18,6 +18,9 @@ OptionsUI::OptionsUI(Fonts::ID font, trmb::FontHolder &fonts, SoundEffects::ID s
 , mHorizontalBuffer(1.0f)
 , mVerticalBuffer(1.0f)
 , mDrawIncDecUI(false)
+, mDisable(false)
+, mRestoreBackgroundSize()
+, mRestoreValuesInitialized(false)
 {
 	mLHSTab = std::make_shared<trmb::GameTab>(Fonts::ID::Main, fonts, soundEffect, soundPlayer, mTabSize);
 	mLHSTab->setCallback(std::bind(&OptionsUI::lhsTab, this));
@@ -91,10 +94,13 @@ void OptionsUI::setCharacterSize(unsigned int size)
 
 void OptionsUI::handler(const sf::RenderWindow &window, const sf::View &view, const sf::Transform &transform)
 {
-	sf::Transform combinedTransform = getTransform() * transform;
+	if (!mDisable)
+	{
+		sf::Transform combinedTransform = getTransform() * transform;
 
-	mTabs.handler(window, view, combinedTransform);
-	mIncDecUI.handler(window, view, combinedTransform);
+		mTabs.handler(window, view, combinedTransform);
+		mIncDecUI.handler(window, view, combinedTransform);
+	}
 }
 
 void OptionsUI::updateIncDecCallbacks(Callback incPurchaseCallback, Callback decPurchaseCallback
@@ -121,14 +127,45 @@ void OptionsUI::reset()
 
 void OptionsUI::enable()
 {
+	mDisable = false;
 	mTabs.enable();
 	mIncDecUI.enable();
 }
 
 void OptionsUI::disable()
 {
+	mDisable = true;
 	mTabs.disable();
 	mIncDecUI.disable();
+}
+
+void OptionsUI::unhide()
+{
+	if (!mRestoreValuesInitialized)
+	{
+		// ALW - On the first pass unhide() will be called before hide(), so initialize the unhide values.
+		mRestoreBackgroundSize = mBackground.getSize();
+		mRestoreValuesInitialized = true;
+	}
+
+	mBackground.setSize(mRestoreBackgroundSize);
+
+	mTabs.unhide();
+	mIncDecUI.unhide();
+
+	enable();
+}
+
+void OptionsUI::hide()
+{
+	disable();
+
+	mRestoreBackgroundSize = mBackground.getSize();
+	const sf::Vector2f hideBackground = sf::Vector2f(0.0f, 0.0f);
+	mBackground.setSize(hideBackground);
+
+	mTabs.hide();
+	mIncDecUI.hide();
 }
 
 void OptionsUI::draw(sf::RenderTarget &target, sf::RenderStates states) const
