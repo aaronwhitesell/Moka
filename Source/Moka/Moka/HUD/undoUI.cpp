@@ -23,7 +23,6 @@ UndoUI::UndoUI(Fonts::ID font, trmb::FontHolder &fonts, SoundEffects::ID soundEf
 , mHorizontalBuffer(1.0f)
 , mDisable(false)
 , mRestoreBackgroundSize()
-, mRestoreValuesInitialized(false)
 {
 	mBackground.setPosition(0.0f, 0.0f);
 	mBackground.setFillColor(sf::Color(0u, 0u, 0u, 200u));
@@ -99,13 +98,6 @@ void UndoUI::disable()
 
 void UndoUI::unhide()
 {
-	if (!mRestoreValuesInitialized)
-	{
-		// ALW - On the first pass unhide() will be called before hide(), so initialize the unhide values.
-		mRestoreBackgroundSize = mBackground.getSize();
-		mRestoreValuesInitialized = true;
-	}
-
 	mBackground.setSize(mRestoreBackgroundSize);
 
 	for (const auto &uiElem : mUIElems)
@@ -118,6 +110,7 @@ void UndoUI::unhide()
 
 void UndoUI::hide()
 {
+	// ALW - hide() must be called before unhide(), so the restore values are assigned.
 	disable();
 
 	mRestoreBackgroundSize = mBackground.getSize();

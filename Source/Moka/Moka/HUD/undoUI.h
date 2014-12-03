@@ -86,7 +86,6 @@ private:
 	bool					mDisable;
 
 	sf::Vector2f			mRestoreBackgroundSize;
-	bool					mRestoreValuesInitialized;
 
 	UIElemVec				mUIElems;
 	sf::RectangleShape		mBackground;

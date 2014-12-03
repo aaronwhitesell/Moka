@@ -85,7 +85,6 @@ private:
 	bool					mDisable;
 
 	sf::Vector2f			mRestoreBackgroundSize;
-	bool					mRestoreValuesInitialized;
 
 	sf::RectangleShape		mBackground;
 	sf::Vector2f            mBackgroundDefaultSize;

@@ -87,29 +87,34 @@ void World::configureUIs()
 	mBarrelUI.setSize(sf::Vector2f(75.0f, 20.0f));
 	mBarrelUI.setCharacterSize(characterSize);
 	centerOrigin(mBarrelUI, true, false);
+	mBarrelUI.hide();
 
 	mDoorUI.addUIElem("Close", "Undo");
 	mDoorUI.setSize(sf::Vector2f(75.0f, 20.0f));
 	mDoorUI.setCharacterSize(characterSize);
 	centerOrigin(mDoorUI, true, false);
+	mDoorUI.hide();
 
 	mWindowUI.addUIElem("Screen", "Undo");
 	mWindowUI.addUIElem("Close", "Undo");
 	mWindowUI.setSize(sf::Vector2f(75.0f, 20.0f));
 	mWindowUI.setCharacterSize(characterSize);
 	centerOrigin(mWindowUI, true, false);
+	mWindowUI.hide();
 
 	mClinicUI.setTabSize(sf::Vector2f(75.0f, 20.0f));
 	mClinicUI.setLHSTabText("RDT");
 	mClinicUI.setRHSTabText("ACT");
 	mClinicUI.setCharacterSize(characterSize);
 	centerOrigin(mClinicUI, true, false);
+	mClinicUI.hide();
 
 	mHouseUI.setTabSize(sf::Vector2f(75.0f, 20.0f));
 	mHouseUI.setLHSTabText("Bed Net");
 	mHouseUI.setRHSTabText("Repair");
 	mHouseUI.setCharacterSize(characterSize);
 	centerOrigin(mHouseUI, true, false);
+	mHouseUI.hide();
 }
 
 void World::buildScene()

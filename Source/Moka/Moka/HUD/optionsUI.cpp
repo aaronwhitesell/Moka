@@ -20,7 +20,6 @@ OptionsUI::OptionsUI(Fonts::ID font, trmb::FontHolder &fonts, SoundEffects::ID s
 , mDrawIncDecUI(false)
 , mDisable(false)
 , mRestoreBackgroundSize()
-, mRestoreValuesInitialized(false)
 {
 	mLHSTab = std::make_shared<trmb::GameTab>(Fonts::ID::Main, fonts, soundEffect, soundPlayer, mTabSize);
 	mLHSTab->setCallback(std::bind(&OptionsUI::lhsTab, this));
@@ -141,13 +140,6 @@ void OptionsUI::disable()
 
 void OptionsUI::unhide()
 {
-	if (!mRestoreValuesInitialized)
-	{
-		// ALW - On the first pass unhide() will be called before hide(), so initialize the unhide values.
-		mRestoreBackgroundSize = mBackground.getSize();
-		mRestoreValuesInitialized = true;
-	}
-
 	mBackground.setSize(mRestoreBackgroundSize);
 
 	mTabs.unhide();
@@ -158,6 +150,7 @@ void OptionsUI::unhide()
 
 void OptionsUI::hide()
 {
+	// ALW - hide() must be called before unhide(), so the restore values are assigned.
 	disable();
 
 	mRestoreBackgroundSize = mBackground.getSize();
