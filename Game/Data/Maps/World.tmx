@@ -1893,202 +1893,442 @@
  <objectgroup name="Interactive" width="25" height="25">
   <object name="House 0" type="House" x="128" y="320" width="64" height="192">
    <properties>
+    <property name="0PosX" value="0"/>
+    <property name="0PosY" value="0"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Color" value="Tan"/>
+    <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="House 1" type="House" x="256" y="320" width="64" height="192">
    <properties>
+    <property name="0PosX" value="0"/>
+    <property name="0PosY" value="0"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Color" value="Tan"/>
+    <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="House 2" type="House" x="192" y="576" width="64" height="192">
    <properties>
+    <property name="0PosX" value="0"/>
+    <property name="0PosY" value="0"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Color" value="Slate"/>
+    <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="House 3" type="House" x="320" y="576" width="64" height="192">
    <properties>
+    <property name="0PosX" value="0"/>
+    <property name="0PosY" value="0"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Color" value="Slate"/>
+    <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="House 4" type="House" x="448" y="576" width="64" height="192">
    <properties>
+    <property name="0PosX" value="0"/>
+    <property name="0PosY" value="0"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Color" value="Slate"/>
+    <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="House 5" type="House" x="576" y="576" width="64" height="192">
    <properties>
+    <property name="0PosX" value="0"/>
+    <property name="0PosY" value="0"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Color" value="Slate"/>
+    <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="House 6" type="House" x="1152" y="256" width="128" height="256">
    <properties>
+    <property name="0PosX" value="0"/>
+    <property name="0PosY" value="0"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Color" value="Tan"/>
+    <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="House 7" type="House" x="1408" y="704" width="128" height="192">
    <properties>
+    <property name="0PosX" value="0"/>
+    <property name="0PosY" value="0"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Color" value="Tan"/>
+    <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="Clinic 0" type="Clinic" x="384" y="960" width="256" height="320">
    <properties>
+    <property name="0PosX" value="320"/>
+    <property name="0PosY" value="1216"/>
+    <property name="1PosX" value="512"/>
+    <property name="1PosY" value="1216"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Color" value="Slate"/>
+    <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="Market 1" type="Prevention Method" x="1024" y="1088" width="256" height="256">
    <properties>
+    <property name="0PosX" value="0"/>
+    <property name="0PosY" value="0"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Color" value="Slate"/>
+    <property name="Style" value="na"/>
    </properties>
   </object>
-  <object name="Small Window 0" type="Window" x="144" y="463" width="32" height="38">
+  <object name="Window 0" type="Window" x="144" y="463" width="32" height="38">
    <properties>
+    <property name="0PosX" value="128"/>
+    <property name="0PosY" value="448"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="House 0"/>
+    <property name="Color" value="Tan"/>
+    <property name="Style" value="Simple"/>
    </properties>
   </object>
-  <object name="Small Window 1" type="Window" x="272" y="463" width="32" height="38">
+  <object name="Window 1" type="Window" x="272" y="463" width="32" height="38">
    <properties>
+    <property name="0PosX" value="256"/>
+    <property name="0PosY" value="448"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="House 1"/>
+    <property name="Color" value="Tan"/>
+    <property name="Style" value="Simple"/>
    </properties>
   </object>
-  <object name="Small Window 2" type="Window" x="208" y="719" width="32" height="38">
+  <object name="Window 2" type="Window" x="208" y="719" width="32" height="38">
    <properties>
+    <property name="0PosX" value="192"/>
+    <property name="0PosY" value="704"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="House 2"/>
+    <property name="Color" value="Slate"/>
+    <property name="Style" value="Simple"/>
    </properties>
   </object>
-  <object name="Small Window 3" type="Window" x="336" y="719" width="32" height="38">
+  <object name="Window 3" type="Window" x="336" y="719" width="32" height="38">
    <properties>
+    <property name="0PosX" value="320"/>
+    <property name="0PosY" value="704"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="House 3"/>
+    <property name="Color" value="Slate"/>
+    <property name="Style" value="Simple"/>
    </properties>
   </object>
-  <object name="Small Window 4" type="Window" x="464" y="719" width="32" height="38">
+  <object name="Window 4" type="Window" x="464" y="719" width="32" height="38">
    <properties>
+    <property name="0PosX" value="448"/>
+    <property name="0PosY" value="704"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="House 4"/>
+    <property name="Color" value="Slate"/>
+    <property name="Style" value="Simple"/>
    </properties>
   </object>
-  <object name="Small Window 5" type="Window" x="592" y="719" width="32" height="38">
+  <object name="Window 5" type="Window" x="592" y="719" width="32" height="38">
    <properties>
+    <property name="0PosX" value="576"/>
+    <property name="0PosY" value="704"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="House 5"/>
+    <property name="Color" value="Slate"/>
+    <property name="Style" value="Simple"/>
    </properties>
   </object>
-  <object name="Small Window 6" type="Window" x="1424" y="847" width="32" height="38">
+  <object name="Window 6" type="Window" x="1168" y="395" width="32" height="44">
    <properties>
-    <property name="AttachedTo" value="House 7"/>
-   </properties>
-  </object>
-  <object name="Small Window 7" type="Window" x="1488" y="847" width="32" height="38">
-   <properties>
-    <property name="AttachedTo" value="House 7"/>
-   </properties>
-  </object>
-  <object name="Medium Window 0" type="Window" x="1168" y="395" width="32" height="44">
-   <properties>
+    <property name="0PosX" value="1152"/>
+    <property name="0PosY" value="384"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="House 6"/>
+    <property name="Color" value="Tan"/>
+    <property name="Style" value="Wooden"/>
    </properties>
   </object>
-  <object name="Medium Window 1" type="Window" x="1232" y="395" width="32" height="44">
+  <object name="Window 7" type="Window" x="1232" y="395" width="32" height="44">
    <properties>
+    <property name="0PosX" value="1216"/>
+    <property name="0PosY" value="384"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="House 6"/>
+    <property name="Color" value="Tan"/>
+    <property name="Style" value="Wooden"/>
    </properties>
   </object>
-  <object name="Medium Window 2" type="Window" x="464" y="1163" width="32" height="44">
+  <object name="Window 8" type="Window" x="1424" y="847" width="32" height="38">
    <properties>
-    <property name="AttachedTo" value="Clinic 0"/>
+    <property name="0PosX" value="1408"/>
+    <property name="0PosY" value="832"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
+    <property name="AttachedTo" value="House 7"/>
+    <property name="Color" value="Tan"/>
+    <property name="Style" value="Simple"/>
    </properties>
   </object>
-  <object name="Medium Window 3" type="Window" x="528" y="1163" width="32" height="44">
+  <object name="Window 9" type="Window" x="1488" y="847" width="32" height="38">
    <properties>
+    <property name="0PosX" value="1472"/>
+    <property name="0PosY" value="832"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
+    <property name="AttachedTo" value="House 7"/>
+    <property name="Color" value="Tan"/>
+    <property name="Style" value="Simple"/>
+   </properties>
+  </object>
+  <object name="Window 10" type="Window" x="464" y="1163" width="32" height="44">
+   <properties>
+    <property name="0PosX" value="384"/>
+    <property name="0PosY" value="1152"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Clinic 0"/>
+    <property name="Color" value="Slate"/>
+    <property name="Style" value="Wooden"/>
+   </properties>
+  </object>
+  <object name="Window 11" type="Window" x="528" y="1163" width="32" height="44">
+   <properties>
+    <property name="0PosX" value="448"/>
+    <property name="0PosY" value="1152"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
+    <property name="AttachedTo" value="Clinic 0"/>
+    <property name="Color" value="Slate"/>
+    <property name="Style" value="Wooden"/>
    </properties>
   </object>
   <object name="Door 0" type="Door" x="1219" y="452" width="58" height="60">
    <properties>
+    <property name="0PosX" value="1216"/>
+    <property name="0PosY" value="448"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="House 6"/>
+    <property name="Color" value="Tan"/>
+    <property name="Style" value="HalfOpen"/>
    </properties>
   </object>
   <object name="Door 1" type="Door" x="515" y="1220" width="58" height="60">
    <properties>
+    <property name="0PosX" value="448"/>
+    <property name="0PosY" value="1216"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Clinic 0"/>
+    <property name="Color" value="Slate"/>
+    <property name="Style" value="FullyOpen"/>
    </properties>
   </object>
   <object name="Barrel 0" type="Barrel" x="210" y="403" width="28" height="45">
    <properties>
+    <property name="0PosX" value="192"/>
+    <property name="0PosY" value="384"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Color" value="na"/>
+    <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="Barrel 1" type="Barrel" x="210" y="467" width="28" height="45">
    <properties>
+    <property name="0PosX" value="192"/>
+    <property name="0PosY" value="448"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Color" value="na"/>
+    <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="Barrel 2" type="Barrel" x="146" y="659" width="28" height="45">
    <properties>
+    <property name="0PosX" value="128"/>
+    <property name="0PosY" value="640"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Color" value="na"/>
+    <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="Barrel 3" type="Barrel" x="274" y="723" width="28" height="45">
    <properties>
+    <property name="0PosX" value="256"/>
+    <property name="0PosY" value="704"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Color" value="na"/>
+    <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="Barrel 4" type="Barrel" x="402" y="723" width="28" height="45">
    <properties>
+    <property name="0PosX" value="384"/>
+    <property name="0PosY" value="704"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Color" value="na"/>
+    <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="Barrel 5" type="Barrel" x="530" y="595" width="28" height="45">
    <properties>
+    <property name="0PosX" value="512"/>
+    <property name="0PosY" value="576"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Color" value="na"/>
+    <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="Barrel 6" type="Barrel" x="658" y="659" width="28" height="45">
    <properties>
+    <property name="0PosX" value="640"/>
+    <property name="0PosY" value="640"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Color" value="na"/>
+    <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="Barrel 7" type="Barrel" x="1298" y="467" width="28" height="45">
    <properties>
+    <property name="0PosX" value="1280"/>
+    <property name="0PosY" value="448"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Color" value="na"/>
+    <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="Barrel 8" type="Barrel" x="1426" y="659" width="28" height="45">
    <properties>
+    <property name="0PosX" value="1408"/>
+    <property name="0PosY" value="640"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Color" value="na"/>
+    <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="Barrel 9" type="Barrel" x="1490" y="659" width="28" height="45">
    <properties>
+    <property name="0PosX" value="1472"/>
+    <property name="0PosY" value="640"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Color" value="na"/>
+    <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="Barrel 10" type="Barrel" x="1554" y="787" width="28" height="45">
    <properties>
+    <property name="0PosX" value="1536"/>
+    <property name="0PosY" value="768"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Color" value="na"/>
+    <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="Barrel 11" type="Barrel" x="402" y="1235" width="28" height="45">
    <properties>
+    <property name="0PosX" value="320"/>
+    <property name="0PosY" value="1216"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Clinic 0"/>
+    <property name="Color" value="na"/>
+    <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="Barrel 12" type="Barrel" x="978" y="1171" width="28" height="45">
    <properties>
+    <property name="0PosX" value="896"/>
+    <property name="0PosY" value="1152"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Color" value="na"/>
+    <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="Barrel 13" type="Barrel" x="978" y="1235" width="28" height="45">
    <properties>
+    <property name="0PosX" value="896"/>
+    <property name="0PosY" value="1216"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Color" value="na"/>
+    <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="Barrel 14" type="Barrel" x="1106" y="1043" width="28" height="45">
    <properties>
+    <property name="0PosX" value="960"/>
+    <property name="0PosY" value="1024"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Color" value="na"/>
+    <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="Barrel 15" type="Barrel" x="1298" y="1299" width="28" height="45">
    <properties>
+    <property name="0PosX" value="1152"/>
+    <property name="0PosY" value="1280"/>
+    <property name="1PosX" value="0"/>
+    <property name="1PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Color" value="na"/>
+    <property name="Style" value="na"/>
    </properties>
   </object>
  </objectgroup>

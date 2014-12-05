@@ -24,69 +24,265 @@ void ObjectGroups::read(const std::string &filename)
 
 void ObjectGroups::loadFile(const std::string &filename, tinyxml2::XMLDocument &config)
 {
-	if (config.LoadFile(filename.c_str()) != tinyxml2::XML_NO_ERROR)
+	tinyxml2::XMLError eResult = config.LoadFile(filename.c_str());
+
+	if (eResult != tinyxml2::XML_NO_ERROR)
 	{
-		throw std::runtime_error("TinyXML2 - Failed to load " + filename);
+		throw std::runtime_error("ALW - Logic Error: Failed to load " + filename);
 	}
 }
 
 void ObjectGroups::readInteractiveGroup(tinyxml2::XMLDocument &config)
 {
-	tinyxml2::XMLElement *map = config.FirstChildElement("map");
-	assert(("ALW - Logic Error: There is no map to read! This must be a incorrectly formatted TMX file.", map));
+	tinyxml2::XMLElement *element = config.FirstChildElement("map");
+	if (element == nullptr)
+	{
+		throw std::runtime_error("ALW - Logic Error: Failed to read map element.");
+	}
 
-	tinyxml2::XMLElement *objectGroup = map->FirstChildElement("objectgroup");
-	assert(("ALW - Logic Error: There must be at least one object group!", objectGroup));
+	// ALW - Find the Interactive objectgroup
+	element = element->FirstChildElement("objectgroup");
+	if (element == nullptr)
+	{
+		throw std::runtime_error("ALW - Logic Error: There are no objectgroup elements.");
+	}
 
 	std::string objectGroupName = "Interactive";
-	while (objectGroupName != objectGroup->Attribute("name"))
+	while (objectGroupName != element->Attribute("name"))
 	{
-		objectGroup = objectGroup->NextSiblingElement("objectgroup");
-		assert(("ALW - Logic Error: There must be an object group named Interactive!", objectGroup));
-	}
-	
-	assert(("ALW - Logic Error : There is no name attribute!", objectGroup->Attribute("name")));
-	mInteractiveGroup.setName(static_cast<std::string>(objectGroup->Attribute("name")));
-	assert(("ALW - Logic Error : There is no width attribute!", objectGroup->Attribute("width")));
-	mInteractiveGroup.setWidth(objectGroup->IntAttribute("width"));
-	assert(("ALW - Logic Error : There is no height attribute!", objectGroup->Attribute("height")));
-	mInteractiveGroup.setHeight(objectGroup->IntAttribute("height"));
-
-	std::vector<InteractiveObject> interactiveObjects;
-	tinyxml2::XMLElement *object = objectGroup->FirstChildElement("object");
-	assert(("ALW - Logic Error: The Interactive object group is empty!", objectGroup));
-	for (; object != nullptr; object = object->NextSiblingElement("object"))
-	{
-		assert(("ALW - Logic Error : There is no name attribute!", object->Attribute("name")));
-		std::string name = object->Attribute("name");
-		assert(("ALW - Logic Error : There is no type attribute!", object->Attribute("type")));
-		std::string type = object->Attribute("type");
-		assert(("ALW - Logic Error : There is no x attribute!", object->IntAttribute("x")));
-		float x = object->FloatAttribute("x");
-		assert(("ALW - Logic Error : There is no x attribute!", object->IntAttribute("y")));
-		float y = object->FloatAttribute("y");
-		assert(("ALW - Logic Error : There is no x attribute!", object->IntAttribute("width")));
-		float width = object->FloatAttribute("width");
-		assert(("ALW - Logic Error : There is no x attribute!", object->IntAttribute("height")));
-		float height = object->FloatAttribute("height");
-
-		tinyxml2::XMLElement *properties = object->FirstChildElement("properties");
-		assert(("ALW - Logic Error: There are no properties!", properties));
-		tinyxml2::XMLElement *property = properties->FirstChildElement("property");
-		assert(("ALW - Logic Error: There is no property!", property));
-		assert(("ALW - Logic Error : There is no name attribute for the property!", property->Attribute("name")));
-		std::string propertyName = property->Attribute("name");
-
-		std::string attachedTo;
-		if (propertyName == "AttachedTo")
+		element = element->NextSiblingElement("objectgroup");
+		if (element == nullptr)
 		{
-			assert(("ALW - Logic Error : There is no value for the attachedTo property!", property->Attribute("value")));
-			attachedTo = property->Attribute("value");
+			throw std::runtime_error("ALW - Logic Error: Failed to read objectgroup element.");
 		}
-		else
-			assert(("ALW - Logic Error : There was no attachedTo property!", false));
+	}
 
-		interactiveObjects.push_back(InteractiveObject(name, type, attachedTo, x, y, width, height));
+	// ALW - Read Interactive objectgroup's attributes
+	mInteractiveGroup.setName(static_cast<std::string>(element->Attribute("name")));
+
+	int width;
+	tinyxml2::XMLError eResult = element->QueryIntAttribute("width", &width);
+	if (eResult != tinyxml2::XML_NO_ERROR)
+	{
+		throw std::runtime_error("ALW - Logic Error: Unable to convert width attribute");
+	}
+	mInteractiveGroup.setWidth(width);
+
+	int height;
+	eResult = element->QueryIntAttribute("height", &height);
+	if (eResult != tinyxml2::XML_NO_ERROR)
+	{
+		throw std::runtime_error("ALW - Logic Error: Unable to convert height attribute");
+	}
+	mInteractiveGroup.setHeight(height);
+
+	// ALW - Read Interactive objectgroup's objects
+	std::vector<InteractiveObject> interactiveObjects;
+
+	element = element->FirstChildElement("object");
+	if (element == nullptr)
+	{
+		throw std::runtime_error("ALW - Logic Error: There are no object elements.");
+	}
+
+	for (; element != nullptr; element = element->NextSiblingElement("object"))
+	{
+		// ALW - Don't reassign element. It is needed for the loop.
+		tinyxml2::XMLElement *elem = element;
+
+		std::string name = elem->Attribute("name");
+		std::string type = elem->Attribute("type");
+
+		float x; // ALW - Read int as float (reduces number of casts when used).
+		eResult = elem->QueryFloatAttribute("x", &x);
+		if (eResult != tinyxml2::XML_NO_ERROR)
+		{
+			throw std::runtime_error("ALW - Logic Error: Unable to convert x attribute");
+		}
+
+		float y; // ALW - Read int as float (reduces number of casts when used).
+		eResult = elem->QueryFloatAttribute("y", &y);
+		if (eResult != tinyxml2::XML_NO_ERROR)
+		{
+			throw std::runtime_error("ALW - Logic Error: Unable to convert y attribute");
+		}
+
+		float width;
+		eResult = elem->QueryFloatAttribute("width", &width);
+		if (eResult != tinyxml2::XML_NO_ERROR)
+		{
+			throw std::runtime_error("ALW - Logic Error: Unable to convert width attribute");
+		}
+
+		float height;
+		eResult = elem->QueryFloatAttribute("height", &height);
+		if (eResult != tinyxml2::XML_NO_ERROR)
+		{
+			throw std::runtime_error("ALW - Logic Error: Unable to convert height attribute");
+		}
+
+		// ALW - Read each object's properties
+		tinyxml2::XMLElement *properties = elem->FirstChildElement("properties");
+		if (properties == nullptr)
+		{
+			throw std::runtime_error("ALW - Logic Error: There are no properties elements.");
+		}
+
+		// ALW - Property 0PosX
+		elem = properties->FirstChildElement("property");
+		if (elem == nullptr)
+		{
+			throw std::runtime_error("ALW - Logic Error: There are no property elements.");
+		}
+
+		std::string posX0Name = "0PosX";
+		while (posX0Name != elem->Attribute("name"))
+		{
+			elem = elem->NextSiblingElement("property");
+			if (elem == nullptr)
+			{
+				throw std::runtime_error("ALW - Logic Error: Failed to find 0PosX property element.");
+			}
+		}
+
+		float posX0Value;
+		eResult = elem->QueryFloatAttribute("value", &posX0Value);
+		if (eResult != tinyxml2::XML_NO_ERROR)
+		{
+			throw std::runtime_error("ALW - Logic Error: Unable to convert 0PosX attribute.");
+		}
+
+		// ALW - Property 0PosY
+		elem = properties->FirstChildElement("property");
+		if (elem == nullptr)
+		{
+			throw std::runtime_error("ALW - Logic Error: There are no property elements.");
+		}
+
+		std::string posY0Name = "0PosY";
+		while (posY0Name != elem->Attribute("name"))
+		{
+			elem = elem->NextSiblingElement("property");
+			if (elem == nullptr)
+			{
+				throw std::runtime_error("ALW - Logic Error: Failed to find 0PosY property element.");
+			}
+		}
+
+		float posY0Value;
+		eResult = elem->QueryFloatAttribute("value", &posY0Value);
+		if (eResult != tinyxml2::XML_NO_ERROR)
+		{
+			throw std::runtime_error("ALW - Logic Error: Unable to convert 0PosY attribute.");
+		}
+
+		// ALW - Property 1PosX
+		elem = properties->FirstChildElement("property");
+		if (elem == nullptr)
+		{
+			throw std::runtime_error("ALW - Logic Error: There are no property elements.");
+		}
+
+		std::string posX1Name = "1PosX";
+		while (posX1Name != elem->Attribute("name"))
+		{
+			elem = elem->NextSiblingElement("property");
+			if (elem == nullptr)
+			{
+				throw std::runtime_error("ALW - Logic Error: Failed to find 1PosX property element.");
+			}
+		}
+
+		float posX1Value;
+		eResult = elem->QueryFloatAttribute("value", &posX1Value);
+		if (eResult != tinyxml2::XML_NO_ERROR)
+		{
+			throw std::runtime_error("ALW - Logic Error: Unable to convert 1PosX attribute.");
+		}
+
+		// ALW - Property 1PosY
+		elem = properties->FirstChildElement("property");
+		if (elem == nullptr)
+		{
+			throw std::runtime_error("ALW - Logic Error: There are no property elements.");
+		}
+
+		std::string posY1Name = "1PosY";
+		while (posY1Name != elem->Attribute("name"))
+		{
+			elem = elem->NextSiblingElement("property");
+			if (elem == nullptr)
+			{
+				throw std::runtime_error("ALW - Logic Error: Failed to find 1PosY property element.");
+			}
+		}
+
+		float posY1Value;
+		eResult = elem->QueryFloatAttribute("value", &posY1Value);
+		if (eResult != tinyxml2::XML_NO_ERROR)
+		{
+			throw std::runtime_error("ALW - Logic Error: Unable to convert 1PosY attribute.");
+		}
+
+		// ALW - Property AttachedTo
+		elem = properties->FirstChildElement("property");
+		if (elem == nullptr)
+		{
+			throw std::runtime_error("ALW - Logic Error: There are no property elements.");
+		}
+
+		std::string attachedToName = "AttachedTo";
+		while (attachedToName != elem->Attribute("name"))
+		{
+			elem = elem->NextSiblingElement("property");
+			if (elem == nullptr)
+			{
+				throw std::runtime_error("ALW - Logic Error: Failed to find AttachedTo property element.");
+			}
+		}
+
+		std::string attachedToValue = elem->Attribute("value");
+
+		// ALW - Property Color
+		elem = properties->FirstChildElement("property");
+		if (elem == nullptr)
+		{
+			throw std::runtime_error("ALW - Logic Error: There are no property elements.");
+		}
+
+		std::string colorName = "Color";
+		while (colorName != elem->Attribute("name"))
+		{
+			elem = elem->NextSiblingElement("property");
+			if (elem == nullptr)
+			{
+				throw std::runtime_error("ALW - Logic Error: Failed to find Color property element.");
+			}
+		}
+
+		std::string colorValue = elem->Attribute("value");
+
+		// ALW - Property Style
+		elem = properties->FirstChildElement("property");
+		if (elem == nullptr)
+		{
+			throw std::runtime_error("ALW - Logic Error: There are no property elements.");
+		}
+
+		std::string styleName = "Style";
+		while (styleName != elem->Attribute("name"))
+		{
+			elem = elem->NextSiblingElement("property");
+			if (elem == nullptr)
+			{
+				throw std::runtime_error("ALW - Logic Error: Failed to find Style property element.");
+			}
+		}
+
+		std::string styleValue = elem->Attribute("value");
+
+		interactiveObjects.push_back(InteractiveObject(name, type, x, y, width, height, posX0Value, posY0Value, posX1Value, posY1Value
+			, attachedToValue, colorValue, styleValue));
 	}
 
 	mInteractiveGroup.setInteractiveObjects(interactiveObjects);
