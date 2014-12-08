@@ -8,7 +8,7 @@ class InteractiveObject
 {
 public:
 							InteractiveObject(std::string name, std::string type, float x, float y, float width, float height
-								, float posX0, float posY0, float posX1, float posY1, std::string attachedTo, std::string size
+								, float posX0, float posY0, float posX1, float posY1, std::string attachedTo, std::string color
 								, std::string style);
 							// ALW - Allow copy construction and assignment
 
@@ -24,10 +24,8 @@ public:
 	float					getPosX1() const;
 	float					getPosY1() const;
 	const std::string		getAttachedTo() const;
-	const std::string		getSize() const;
+	const std::string		getColor() const;
 	const std::string		getStyle() const;
-
-
 
 
 private:
@@ -43,7 +41,7 @@ private:
 	float					mPosX1;
 	float					mPosY1;
 	std::string				mAttachedTo;
-	std::string				mSize;
+	std::string				mColor;
 	std::string				mStyle;
 
 

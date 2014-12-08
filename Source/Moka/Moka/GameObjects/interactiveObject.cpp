@@ -2,7 +2,7 @@
 
 
 InteractiveObject::InteractiveObject(std::string name, std::string type, float x, float y, float width, float height
-	, float posX0, float posY0, float posX1, float posY1, std::string attachedTo, std::string size, std::string style)
+	, float posX0, float posY0, float posX1, float posY1, std::string attachedTo, std::string color, std::string style)
 : mName(name)
 , mType(type)
 , mX(x)
@@ -14,7 +14,7 @@ InteractiveObject::InteractiveObject(std::string name, std::string type, float x
 , mPosX1(posX1)
 , mPosY1(posY1)
 , mAttachedTo(attachedTo)
-, mSize(size)
+, mColor(color)
 , mStyle(style)
 {
 }
@@ -74,9 +74,9 @@ const std::string InteractiveObject::getAttachedTo() const
 	return mAttachedTo;
 }
 
-const std::string InteractiveObject::getSize() const
+const std::string InteractiveObject::getColor() const
 {
-	return mSize;
+	return mColor;
 }
 
 const std::string InteractiveObject::getStyle() const
