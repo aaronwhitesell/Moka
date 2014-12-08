@@ -8,6 +8,7 @@ namespace Textures
 	{
 		Buttons,
 		Heroes,
+		Tiles,
 		TitleScreen,
 	};
 }

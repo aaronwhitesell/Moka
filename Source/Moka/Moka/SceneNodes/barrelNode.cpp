@@ -9,22 +9,28 @@
 #include "Trambo/Localize/localize.h"
 #include "Trambo/Sounds/soundPlayer.h"
 
+#include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/View.hpp>
 
 
+
 BarrelNode::BarrelNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view
-	, UIBundle &uiBundle, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
+	, UIBundle &uiBundle, trmb::TextureHolder &textures, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
 : PreventionNode(interactiveObject, window, view, uiBundle)
 , mBarrelUIActivated(0x10a1b42f)
 , mLeftClickPress(0x6955d309)
+, mTextures(textures)
 , mSoundPlayer(soundPlayer)
 , mChatBox(chatBox)
 , mBarrelUIActive(false)
+, mCoveredBarrel(mTextures.get(Textures::ID::Tiles), sf::IntRect(576, 640, 64, 64))
+, mIsBarrelCovered(false)
 {
-	mCallbackPairs.emplace_back(CallbackPair(std::bind(&BarrelNode::addLid, this), std::bind(&BarrelNode::undoLid, this)));
+	mCoveredBarrel.setPosition(sf::Vector2f(mInteractiveObject.getPosX0(), mInteractiveObject.getPosY0()));
+	mCallbackPairs.emplace_back(CallbackPair(std::bind(&BarrelNode::addCover, this), std::bind(&BarrelNode::undoCover, this)));
 	mUIElemStates.emplace_back(true);
 }
 
@@ -80,6 +86,9 @@ void BarrelNode::handleEvent(const trmb::Event &gameEvent)
 
 void BarrelNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const
 {
+	if (mIsBarrelCovered)
+		target.draw(mCoveredBarrel, states);
+
 	if (mSelected)
 	{
 		target.draw(mHightlight, states);
@@ -115,7 +124,10 @@ void BarrelNode::activate()
 	// ALW - interactive object will be left selected. To remedy this all InteractiveNodes deselect
 	// ALW - themselves when a mCreatePrompt is generated. Immediately afterwards the InteractiveNode
 	// ALW - that generated the mCreatePrompt is reselected.
-	mChatBox.updateText(trmb::Localize::getInstance().getString("inspectBarrel"));
+	if (mIsBarrelCovered)
+		mChatBox.updateText(trmb::Localize::getInstance().getString("inspectCoveredBarrel"));
+	else
+		mChatBox.updateText(trmb::Localize::getInstance().getString("inspectBarrel"));
 	mSelected = true;
 }
 
@@ -132,14 +144,16 @@ void BarrelNode::updateUndoUI()
 	mUIBundle.getBarrelUI().setUIElemState(mUIElemStates);
 }
 
-void BarrelNode::addLid()
+void BarrelNode::addCover()
 {
+	mIsBarrelCovered = true;
+	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseCover"));
 	mUIElemStates.front() = false;
-	// ALW - TODO - Add lid
 }
 
-void BarrelNode::undoLid()
+void BarrelNode::undoCover()
 {
+	mIsBarrelCovered = false;
+	mChatBox.updateText(trmb::Localize::getInstance().getString("refundCover"));
 	mUIElemStates.front() = true;
-	// ALW - TODO - Remove lid
 }

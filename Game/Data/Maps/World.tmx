@@ -2278,7 +2278,7 @@
   </object>
   <object name="Barrel 11" type="Barrel" x="978" y="1171" width="28" height="45">
    <properties>
-    <property name="0PosX" value="896"/>
+    <property name="0PosX" value="960"/>
     <property name="0PosY" value="1152"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
@@ -2289,7 +2289,7 @@
   </object>
   <object name="Barrel 12" type="Barrel" x="978" y="1235" width="28" height="45">
    <properties>
-    <property name="0PosX" value="896"/>
+    <property name="0PosX" value="960"/>
     <property name="0PosY" value="1216"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
@@ -2300,7 +2300,7 @@
   </object>
   <object name="Barrel 13" type="Barrel" x="1106" y="1043" width="28" height="45">
    <properties>
-    <property name="0PosX" value="960"/>
+    <property name="0PosX" value="1088"/>
     <property name="0PosY" value="1024"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
@@ -2311,7 +2311,7 @@
   </object>
   <object name="Barrel 14" type="Barrel" x="1298" y="1299" width="28" height="45">
    <properties>
-    <property name="0PosX" value="1152"/>
+    <property name="0PosX" value="1280"/>
     <property name="0PosY" value="1280"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>

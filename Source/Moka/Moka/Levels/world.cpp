@@ -43,6 +43,7 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mObjectGroups("Data/Maps/World.tmx")
 , mHero(nullptr)
 {
+	mTextures.load(Textures::ID::Tiles, "Data/Textures/Tiles.png");
 	configureUIs();
 	buildScene();
 }
@@ -149,7 +150,7 @@ void World::buildScene()
 		if (iter->getType() == "Barrel")
 		{
 			mSceneLayers[Interactive]->attachChild(std::move(std::unique_ptr<BarrelNode>(
-				new BarrelNode(*iter, mWindow, mCamera.getView(), mUIBundle, mSoundPlayer, mChatBox))));
+				new BarrelNode(*iter, mWindow, mCamera.getView(), mUIBundle, mTextures, mSoundPlayer, mChatBox))));
 		}
 		else if (iter->getType() == "Door")
 		{

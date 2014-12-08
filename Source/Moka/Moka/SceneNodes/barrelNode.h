@@ -4,6 +4,10 @@
 #include "PreventionNode.h"
 #include "../HUD/undoUI.h"
 
+#include "Trambo/Resources/resourceHolder.h"
+
+#include <SFML/Graphics/Sprite.hpp>
+
 #include <deque>
 #include <vector>
 
@@ -35,7 +39,8 @@ private:
 
 public:
 								BarrelNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window
-									, const sf::View &view, UIBundle &uiBundle, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox);
+									, const sf::View &view, UIBundle &uiBundle, trmb::TextureHolder &mTextures
+									, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox);
 								BarrelNode(const BarrelNode &) = delete;
 	BarrelNode &				operator=(const BarrelNode &) = delete;
 
@@ -48,16 +53,20 @@ private:
 	virtual void				activate() override final;
 	void						updateUndoUI();
 
-	void						addLid();
-	void						undoLid();
+	void						addCover();
+	void						undoCover();
 
 
 private:
 	const trmb::Event			mBarrelUIActivated;
 	const EventGuid				mLeftClickPress;   // ALW - Matches the GUID in the Controller class.
+	trmb::TextureHolder			&mTextures;
 	trmb::SoundPlayer			&mSoundPlayer;
 	ChatBox						&mChatBox;
 	bool						mBarrelUIActive;
+
+	sf::Sprite					mCoveredBarrel;
+	bool						mIsBarrelCovered;
 
 	// ALW - STL containers are used here, so the interface of the UndoUI class is the same for an instance of UndoUI with 
 	// ALW - one or multiple UI elements.
