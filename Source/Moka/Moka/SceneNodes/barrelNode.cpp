@@ -5,7 +5,6 @@
 #include "../Levels/uiBundle.h"
 #include "../Resources/resourceIdentifiers.h"
 
-#include "Trambo/Events/event.h"
 #include "Trambo/Localize/localize.h"
 #include "Trambo/Sounds/soundPlayer.h"
 
@@ -21,6 +20,8 @@ BarrelNode::BarrelNode(const InteractiveObject &interactiveObject, const sf::Ren
 	, UIBundle &uiBundle, trmb::TextureHolder &textures, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
 : PreventionNode(interactiveObject, window, view, uiBundle)
 , mBarrelUIActivated(0x10a1b42f)
+, mDrawBarrelUI(0xcfdb933d)
+, mDoNotDrawBarrelUI(0x210832f5)
 , mLeftClickPress(0x6955d309)
 , mTextures(textures)
 , mSoundPlayer(soundPlayer)
@@ -92,7 +93,6 @@ void BarrelNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) 
 	if (mSelected)
 	{
 		target.draw(mHightlight, states);
-		target.draw(mUIBundle.getBarrelUI(), states);
 	}
 }
 
@@ -133,6 +133,7 @@ void BarrelNode::activate()
 
 void BarrelNode::updateUndoUI()
 {
+	// ALW - Resizes UI to zero, so click detection does not occur.
 	mUIBundle.getBarrelUI().unhide();
 
 	const float verticalBuffer = 10.0f;
@@ -142,6 +143,12 @@ void BarrelNode::updateUndoUI()
 	mUIBundle.getBarrelUI().setCallbacks(mCallbackPairs);
 
 	mUIBundle.getBarrelUI().setUIElemState(mUIElemStates);
+
+	// ALW - Tells the BarrelUINode whether to draw the UI or not.
+	if (mSelected)
+		InteractiveNode::sendEvent(mDrawBarrelUI);
+	else
+		InteractiveNode::sendEvent(mDoNotDrawBarrelUI);
 }
 
 void BarrelNode::addCover()

@@ -4,6 +4,8 @@
 #include "PreventionNode.h"
 #include "../HUD/undoUI.h"
 
+#include "Trambo/Events/event.h"
+
 #include <deque>
 #include <vector>
 
@@ -56,6 +58,8 @@ private:
 
 private:
 	const trmb::Event			mWindowUIActivated;
+	const trmb::Event			mDrawWindowUI;
+	const trmb::Event			mDoNotDrawWindowUI;
 	const EventGuid				mLeftClickPress;   // ALW - Matches the GUID in the Controller class.
 	trmb::SoundPlayer			&mSoundPlayer;
 	ChatBox						&mChatBox;

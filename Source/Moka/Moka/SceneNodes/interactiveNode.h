@@ -1,7 +1,6 @@
 #ifndef INTERACTIVE_NODE_H
 #define INTERACTIVE_NODE_H
 
-#include "Trambo/Events/event.h"
 #include "Trambo/Events/eventHandler.h"
 #include "Trambo/SceneNodes/sceneNode.h"
 

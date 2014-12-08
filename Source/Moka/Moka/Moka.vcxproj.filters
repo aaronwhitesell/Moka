@@ -84,6 +84,12 @@
     <Filter Include="Header Files\SceneNodes\Interactive\PrevMeth">
       <UniqueIdentifier>{47a72e5b-fdb7-4270-9ec9-c4a808631cfb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\SceneNodes\UI">
+      <UniqueIdentifier>{72bdc313-0e06-4025-b8fe-1ed9bbe6c838}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SceneNodes\UI">
+      <UniqueIdentifier>{45c13e3a-15d7-46f2-b5ab-441c0a2089b8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\application.h">
@@ -176,6 +182,21 @@
     <ClInclude Include="SceneNodes\doorNode.h">
       <Filter>Header Files\SceneNodes\Interactive\PrevMeth</Filter>
     </ClInclude>
+    <ClInclude Include="SceneNodes\barrelUINode.h">
+      <Filter>Header Files\SceneNodes\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneNodes\clinicUINode.h">
+      <Filter>Header Files\SceneNodes\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneNodes\doorUINode.h">
+      <Filter>Header Files\SceneNodes\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneNodes\houseUINode.h">
+      <Filter>Header Files\SceneNodes\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneNodes\windowUINode.h">
+      <Filter>Header Files\SceneNodes\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\application.cpp">
@@ -264,6 +285,21 @@
     </ClCompile>
     <ClCompile Include="SceneNodes\doorNode.cpp">
       <Filter>Source Files\SceneNodes\Interactive\PrevMeth</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNodes\barrelUINode.cpp">
+      <Filter>Source Files\SceneNodes\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNodes\clinicUINode.cpp">
+      <Filter>Source Files\SceneNodes\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNodes\doorUINode.cpp">
+      <Filter>Source Files\SceneNodes\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNodes\houseUINode.cpp">
+      <Filter>Source Files\SceneNodes\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNodes\windowUINode.cpp">
+      <Filter>Source Files\SceneNodes\UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

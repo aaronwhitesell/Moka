@@ -5,7 +5,6 @@
 #include "../Levels/uiBundle.h"
 #include "../Resources/resourceIdentifiers.h"
 
-#include "Trambo/Events/event.h"
 #include "Trambo/Localize/localize.h"
 #include "Trambo/Sounds/soundPlayer.h"
 
@@ -19,6 +18,8 @@ WindowNode::WindowNode(const InteractiveObject &interactiveObject, const sf::Ren
 	, UIBundle &uiBundle, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
 : PreventionNode(interactiveObject, window, view, uiBundle)
 , mWindowUIActivated(0x961e8d0b)
+, mDrawWindowUI(0x30459275)
+, mDoNotDrawWindowUI(0xf83a20bd)
 , mLeftClickPress(0x6955d309)
 , mSoundPlayer(soundPlayer)
 , mChatBox(chatBox)
@@ -85,7 +86,6 @@ void WindowNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) 
 	if (mSelected)
 	{
 		target.draw(mHightlight, states);
-		target.draw(mUIBundle.getWindowUI(), states);
 	}
 }
 
@@ -123,6 +123,7 @@ void WindowNode::activate()
 
 void WindowNode::updateUndoUI()
 {
+	// ALW - Resizes UI to zero, so click detection does not occur.
 	mUIBundle.getWindowUI().unhide();
 
 	const float verticalBuffer = 10.0f;
@@ -132,6 +133,12 @@ void WindowNode::updateUndoUI()
 	mUIBundle.getWindowUI().setCallbacks(mCallbackPairs);
 
 	mUIBundle.getWindowUI().setUIElemState(mUIElemStates);
+
+	// ALW - Tells the WindowUINode whether to draw the UI or not.
+	if (mSelected)
+		InteractiveNode::sendEvent(mDrawWindowUI);
+	else
+		InteractiveNode::sendEvent(mDoNotDrawWindowUI);
 }
 
 void WindowNode::addScreen()

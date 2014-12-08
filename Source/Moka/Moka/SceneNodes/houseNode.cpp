@@ -6,7 +6,6 @@
 #include "../Levels/uiBundle.h"
 #include "../Resources/resourceIdentifiers.h"
 
-#include "Trambo/Events/event.h"
 #include "Trambo/Localize/localize.h"
 #include "Trambo/Sounds/soundPlayer.h"
 
@@ -20,6 +19,8 @@ HouseNode::HouseNode(const InteractiveObject &interactiveObject, const sf::Rende
 	, std::vector<sf::FloatRect> attachedRects, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
 : BuildingNode(interactiveObject, window, view, uiBundle, attachedRects)
 , mHouseUIActivated(0xb5ba9eaf)
+, mDrawHouseUI(0xc7353048)
+, mDoNotDrawHouseUI(0x8e6093bf)
 , mLeftClickPress(0x6955d309)
 , mSoundPlayer(soundPlayer)
 , mChatBox(chatBox)
@@ -89,7 +90,6 @@ void HouseNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) c
 	if (mSelected)
 	{
 		target.draw(mHightlight, states);
-		target.draw(mUIBundle.getHouseUI(), states);
 	}
 }
 
@@ -127,6 +127,7 @@ void HouseNode::activate()
 
 void HouseNode::updateOptionsUI()
 {
+	// ALW - Resizes UI to zero, so click detection does not occur.
 	mUIBundle.getHouseUI().unhide();
 
 	const float verticalBuffer = 10.0f;
@@ -137,6 +138,12 @@ void HouseNode::updateOptionsUI()
 		, std::bind(&HouseNode::decrementPurchaseBedNet, this)
 		, std::bind(&HouseNode::incrementRepair, this)
 		, std::bind(&HouseNode::decrementRepair, this));
+
+	// ALW - Tells the HouseUINode whether to draw the UI or not.
+	if (mSelected)
+		InteractiveNode::sendEvent(mDrawHouseUI);
+	else
+		InteractiveNode::sendEvent(mDoNotDrawHouseUI);
 }
 
 void HouseNode::incrementPurchaseBedNet()

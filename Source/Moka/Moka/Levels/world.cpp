@@ -1,9 +1,14 @@
 #include "world.h"
 #include "../SceneNodes/barrelNode.h"
+#include "../SceneNodes/barrelUINode.h"
 #include "../SceneNodes/doorNode.h"
+#include "../SceneNodes/doorUINode.h"
 #include "../SceneNodes/windowNode.h"
+#include "../SceneNodes/windowUINode.h"
 #include "../SceneNodes/clinicNode.h"
+#include "../SceneNodes/clinicUINode.h"
 #include "../SceneNodes/HouseNode.h"
+#include "../SceneNodes/HouseUINode.h"
 #include "../GameObjects/interactiveObject.h"
 #include "../Resources/resourceIdentifiers.h"
 
@@ -178,6 +183,13 @@ void World::buildScene()
 			//assert(("ALW - Logic Error: The interactive object type is not handled!", false));
 		}
 	}
+
+	// Add UIs
+	mSceneLayers[Foreground]->attachChild(std::move(std::unique_ptr<BarrelUINode>(new BarrelUINode(mBarrelUI))));
+	mSceneLayers[Foreground]->attachChild(std::move(std::unique_ptr<DoorUINode>(new DoorUINode(mDoorUI))));
+	mSceneLayers[Foreground]->attachChild(std::move(std::unique_ptr<WindowUINode>(new WindowUINode(mWindowUI))));
+	mSceneLayers[Foreground]->attachChild(std::move(std::unique_ptr<ClinicUINode>(new ClinicUINode(mClinicUI))));
+	mSceneLayers[Foreground]->attachChild(std::move(std::unique_ptr<HouseUINode>(new HouseUINode(mHouseUI))));
 
 	// Add player's character
 	std::unique_ptr<HeroNode> player(new HeroNode(mWorldBounds, mCamera.getView()));

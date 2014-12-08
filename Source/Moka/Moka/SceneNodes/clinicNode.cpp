@@ -6,7 +6,6 @@
 #include "../Levels/uiBundle.h"
 #include "../Resources/resourceIdentifiers.h"
 
-#include "Trambo/Events/event.h"
 #include "Trambo/Localize/localize.h"
 #include "Trambo/Sounds/soundPlayer.h"
 
@@ -20,6 +19,8 @@ ClinicNode::ClinicNode(const InteractiveObject &interactiveObject, const sf::Ren
 	, UIBundle &mUIBundle, std::vector<sf::FloatRect> attachedRects, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
 : BuildingNode(interactiveObject, window, view, mUIBundle, attachedRects)
 , mClinicUIActivated(0xcb9e3f21)
+, mDrawClinicUI(0x1363b002)
+, mDoNotDrawClinicUI(0x7ccd235d)
 , mLeftClickPress(0x6955d309)
 , mSoundPlayer(soundPlayer)
 , mChatBox(chatBox)
@@ -89,7 +90,6 @@ void ClinicNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) 
 	if (mSelected)
 	{
 		target.draw(mHightlight, states);
-		target.draw(mUIBundle.getClinicUI(), states);
 	}
 }
 
@@ -127,6 +127,7 @@ void ClinicNode::activate()
 
 void ClinicNode::updateOptionsUI()
 {
+	// ALW - Resizes UI to zero, so click detection does not occur.
 	mUIBundle.getClinicUI().unhide();
 
 	const float verticalBuffer = 10.0f;
@@ -137,6 +138,12 @@ void ClinicNode::updateOptionsUI()
 		, std::bind(&ClinicNode::decrementPurchaseRDT, this)
 		, std::bind(&ClinicNode::incrementPurchaseACT, this)
 		, std::bind(&ClinicNode::decrementPurchaseACT, this));
+
+	// ALW - Tells the ClinicUINode whether to draw the UI or not.
+	if (mSelected)
+		InteractiveNode::sendEvent(mDrawClinicUI);
+	else
+		InteractiveNode::sendEvent(mDoNotDrawClinicUI);
 }
 
 void ClinicNode::incrementPurchaseRDT()

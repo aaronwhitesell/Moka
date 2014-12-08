@@ -5,7 +5,6 @@
 #include "../Levels/uiBundle.h"
 #include "../Resources/resourceIdentifiers.h"
 
-#include "Trambo/Events/event.h"
 #include "Trambo/Localize/localize.h"
 #include "Trambo/Sounds/soundPlayer.h"
 
@@ -19,6 +18,8 @@ DoorNode::DoorNode(const InteractiveObject &interactiveObject, const sf::RenderW
 	, UIBundle &uiBundle, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
 : PreventionNode(interactiveObject, window, view, uiBundle)
 , mDoorUIActivated(0xa704ae55)
+, mDrawDoorUI(0x7cf851c6)
+, mDoNotDrawDoorUI(0xc0a53a4d)
 , mLeftClickPress(0x6955d309)
 , mSoundPlayer(soundPlayer)
 , mChatBox(chatBox)
@@ -83,7 +84,6 @@ void DoorNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) co
 	if (mSelected)
 	{
 		target.draw(mHightlight, states);
-		target.draw(mUIBundle.getDoorUI(), states);
 	}
 }
 
@@ -121,7 +121,14 @@ void DoorNode::activate()
 
 void DoorNode::updateUndoUI()
 {
+	// ALW - Resizes UI to zero, so click detection does not occur.
 	mUIBundle.getDoorUI().unhide();
+
+	// ALW - Tells the DoorUINode whether to draw the UI or not.
+	if (mSelected)
+		InteractiveNode::sendEvent(mDrawDoorUI);
+	else
+		InteractiveNode::sendEvent(mDoNotDrawDoorUI);
 
 	const float verticalBuffer = 10.0f;
 	mUIBundle.getDoorUI().setPosition(sf::Vector2f(mInteractiveObject.getX() + mInteractiveObject.getWidth() / 2.0f

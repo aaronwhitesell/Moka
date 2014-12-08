@@ -3,6 +3,8 @@
 
 #include "buildingNode.h"
 
+#include "Trambo/Events/event.h"
+
 #include <SFML/Graphics/Rect.hpp>
 
 #include <vector>
@@ -53,6 +55,8 @@ private:
 
 private:
 	const trmb::Event			mHouseUIActivated;
+	const trmb::Event			mDrawHouseUI;
+	const trmb::Event			mDoNotDrawHouseUI;
 	const EventGuid				mLeftClickPress;   // ALW - Matches the GUID in the Controller class.
 	trmb::SoundPlayer			&mSoundPlayer;
 	ChatBox						&mChatBox;

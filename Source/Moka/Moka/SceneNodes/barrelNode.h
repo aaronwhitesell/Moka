@@ -4,6 +4,7 @@
 #include "PreventionNode.h"
 #include "../HUD/undoUI.h"
 
+#include "Trambo/Events/event.h"
 #include "Trambo/Resources/resourceHolder.h"
 
 #include <SFML/Graphics/Sprite.hpp>
@@ -59,6 +60,8 @@ private:
 
 private:
 	const trmb::Event			mBarrelUIActivated;
+	const trmb::Event			mDrawBarrelUI;
+	const trmb::Event			mDoNotDrawBarrelUI;
 	const EventGuid				mLeftClickPress;   // ALW - Matches the GUID in the Controller class.
 	trmb::TextureHolder			&mTextures;
 	trmb::SoundPlayer			&mSoundPlayer;
