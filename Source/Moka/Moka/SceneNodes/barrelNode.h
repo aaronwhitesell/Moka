@@ -40,7 +40,7 @@ private:
 
 public:
 								BarrelNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window
-									, const sf::View &view, UIBundle &uiBundle, trmb::TextureHolder &mTextures
+									, const sf::View &view, UIBundle &uiBundle, const trmb::TextureHolder &textures
 									, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox);
 								BarrelNode(const BarrelNode &) = delete;
 	BarrelNode &				operator=(const BarrelNode &) = delete;
@@ -63,7 +63,7 @@ private:
 	const trmb::Event			mDrawBarrelUI;
 	const trmb::Event			mDoNotDrawBarrelUI;
 	const EventGuid				mLeftClickPress;   // ALW - Matches the GUID in the Controller class.
-	trmb::TextureHolder			&mTextures;
+	const trmb::TextureHolder	&mTextures;
 	trmb::SoundPlayer			&mSoundPlayer;
 	ChatBox						&mChatBox;
 	bool						mBarrelUIActive;
