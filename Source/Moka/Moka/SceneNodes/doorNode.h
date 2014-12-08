@@ -5,6 +5,9 @@
 #include "../HUD/undoUI.h"
 
 #include "Trambo/Events/event.h"
+#include "Trambo/Resources/resourceHolder.h"
+
+#include <SFML/Graphics/Sprite.hpp>
 
 #include <deque>
 #include <vector>
@@ -37,7 +40,8 @@ private:
 
 public:
 								DoorNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window
-									, const sf::View &view, UIBundle &uiBundle, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox);
+									, const sf::View &view, UIBundle &uiBundle, const trmb::TextureHolder &textures
+									, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox);
 								DoorNode(const DoorNode &) = delete;
 	DoorNode &					operator=(const DoorNode &) = delete;
 
@@ -59,9 +63,13 @@ private:
 	const trmb::Event			mDrawDoorUI;
 	const trmb::Event			mDoNotDrawDoorUI;
 	const EventGuid				mLeftClickPress;   // ALW - Matches the GUID in the Controller class.
+	const trmb::TextureHolder	&mTextures;
 	trmb::SoundPlayer			&mSoundPlayer;
 	ChatBox						&mChatBox;
 	bool						mDoorUIActive;
+
+	sf::Sprite					mClosedDoor;
+	bool						mIsDoorClosed;
 
 	// ALW - STL containers are used here, so the interface of the UndoUI class is the same for an instance of UndoUI with 
 	// ALW - one or multiple UI elements.

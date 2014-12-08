@@ -160,7 +160,7 @@ void World::buildScene()
 		else if (iter->getType() == "Door")
 		{
 			mSceneLayers[Interactive]->attachChild(std::move(std::unique_ptr<DoorNode>(
-				new DoorNode(*iter, mWindow, mCamera.getView(), mUIBundle, mSoundPlayer, mChatBox))));
+				new DoorNode(*iter, mWindow, mCamera.getView(), mUIBundle, mTextures, mSoundPlayer, mChatBox))));
 		}
 		else if (iter->getType() == "Window")
 		{

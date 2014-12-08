@@ -2146,7 +2146,7 @@
   </object>
   <object name="Door 1" type="Door" x="515" y="1220" width="58" height="60">
    <properties>
-    <property name="0PosX" value="448"/>
+    <property name="0PosX" value="512"/>
     <property name="0PosY" value="1216"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>

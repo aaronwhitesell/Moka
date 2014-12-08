@@ -8,23 +8,43 @@
 #include "Trambo/Localize/localize.h"
 #include "Trambo/Sounds/soundPlayer.h"
 
+#include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/View.hpp>
 
+#include <stdexcept>
+
 
 DoorNode::DoorNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view
-	, UIBundle &uiBundle, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
+	, UIBundle &uiBundle, const trmb::TextureHolder &textures, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
 : PreventionNode(interactiveObject, window, view, uiBundle)
 , mDoorUIActivated(0xa704ae55)
 , mDrawDoorUI(0x7cf851c6)
 , mDoNotDrawDoorUI(0xc0a53a4d)
 , mLeftClickPress(0x6955d309)
+, mTextures(textures)
 , mSoundPlayer(soundPlayer)
 , mChatBox(chatBox)
 , mDoorUIActive(false)
+, mClosedDoor(mTextures.get(Textures::ID::Tiles))
+, mIsDoorClosed(false)
 {
+	if ("Tan" == mInteractiveObject.getColor())
+	{
+		mClosedDoor.setTextureRect(sf::IntRect(896, 640, 64, 64));
+	}
+	else if ("Slate" == mInteractiveObject.getColor())
+	{
+		mClosedDoor.setTextureRect(sf::IntRect(1216, 640, 64, 64));
+	}
+	else
+	{
+		throw std::runtime_error("ALW - Runtime Error: Interactive object's color property is not valid.");
+	}
+
+	mClosedDoor.setPosition(sf::Vector2f(mInteractiveObject.getPosX0(), mInteractiveObject.getPosY0()));
 	mCallbackPairs.emplace_back(CallbackPair(std::bind(&DoorNode::closeDoor, this), std::bind(&DoorNode::openDoor, this)));
 	mUIElemStates.emplace_back(true);
 }
@@ -81,6 +101,9 @@ void DoorNode::handleEvent(const trmb::Event &gameEvent)
 
 void DoorNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const
 {
+	if (mIsDoorClosed)
+		target.draw(mClosedDoor, states);
+
 	if (mSelected)
 	{
 		target.draw(mHightlight, states);
@@ -115,7 +138,10 @@ void DoorNode::activate()
 	// ALW - interactive object will be left selected. To remedy this all InteractiveNodes deselect
 	// ALW - themselves when a mCreatePrompt is generated. Immediately afterwards the InteractiveNode
 	// ALW - that generated the mCreatePrompt is reselected.
-	mChatBox.updateText(trmb::Localize::getInstance().getString("inspectDoor"));
+	if (mIsDoorClosed)
+		mChatBox.updateText(trmb::Localize::getInstance().getString("inspectClosedDoor"));
+	else
+		mChatBox.updateText(trmb::Localize::getInstance().getString("inspectDoor"));
 	mSelected = true;
 }
 
@@ -141,12 +167,14 @@ void DoorNode::updateUndoUI()
 
 void DoorNode::closeDoor()
 {
+	mIsDoorClosed = true;
+	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseClose"));
 	mUIElemStates.front() = false;
-	// ALW - TODO - Close door
 }
 
 void DoorNode::openDoor()
 {
+	mIsDoorClosed = false;
+	mChatBox.updateText(trmb::Localize::getInstance().getString("refundClose"));
 	mUIElemStates.front() = true;
-	// ALW - TODO - Open door
 }
