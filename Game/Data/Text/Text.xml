@@ -14,9 +14,9 @@ effectiveness of your plan."/>
 	    <refundCover	  	       attribute="One hour has been refunded to you."/>
 		<inspectDoor               attribute="You see an open door. Would you like to close it?"/>
 	    <inspectClosedDoor         attribute="Would you like to open the door?"/>
-	    <purchaseClose	  	       attribute="Fifteen minutes pass as the residents and you discuss the benefits of closing
+	    <purchaseClosedDoor	  	   attribute="Fifteen minutes pass as the residents and you discuss the benefits of closing
 their door at night to keep mosquitoes out."/>
-	    <refundClose	  	       attribute="Fifteen minutes has been refunded to you."/>
+	    <refundClosedDoor	  	   attribute="Fifteen minutes has been refunded to you."/>
 		<inspectWindow             attribute="You see an open window. Would you like to install a mosquito screen or close it?"/>
 	    <inspectScreenWindow       attribute="Would you like to remove the mosquito screen?"/>
 	    <inspectClosedWindow       attribute="Would you like to open the window?"/>
@@ -41,9 +41,9 @@ effectiveness of your plan."/>
 	    <refundCover	  	       attribute="fr: One hour has been refunded to you."/>
 		<inspectDoor               attribute="fr: You see a door. Would you like to close it?"/>
 	    <inspectClosedDoor         attribute="fr: Would you like to open the door?"/>
-	    <purchaseClose	  	       attribute="fr: For fifteen minutes the residents and you discuss the benefits of closing
+	    <purchaseClosedDoor	  	   attribute="fr: For fifteen minutes the residents and you discuss the benefits of closing
 their door at night to keep mosquitoes out."/>
-	    <refundClose	  	       attribute="fr: Fifteen minutes has been refunded to you."/>
+	    <refundClosedDoor	  	   attribute="fr: Fifteen minutes has been refunded to you."/>
 		<inspectWindow             attribute="fr: You see an open window. Would you like to install a mosquito screen or close it?"/>
 	    <inspectScreenWindow       attribute="fr: Would you like to remove the mosquito screen?"/>
 	    <inspectClosedWindow       attribute="fr: Would you like to open the window?"/>
@@ -68,9 +68,9 @@ effectiveness of your plan."/>
 	    <refundCover	  	       attribute="mg: One hour has been refunded to you."/>
 		<inspectDoor               attribute="mg: You see a door. Would you like to close it?"/>
 	    <inspectClosedDoor         attribute="mg: Would you like to open the door?"/>
-	    <purchaseClose	  	       attribute="mg: For fifteen minutes the residents and you discuss the benefits of closing
+	    <purchaseClosedDoor	  	   attribute="mg: For fifteen minutes the residents and you discuss the benefits of closing
 their door at night to keep mosquitoes out."/>
-	    <refundClose	  	       attribute="mg: Fifteen minutes has been refunded to you."/>
+	    <refundClosedDoor	  	   attribute="mg: Fifteen minutes has been refunded to you."/>
 		<inspectWindow             attribute="mg: You see an open window. Would you like to install a mosquito screen or close it?"/>
 	    <inspectScreenWindow       attribute="mg: Would you like to remove the mosquito screen?"/>
 	    <inspectClosedWindow       attribute="mg: Would you like to open the window?"/>

@@ -168,13 +168,13 @@ void DoorNode::updateUndoUI()
 void DoorNode::closeDoor()
 {
 	mIsDoorClosed = true;
-	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseClose"));
+	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseClosedDoor"));
 	mUIElemStates.front() = false;
 }
 
 void DoorNode::openDoor()
 {
 	mIsDoorClosed = false;
-	mChatBox.updateText(trmb::Localize::getInstance().getString("refundClose"));
+	mChatBox.updateText(trmb::Localize::getInstance().getString("refundClosedDoor"));
 	mUIElemStates.front() = true;
 }
