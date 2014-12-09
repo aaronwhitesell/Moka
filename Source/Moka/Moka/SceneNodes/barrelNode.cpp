@@ -27,10 +27,10 @@ BarrelNode::BarrelNode(const InteractiveObject &interactiveObject, const sf::Ren
 , mSoundPlayer(soundPlayer)
 , mChatBox(chatBox)
 , mBarrelUIActive(false)
-, mCoveredBarrel(mTextures.get(Textures::ID::Tiles), sf::IntRect(576, 640, 64, 64))
+, mBarrelSprite(mTextures.get(Textures::ID::Tiles), sf::IntRect(576, 640, 64, 64))
 , mIsBarrelCovered(false)
 {
-	mCoveredBarrel.setPosition(sf::Vector2f(mInteractiveObject.getPosX0(), mInteractiveObject.getPosY0()));
+	mBarrelSprite.setPosition(sf::Vector2f(mInteractiveObject.getPosX0(), mInteractiveObject.getPosY0()));
 	mCallbackPairs.emplace_back(CallbackPair(std::bind(&BarrelNode::addCover, this), std::bind(&BarrelNode::undoCover, this)));
 	mUIElemStates.emplace_back(true);
 }
@@ -88,7 +88,7 @@ void BarrelNode::handleEvent(const trmb::Event &gameEvent)
 void BarrelNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	if (mIsBarrelCovered)
-		target.draw(mCoveredBarrel, states);
+		target.draw(mBarrelSprite, states);
 
 	if (mSelected)
 	{

@@ -68,7 +68,7 @@ private:
 	ChatBox						&mChatBox;
 	bool						mDoorUIActive;
 
-	sf::Sprite					mClosedDoor;
+	sf::Sprite					mDoorSprite;
 	bool						mIsDoorClosed;
 
 	// ALW - STL containers are used here, so the interface of the UndoUI class is the same for an instance of UndoUI with 

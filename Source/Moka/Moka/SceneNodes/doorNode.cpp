@@ -28,23 +28,23 @@ DoorNode::DoorNode(const InteractiveObject &interactiveObject, const sf::RenderW
 , mSoundPlayer(soundPlayer)
 , mChatBox(chatBox)
 , mDoorUIActive(false)
-, mClosedDoor(mTextures.get(Textures::ID::Tiles))
+, mDoorSprite(mTextures.get(Textures::ID::Tiles))
 , mIsDoorClosed(false)
 {
 	if ("Tan" == mInteractiveObject.getColor())
 	{
-		mClosedDoor.setTextureRect(sf::IntRect(896, 640, 64, 64));
+		mDoorSprite.setTextureRect(sf::IntRect(896, 640, 64, 64));
 	}
 	else if ("Slate" == mInteractiveObject.getColor())
 	{
-		mClosedDoor.setTextureRect(sf::IntRect(1216, 640, 64, 64));
+		mDoorSprite.setTextureRect(sf::IntRect(1216, 640, 64, 64));
 	}
 	else
 	{
 		throw std::runtime_error("ALW - Runtime Error: Interactive object's color property is not valid.");
 	}
 
-	mClosedDoor.setPosition(sf::Vector2f(mInteractiveObject.getPosX0(), mInteractiveObject.getPosY0()));
+	mDoorSprite.setPosition(sf::Vector2f(mInteractiveObject.getPosX0(), mInteractiveObject.getPosY0()));
 	mCallbackPairs.emplace_back(CallbackPair(std::bind(&DoorNode::closeDoor, this), std::bind(&DoorNode::openDoor, this)));
 	mUIElemStates.emplace_back(true);
 }
@@ -102,7 +102,7 @@ void DoorNode::handleEvent(const trmb::Event &gameEvent)
 void DoorNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	if (mIsDoorClosed)
-		target.draw(mClosedDoor, states);
+		target.draw(mDoorSprite, states);
 
 	if (mSelected)
 	{
