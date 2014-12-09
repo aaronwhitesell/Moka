@@ -165,7 +165,7 @@ void World::buildScene()
 		else if (iter->getType() == "Window")
 		{
 			mSceneLayers[Interactive]->attachChild(std::move(std::unique_ptr<WindowNode>(
-				new WindowNode(*iter, mWindow, mCamera.getView(), mUIBundle, mSoundPlayer, mChatBox))));
+				new WindowNode(*iter, mWindow, mCamera.getView(), mUIBundle, mTextures, mSoundPlayer, mChatBox))));
 		}
 		else if (iter->getType() == "Clinic")
 		{

@@ -2113,7 +2113,7 @@
   </object>
   <object name="Window 10" type="Window" x="464" y="1163" width="32" height="44">
    <properties>
-    <property name="0PosX" value="384"/>
+    <property name="0PosX" value="448"/>
     <property name="0PosY" value="1152"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
@@ -2124,7 +2124,7 @@
   </object>
   <object name="Window 11" type="Window" x="528" y="1163" width="32" height="44">
    <properties>
-    <property name="0PosX" value="448"/>
+    <property name="0PosX" value="512"/>
     <property name="0PosY" value="1152"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>

@@ -5,6 +5,9 @@
 #include "../HUD/undoUI.h"
 
 #include "Trambo/Events/event.h"
+#include "Trambo/Resources/resourceHolder.h"
+
+#include <SFML/Graphics/Sprite.hpp>
 
 #include <deque>
 #include <vector>
@@ -37,7 +40,8 @@ private:
 
 public:
 								WindowNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window
-									, const sf::View &view, UIBundle &uiBundle, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox);
+									, const sf::View &view, UIBundle &uiBundle, const trmb::TextureHolder &textures
+									, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox);
 								WindowNode(const WindowNode &) = delete;
 	WindowNode &				operator=(const WindowNode &) = delete;
 
@@ -49,6 +53,8 @@ private:
 	virtual void				updateCurrent(sf::Time dt) override final;
 	virtual void				activate() override final;
 	void						updateUndoUI();
+	void						setWindowScreenSprite();
+	void						setWindowCloseSprite();
 
 	void						addScreen();
 	void						undoScreen();
@@ -61,9 +67,15 @@ private:
 	const trmb::Event			mDrawWindowUI;
 	const trmb::Event			mDoNotDrawWindowUI;
 	const EventGuid				mLeftClickPress;   // ALW - Matches the GUID in the Controller class.
+	const trmb::TextureHolder	&mTextures;
 	trmb::SoundPlayer			&mSoundPlayer;
 	ChatBox						&mChatBox;
 	bool						mWindowUIActive;
+
+
+	sf::Sprite					mWindowSprite;
+	bool						mIsWindowScreen;
+	bool						mIsWindowClosed;
 
 	// ALW - STL containers are used here, so the interface of the UndoUI class is the same for an instance of UndoUI with 
 	// ALW - one or multiple UI elements.

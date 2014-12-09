@@ -2,63 +2,84 @@
 <!-- Text -->
 <text>
     <en>
-	    <prompt          attribute="Press Enter"/>
-		<greeting		 attribute="Congratulations, you have just been elected the new mayor of Pleasantville!
+	    <prompt                    attribute="Press Enter"/>
+		<greeting		           attribute="Congratulations, you have just been elected the new mayor of Pleasantville!
 Pleasantville is a wonderful place, but it has one big problem; malaria. Help the residents of your town develop an
 effective strategy to fight malaria. First, have a look around a neighborhood of Pleasantville and identify different
 ways to combat malaria. Then spend your resources wisely. Afterwards, we will have a board meeting and check the
 effectiveness of your plan."/>
-	    <inspectBarrel        attribute="You see a barrel full of water. Would you like to cover the barrel?"/>
-	    <inspectCoveredBarrel attribute="Would you like to uncover the barrel?"/>
-	    <purchaseCover	  	  attribute="It takes one hour to construct and fasten a cover to the barrel."/>
-	    <refundCover	  	  attribute="One hour has been refunded to you."/>
-		<inspectDoor          attribute="You see a door. Would you like to close it?"/>
-	    <inspectClosedDoor    attribute="Would you like to open the door?"/>
-	    <purchaseClose	  	  attribute="For fifteen minutes the residents and you discuss the benefits of closing
+	    <inspectBarrel             attribute="You see a barrel full of water. Would you like to cover the barrel?"/>
+	    <inspectCoveredBarrel      attribute="Would you like to uncover the barrel?"/>
+	    <purchaseCover	  	       attribute="It takes one hour to construct a cover for the barrel."/>
+	    <refundCover	  	       attribute="One hour has been refunded to you."/>
+		<inspectDoor               attribute="You see an open door. Would you like to close it?"/>
+	    <inspectClosedDoor         attribute="Would you like to open the door?"/>
+	    <purchaseClose	  	       attribute="Fifteen minutes pass as the residents and you discuss the benefits of closing
 their door at night to keep mosquitoes out."/>
-	    <refundClose	  	  attribute="Fifteen minutes has been refunded to you."/>
-		<inspectWindow        attribute="You see a window. Would you like to install a mosquito screen or close it?"/>
-	    <inspectClinic        attribute="You see a clinic."/>
-	    <inspectHouse         attribute="You see a house."/>
+	    <refundClose	  	       attribute="Fifteen minutes has been refunded to you."/>
+		<inspectWindow             attribute="You see an open window. Would you like to install a mosquito screen or close it?"/>
+	    <inspectScreenWindow       attribute="Would you like to remove the mosquito screen?"/>
+	    <inspectClosedWindow       attribute="Would you like to open the window?"/>
+	    <inspectScreenClosedWindow attribute="Would you like to remove the mosquito screen or open the window?"/>
+		<purchaseScreenWindow      attribute="It takes you one hour to construct a mosquito screen."/>
+	    <purchaseClosedWindow      attribute="The window shutters are rusted in place. It takes you thirty minutes to oil and adjust them."/>
+	    <refundScreenWindow	       attribute="One hour has been refunded to you."/>
+	    <refundClosedWindow	       attribute="Thirty minutes have been refunded to you."/>
+	    <inspectClinic             attribute="You see a clinic."/>
+	    <inspectHouse              attribute="You see a house."/>
 	</en>
     <fr>
-	    <prompt          attribute="fr: Press Enter"/>
-		<greeting        attribute="fr: Congratulations, you have just been elected the new mayor of Pleasantville!
+	    <prompt                    attribute="fr: Press Enter"/>
+		<greeting                  attribute="fr: Congratulations, you have just been elected the new mayor of Pleasantville!
 Pleasantville is a wonderful place, but it has one big problem; malaria. Help the residents of your town develop an
 effective strategy to fight malaria. First, have a look around a neighborhood of Pleasantville and identify different
 ways to combat malaria. Then spend your resources wisely. Afterwards, we will have a board meeting and check the
 effectiveness of your plan."/>
-	    <inspectBarrel        attribute="fr: You see a barrel full of water. Would you like to cover the barrel?"/>
-	    <inspectCoveredBarrel attribute="fr: Would you like to uncover the barrel?"/>
-	    <purchaseCover	  	  attribute="fr: It takes one hour to construct and fasten a cover to the barrel."/>
-	    <refundCover	  	  attribute="fr: One hour has been refunded to you."/>
-		<inspectDoor          attribute="fr: You see a door. Would you like to close it?"/>
-	    <inspectClosedDoor    attribute="fr: Would you like to open the door?"/>
-	    <purchaseClose	  	  attribute="fr: For fifteen minutes the residents and you discuss the benefits of closing
+	    <inspectBarrel             attribute="fr: You see a barrel full of water. Would you like to cover the barrel?"/>
+	    <inspectCoveredBarrel      attribute="fr: Would you like to uncover the barrel?"/>
+	    <purchaseCover	  	       attribute="fr: It takes one hour to construct and fasten a cover to the barrel."/>
+	    <refundCover	  	       attribute="fr: One hour has been refunded to you."/>
+		<inspectDoor               attribute="fr: You see a door. Would you like to close it?"/>
+	    <inspectClosedDoor         attribute="fr: Would you like to open the door?"/>
+	    <purchaseClose	  	       attribute="fr: For fifteen minutes the residents and you discuss the benefits of closing
 their door at night to keep mosquitoes out."/>
-	    <refundClose	  	  attribute="fr: Fifteen minutes has been refunded to you."/>
-		<inspectWindow        attribute="fr: You see a window. Would you like to install a mosquito screen or close it?"/>
-	    <inspectClinic        attribute="fr: You see a clinic."/>
-	    <inspectHouse         attribute="fr: You see a house."/>
+	    <refundClose	  	       attribute="fr: Fifteen minutes has been refunded to you."/>
+		<inspectWindow             attribute="fr: You see an open window. Would you like to install a mosquito screen or close it?"/>
+	    <inspectScreenWindow       attribute="fr: Would you like to remove the mosquito screen?"/>
+	    <inspectClosedWindow       attribute="fr: Would you like to open the window?"/>
+	    <inspectScreenClosedWindow attribute="fr: Would you like to remove the mosquito screen or open the window?"/>
+		<purchaseScreenWindow      attribute="fr: It takes you one hour to construct a mosquito screen."/>
+	    <purchaseClosedWindow      attribute="fr: The window shutters are rusted in place. It takes you thirty minutes to oil and adjust them."/>
+	    <refundScreenWindow	       attribute="fr: One hour has been refunded to you."/>
+	    <refundClosedWindow	       attribute="fr: Thirty minutes have been refunded to you."/>
+	    <inspectClinic             attribute="fr: You see a clinic."/>
+	    <inspectHouse              attribute="fr: You see a house."/>
 	</fr>
     <mg>
-	    <prompt          attribute="mg: Press Enter"/>
-		<greeting        attribute="mg: Congratulations, you have just been elected the new mayor of Pleasantville!
+	    <prompt                    attribute="mg: Press Enter"/>
+		<greeting                  attribute="mg: Congratulations, you have just been elected the new mayor of Pleasantville!
 Pleasantville is a wonderful place, but it has one big problem; malaria.  Help the residents of your town develop an
 effective strategy to fight malaria.  First, have a look around a neighborhood of Pleasantville and identify different
 ways to combat malaria.  Then spend your resources wisely.  Afterwards, we will have a board meeting and check the
 effectiveness of your plan."/>
-	    <inspectBarrel        attribute="mg: You see a barrel full of water. Would you like to cover the barrel?"/>
-	    <inspectCoveredBarrel attribute="mg: Would you like to uncover the barrel?"/>
-	    <purchaseCover	  	  attribute="mg: It takes one hour to construct and fasten a cover to the barrel."/>
-	    <refundCover	  	  attribute="mg: One hour has been refunded to you."/>
-		<inspectDoor          attribute="mg: You see a door. Would you like to close it?"/>
-	    <inspectClosedDoor    attribute="mg: Would you like to open the door?"/>
-	    <purchaseClose	  	  attribute="mg: For fifteen minutes the residents and you discuss the benefits of closing
+	    <inspectBarrel             attribute="mg: You see a barrel full of water. Would you like to cover the barrel?"/>
+	    <inspectCoveredBarrel      attribute="mg: Would you like to uncover the barrel?"/>
+	    <purchaseCover	  	       attribute="mg: It takes one hour to construct and fasten a cover to the barrel."/>
+	    <refundCover	  	       attribute="mg: One hour has been refunded to you."/>
+		<inspectDoor               attribute="mg: You see a door. Would you like to close it?"/>
+	    <inspectClosedDoor         attribute="mg: Would you like to open the door?"/>
+	    <purchaseClose	  	       attribute="mg: For fifteen minutes the residents and you discuss the benefits of closing
 their door at night to keep mosquitoes out."/>
-	    <refundClose	  	  attribute="mg: Fifteen minutes has been refunded to you."/>
-		<inspectWindow        attribute="mg: You see a window. Would you like to install a mosquito screen or close it?"/>
-	    <inspectClinic        attribute="mg: You see a clinic."/>
-	    <inspectHouse         attribute="mg: You see a house."/>
+	    <refundClose	  	       attribute="mg: Fifteen minutes has been refunded to you."/>
+		<inspectWindow             attribute="mg: You see an open window. Would you like to install a mosquito screen or close it?"/>
+	    <inspectScreenWindow       attribute="mg: Would you like to remove the mosquito screen?"/>
+	    <inspectClosedWindow       attribute="mg: Would you like to open the window?"/>
+	    <inspectScreenClosedWindow attribute="mg: Would you like to remove the mosquito screen or open the window?"/>
+		<purchaseScreenWindow      attribute="mg: It takes you one hour to construct a mosquito screen."/>
+	    <purchaseClosedWindow      attribute="mg: The window shutters are rusted in place. It takes you thirty minutes to oil and adjust them."/>
+	    <refundScreenWindow	       attribute="mg: One hour has been refunded to you."/>
+	    <refundClosedWindow	       attribute="mg: Thirty minutes have been refunded to you."/>
+	    <inspectClinic             attribute="mg: You see a clinic."/>
+	    <inspectHouse              attribute="mg: You see a house."/>
 	</mg>
 </text>
