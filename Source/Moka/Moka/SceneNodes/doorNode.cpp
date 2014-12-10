@@ -14,8 +14,6 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/View.hpp>
 
-#include <stdexcept>
-
 
 DoorNode::DoorNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view
 	, UIBundle &uiBundle, const trmb::TextureHolder &textures, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
@@ -23,28 +21,15 @@ DoorNode::DoorNode(const InteractiveObject &interactiveObject, const sf::RenderW
 , mDoorUIActivated(0xa704ae55)
 , mDrawDoorUI(0x7cf851c6)
 , mDoNotDrawDoorUI(0xc0a53a4d)
+, mDrawDoorSprite(0x5ea6cda9, interactiveObject.getName())
+, mDoNotDrawDoorSprite(0x918c6b78, interactiveObject.getName())
 , mLeftClickPress(0x6955d309)
 , mTextures(textures)
 , mSoundPlayer(soundPlayer)
 , mChatBox(chatBox)
 , mDoorUIActive(false)
-, mDoorSprite(mTextures.get(Textures::ID::Tiles))
 , mIsDoorClosed(false)
 {
-	if ("Tan" == mInteractiveObject.getColor())
-	{
-		mDoorSprite.setTextureRect(sf::IntRect(896, 640, 64, 64));
-	}
-	else if ("Slate" == mInteractiveObject.getColor())
-	{
-		mDoorSprite.setTextureRect(sf::IntRect(1216, 640, 64, 64));
-	}
-	else
-	{
-		throw std::runtime_error("ALW - Runtime Error: Interactive object's color property is not valid.");
-	}
-
-	mDoorSprite.setPosition(sf::Vector2f(mInteractiveObject.getPosX0(), mInteractiveObject.getPosY0()));
 	mCallbackPairs.emplace_back(CallbackPair(std::bind(&DoorNode::closeDoor, this), std::bind(&DoorNode::openDoor, this)));
 	mUIElemStates.emplace_back(true);
 }
@@ -101,9 +86,6 @@ void DoorNode::handleEvent(const trmb::Event &gameEvent)
 
 void DoorNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const
 {
-	if (mIsDoorClosed)
-		target.draw(mDoorSprite, states);
-
 	if (mSelected)
 	{
 		target.draw(mHightlight, states);
@@ -168,6 +150,7 @@ void DoorNode::updateUndoUI()
 void DoorNode::closeDoor()
 {
 	mIsDoorClosed = true;
+	InteractiveNode::sendEvent(mDrawDoorSprite);
 	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseClosedDoor"));
 	mUIElemStates.front() = false;
 }
@@ -175,6 +158,7 @@ void DoorNode::closeDoor()
 void DoorNode::openDoor()
 {
 	mIsDoorClosed = false;
+	InteractiveNode::sendEvent(mDoNotDrawDoorSprite);
 	mChatBox.updateText(trmb::Localize::getInstance().getString("refundClosedDoor"));
 	mUIElemStates.front() = true;
 }

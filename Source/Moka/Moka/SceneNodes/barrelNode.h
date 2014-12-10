@@ -5,6 +5,7 @@
 #include "../HUD/undoUI.h"
 
 #include "Trambo/Events/event.h"
+#include "Trambo/Events/eventStr.h"
 #include "Trambo/Resources/resourceHolder.h"
 
 #include <SFML/Graphics/Sprite.hpp>
@@ -24,7 +25,6 @@ namespace sf
 
 namespace trmb
 {
-	class Event;
 	class SoundPlayer;
 }
 
@@ -62,13 +62,13 @@ private:
 	const trmb::Event			mBarrelUIActivated;
 	const trmb::Event			mDrawBarrelUI;
 	const trmb::Event			mDoNotDrawBarrelUI;
+	const trmb::EventStr		mDrawBarrelSprite;
+	const trmb::EventStr		mDoNotDrawBarrelSprite;
 	const EventGuid				mLeftClickPress;   // ALW - Matches the GUID in the Controller class.
 	const trmb::TextureHolder	&mTextures;
 	trmb::SoundPlayer			&mSoundPlayer;
 	ChatBox						&mChatBox;
 	bool						mBarrelUIActive;
-
-	sf::Sprite					mBarrelSprite;
 	bool						mIsBarrelCovered;
 
 	// ALW - STL containers are used here, so the interface of the UndoUI class is the same for an instance of UndoUI with 

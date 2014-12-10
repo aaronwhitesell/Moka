@@ -90,6 +90,12 @@
     <Filter Include="Source Files\SceneNodes\UI">
       <UniqueIdentifier>{45c13e3a-15d7-46f2-b5ab-441c0a2089b8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\SceneNodes\Sprite">
+      <UniqueIdentifier>{d4956e01-3dc9-420e-b126-4c8927518f9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SceneNodes\Sprite">
+      <UniqueIdentifier>{2893e3a9-8cf2-40ed-a9ee-13f575cffd61}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\application.h">
@@ -197,6 +203,15 @@
     <ClInclude Include="SceneNodes\windowUINode.h">
       <Filter>Header Files\SceneNodes\UI</Filter>
     </ClInclude>
+    <ClInclude Include="SceneNodes\barrelSpriteNode.h">
+      <Filter>Header Files\SceneNodes\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneNodes\doorSpriteNode.h">
+      <Filter>Header Files\SceneNodes\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneNodes\windowSpriteNode.h">
+      <Filter>Header Files\SceneNodes\Sprite</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\application.cpp">
@@ -300,6 +315,15 @@
     </ClCompile>
     <ClCompile Include="SceneNodes\windowUINode.cpp">
       <Filter>Source Files\SceneNodes\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNodes\barrelSpriteNode.cpp">
+      <Filter>Source Files\SceneNodes\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNodes\doorSpriteNode.cpp">
+      <Filter>Source Files\SceneNodes\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNodes\windowSpriteNode.cpp">
+      <Filter>Source Files\SceneNodes\Sprite</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

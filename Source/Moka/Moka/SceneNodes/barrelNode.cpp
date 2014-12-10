@@ -22,15 +22,15 @@ BarrelNode::BarrelNode(const InteractiveObject &interactiveObject, const sf::Ren
 , mBarrelUIActivated(0x10a1b42f)
 , mDrawBarrelUI(0xcfdb933d)
 , mDoNotDrawBarrelUI(0x210832f5)
+, mDrawBarrelSprite(0xe22f85d5, interactiveObject.getName())
+, mDoNotDrawBarrelSprite(0xcd1fd24, interactiveObject.getName())
 , mLeftClickPress(0x6955d309)
 , mTextures(textures)
 , mSoundPlayer(soundPlayer)
 , mChatBox(chatBox)
 , mBarrelUIActive(false)
-, mBarrelSprite(mTextures.get(Textures::ID::Tiles), sf::IntRect(576, 640, 64, 64))
 , mIsBarrelCovered(false)
 {
-	mBarrelSprite.setPosition(sf::Vector2f(mInteractiveObject.getPosX0(), mInteractiveObject.getPosY0()));
 	mCallbackPairs.emplace_back(CallbackPair(std::bind(&BarrelNode::addCover, this), std::bind(&BarrelNode::undoCover, this)));
 	mUIElemStates.emplace_back(true);
 }
@@ -87,9 +87,6 @@ void BarrelNode::handleEvent(const trmb::Event &gameEvent)
 
 void BarrelNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const
 {
-	if (mIsBarrelCovered)
-		target.draw(mBarrelSprite, states);
-
 	if (mSelected)
 	{
 		target.draw(mHightlight, states);
@@ -154,6 +151,7 @@ void BarrelNode::updateUndoUI()
 void BarrelNode::addCover()
 {
 	mIsBarrelCovered = true;
+	InteractiveNode::sendEvent(mDrawBarrelSprite);
 	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseCover"));
 	mUIElemStates.front() = false;
 }
@@ -161,6 +159,7 @@ void BarrelNode::addCover()
 void BarrelNode::undoCover()
 {
 	mIsBarrelCovered = false;
+	InteractiveNode::sendEvent(mDoNotDrawBarrelSprite);
 	mChatBox.updateText(trmb::Localize::getInstance().getString("refundCover"));
 	mUIElemStates.front() = true;
 }

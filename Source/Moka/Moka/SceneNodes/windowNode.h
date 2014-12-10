@@ -5,6 +5,7 @@
 #include "../HUD/undoUI.h"
 
 #include "Trambo/Events/event.h"
+#include "Trambo/Events/eventStr.h"
 #include "Trambo/Resources/resourceHolder.h"
 
 #include <SFML/Graphics/Sprite.hpp>
@@ -24,7 +25,6 @@ namespace sf
 
 namespace trmb
 {
-	class Event;
 	class SoundPlayer;
 }
 
@@ -53,8 +53,6 @@ private:
 	virtual void				updateCurrent(sf::Time dt) override final;
 	virtual void				activate() override final;
 	void						updateUndoUI();
-	void						setWindowScreenSprite();
-	void						setWindowCloseSprite();
 
 	void						addScreen();
 	void						undoScreen();
@@ -66,14 +64,15 @@ private:
 	const trmb::Event			mWindowUIActivated;
 	const trmb::Event			mDrawWindowUI;
 	const trmb::Event			mDoNotDrawWindowUI;
+	const trmb::EventStr		mDrawWindowScreenSprite;
+	const trmb::EventStr		mDoNotDrawWindowScreenSprite;
+	const trmb::EventStr		mDrawWindowClosedSprite;
+	const trmb::EventStr		mDoNotDrawWindowClosedSprite;
 	const EventGuid				mLeftClickPress;   // ALW - Matches the GUID in the Controller class.
 	const trmb::TextureHolder	&mTextures;
 	trmb::SoundPlayer			&mSoundPlayer;
 	ChatBox						&mChatBox;
 	bool						mWindowUIActive;
-
-
-	sf::Sprite					mWindowSprite;
 	bool						mIsWindowScreen;
 	bool						mIsWindowClosed;
 

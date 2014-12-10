@@ -23,16 +23,18 @@ WindowNode::WindowNode(const InteractiveObject &interactiveObject, const sf::Ren
 , mWindowUIActivated(0x961e8d0b)
 , mDrawWindowUI(0x30459275)
 , mDoNotDrawWindowUI(0xf83a20bd)
+, mDrawWindowScreenSprite(0x41a9ff51, interactiveObject.getName())
+, mDoNotDrawWindowScreenSprite(0xbfe9d3e6, interactiveObject.getName())
+, mDrawWindowClosedSprite(0xe0f87a29, interactiveObject.getName())
+, mDoNotDrawWindowClosedSprite(0xdeecc064, interactiveObject.getName())
 , mLeftClickPress(0x6955d309)
 , mTextures(textures)
 , mSoundPlayer(soundPlayer)
 , mChatBox(chatBox)
 , mWindowUIActive(false)
-, mWindowSprite(mTextures.get(Textures::ID::Tiles))
 , mIsWindowScreen(false)
 , mIsWindowClosed(false)
 {
-	mWindowSprite.setPosition(sf::Vector2f(mInteractiveObject.getPosX0(), mInteractiveObject.getPosY0()));
 	mCallbackPairs.emplace_back(CallbackPair(std::bind(&WindowNode::addScreen, this), std::bind(&WindowNode::undoScreen, this)));
 	mCallbackPairs.emplace_back(CallbackPair(std::bind(&WindowNode::closeWindow, this), std::bind(&WindowNode::openWindow, this)));
 	mUIElemStates.emplace_back(true);
@@ -91,9 +93,6 @@ void WindowNode::handleEvent(const trmb::Event &gameEvent)
 
 void WindowNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const
 {
-	if (mIsWindowScreen || mIsWindowClosed)
-		target.draw(mWindowSprite, states);
-
 	if (mSelected)
 	{
 		target.draw(mHightlight, states);
@@ -168,92 +167,11 @@ void WindowNode::updateUndoUI()
 		InteractiveNode::sendEvent(mDoNotDrawWindowUI);
 }
 
-void WindowNode::setWindowScreenSprite()
-{
-	if ("Tan" == mInteractiveObject.getColor())
-	{
-		if ("Simple" == mInteractiveObject.getStyle())
-		{
-			mWindowSprite.setTextureRect(sf::IntRect(832, 640, 64, 64));
-		}
-		else if ("Wooden" == mInteractiveObject.getStyle())
-		{
-			mWindowSprite.setTextureRect(sf::IntRect(768, 640, 64, 64));
-		}
-		else
-		{
-			throw std::runtime_error("ALW - Runtime Error: Interactive object's style property is not valid.");
-		}
-	}
-	else if ("Slate" == mInteractiveObject.getColor())
-	{
-		if ("Simple" == mInteractiveObject.getStyle())
-		{
-			mWindowSprite.setTextureRect(sf::IntRect(1152, 640, 64, 64));
-		}
-		else if ("Wooden" == mInteractiveObject.getStyle())
-		{
-			mWindowSprite.setTextureRect(sf::IntRect(1088, 640, 64, 64));
-		}
-		else
-		{
-			throw std::runtime_error("ALW - Runtime Error: Interactive object's style property is not valid.");
-		}
-	}
-	else
-	{
-		throw std::runtime_error("ALW - Runtime Error: Interactive object's color property is not valid.");
-	}
-}
-
-void WindowNode::setWindowCloseSprite()
-{
-	if ("Tan" == mInteractiveObject.getColor())
-	{
-		if ("Simple" == mInteractiveObject.getStyle())
-		{
-			mWindowSprite.setTextureRect(sf::IntRect(832, 704, 64, 64));
-		}
-		else if ("Wooden" == mInteractiveObject.getStyle())
-		{
-			mWindowSprite.setTextureRect(sf::IntRect(768, 704, 64, 64));
-		}
-		else
-		{
-			throw std::runtime_error("ALW - Runtime Error: Interactive object's style property is not valid.");
-		}
-	}
-	else if ("Slate" == mInteractiveObject.getColor())
-	{
-		if ("Simple" == mInteractiveObject.getStyle())
-		{
-			mWindowSprite.setTextureRect(sf::IntRect(1152, 704, 64, 64));
-		}
-		else if ("Wooden" == mInteractiveObject.getStyle())
-		{
-			mWindowSprite.setTextureRect(sf::IntRect(1088, 704, 64, 64));
-		}
-		else
-		{
-			throw std::runtime_error("ALW - Runtime Error: Interactive object's style property is not valid.");
-		}
-	}
-	else
-	{
-		throw std::runtime_error("ALW - Runtime Error: Interactive object's color property is not valid.");
-	}
-}
-
 void WindowNode::addScreen()
 {
 	mIsWindowScreen = true;
+	InteractiveNode::sendEvent(mDrawWindowScreenSprite);
 	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseScreenWindow"));
-
-	if (!mIsWindowClosed)
-	{
-		// ALW - If the window is not closed the screen is visible.
-		setWindowScreenSprite();
-	}
 
 	const std::size_t screenElement = 0;
 	mUIElemStates.at(screenElement) = false;
@@ -262,6 +180,7 @@ void WindowNode::addScreen()
 void WindowNode::undoScreen()
 {
 	mIsWindowScreen = false;
+	InteractiveNode::sendEvent(mDoNotDrawWindowScreenSprite);
 	mChatBox.updateText(trmb::Localize::getInstance().getString("refundScreenWindow"));
 
 	const std::size_t screenElement = 0;
@@ -271,8 +190,8 @@ void WindowNode::undoScreen()
 void WindowNode::closeWindow()
 {
 	mIsWindowClosed = true;
+	InteractiveNode::sendEvent(mDrawWindowClosedSprite);
 	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseClosedWindow"));
-	setWindowCloseSprite();
 
 	const std::size_t windowElement = 1;
 	mUIElemStates.at(windowElement) = false;
@@ -281,13 +200,8 @@ void WindowNode::closeWindow()
 void WindowNode::openWindow()
 {
 	mIsWindowClosed = false;
+	InteractiveNode::sendEvent(mDoNotDrawWindowClosedSprite);
 	mChatBox.updateText(trmb::Localize::getInstance().getString("refundClosedWindow"));
-
-	if (mIsWindowScreen)
-	{
-		// ALW - If the window is closed the screen is visible.
-		setWindowScreenSprite();
-	}
 
 	const std::size_t windowElement = 1;
 	mUIElemStates.at(windowElement) = true;

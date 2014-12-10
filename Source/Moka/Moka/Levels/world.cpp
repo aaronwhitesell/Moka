@@ -1,9 +1,12 @@
 #include "world.h"
 #include "../SceneNodes/barrelNode.h"
+#include "../SceneNodes/barrelSpriteNode.h"
 #include "../SceneNodes/barrelUINode.h"
 #include "../SceneNodes/doorNode.h"
+#include "../SceneNodes/doorSpriteNode.h"
 #include "../SceneNodes/doorUINode.h"
 #include "../SceneNodes/windowNode.h"
+#include "../SceneNodes/WindowSpriteNode.h"
 #include "../SceneNodes/windowUINode.h"
 #include "../SceneNodes/clinicNode.h"
 #include "../SceneNodes/clinicUINode.h"
@@ -140,13 +143,13 @@ void World::buildScene()
 
 	// Add tiled houses
 	std::unique_ptr<trmb::MapLayerNode> layer1(new trmb::MapLayerNode(mMap, 1));
-	mSceneLayers[Middleground]->attachChild(std::move(layer1));
+	mSceneLayers[Background]->attachChild(std::move(layer1));
 
 	// Add tiled roofs
 	std::unique_ptr<trmb::MapLayerNode> layer2(new trmb::MapLayerNode(mMap, 2));
-	mSceneLayers[Middleground]->attachChild(std::move(layer2));
+	mSceneLayers[Background]->attachChild(std::move(layer2));
 
-	// ALW - Add interactive objects
+	// ALW - Add sprite and logic nodes
 	std::vector<InteractiveObject>::const_iterator iter    = begin(mObjectGroups.getInteractiveGroup().getInteractiveObjects());
 	std::vector<InteractiveObject>::const_iterator iterEnd = end(mObjectGroups.getInteractiveGroup().getInteractiveObjects());
 
@@ -154,27 +157,36 @@ void World::buildScene()
 	{
 		if (iter->getType() == "Barrel")
 		{
-			mSceneLayers[Interactive]->attachChild(std::move(std::unique_ptr<BarrelNode>(
+			mSceneLayers[Sprite]->attachChild(std::move(std::unique_ptr<BarrelSpriteNode>(
+				new BarrelSpriteNode(*iter, mTextures.get(Textures::ID::Tiles)))));
+
+			mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<BarrelNode>(
 				new BarrelNode(*iter, mWindow, mCamera.getView(), mUIBundle, mTextures, mSoundPlayer, mChatBox))));
 		}
 		else if (iter->getType() == "Door")
 		{
-			mSceneLayers[Interactive]->attachChild(std::move(std::unique_ptr<DoorNode>(
+			mSceneLayers[Sprite]->attachChild(std::move(std::unique_ptr<DoorSpriteNode>(
+				new DoorSpriteNode(*iter, mTextures.get(Textures::ID::Tiles)))));
+
+			mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<DoorNode>(
 				new DoorNode(*iter, mWindow, mCamera.getView(), mUIBundle, mTextures, mSoundPlayer, mChatBox))));
 		}
 		else if (iter->getType() == "Window")
 		{
-			mSceneLayers[Interactive]->attachChild(std::move(std::unique_ptr<WindowNode>(
+			mSceneLayers[Sprite]->attachChild(std::move(std::unique_ptr<WindowSpriteNode>(
+				new WindowSpriteNode(*iter, mTextures.get(Textures::ID::Tiles)))));
+
+			mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<WindowNode>(
 				new WindowNode(*iter, mWindow, mCamera.getView(), mUIBundle, mTextures, mSoundPlayer, mChatBox))));
 		}
 		else if (iter->getType() == "Clinic")
 		{
-			mSceneLayers[Interactive]->attachChild(std::move(std::unique_ptr<ClinicNode>(
+			mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<ClinicNode>(
 				new ClinicNode(*iter, mWindow, mCamera.getView(), mUIBundle, buildAttachedRects(*iter), mSoundPlayer, mChatBox))));
 		}
 		else if (iter->getType() == "House")
 		{
-			mSceneLayers[Interactive]->attachChild(std::move(std::unique_ptr<HouseNode>(
+			mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<HouseNode>(
 				new HouseNode(*iter, mWindow, mCamera.getView(), mUIBundle, buildAttachedRects(*iter), mSoundPlayer, mChatBox))));
 		}
 		else
@@ -185,17 +197,17 @@ void World::buildScene()
 	}
 
 	// Add UIs
-	mSceneLayers[Foreground]->attachChild(std::move(std::unique_ptr<BarrelUINode>(new BarrelUINode(mBarrelUI))));
-	mSceneLayers[Foreground]->attachChild(std::move(std::unique_ptr<DoorUINode>(new DoorUINode(mDoorUI))));
-	mSceneLayers[Foreground]->attachChild(std::move(std::unique_ptr<WindowUINode>(new WindowUINode(mWindowUI))));
-	mSceneLayers[Foreground]->attachChild(std::move(std::unique_ptr<ClinicUINode>(new ClinicUINode(mClinicUI))));
-	mSceneLayers[Foreground]->attachChild(std::move(std::unique_ptr<HouseUINode>(new HouseUINode(mHouseUI))));
+	mSceneLayers[UI]->attachChild(std::move(std::unique_ptr<BarrelUINode>(new BarrelUINode(mBarrelUI))));
+	mSceneLayers[UI]->attachChild(std::move(std::unique_ptr<DoorUINode>(new DoorUINode(mDoorUI))));
+	mSceneLayers[UI]->attachChild(std::move(std::unique_ptr<WindowUINode>(new WindowUINode(mWindowUI))));
+	mSceneLayers[UI]->attachChild(std::move(std::unique_ptr<ClinicUINode>(new ClinicUINode(mClinicUI))));
+	mSceneLayers[UI]->attachChild(std::move(std::unique_ptr<HouseUINode>(new HouseUINode(mHouseUI))));
 
 	// Add player's character
 	std::unique_ptr<HeroNode> player(new HeroNode(mWorldBounds, mCamera.getView()));
 	mHero = player.get();
 	mHero->setPosition(mSpawnPosition);
-	mSceneLayers[Foreground]->attachChild(std::move(player));
+	mSceneLayers[Camera]->attachChild(std::move(player));
 }
 
 std::vector<sf::FloatRect> World::buildAttachedRects(const InteractiveObject &interactiveObj)

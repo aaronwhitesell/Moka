@@ -63,9 +63,10 @@ private:
 	enum Layer
 	{
 		Background,
-		Middleground,
-		Interactive,
-		Foreground,
+		Sprite,
+		Selection,
+		UI,
+		Camera,
 		LayerCount
 	};
 
