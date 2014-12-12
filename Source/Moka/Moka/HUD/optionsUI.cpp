@@ -18,6 +18,10 @@ OptionsUI::OptionsUI(Fonts::ID font, trmb::FontHolder &fonts, SoundEffects::ID s
 , mHorizontalBuffer(1.0f)
 , mVerticalBuffer(1.0f)
 , mDrawIncDecUI(false)
+, mDisableIncrementButtonOfLHSTab(false)
+, mDisableDecrementButtonOfLHSTab(true)
+, mDisableIncrementButtonOfRHSTab(false)
+, mDisableDecrementButtonOfRHSTab(true)
 , mDisable(false)
 , mRestoreBackgroundSize()
 {
@@ -43,9 +47,9 @@ OptionsUI::OptionsUI(Fonts::ID font, trmb::FontHolder &fonts, SoundEffects::ID s
 
 	trmb::centerOrigin(mIncDecUI, true, false);
 	mIncDecUI.setVisualScheme(sf::Color(95u, 158u, 160u, 255u), sf::Color(255u, 255u, 255u, 255u), sf::Color(0u, 0u, 0u, 255u)
-		, sf::Color(162u, 181u, 205u, 255u), sf::Color(255u, 255u, 255u, 255u), sf::Color(0u, 0u, 0u, 255u)       // Hover
-		, sf::Color(88u, 146u, 148u, 255u), sf::Color(255u, 255u, 255u, 255u), sf::Color(0u, 0u, 0u, 255u)        // Depress
-		, sf::Color(160u, 160u, 160u, 255u), sf::Color(224u, 224u, 224u, 255u), sf::Color(128u, 128u, 128u, 255u) //Disablle
+		, sf::Color(162u, 181u, 205u, 255u), sf::Color(255u, 255u, 255u, 255u), sf::Color(0u, 0u, 0u, 255u) // Hover
+		, sf::Color(88u, 146u, 148u, 255u), sf::Color(255u, 255u, 255u, 255u), sf::Color(0u, 0u, 0u, 255u)  // Depress
+		, sf::Color(0u, 0u, 0u, 0u), sf::Color(224u, 224u, 224u, 75u), sf::Color(0u, 0u, 0u, 255u)	        // Disable
 		, mOutLineThickness);
 
 	buildUI();
@@ -89,6 +93,30 @@ void OptionsUI::setCharacterSize(unsigned int size)
 {
 	mLHSTab->setCharacterSize(size);
 	mRHSTab->setCharacterSize(size);
+}
+
+void OptionsUI::setDisableIncrementButtonOfLHSTab(bool flag)
+{
+	mDisableIncrementButtonOfLHSTab = flag;
+	mIncDecUI.setDisableIncrementButton(flag);
+}
+
+void OptionsUI::setDisableDecrementButtonOfLHSTab(bool flag)
+{
+	mDisableDecrementButtonOfLHSTab = flag;
+	mIncDecUI.setDisableDecrementButton(flag);
+}
+
+void OptionsUI::setDisableIncrementButtonOfRHSTab(bool flag)
+{
+	mDisableIncrementButtonOfRHSTab = flag;
+	mIncDecUI.setDisableIncrementButton(flag);
+}
+
+void OptionsUI::setDisableDecrementButtonOfRHSTab(bool flag)
+{
+	mDisableDecrementButtonOfRHSTab = flag;
+	mIncDecUI.setDisableDecrementButton(flag);
 }
 
 void OptionsUI::handler(const sf::RenderWindow &window, const sf::View &view, const sf::Transform &transform)
@@ -202,6 +230,25 @@ void OptionsUI::lhsTab()
 	// ALW - Activate IncDec UI
 	mDrawIncDecUI = true;
 	mIncDecUI.setCallbacks(mIncPurchaseCallback, mDecPurchaseCallback);
+
+	// ALW - IncDec UI has been activated, restore enabled/disabled states of increment/decrement button
+	if (mDisableIncrementButtonOfLHSTab)
+	{
+		mIncDecUI.setDisableIncrementButton(true);
+	}
+	else
+	{
+		mIncDecUI.setDisableIncrementButton(false);
+	}
+
+	if (mDisableDecrementButtonOfLHSTab)
+	{
+		mIncDecUI.setDisableDecrementButton(true);
+	}
+	else
+	{
+		mIncDecUI.setDisableDecrementButton(false);
+	}
 }
 
 void OptionsUI::rhsTab()
@@ -212,6 +259,25 @@ void OptionsUI::rhsTab()
 	// ALW - Activate IncDec UI
 	mDrawIncDecUI = true;
 	mIncDecUI.setCallbacks(mIncRepairCallback, mDecRepairCallback);
+
+	// ALW - IncDec UI has been activated, restore enabled/disabled states of increment/decrement button
+	if (mDisableIncrementButtonOfRHSTab)
+	{
+		mIncDecUI.setDisableIncrementButton(true);
+	}
+	else
+	{
+		mIncDecUI.setDisableIncrementButton(false);
+	}
+
+	if (mDisableDecrementButtonOfRHSTab)
+	{
+		mIncDecUI.setDisableDecrementButton(true);
+	}
+	else
+	{
+		mIncDecUI.setDisableDecrementButton(false);
+	}
 }
 
 void centerOrigin(OptionsUI &button, bool centerXAxis, bool centerYAxis)

@@ -25,7 +25,12 @@ their door at night to keep mosquitoes out."/>
 	    <purchaseClosedWindow      attribute="The window shutters are rusted in place. It takes you thirty minutes to oil and adjust them."/>
 	    <refundScreenWindow	       attribute="One hour has been refunded to you."/>
 	    <refundClosedWindow	       attribute="Thirty minutes have been refunded to you."/>
-	    <inspectClinic             attribute="You see a clinic."/>
+	    <inspectClinic             attribute="You see a clinic. They stock both rapid diagnostic tests (RDTs) and Artemisinin-based combination
+therapies (ACTs)."/>
+        <purchaseRDT               attribute="It takes two hour to purchase and deliver the RDTs."/>
+        <purchaseACT               attribute="It takes two hour to purchase and deliver the ACTs."/>
+		<refundRDT                 attribute="Two hours have been refunded to you."/>
+		<refundACT                 attribute="Two hours have been refunded to you."/>
 	    <inspectHouse              attribute="You see a house."/>
 	</en>
     <fr>
@@ -52,7 +57,12 @@ their door at night to keep mosquitoes out."/>
 	    <purchaseClosedWindow      attribute="fr: The window shutters are rusted in place. It takes you thirty minutes to oil and adjust them."/>
 	    <refundScreenWindow	       attribute="fr: One hour has been refunded to you."/>
 	    <refundClosedWindow	       attribute="fr: Thirty minutes have been refunded to you."/>
-	    <inspectClinic             attribute="fr: You see a clinic."/>
+	    <inspectClinic             attribute="fr: You see a clinic. They stock both rapid diagnostic tests (RDTs) and Artemisinin-based combination
+therapies (ACTs)."/>
+        <purchaseRDT               attribute="fr: It takes two hour to purchase and deliver the RDTs."/>
+        <purchaseACT               attribute="fr: It takes two hour to purchase and deliver the ACTs."/>
+		<refundRDT                 attribute="fr: Two hours have been refunded to you."/>
+		<refundACT                 attribute="fr: Two hours have been refunded to you."/>
 	    <inspectHouse              attribute="fr: You see a house."/>
 	</fr>
     <mg>
@@ -79,7 +89,12 @@ their door at night to keep mosquitoes out."/>
 	    <purchaseClosedWindow      attribute="mg: The window shutters are rusted in place. It takes you thirty minutes to oil and adjust them."/>
 	    <refundScreenWindow	       attribute="mg: One hour has been refunded to you."/>
 	    <refundClosedWindow	       attribute="mg: Thirty minutes have been refunded to you."/>
-	    <inspectClinic             attribute="mg: You see a clinic."/>
+	    <inspectClinic             attribute="mg: You see a clinic. They stock both rapid diagnostic tests (RDTs) and Artemisinin-based combination
+therapies (ACTs)."/>
+        <purchaseRDT               attribute="mg: It takes two hour to purchase and deliver the RDTs."/>
+        <purchaseACT               attribute="mg: It takes two hour to purchase and deliver the ACTs."/>
+		<refundRDT                 attribute="mg: Two hours have been refunded to you."/>
+		<refundACT                 attribute="mg: Two hours have been refunded to you."/>
 	    <inspectHouse              attribute="mg: You see a house."/>
 	</mg>
 </text>

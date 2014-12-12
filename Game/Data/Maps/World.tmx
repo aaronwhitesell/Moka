@@ -1981,9 +1981,9 @@
   </object>
   <object name="Clinic 0" type="Clinic" x="384" y="960" width="256" height="320">
    <properties>
-    <property name="0PosX" value="320"/>
+    <property name="0PosX" value="384"/>
     <property name="0PosY" value="1216"/>
-    <property name="1PosX" value="512"/>
+    <property name="1PosX" value="576"/>
     <property name="1PosY" value="1216"/>
     <property name="AttachedTo" value="Standalone"/>
     <property name="Color" value="Slate"/>

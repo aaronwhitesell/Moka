@@ -4,6 +4,7 @@
 #include "buildingNode.h"
 
 #include "Trambo/Events/event.h"
+#include "Trambo/Events/eventStr.h"
 
 #include <SFML/Graphics/Rect.hpp>
 
@@ -21,7 +22,6 @@ namespace sf
 
 namespace trmb
 {
-	class Event;
 	class SoundPlayer;
 }
 
@@ -42,6 +42,28 @@ public:
 
 
 private:
+	enum RDTSupplies
+	{
+		NoRDTs        = 0,
+		SmallRDTCrate = 1,
+		LargeRDTCrate = 2,
+		RDTBarrel     = 3,
+		MinRDTCount   = 0,
+		MaxRDTCount   = 3
+	};
+
+	enum ACTSupplies
+	{
+		NoACTs        = 0,
+		SmallACTCrate = 1,
+		LargeACTCrate = 2,
+		ACTBarrel     = 3,
+		MinACTCount   = 0,
+		MaxACTCount   = 3
+	};
+
+
+private:
 	virtual void				drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const override final;
 	virtual void				updateCurrent(sf::Time dt) override final;
 	virtual void				activate() override final;
@@ -52,15 +74,30 @@ private:
 	void						incrementPurchaseACT();
 	void						decrementPurchaseACT();
 
+	void						calculateRDTEvent();
+	void						calculateACTEvent();
+	void						updateRDTDisableState();
+	void						updateACTDisableState();
+
 
 private:
 	const trmb::Event			mClinicUIActivated;
 	const trmb::Event			mDrawClinicUI;
 	const trmb::Event			mDoNotDrawClinicUI;
+	const trmb::EventStr		mDrawSmallRDTCrateSprite;
+	const trmb::EventStr		mDrawLargeRDTCrateSprite;
+	const trmb::EventStr		mDrawRDTBarrelSprite;
+	const trmb::EventStr		mDoNotRDTDrawSprite;
+	const trmb::EventStr		mDrawSmallACTCrateSprite;
+	const trmb::EventStr		mDrawLargeACTCrateSprite;
+	const trmb::EventStr		mDrawACTBarrelSprite;
+	const trmb::EventStr		mDoNotACTDrawSprite;
 	const EventGuid				mLeftClickPress;   // ALW - Matches the GUID in the Controller class.
 	trmb::SoundPlayer			&mSoundPlayer;
 	ChatBox						&mChatBox;
 	bool						mClinicUIActive;
+	int							mRDTCount;
+	int							mACTCount;
 };
 
 #endif

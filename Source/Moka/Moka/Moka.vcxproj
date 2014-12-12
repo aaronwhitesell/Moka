@@ -97,6 +97,7 @@
     <ClInclude Include="SceneNodes\barrelUINode.h" />
     <ClInclude Include="SceneNodes\buildingNode.h" />
     <ClInclude Include="SceneNodes\clinicNode.h" />
+    <ClInclude Include="SceneNodes\clinicSpriteNode.h" />
     <ClInclude Include="SceneNodes\clinicUINode.h" />
     <ClInclude Include="SceneNodes\doorNode.h" />
     <ClInclude Include="SceneNodes\doorSpriteNode.h" />
@@ -137,6 +138,7 @@
     <ClCompile Include="SceneNodes\barrelUINode.cpp" />
     <ClCompile Include="SceneNodes\buildingNode.cpp" />
     <ClCompile Include="SceneNodes\clinicNode.cpp" />
+    <ClCompile Include="SceneNodes\clinicSpriteNode.cpp" />
     <ClCompile Include="SceneNodes\clinicUINode.cpp" />
     <ClCompile Include="SceneNodes\doorNode.cpp" />
     <ClCompile Include="SceneNodes\doorSpriteNode.cpp" />

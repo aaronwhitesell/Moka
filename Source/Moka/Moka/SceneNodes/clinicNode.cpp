@@ -14,6 +14,8 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/View.hpp>
 
+#include <cassert>
+
 
 ClinicNode::ClinicNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view
 	, UIBundle &mUIBundle, std::vector<sf::FloatRect> attachedRects, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
@@ -21,10 +23,20 @@ ClinicNode::ClinicNode(const InteractiveObject &interactiveObject, const sf::Ren
 , mClinicUIActivated(0xcb9e3f21)
 , mDrawClinicUI(0x1363b002)
 , mDoNotDrawClinicUI(0x7ccd235d)
+, mDrawSmallRDTCrateSprite(0x3377fe93, interactiveObject.getName())
+, mDrawLargeRDTCrateSprite(0x358963ee, interactiveObject.getName())
+, mDrawRDTBarrelSprite(0xafbc42ce, interactiveObject.getName())
+, mDoNotRDTDrawSprite(0xf08738aa, interactiveObject.getName())
+, mDrawSmallACTCrateSprite(0x7f31c614, interactiveObject.getName())
+, mDrawLargeACTCrateSprite(0x4a640fb6, interactiveObject.getName())
+, mDrawACTBarrelSprite(0xad344f84, interactiveObject.getName())
+, mDoNotACTDrawSprite(0xd6fe68f2, interactiveObject.getName())
 , mLeftClickPress(0x6955d309)
 , mSoundPlayer(soundPlayer)
 , mChatBox(chatBox)
 , mClinicUIActive(false)
+, mRDTCount(0)
+, mACTCount(0)
 {
 }
 
@@ -148,20 +160,114 @@ void ClinicNode::updateOptionsUI()
 
 void ClinicNode::incrementPurchaseRDT()
 {
-	// ALW - TODO - Increment resource
+	++mRDTCount;
+	calculateRDTEvent();
+	updateRDTDisableState();
+	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseRDT"));
 }
 
 void ClinicNode::decrementPurchaseRDT()
 {
-	// ALW - TODO - Decrement resource
+	--mRDTCount;
+	calculateRDTEvent();
+	updateRDTDisableState();
+	mChatBox.updateText(trmb::Localize::getInstance().getString("refundRDT"));
 }
 
 void ClinicNode::incrementPurchaseACT()
 {
-	// ALW - TODO - Increment resource
+	++mACTCount;
+	calculateACTEvent();
+	updateACTDisableState();
+	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseACT"));
 }
 
 void ClinicNode::decrementPurchaseACT()
 {
-	// ALW - TODO - Decrement resource
+	--mACTCount;
+	calculateACTEvent();
+	updateACTDisableState();
+	mChatBox.updateText(trmb::Localize::getInstance().getString("refundACT"));
+}
+
+void ClinicNode::calculateRDTEvent()
+{
+	if (NoRDTs == mRDTCount)
+	{
+		InteractiveNode::sendEvent(mDoNotRDTDrawSprite);
+	}
+	else if (SmallRDTCrate == mRDTCount)
+	{
+		InteractiveNode::sendEvent(mDrawSmallRDTCrateSprite);
+	}
+	else if (LargeRDTCrate == mRDTCount)
+	{
+		InteractiveNode::sendEvent(mDrawLargeRDTCrateSprite);
+	}
+	else if (RDTBarrel == mRDTCount)
+	{
+		InteractiveNode::sendEvent(mDrawRDTBarrelSprite);
+	}
+	else
+	{
+		assert(("The RDT count is out of range!", false));
+	}
+}
+
+void ClinicNode::calculateACTEvent()
+{
+	if (NoACTs == mACTCount)
+	{
+		InteractiveNode::sendEvent(mDoNotACTDrawSprite);
+	}
+	else if (SmallACTCrate == mACTCount)
+	{
+		InteractiveNode::sendEvent(mDrawSmallACTCrateSprite);
+	}
+	else if (LargeACTCrate == mACTCount)
+	{
+		InteractiveNode::sendEvent(mDrawLargeACTCrateSprite);
+	}
+	else if (ACTBarrel == mACTCount)
+	{
+		InteractiveNode::sendEvent(mDrawACTBarrelSprite);
+	}
+	else
+	{
+		assert(("The ACT count is out of range!", false));
+	}
+}
+
+void ClinicNode::updateRDTDisableState()
+{
+	if (MinRDTCount == mRDTCount)
+	{
+		mUIBundle.getClinicUI().setDisableDecrementButtonOfLHSTab(true);
+	}
+	else if (MaxRDTCount == mRDTCount)
+	{
+		mUIBundle.getClinicUI().setDisableIncrementButtonOfLHSTab(true);
+	}
+	else
+	{
+		mUIBundle.getClinicUI().setDisableDecrementButtonOfLHSTab(false);
+		mUIBundle.getClinicUI().setDisableIncrementButtonOfLHSTab(false);
+	}
+}
+
+void ClinicNode::updateACTDisableState()
+{
+	if (MinACTCount == mACTCount)
+	{
+		mUIBundle.getClinicUI().setDisableDecrementButtonOfRHSTab(true);
+	}
+	else if (MaxACTCount == mACTCount)
+	{
+		mUIBundle.getClinicUI().setDisableIncrementButtonOfRHSTab(true);
+	}
+	else
+	{
+		mUIBundle.getClinicUI().setDisableDecrementButtonOfRHSTab(false);
+		mUIBundle.getClinicUI().setDisableIncrementButtonOfRHSTab(false);
+	}
 }

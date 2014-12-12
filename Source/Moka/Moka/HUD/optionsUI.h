@@ -47,10 +47,15 @@ public:
 	void					setLHSTabText(std::string string);
 	void					setRHSTabText(std::string string);
 	void					setCharacterSize(unsigned int size);
+	void					setDisableIncrementButtonOfLHSTab(bool flag);
+	void					setDisableDecrementButtonOfLHSTab(bool flag);
+	void					setDisableIncrementButtonOfRHSTab(bool flag);
+	void					setDisableDecrementButtonOfRHSTab(bool flag);
 
 	void					handler(const sf::RenderWindow &window, const sf::View &view, const sf::Transform &transform);
 	void					updateIncDecCallbacks(Callback incPurchaseCallback, Callback decPurchaseCallback
 								, Callback incRepairCallback, Callback decRepairCallback);
+
 	void					reset();
 	void					enable();
 	void					disable();
@@ -81,6 +86,11 @@ private:
 	float					mHorizontalBuffer;
 	float					mVerticalBuffer;
 	bool					mDrawIncDecUI;
+
+	bool					mDisableIncrementButtonOfLHSTab;
+	bool					mDisableDecrementButtonOfLHSTab;
+	bool					mDisableIncrementButtonOfRHSTab;
+	bool					mDisableDecrementButtonOfRHSTab;
 
 	bool					mDisable;
 

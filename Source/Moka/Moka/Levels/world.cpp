@@ -9,6 +9,7 @@
 #include "../SceneNodes/WindowSpriteNode.h"
 #include "../SceneNodes/windowUINode.h"
 #include "../SceneNodes/clinicNode.h"
+#include "../SceneNodes/ClinicSpriteNode.h"
 #include "../SceneNodes/clinicUINode.h"
 #include "../SceneNodes/HouseNode.h"
 #include "../SceneNodes/HouseUINode.h"
@@ -112,8 +113,8 @@ void World::configureUIs()
 	mWindowUI.hide();
 
 	mClinicUI.setTabSize(sf::Vector2f(75.0f, 20.0f));
-	mClinicUI.setLHSTabText("RDT");
-	mClinicUI.setRHSTabText("ACT");
+	mClinicUI.setLHSTabText("RDTs");
+	mClinicUI.setRHSTabText("ACTs");
 	mClinicUI.setCharacterSize(characterSize);
 	centerOrigin(mClinicUI, true, false);
 	mClinicUI.hide();
@@ -181,6 +182,9 @@ void World::buildScene()
 		}
 		else if (iter->getType() == "Clinic")
 		{
+			mSceneLayers[Sprite]->attachChild(std::move(std::unique_ptr<ClinicSpriteNode>(
+				new ClinicSpriteNode(*iter, mTextures.get(Textures::ID::Tiles)))));
+
 			mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<ClinicNode>(
 				new ClinicNode(*iter, mWindow, mCamera.getView(), mUIBundle, buildAttachedRects(*iter), mSoundPlayer, mChatBox))));
 		}
