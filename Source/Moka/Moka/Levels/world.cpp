@@ -159,7 +159,7 @@ void World::buildScene()
 	{
 		if (iter->getType() == "Barrel")
 		{
-			mSceneLayers[Sprite]->attachChild(std::move(std::unique_ptr<BarrelUpdateNode>(
+			mSceneLayers[Update]->attachChild(std::move(std::unique_ptr<BarrelUpdateNode>(
 				new BarrelUpdateNode(*iter, mTextures.get(Textures::ID::Tiles)))));
 
 			mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<BarrelNode>(
@@ -167,7 +167,7 @@ void World::buildScene()
 		}
 		else if (iter->getType() == "Door")
 		{
-			mSceneLayers[Sprite]->attachChild(std::move(std::unique_ptr<DoorUpdateNode>(
+			mSceneLayers[Update]->attachChild(std::move(std::unique_ptr<DoorUpdateNode>(
 				new DoorUpdateNode(*iter, mTextures.get(Textures::ID::Tiles)))));
 
 			mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<DoorNode>(
@@ -175,7 +175,7 @@ void World::buildScene()
 		}
 		else if (iter->getType() == "Window")
 		{
-			mSceneLayers[Sprite]->attachChild(std::move(std::unique_ptr<WindowUpdateNode>(
+			mSceneLayers[Update]->attachChild(std::move(std::unique_ptr<WindowUpdateNode>(
 				new WindowUpdateNode(*iter, mTextures.get(Textures::ID::Tiles)))));
 
 			mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<WindowNode>(
@@ -183,7 +183,7 @@ void World::buildScene()
 		}
 		else if (iter->getType() == "Clinic")
 		{
-			mSceneLayers[Sprite]->attachChild(std::move(std::unique_ptr<ClinicUpdateNode>(
+			mSceneLayers[Update]->attachChild(std::move(std::unique_ptr<ClinicUpdateNode>(
 				new ClinicUpdateNode(*iter, mTextures.get(Textures::ID::Tiles)))));
 
 			mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<ClinicNode>(
@@ -191,7 +191,7 @@ void World::buildScene()
 		}
 		else if (iter->getType() == "House")
 		{
-			mSceneLayers[Sprite]->attachChild(std::move(std::unique_ptr<HouseUpdateNode>(new HouseUpdateNode(*iter))));
+			mSceneLayers[Update]->attachChild(std::move(std::unique_ptr<HouseUpdateNode>(new HouseUpdateNode(*iter))));
 
 			mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<HouseNode>(
 				new HouseNode(*iter, mWindow, mCamera.getView(), mUIBundle, buildAttachedRects(*iter), mSoundPlayer, mChatBox))));

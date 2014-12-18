@@ -5,7 +5,6 @@
 #include "Trambo/SceneNodes/sceneNode.h"
 
 #include <SFML/Graphics/RectangleShape.hpp>
-#include <SFML/Graphics/Sprite.hpp>
 
 
 namespace sf
@@ -23,8 +22,8 @@ class InteractiveObject;
 
 class HouseUpdateNode : public trmb::SceneNode, trmb::EventHandler
 {
-// ALW - The motivation for this class is to allow the updatable sprite to be attached
-// ALW - to the Sprite layer. This draws the sprite below the selection highlight.
+// ALW - The motivation for this class is to allow the drawn image to be attached
+// ALW - to the Update layer. This draws the image below the selection highlight.
 public:
 								HouseUpdateNode(const InteractiveObject &interactiveObject);
 								HouseUpdateNode(const HouseUpdateNode &) = delete;

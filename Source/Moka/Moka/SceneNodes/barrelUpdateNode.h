@@ -23,8 +23,8 @@ class InteractiveObject;
 
 class BarrelUpdateNode : public trmb::SceneNode, trmb::EventHandler
 {
-// ALW - The motivation for this class is to allow the updatable sprite to be attached
-// ALW - to the Sprite layer. This draws the sprite below the selection highlight.
+// ALW - The motivation for this class is to allow the drawn image to be attached
+// ALW - to the Update layer. This draws the image below the selection highlight.
 public:
 								BarrelUpdateNode(const InteractiveObject &interactiveObject, const sf::Texture &texture);
 								BarrelUpdateNode(const BarrelUpdateNode &) = delete;

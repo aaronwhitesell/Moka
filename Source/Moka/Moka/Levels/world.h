@@ -63,7 +63,7 @@ private:
 	enum Layer
 	{
 		Background,
-		Sprite,
+		Update,
 		Selection,
 		UI,
 		Camera,
