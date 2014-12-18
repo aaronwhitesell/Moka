@@ -215,6 +215,9 @@
     <ClInclude Include="SceneNodes\clinicSpriteNode.h">
       <Filter>Header Files\SceneNodes\Sprite</Filter>
     </ClInclude>
+    <ClInclude Include="SceneNodes\houseUpdateNode.h">
+      <Filter>Header Files\SceneNodes\Sprite</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\application.cpp">
@@ -329,6 +332,9 @@
       <Filter>Source Files\SceneNodes\Sprite</Filter>
     </ClCompile>
     <ClCompile Include="SceneNodes\clinicSpriteNode.cpp">
+      <Filter>Source Files\SceneNodes\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNodes\houseUpdateNode.cpp">
       <Filter>Source Files\SceneNodes\Sprite</Filter>
     </ClCompile>
   </ItemGroup>

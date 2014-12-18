@@ -14,18 +14,38 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/View.hpp>
 
+#include <cassert>
+
 
 HouseNode::HouseNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view, UIBundle &uiBundle
 	, std::vector<sf::FloatRect> attachedRects, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
 : BuildingNode(interactiveObject, window, view, uiBundle, attachedRects)
 , mHouseUIActivated(0xb5ba9eaf)
+, mAddNet1(0x43702f1a, interactiveObject.getName())
+, mAddNet2(0xc84d3fea, interactiveObject.getName())
+, mAddNet3(0x68edab82, interactiveObject.getName())
+, mRemoveNet1(0xe1636e98, interactiveObject.getName())
+, mRemoveNet2(0xadd9292e, interactiveObject.getName())
+, mRemoveNet3(0x15f4a6d9, interactiveObject.getName())
+, mRepairNet1(0xbd7bb606, interactiveObject.getName())
+, mRepairNet2(0x1b5cf244, interactiveObject.getName())
+, mRepairNet3(0x2bf40c2c, interactiveObject.getName())
+, mUnrepairNet1(0x529e6299, interactiveObject.getName())
+, mUnrepairNet2(0xfeb3945, interactiveObject.getName())
+, mUnrepairNet3(0x2aac4ae8, interactiveObject.getName())
 , mDrawHouseUI(0xc7353048)
 , mDoNotDrawHouseUI(0x8e6093bf)
 , mLeftClickPress(0x6955d309)
 , mSoundPlayer(soundPlayer)
 , mChatBox(chatBox)
 , mHouseUIActive(false)
+, mTotalBeds(interactiveObject.getBeds())
+, mTotalOldNets(interactiveObject.getNets())
+, mNewNetCount(0)
+, mRepairCount(0)
 {
+	updateNetDisableState();
+	updateRepairDisableState();
 }
 
 void HouseNode::handleEvent(const trmb::Event &gameEvent)
@@ -130,6 +150,9 @@ void HouseNode::updateOptionsUI()
 	// ALW - Resizes UI to zero, so click detection does not occur.
 	mUIBundle.getHouseUI().unhide();
 
+	updateNetDisableState();
+	updateRepairDisableState();
+
 	const float verticalBuffer = 10.0f;
 	mUIBundle.getHouseUI().setPosition(sf::Vector2f(mInteractiveObject.getX() + mInteractiveObject.getWidth() / 2.0f
 		, mInteractiveObject.getY() + mInteractiveObject.getHeight() + verticalBuffer));
@@ -148,20 +171,163 @@ void HouseNode::updateOptionsUI()
 
 void HouseNode::incrementPurchaseBedNet()
 {
-	// ALW - TODO - Increment resource
+	++mNewNetCount;
+	calculateNetPurchaseEvent();
+	updateNetDisableState();
+	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseNet"));
 }
 
 void HouseNode::decrementPurchaseBedNet()
 {
-	// ALW - TODO - Decrement resource
+	--mNewNetCount;
+	calculateNetRefundEvent();
+	updateNetDisableState();
+	mChatBox.updateText(trmb::Localize::getInstance().getString("refundNet"));
 }
 
 void HouseNode::incrementRepair()
 {
-	// ALW - TODO - Increment resource
+	++mRepairCount;
+	calculateRepairPurchaseEvent();
+	updateRepairDisableState();
+	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseRepair"));
 }
 
 void HouseNode::decrementRepair()
 {
-	// ALW - TODO - Decrement resource
+	--mRepairCount;
+	calculateRepairRefundEvent();
+	updateRepairDisableState();
+	mChatBox.updateText(trmb::Localize::getInstance().getString("refundRepair"));
+}
+
+void HouseNode::calculateNetPurchaseEvent()
+{
+	int netCount = mTotalOldNets + mNewNetCount;
+	assert(("The net count is out of range!", 0 <= mNewNetCount && netCount <= mTotalBeds));
+
+	switch (netCount)
+	{
+	case OneNet:
+		InteractiveNode::sendEvent(mAddNet1);
+		break;
+	case TwoNets:
+		InteractiveNode::sendEvent(mAddNet2);
+		break;
+	case ThreeNets:
+		InteractiveNode::sendEvent(mAddNet3);
+		break;
+	default:
+		assert(("The net count is out of range!", false));
+	}
+}
+
+void HouseNode::calculateNetRefundEvent()
+{
+	int netCount = mTotalOldNets + mNewNetCount;
+	assert(("The net count is out of range!", 0 <= mNewNetCount && netCount <= mTotalBeds));
+
+	switch (netCount)
+	{
+	case NoNets:
+		InteractiveNode::sendEvent(mRemoveNet1);
+		break;
+	case OneNet:
+		InteractiveNode::sendEvent(mRemoveNet2);
+		break;
+	case TwoNets:
+		InteractiveNode::sendEvent(mRemoveNet3);
+		break;
+	default:
+		assert(("The net count is out of range!", false));
+	}
+}
+
+void HouseNode::calculateRepairPurchaseEvent()
+{
+	assert(("The repair count is out of range!", 0 <= mRepairCount && mRepairCount <= mTotalOldNets));
+
+	switch (mRepairCount)
+	{
+	case OneNet:
+		InteractiveNode::sendEvent(mRepairNet1);
+		break;
+	case TwoNets:
+		InteractiveNode::sendEvent(mRepairNet2);
+		break;
+	case ThreeNets:
+		InteractiveNode::sendEvent(mRepairNet3);
+		break;
+	default:
+		assert(("The net count is out of range!", false));
+	}
+}
+
+void HouseNode::calculateRepairRefundEvent()
+{
+	assert(("The repair count is out of range!", 0 <= mRepairCount && mRepairCount <= mTotalOldNets));
+
+	switch (mRepairCount)
+	{
+	case NoNets:
+		InteractiveNode::sendEvent(mUnrepairNet1);
+		break;
+	case OneNet:
+		InteractiveNode::sendEvent(mUnrepairNet2);
+		break;
+	case TwoNets:
+		InteractiveNode::sendEvent(mUnrepairNet3);
+		break;
+	default:
+		assert(("The net count is out of range!", false));
+	}
+}
+
+void HouseNode::updateNetDisableState()
+{
+	const int minNewNets = 0;
+	int netCount = mTotalOldNets + mNewNetCount;
+	assert(("The net count is out of range!", minNewNets <= mNewNetCount && netCount <= mTotalBeds));
+
+	if (minNewNets == mNewNetCount)
+	{
+		mUIBundle.getHouseUI().setDisableDecrementButtonOfLHSTab(true);
+	}
+	else
+	{
+		mUIBundle.getHouseUI().setDisableDecrementButtonOfLHSTab(false);
+	}
+
+	if (mTotalBeds == netCount)
+	{
+		mUIBundle.getHouseUI().setDisableIncrementButtonOfLHSTab(true);
+	}
+	else
+	{
+		mUIBundle.getHouseUI().setDisableIncrementButtonOfLHSTab(false);
+	}
+}
+
+void HouseNode::updateRepairDisableState()
+{
+	const int minOldNets = 0;
+	assert(("The old net count is out of range!", minOldNets <= mRepairCount && mRepairCount <= mTotalOldNets));
+
+	if (minOldNets == mRepairCount)
+	{
+		mUIBundle.getHouseUI().setDisableDecrementButtonOfRHSTab(true);
+	}
+	else
+	{
+		mUIBundle.getHouseUI().setDisableDecrementButtonOfRHSTab(false);
+	}
+
+	if (mTotalOldNets == mRepairCount)
+	{
+		mUIBundle.getHouseUI().setDisableIncrementButtonOfRHSTab(true);
+	}
+	else
+	{
+		mUIBundle.getHouseUI().setDisableIncrementButtonOfRHSTab(false);
+	}
 }

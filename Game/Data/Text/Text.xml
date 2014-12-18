@@ -19,19 +19,24 @@ their door at night to keep mosquitoes out."/>
 	    <refundClosedDoor	  	   attribute="Fifteen minutes has been refunded to you."/>
 		<inspectWindow             attribute="You see an open window. Would you like to install a mosquito screen or close it?"/>
 	    <inspectScreenWindow       attribute="Would you like to remove the mosquito screen?"/>
-	    <inspectClosedWindow       attribute="Would you like to open the window?"/>
+		<inspectClosedWindow       attribute="Would you like to open the window?"/>
 	    <inspectScreenClosedWindow attribute="Would you like to remove the mosquito screen or open the window?"/>
 		<purchaseScreenWindow      attribute="It takes you one hour to construct a mosquito screen."/>
-	    <purchaseClosedWindow      attribute="The window shutters are rusted in place. It takes you thirty minutes to oil and adjust them."/>
 	    <refundScreenWindow	       attribute="One hour has been refunded to you."/>
+	    <purchaseClosedWindow      attribute="The window shutters are rusted in place. It takes you thirty minutes to oil and adjust them."/>
 	    <refundClosedWindow	       attribute="Thirty minutes have been refunded to you."/>
 	    <inspectClinic             attribute="You see a clinic. They stock both rapid diagnostic tests (RDTs) and Artemisinin-based combination
 therapies (ACTs)."/>
         <purchaseRDT               attribute="It takes two hour to purchase and deliver the RDTs."/>
-        <purchaseACT               attribute="It takes two hour to purchase and deliver the ACTs."/>
 		<refundRDT                 attribute="Two hours have been refunded to you."/>
+        <purchaseACT               attribute="It takes two hour to purchase and deliver the ACTs."/>
 		<refundACT                 attribute="Two hours have been refunded to you."/>
-	    <inspectHouse              attribute="You see a house."/>
+	    <inspectHouse              attribute="You see a house. Would you like to deliver a new insecticide-treated bed net, or if they have a
+damaged bed net it can be repaired."/>
+		<purchaseNet               attribute="It takes one hour to deliver and hang the insecticide-treated bed net."/>
+		<refundNet                 attribute="One hour has been refunded to you."/>
+		<purchaseRepair            attribute="You use a needle and thread to sew up each small hole. Thirty minutes have passed."/>
+		<refundRepair              attribute="Thirty minutes have been refunded to you."/>
 	</en>
     <fr>
 	    <prompt                    attribute="fr: Press Enter"/>
@@ -54,16 +59,21 @@ their door at night to keep mosquitoes out."/>
 	    <inspectClosedWindow       attribute="fr: Would you like to open the window?"/>
 	    <inspectScreenClosedWindow attribute="fr: Would you like to remove the mosquito screen or open the window?"/>
 		<purchaseScreenWindow      attribute="fr: It takes you one hour to construct a mosquito screen."/>
-	    <purchaseClosedWindow      attribute="fr: The window shutters are rusted in place. It takes you thirty minutes to oil and adjust them."/>
 	    <refundScreenWindow	       attribute="fr: One hour has been refunded to you."/>
+	    <purchaseClosedWindow      attribute="fr: The window shutters are rusted in place. It takes you thirty minutes to oil and adjust them."/>
 	    <refundClosedWindow	       attribute="fr: Thirty minutes have been refunded to you."/>
 	    <inspectClinic             attribute="fr: You see a clinic. They stock both rapid diagnostic tests (RDTs) and Artemisinin-based combination
 therapies (ACTs)."/>
         <purchaseRDT               attribute="fr: It takes two hour to purchase and deliver the RDTs."/>
-        <purchaseACT               attribute="fr: It takes two hour to purchase and deliver the ACTs."/>
 		<refundRDT                 attribute="fr: Two hours have been refunded to you."/>
+        <purchaseACT               attribute="fr: It takes two hour to purchase and deliver the ACTs."/>
 		<refundACT                 attribute="fr: Two hours have been refunded to you."/>
-	    <inspectHouse              attribute="fr: You see a house."/>
+	    <inspectHouse              attribute="fr: You see a house. Would you like to deliver a new insecticide-treated bed net, or if they have a
+damaged bed net it can be repaired."/>
+		<purchaseNet               attribute="fr: It takes one hour to deliver and hang the insecticide-treated bed net."/>
+		<refundNet                 attribute="fr: One hour has been refunded to you."/>
+		<purchaseRepair            attribute="fr: You use a needle and thread to sew up each small hole. Thirty minutes have passed."/>
+		<refundRepair              attribute="fr: Thirty minutes have been refunded to you."/>
 	</fr>
     <mg>
 	    <prompt                    attribute="mg: Press Enter"/>
@@ -86,15 +96,21 @@ their door at night to keep mosquitoes out."/>
 	    <inspectClosedWindow       attribute="mg: Would you like to open the window?"/>
 	    <inspectScreenClosedWindow attribute="mg: Would you like to remove the mosquito screen or open the window?"/>
 		<purchaseScreenWindow      attribute="mg: It takes you one hour to construct a mosquito screen."/>
-	    <purchaseClosedWindow      attribute="mg: The window shutters are rusted in place. It takes you thirty minutes to oil and adjust them."/>
 	    <refundScreenWindow	       attribute="mg: One hour has been refunded to you."/>
+	    <purchaseClosedWindow      attribute="mg: The window shutters are rusted in place. It takes you thirty minutes to oil and adjust them."/>
 	    <refundClosedWindow	       attribute="mg: Thirty minutes have been refunded to you."/>
 	    <inspectClinic             attribute="mg: You see a clinic. They stock both rapid diagnostic tests (RDTs) and Artemisinin-based combination
 therapies (ACTs)."/>
         <purchaseRDT               attribute="mg: It takes two hour to purchase and deliver the RDTs."/>
-        <purchaseACT               attribute="mg: It takes two hour to purchase and deliver the ACTs."/>
 		<refundRDT                 attribute="mg: Two hours have been refunded to you."/>
+        <purchaseACT               attribute="mg: It takes two hour to purchase and deliver the ACTs."/>
 		<refundACT                 attribute="mg: Two hours have been refunded to you."/>
 	    <inspectHouse              attribute="mg: You see a house."/>
+	    <inspectHouse              attribute="mg: You see a house. Would you like to deliver a new insecticide-treated bed net, or if they have a
+damaged bed net it can be repaired."/>
+		<purchaseNet               attribute="mg: It takes one hour to deliver and hang the insecticide-treated bed net."/>
+		<refundNet                 attribute="mg: One hour has been refunded to you."/>
+		<purchaseRepair            attribute="mg: You use a needle and thread to sew up each small hole. Thirty minutes have passed."/>
+		<refundRepair              attribute="mg: Thirty minutes have been refunded to you."/>
 	</mg>
 </text>

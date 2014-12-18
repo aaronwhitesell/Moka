@@ -6,13 +6,14 @@
 #include "../SceneNodes/doorSpriteNode.h"
 #include "../SceneNodes/doorUINode.h"
 #include "../SceneNodes/windowNode.h"
-#include "../SceneNodes/WindowSpriteNode.h"
+#include "../SceneNodes/windowSpriteNode.h"
 #include "../SceneNodes/windowUINode.h"
 #include "../SceneNodes/clinicNode.h"
-#include "../SceneNodes/ClinicSpriteNode.h"
+#include "../SceneNodes/clinicSpriteNode.h"
 #include "../SceneNodes/clinicUINode.h"
-#include "../SceneNodes/HouseNode.h"
-#include "../SceneNodes/HouseUINode.h"
+#include "../SceneNodes/houseNode.h"
+#include "../SceneNodes/houseUINode.h"
+#include "../SceneNodes/houseUpdateNode.h"
 #include "../GameObjects/interactiveObject.h"
 #include "../Resources/resourceIdentifiers.h"
 
@@ -190,6 +191,8 @@ void World::buildScene()
 		}
 		else if (iter->getType() == "House")
 		{
+			mSceneLayers[Sprite]->attachChild(std::move(std::unique_ptr<HouseUpdateNode>(new HouseUpdateNode(*iter))));
+
 			mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<HouseNode>(
 				new HouseNode(*iter, mWindow, mCamera.getView(), mUIBundle, buildAttachedRects(*iter), mSoundPlayer, mChatBox))));
 		}

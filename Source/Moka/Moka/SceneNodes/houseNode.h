@@ -4,6 +4,7 @@
 #include "buildingNode.h"
 
 #include "Trambo/Events/event.h"
+#include "Trambo/Events/eventStr.h"
 
 #include <SFML/Graphics/Rect.hpp>
 
@@ -21,7 +22,6 @@ namespace sf
 
 namespace trmb
 {
-	class Event;
 	class SoundPlayer;
 }
 
@@ -42,6 +42,16 @@ public:
 
 
 private:
+	enum NetCount
+	{
+		NoNets    = 0,
+		OneNet    = 1,
+		TwoNets   = 2,
+		ThreeNets = 3
+	};
+
+
+private:
 	virtual void				drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const override final;
 	virtual void				updateCurrent(sf::Time dt) override final;
 	virtual void				activate() override final;
@@ -52,15 +62,39 @@ private:
 	void						incrementRepair();
 	void						decrementRepair();
 
+	void						calculateNetPurchaseEvent();
+	void						calculateNetRefundEvent();
+	void						calculateRepairPurchaseEvent();
+	void						calculateRepairRefundEvent();
+	void						updateNetDisableState();
+	void						updateRepairDisableState();
+
 
 private:
 	const trmb::Event			mHouseUIActivated;
+	const trmb::EventStr		mAddNet1;
+	const trmb::EventStr		mAddNet2;
+	const trmb::EventStr		mAddNet3;
+	const trmb::EventStr		mRemoveNet1;
+	const trmb::EventStr		mRemoveNet2;
+	const trmb::EventStr		mRemoveNet3;
+	const trmb::EventStr		mRepairNet1;
+	const trmb::EventStr		mRepairNet2;
+	const trmb::EventStr		mRepairNet3;
+	const trmb::EventStr		mUnrepairNet1;
+	const trmb::EventStr		mUnrepairNet2;
+	const trmb::EventStr		mUnrepairNet3;
 	const trmb::Event			mDrawHouseUI;
 	const trmb::Event			mDoNotDrawHouseUI;
 	const EventGuid				mLeftClickPress;   // ALW - Matches the GUID in the Controller class.
 	trmb::SoundPlayer			&mSoundPlayer;
 	ChatBox						&mChatBox;
 	bool						mHouseUIActive;
+
+	const int					mTotalBeds;
+	const int					mTotalOldNets;
+	int							mNewNetCount;
+	int							mRepairCount;
 };
 
 #endif
