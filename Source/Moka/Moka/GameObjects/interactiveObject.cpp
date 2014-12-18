@@ -2,7 +2,8 @@
 
 
 InteractiveObject::InteractiveObject(std::string name, std::string type, float x, float y, float width, float height
-	, float posX0, float posY0, float posX1, float posY1, std::string attachedTo, std::string color, std::string style)
+	, float posX0, float posY0, float posX1, float posY1, float posX2, float posY2, std::string attachedTo, int beds
+	, std::string color, int nets, int residents, std::string style)
 : mName(name)
 , mType(type)
 , mX(x)
@@ -13,8 +14,13 @@ InteractiveObject::InteractiveObject(std::string name, std::string type, float x
 , mPosY0(posY0)
 , mPosX1(posX1)
 , mPosY1(posY1)
+, mPosX2(posX2)
+, mPosY2(posY2)
 , mAttachedTo(attachedTo)
+, mBeds(beds)
 , mColor(color)
+, mNets(nets)
+, mResidents(residents)
 , mStyle(style)
 {
 }
@@ -69,14 +75,39 @@ float InteractiveObject::getPosY1() const
 	return mPosY1;
 }
 
+float InteractiveObject::getPosX2() const
+{
+	return mPosX2;
+}
+
+float InteractiveObject::getPosY2() const
+{
+	return mPosY2;
+}
+
 const std::string InteractiveObject::getAttachedTo() const
 {
 	return mAttachedTo;
 }
 
+int InteractiveObject::getBeds() const
+{
+	return mBeds;
+}
+
 const std::string InteractiveObject::getColor() const
 {
 	return mColor;
+}
+
+int InteractiveObject::getNets() const
+{
+	return mNets;
+}
+
+int InteractiveObject::getResidents() const
+{
+	return mResidents;
 }
 
 const std::string InteractiveObject::getStyle() const

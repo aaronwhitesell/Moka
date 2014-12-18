@@ -1893,89 +1893,129 @@
  <objectgroup name="Interactive" width="25" height="25">
   <object name="House 0" type="House" x="128" y="320" width="64" height="192">
    <properties>
-    <property name="0PosX" value="0"/>
-    <property name="0PosY" value="0"/>
-    <property name="1PosX" value="0"/>
-    <property name="1PosY" value="0"/>
+    <property name="0PosX" value="38"/>
+    <property name="0PosY" value="40"/>
+    <property name="1PosX" value="38"/>
+    <property name="1PosY" value="55"/>
+    <property name="2PosX" value="38"/>
+    <property name="2PosY" value="70"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Beds" value="1"/>
     <property name="Color" value="Tan"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="3"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="House 1" type="House" x="256" y="320" width="64" height="192">
    <properties>
-    <property name="0PosX" value="0"/>
-    <property name="0PosY" value="0"/>
-    <property name="1PosX" value="0"/>
-    <property name="1PosY" value="0"/>
+    <property name="0PosX" value="38"/>
+    <property name="0PosY" value="40"/>
+    <property name="1PosX" value="38"/>
+    <property name="1PosY" value="55"/>
+    <property name="2PosX" value="38"/>
+    <property name="2PosY" value="70"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Beds" value="1"/>
     <property name="Color" value="Tan"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="4"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="House 2" type="House" x="192" y="576" width="64" height="192">
    <properties>
-    <property name="0PosX" value="0"/>
-    <property name="0PosY" value="0"/>
-    <property name="1PosX" value="0"/>
-    <property name="1PosY" value="0"/>
+    <property name="0PosX" value="38"/>
+    <property name="0PosY" value="40"/>
+    <property name="1PosX" value="38"/>
+    <property name="1PosY" value="55"/>
+    <property name="2PosX" value="38"/>
+    <property name="2PosY" value="70"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Beds" value="1"/>
     <property name="Color" value="Slate"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="3"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="House 3" type="House" x="320" y="576" width="64" height="192">
    <properties>
-    <property name="0PosX" value="0"/>
-    <property name="0PosY" value="0"/>
-    <property name="1PosX" value="0"/>
-    <property name="1PosY" value="0"/>
+    <property name="0PosX" value="38"/>
+    <property name="0PosY" value="40"/>
+    <property name="1PosX" value="38"/>
+    <property name="1PosY" value="55"/>
+    <property name="2PosX" value="38"/>
+    <property name="2PosY" value="70"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Beds" value="2"/>
     <property name="Color" value="Slate"/>
+    <property name="Nets" value="1"/>
+    <property name="Residents" value="5"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="House 4" type="House" x="448" y="576" width="64" height="192">
    <properties>
-    <property name="0PosX" value="0"/>
-    <property name="0PosY" value="0"/>
-    <property name="1PosX" value="0"/>
-    <property name="1PosY" value="0"/>
+    <property name="0PosX" value="38"/>
+    <property name="0PosY" value="40"/>
+    <property name="1PosX" value="38"/>
+    <property name="1PosY" value="55"/>
+    <property name="2PosX" value="38"/>
+    <property name="2PosY" value="70"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Beds" value="2"/>
     <property name="Color" value="Slate"/>
+    <property name="Nets" value="1"/>
+    <property name="Residents" value="4"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="House 5" type="House" x="576" y="576" width="64" height="192">
    <properties>
-    <property name="0PosX" value="0"/>
-    <property name="0PosY" value="0"/>
-    <property name="1PosX" value="0"/>
-    <property name="1PosY" value="0"/>
+    <property name="0PosX" value="38"/>
+    <property name="0PosY" value="40"/>
+    <property name="1PosX" value="38"/>
+    <property name="1PosY" value="55"/>
+    <property name="2PosX" value="38"/>
+    <property name="2PosY" value="70"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Beds" value="1"/>
     <property name="Color" value="Slate"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="2"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="House 6" type="House" x="1152" y="256" width="128" height="256">
    <properties>
-    <property name="0PosX" value="0"/>
-    <property name="0PosY" value="0"/>
-    <property name="1PosX" value="0"/>
-    <property name="1PosY" value="0"/>
+    <property name="0PosX" value="102"/>
+    <property name="0PosY" value="17"/>
+    <property name="1PosX" value="102"/>
+    <property name="1PosY" value="32"/>
+    <property name="2PosX" value="102"/>
+    <property name="2PosY" value="47"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Beds" value="3"/>
     <property name="Color" value="Tan"/>
+    <property name="Nets" value="2"/>
+    <property name="Residents" value="7"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="House 7" type="House" x="1408" y="704" width="128" height="192">
    <properties>
-    <property name="0PosX" value="0"/>
-    <property name="0PosY" value="0"/>
-    <property name="1PosX" value="0"/>
-    <property name="1PosY" value="0"/>
+    <property name="0PosX" value="102"/>
+    <property name="0PosY" value="17"/>
+    <property name="1PosX" value="102"/>
+    <property name="1PosY" value="32"/>
+    <property name="2PosX" value="102"/>
+    <property name="2PosY" value="47"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Beds" value="3"/>
     <property name="Color" value="Tan"/>
+    <property name="Nets" value="1"/>
+    <property name="Residents" value="6"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
@@ -1985,8 +2025,13 @@
     <property name="0PosY" value="1216"/>
     <property name="1PosX" value="576"/>
     <property name="1PosY" value="1216"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="Slate"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
@@ -1996,8 +2041,13 @@
     <property name="0PosY" value="0"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="Slate"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
@@ -2007,8 +2057,13 @@
     <property name="0PosY" value="448"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="House 0"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="Tan"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="Simple"/>
    </properties>
   </object>
@@ -2018,8 +2073,13 @@
     <property name="0PosY" value="448"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="House 1"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="Tan"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="Simple"/>
    </properties>
   </object>
@@ -2029,8 +2089,13 @@
     <property name="0PosY" value="704"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="House 2"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="Slate"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="Simple"/>
    </properties>
   </object>
@@ -2040,8 +2105,13 @@
     <property name="0PosY" value="704"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="House 3"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="Slate"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="Simple"/>
    </properties>
   </object>
@@ -2051,8 +2121,13 @@
     <property name="0PosY" value="704"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="House 4"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="Slate"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="Simple"/>
    </properties>
   </object>
@@ -2062,8 +2137,13 @@
     <property name="0PosY" value="704"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="House 5"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="Slate"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="Simple"/>
    </properties>
   </object>
@@ -2073,8 +2153,13 @@
     <property name="0PosY" value="384"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="House 6"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="Tan"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="Wooden"/>
    </properties>
   </object>
@@ -2084,8 +2169,13 @@
     <property name="0PosY" value="384"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="House 6"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="Tan"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="Wooden"/>
    </properties>
   </object>
@@ -2095,8 +2185,13 @@
     <property name="0PosY" value="832"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="House 7"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="Tan"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="Simple"/>
    </properties>
   </object>
@@ -2106,8 +2201,13 @@
     <property name="0PosY" value="832"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="House 7"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="Tan"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="Simple"/>
    </properties>
   </object>
@@ -2117,8 +2217,13 @@
     <property name="0PosY" value="1152"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="Clinic 0"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="Slate"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="Wooden"/>
    </properties>
   </object>
@@ -2128,8 +2233,13 @@
     <property name="0PosY" value="1152"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="Clinic 0"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="Slate"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="Wooden"/>
    </properties>
   </object>
@@ -2139,8 +2249,13 @@
     <property name="0PosY" value="448"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="House 6"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="Tan"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="HalfOpen"/>
    </properties>
   </object>
@@ -2150,8 +2265,13 @@
     <property name="0PosY" value="1216"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="Clinic 0"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="Slate"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="FullyOpen"/>
    </properties>
   </object>
@@ -2161,8 +2281,13 @@
     <property name="0PosY" value="384"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="na"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
@@ -2172,8 +2297,13 @@
     <property name="0PosY" value="448"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="na"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
@@ -2183,8 +2313,13 @@
     <property name="0PosY" value="640"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="na"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
@@ -2194,8 +2329,13 @@
     <property name="0PosY" value="704"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="na"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
@@ -2205,8 +2345,13 @@
     <property name="0PosY" value="704"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="na"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
@@ -2216,8 +2361,13 @@
     <property name="0PosY" value="576"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="na"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
@@ -2227,8 +2377,13 @@
     <property name="0PosY" value="640"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="na"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
@@ -2238,8 +2393,13 @@
     <property name="0PosY" value="448"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="na"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
@@ -2249,8 +2409,13 @@
     <property name="0PosY" value="640"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="na"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
@@ -2260,8 +2425,13 @@
     <property name="0PosY" value="640"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="na"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
@@ -2271,8 +2441,13 @@
     <property name="0PosY" value="768"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="na"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
@@ -2282,8 +2457,13 @@
     <property name="0PosY" value="1152"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="na"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
@@ -2293,8 +2473,13 @@
     <property name="0PosY" value="1216"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="na"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
@@ -2304,8 +2489,13 @@
     <property name="0PosY" value="1024"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="na"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
@@ -2315,8 +2505,13 @@
     <property name="0PosY" value="1280"/>
     <property name="1PosX" value="0"/>
     <property name="1PosY" value="0"/>
+    <property name="2PosX" value="0"/>
+    <property name="2PosY" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
+    <property name="Beds" value="0"/>
     <property name="Color" value="na"/>
+    <property name="Nets" value="0"/>
+    <property name="Residents" value="0"/>
     <property name="Style" value="na"/>
    </properties>
   </object>

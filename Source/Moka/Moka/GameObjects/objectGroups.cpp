@@ -224,6 +224,54 @@ void ObjectGroups::readInteractiveGroup(tinyxml2::XMLDocument &config)
 			throw std::runtime_error("ALW - Runtime Error: Unable to convert 1PosY attribute.");
 		}
 
+		// ALW - Property 2PosX
+		elem = properties->FirstChildElement("property");
+		if (elem == nullptr)
+		{
+			throw std::runtime_error("ALW - Runtime Error: There are no property elements.");
+		}
+
+		std::string posX2Name = "2PosX";
+		while (posX2Name != elem->Attribute("name"))
+		{
+			elem = elem->NextSiblingElement("property");
+			if (elem == nullptr)
+			{
+				throw std::runtime_error("ALW - Runtime Error: Failed to find 2PosX property element.");
+			}
+		}
+
+		float posX2Value;
+		eResult = elem->QueryFloatAttribute("value", &posX2Value);
+		if (eResult != tinyxml2::XML_NO_ERROR)
+		{
+			throw std::runtime_error("ALW - Runtime Error: Unable to convert 2PosX attribute.");
+		}
+
+		// ALW - Property 2PosY
+		elem = properties->FirstChildElement("property");
+		if (elem == nullptr)
+		{
+			throw std::runtime_error("ALW - Runtime Error: There are no property elements.");
+		}
+
+		std::string posY2Name = "2PosY";
+		while (posY2Name != elem->Attribute("name"))
+		{
+			elem = elem->NextSiblingElement("property");
+			if (elem == nullptr)
+			{
+				throw std::runtime_error("ALW - Runtime Error: Failed to find 1PosY property element.");
+			}
+		}
+
+		float posY2Value;
+		eResult = elem->QueryFloatAttribute("value", &posY2Value);
+		if (eResult != tinyxml2::XML_NO_ERROR)
+		{
+			throw std::runtime_error("ALW - Runtime Error: Unable to convert 2PosY attribute.");
+		}
+
 		// ALW - Property AttachedTo
 		elem = properties->FirstChildElement("property");
 		if (elem == nullptr)
@@ -243,6 +291,30 @@ void ObjectGroups::readInteractiveGroup(tinyxml2::XMLDocument &config)
 
 		std::string attachedToValue = elem->Attribute("value");
 
+		// ALW - Property Beds
+		elem = properties->FirstChildElement("property");
+		if (elem == nullptr)
+		{
+			throw std::runtime_error("ALW - Runtime Error: There are no property elements.");
+		}
+
+		std::string bedsName = "Beds";
+		while (bedsName != elem->Attribute("name"))
+		{
+			elem = elem->NextSiblingElement("property");
+			if (elem == nullptr)
+			{
+				throw std::runtime_error("ALW - Runtime Error: Failed to find Beds property element.");
+			}
+		}
+
+		int bedsValue;
+		eResult = elem->QueryIntAttribute("value", &bedsValue);
+		if (eResult != tinyxml2::XML_NO_ERROR)
+		{
+			throw std::runtime_error("ALW - Runtime Error: Unable to convert Beds attribute.");
+		}
+
 		// ALW - Property Color
 		elem = properties->FirstChildElement("property");
 		if (elem == nullptr)
@@ -261,6 +333,54 @@ void ObjectGroups::readInteractiveGroup(tinyxml2::XMLDocument &config)
 		}
 
 		std::string colorValue = elem->Attribute("value");
+
+		// ALW - Property Nets
+		elem = properties->FirstChildElement("property");
+		if (elem == nullptr)
+		{
+			throw std::runtime_error("ALW - Runtime Error: There are no property elements.");
+		}
+
+		std::string netsName = "Nets";
+		while (netsName != elem->Attribute("name"))
+		{
+			elem = elem->NextSiblingElement("property");
+			if (elem == nullptr)
+			{
+				throw std::runtime_error("ALW - Runtime Error: Failed to find Nets property element.");
+			}
+		}
+
+		int netsValue;
+		eResult = elem->QueryIntAttribute("value", &netsValue);
+		if (eResult != tinyxml2::XML_NO_ERROR)
+		{
+			throw std::runtime_error("ALW - Runtime Error: Unable to convert Nets attribute.");
+		}
+
+		// ALW - Property Residents
+		elem = properties->FirstChildElement("property");
+		if (elem == nullptr)
+		{
+			throw std::runtime_error("ALW - Runtime Error: There are no property elements.");
+		}
+
+		std::string residentsName = "Residents";
+		while (residentsName != elem->Attribute("name"))
+		{
+			elem = elem->NextSiblingElement("property");
+			if (elem == nullptr)
+			{
+				throw std::runtime_error("ALW - Runtime Error: Failed to find Residents property element.");
+			}
+		}
+
+		int residentsValue;
+		eResult = elem->QueryIntAttribute("value", &residentsValue);
+		if (eResult != tinyxml2::XML_NO_ERROR)
+		{
+			throw std::runtime_error("ALW - Runtime Error: Unable to convert Residents attribute.");
+		}
 
 		// ALW - Property Style
 		elem = properties->FirstChildElement("property");
@@ -282,7 +402,7 @@ void ObjectGroups::readInteractiveGroup(tinyxml2::XMLDocument &config)
 		std::string styleValue = elem->Attribute("value");
 
 		interactiveObjects.push_back(InteractiveObject(name, type, x, y, width, height, posX0Value, posY0Value, posX1Value, posY1Value
-			, attachedToValue, colorValue, styleValue));
+			, posX2Value, posY2Value, attachedToValue, bedsValue, colorValue, netsValue, residentsValue, styleValue));
 	}
 
 	mInteractiveGroup.setInteractiveObjects(interactiveObjects);
