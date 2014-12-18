@@ -1,16 +1,16 @@
 #include "world.h"
 #include "../SceneNodes/barrelNode.h"
-#include "../SceneNodes/barrelSpriteNode.h"
+#include "../SceneNodes/barrelUpdateNode.h"
 #include "../SceneNodes/barrelUINode.h"
 #include "../SceneNodes/doorNode.h"
-#include "../SceneNodes/doorSpriteNode.h"
 #include "../SceneNodes/doorUINode.h"
+#include "../SceneNodes/doorUpdateNode.h"
 #include "../SceneNodes/windowNode.h"
-#include "../SceneNodes/windowSpriteNode.h"
 #include "../SceneNodes/windowUINode.h"
+#include "../SceneNodes/windowUpdateNode.h"
 #include "../SceneNodes/clinicNode.h"
-#include "../SceneNodes/clinicSpriteNode.h"
 #include "../SceneNodes/clinicUINode.h"
+#include "../SceneNodes/clinicUpdateNode.h"
 #include "../SceneNodes/houseNode.h"
 #include "../SceneNodes/houseUINode.h"
 #include "../SceneNodes/houseUpdateNode.h"
@@ -159,32 +159,32 @@ void World::buildScene()
 	{
 		if (iter->getType() == "Barrel")
 		{
-			mSceneLayers[Sprite]->attachChild(std::move(std::unique_ptr<BarrelSpriteNode>(
-				new BarrelSpriteNode(*iter, mTextures.get(Textures::ID::Tiles)))));
+			mSceneLayers[Sprite]->attachChild(std::move(std::unique_ptr<BarrelUpdateNode>(
+				new BarrelUpdateNode(*iter, mTextures.get(Textures::ID::Tiles)))));
 
 			mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<BarrelNode>(
 				new BarrelNode(*iter, mWindow, mCamera.getView(), mUIBundle, mTextures, mSoundPlayer, mChatBox))));
 		}
 		else if (iter->getType() == "Door")
 		{
-			mSceneLayers[Sprite]->attachChild(std::move(std::unique_ptr<DoorSpriteNode>(
-				new DoorSpriteNode(*iter, mTextures.get(Textures::ID::Tiles)))));
+			mSceneLayers[Sprite]->attachChild(std::move(std::unique_ptr<DoorUpdateNode>(
+				new DoorUpdateNode(*iter, mTextures.get(Textures::ID::Tiles)))));
 
 			mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<DoorNode>(
 				new DoorNode(*iter, mWindow, mCamera.getView(), mUIBundle, mTextures, mSoundPlayer, mChatBox))));
 		}
 		else if (iter->getType() == "Window")
 		{
-			mSceneLayers[Sprite]->attachChild(std::move(std::unique_ptr<WindowSpriteNode>(
-				new WindowSpriteNode(*iter, mTextures.get(Textures::ID::Tiles)))));
+			mSceneLayers[Sprite]->attachChild(std::move(std::unique_ptr<WindowUpdateNode>(
+				new WindowUpdateNode(*iter, mTextures.get(Textures::ID::Tiles)))));
 
 			mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<WindowNode>(
 				new WindowNode(*iter, mWindow, mCamera.getView(), mUIBundle, mTextures, mSoundPlayer, mChatBox))));
 		}
 		else if (iter->getType() == "Clinic")
 		{
-			mSceneLayers[Sprite]->attachChild(std::move(std::unique_ptr<ClinicSpriteNode>(
-				new ClinicSpriteNode(*iter, mTextures.get(Textures::ID::Tiles)))));
+			mSceneLayers[Sprite]->attachChild(std::move(std::unique_ptr<ClinicUpdateNode>(
+				new ClinicUpdateNode(*iter, mTextures.get(Textures::ID::Tiles)))));
 
 			mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<ClinicNode>(
 				new ClinicNode(*iter, mWindow, mCamera.getView(), mUIBundle, buildAttachedRects(*iter), mSoundPlayer, mChatBox))));

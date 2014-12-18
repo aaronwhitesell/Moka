@@ -1,5 +1,5 @@
-#ifndef WINDOW_SPRITE_NODE_H
-#define WINDOW_SPRITE_NODE_H
+#ifndef WINDOW_UPDATE_NODE_H
+#define WINDOW_UPDATE_NODE_H
 
 #include "Trambo/Events/eventHandler.h"
 #include "Trambo/SceneNodes/sceneNode.h"
@@ -21,14 +21,14 @@ namespace trambo
 
 class InteractiveObject;
 
-class WindowSpriteNode : public trmb::SceneNode, trmb::EventHandler
+class WindowUpdateNode : public trmb::SceneNode, trmb::EventHandler
 {
 // ALW - The motivation for this class is to allow the updatable sprite to be attached
 // ALW - to the Sprite layer. This draws the sprite below the selection highlight.
 public:
-								WindowSpriteNode(const InteractiveObject &interactiveObject, const sf::Texture &texture);
-								WindowSpriteNode(const WindowSpriteNode &) = delete;
-	WindowSpriteNode &			operator=(const WindowSpriteNode &) = delete;
+								WindowUpdateNode(const InteractiveObject &interactiveObject, const sf::Texture &texture);
+								WindowUpdateNode(const WindowUpdateNode &) = delete;
+	WindowUpdateNode &			operator=(const WindowUpdateNode &) = delete;
 
 	virtual void				handleEvent(const trmb::Event &gameEvent) override final;
 

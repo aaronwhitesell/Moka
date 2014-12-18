@@ -1,4 +1,4 @@
-#include "windowSpriteNode.h"
+#include "windowUpdateNode.h"
 #include "../GameObjects/interactiveObject.h"
 
 #include "Trambo/Events/event.h"
@@ -10,7 +10,7 @@
 #include <SFML/Graphics/Texture.hpp>
 
 
-WindowSpriteNode::WindowSpriteNode(const InteractiveObject &interactiveObject, const sf::Texture &texture)
+WindowUpdateNode::WindowUpdateNode(const InteractiveObject &interactiveObject, const sf::Texture &texture)
 : mDrawWindowScreenSprite(0x41a9ff51)
 , mDoNotDrawWindowScreenSprite(0xbfe9d3e6)
 , mDrawWindowClosedSprite(0xe0f87a29)
@@ -24,7 +24,7 @@ WindowSpriteNode::WindowSpriteNode(const InteractiveObject &interactiveObject, c
 	mSprite.setPosition(sf::Vector2f(mInteractiveObject.getPosX0(), mInteractiveObject.getPosY0()));
 }
 
-void WindowSpriteNode::handleEvent(const trmb::Event &gameEvent)
+void WindowUpdateNode::handleEvent(const trmb::Event &gameEvent)
 {
 	if (mDrawWindowScreenSprite == gameEvent.getType())
 	{
@@ -70,7 +70,7 @@ void WindowSpriteNode::handleEvent(const trmb::Event &gameEvent)
 	setSprite();
 }
 
-void WindowSpriteNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const
+void WindowUpdateNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	if (mDrawn)
 	{
@@ -78,7 +78,7 @@ void WindowSpriteNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates st
 	}
 }
 
-void WindowSpriteNode::setSprite()
+void WindowUpdateNode::setSprite()
 {
 	if (mWindowClosed)
 	{
@@ -98,7 +98,7 @@ void WindowSpriteNode::setSprite()
 	}
 }
 
-void WindowSpriteNode::setWindowScreenSprite()
+void WindowUpdateNode::setWindowScreenSprite()
 {
 	if ("Tan" == mInteractiveObject.getColor())
 	{
@@ -136,7 +136,7 @@ void WindowSpriteNode::setWindowScreenSprite()
 	}
 }
 
-void WindowSpriteNode::setWindowClosedSprite()
+void WindowUpdateNode::setWindowClosedSprite()
 {
 	if ("Tan" == mInteractiveObject.getColor())
 	{

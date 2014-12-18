@@ -1,5 +1,5 @@
-#ifndef DOOR_SPRITE_NODE_H
-#define DOOR_SPRITE_NODE_H
+#ifndef BARREL_UPDATE_NODE_H
+#define BARREL_UPDATE_NODE_H
 
 #include "Trambo/Events/eventHandler.h"
 #include "Trambo/SceneNodes/sceneNode.h"
@@ -21,14 +21,14 @@ namespace trambo
 
 class InteractiveObject;
 
-class DoorSpriteNode : public trmb::SceneNode, trmb::EventHandler
+class BarrelUpdateNode : public trmb::SceneNode, trmb::EventHandler
 {
 // ALW - The motivation for this class is to allow the updatable sprite to be attached
 // ALW - to the Sprite layer. This draws the sprite below the selection highlight.
 public:
-								DoorSpriteNode(const InteractiveObject &interactiveObject, const sf::Texture &texture);
-								DoorSpriteNode(const DoorSpriteNode &) = delete;
-	DoorSpriteNode &			operator=(const DoorSpriteNode &) = delete;
+								BarrelUpdateNode(const InteractiveObject &interactiveObject, const sf::Texture &texture);
+								BarrelUpdateNode(const BarrelUpdateNode &) = delete;
+	BarrelUpdateNode &			operator=(const BarrelUpdateNode &) = delete;
 
 	virtual void				handleEvent(const trmb::Event &gameEvent) override final;
 
@@ -42,8 +42,8 @@ private:
 
 
 private:
-	const EventGuid				mDrawSprite;      // ALW - Matches the GUID in the DoorNode class.
-	const EventGuid				mDoNotDrawSprite; // ALW - Matches the GUID in the DoorNode class.
+	const EventGuid				mDrawSprite;      // ALW - Matches the GUID in the BarrelNode class.
+	const EventGuid				mDoNotDrawSprite; // ALW - Matches the GUID in the BarrelNode class.
 	const InteractiveObject		&mInteractiveObject;
 	sf::Sprite					mSprite;
 	bool						mDrawn;

@@ -1,4 +1,4 @@
-#include "clinicSpriteNode.h"
+#include "clinicUpdateNode.h"
 #include "../GameObjects/interactiveObject.h"
 
 #include "Trambo/Events/event.h"
@@ -10,7 +10,7 @@
 #include <SFML/Graphics/Texture.hpp>
 
 
-ClinicSpriteNode::ClinicSpriteNode(const InteractiveObject &interactiveObject, const sf::Texture &texture)
+ClinicUpdateNode::ClinicUpdateNode(const InteractiveObject &interactiveObject, const sf::Texture &texture)
 : mDrawSmallRDTCrateSprite(0x3377fe93)
 , mDrawLargeRDTCrateSprite(0x358963ee)
 , mDrawRDTBarrelSprite(0xafbc42ce)
@@ -29,7 +29,7 @@ ClinicSpriteNode::ClinicSpriteNode(const InteractiveObject &interactiveObject, c
 	mACTSprite.setPosition(sf::Vector2f(mInteractiveObject.getPosX1(), mInteractiveObject.getPosY1()));
 }
 
-void ClinicSpriteNode::handleEvent(const trmb::Event &gameEvent)
+void ClinicUpdateNode::handleEvent(const trmb::Event &gameEvent)
 {
 	if (mDrawSmallRDTCrateSprite == gameEvent.getType())
 	{
@@ -119,7 +119,7 @@ void ClinicSpriteNode::handleEvent(const trmb::Event &gameEvent)
 	}
 }
 
-void ClinicSpriteNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const
+void ClinicUpdateNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	if (mDrawRDT)
 	{
