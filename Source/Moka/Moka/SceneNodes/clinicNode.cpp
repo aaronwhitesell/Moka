@@ -38,6 +38,8 @@ ClinicNode::ClinicNode(const InteractiveObject &interactiveObject, const sf::Ren
 , mRDTCount(0)
 , mACTCount(0)
 {
+	updateRDTDisableState();
+	updateACTDisableState();
 }
 
 void ClinicNode::handleEvent(const trmb::Event &gameEvent)
@@ -142,6 +144,9 @@ void ClinicNode::updateOptionsUI()
 	// ALW - Resizes UI to zero, so click detection does not occur.
 	mUIBundle.getClinicUI().unhide();
 
+	updateRDTDisableState();
+	updateACTDisableState();
+
 	const float verticalBuffer = 10.0f;
 	mUIBundle.getClinicUI().setPosition(sf::Vector2f(mInteractiveObject.getX() + mInteractiveObject.getWidth() / 2.0f
 		, mInteractiveObject.getY() + mInteractiveObject.getHeight() + verticalBuffer));
@@ -192,64 +197,59 @@ void ClinicNode::decrementPurchaseACT()
 
 void ClinicNode::calculateRDTEvent()
 {
-	if (NoRDTs == mRDTCount)
+	switch (mRDTCount)
 	{
+	case NoRDTs:
 		InteractiveNode::sendEvent(mDoNotRDTDrawSprite);
-	}
-	else if (SmallRDTCrate == mRDTCount)
-	{
+		break;
+	case SmallRDTCrate:
 		InteractiveNode::sendEvent(mDrawSmallRDTCrateSprite);
-	}
-	else if (LargeRDTCrate == mRDTCount)
-	{
+		break;
+	case LargeRDTCrate:
 		InteractiveNode::sendEvent(mDrawLargeRDTCrateSprite);
-	}
-	else if (RDTBarrel == mRDTCount)
-	{
+		break;
+	case RDTBarrel:
 		InteractiveNode::sendEvent(mDrawRDTBarrelSprite);
-	}
-	else
-	{
+		break;
+	default:
 		assert(("The RDT count is out of range!", false));
 	}
 }
 
 void ClinicNode::calculateACTEvent()
 {
-	if (NoACTs == mACTCount)
+	switch (mACTCount)
 	{
+	case NoACTs:
 		InteractiveNode::sendEvent(mDoNotACTDrawSprite);
-	}
-	else if (SmallACTCrate == mACTCount)
-	{
+		break;
+	case SmallACTCrate:
 		InteractiveNode::sendEvent(mDrawSmallACTCrateSprite);
-	}
-	else if (LargeACTCrate == mACTCount)
-	{
+		break;
+	case LargeACTCrate:
 		InteractiveNode::sendEvent(mDrawLargeACTCrateSprite);
-	}
-	else if (ACTBarrel == mACTCount)
-	{
+		break;
+	case ACTBarrel:
 		InteractiveNode::sendEvent(mDrawACTBarrelSprite);
-	}
-	else
-	{
+		break;
+	default:
 		assert(("The ACT count is out of range!", false));
 	}
 }
 
 void ClinicNode::updateRDTDisableState()
 {
-	if (MinRDTCount == mRDTCount)
+	assert(("The RDT count is out of range!", MinRDTCount <= mRDTCount && mRDTCount <= MaxRDTCount));
+
+	switch (mRDTCount)
 	{
+	case MinRDTCount:
 		mUIBundle.getClinicUI().setDisableDecrementButtonOfLHSTab(true);
-	}
-	else if (MaxRDTCount == mRDTCount)
-	{
+		break;
+	case MaxRDTCount:
 		mUIBundle.getClinicUI().setDisableIncrementButtonOfLHSTab(true);
-	}
-	else
-	{
+		break;
+	default:
 		mUIBundle.getClinicUI().setDisableDecrementButtonOfLHSTab(false);
 		mUIBundle.getClinicUI().setDisableIncrementButtonOfLHSTab(false);
 	}
@@ -257,16 +257,17 @@ void ClinicNode::updateRDTDisableState()
 
 void ClinicNode::updateACTDisableState()
 {
-	if (MinACTCount == mACTCount)
+	assert(("The ACT count is out of range!", MinACTCount <= mACTCount && mACTCount <= MaxACTCount));
+
+	switch (mACTCount)
 	{
+	case MinACTCount:
 		mUIBundle.getClinicUI().setDisableDecrementButtonOfRHSTab(true);
-	}
-	else if (MaxACTCount == mACTCount)
-	{
+		break;
+	case MaxACTCount:
 		mUIBundle.getClinicUI().setDisableIncrementButtonOfRHSTab(true);
-	}
-	else
-	{
+		break;
+	default:
 		mUIBundle.getClinicUI().setDisableDecrementButtonOfRHSTab(false);
 		mUIBundle.getClinicUI().setDisableIncrementButtonOfRHSTab(false);
 	}

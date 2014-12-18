@@ -19,9 +19,9 @@ OptionsUI::OptionsUI(Fonts::ID font, trmb::FontHolder &fonts, SoundEffects::ID s
 , mVerticalBuffer(1.0f)
 , mDrawIncDecUI(false)
 , mDisableIncrementButtonOfLHSTab(false)
-, mDisableDecrementButtonOfLHSTab(true)
+, mDisableDecrementButtonOfLHSTab(false)
 , mDisableIncrementButtonOfRHSTab(false)
-, mDisableDecrementButtonOfRHSTab(true)
+, mDisableDecrementButtonOfRHSTab(false)
 , mDisable(false)
 , mRestoreBackgroundSize()
 {
