@@ -43,7 +43,7 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mSpawnPosition(mWorldBounds.width / 2.f, mWorldBounds.height / 2.f)
 , mCamera(window.getDefaultView(), mWorldBounds)
 , mMap("Data/Maps/World.tmx")
-, mChatBox(window, fonts, soundPlayer)
+, mChatBox(window, Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer)
 , mDaylightUI(window, Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer)
 , mBarrelUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
 , mDoorUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)

@@ -18,7 +18,8 @@
 #include <sstream>
 
 
-ChatBox::ChatBox(sf::RenderWindow &window, trmb::FontHolder &fonts, trmb::SoundPlayer &soundPlayer)
+ChatBox::ChatBox(sf::RenderWindow &window, Fonts::ID font, trmb::FontHolder &fonts, SoundEffects::ID soundEffect
+	, trmb::SoundPlayer &soundPlayer)
 : mCreateTextPrompt(0x25e87fd8)
 , mClearTextPrompt(0xc1523265)
 , mEnter(0xff349d1d)
@@ -29,6 +30,7 @@ ChatBox::ChatBox(sf::RenderWindow &window, trmb::FontHolder &fonts, trmb::SoundP
 , mMaxLinesDrawn(5u)
 , mWindow(window)
 , mFonts(fonts)
+, mSoundEffect(soundEffect)
 , mSoundPlayer(soundPlayer)
 , mLinesToDraw(mMaxLinesDrawn)
 {
@@ -48,11 +50,11 @@ ChatBox::ChatBox(sf::RenderWindow &window, trmb::FontHolder &fonts, trmb::SoundP
 
 	// ALW - Position text at the top left of the ChatBox
 	mTextLine.setPosition(mChatBox.getPosition() - halfOfChatBox);
-	mTextLine.setFont(mFonts.get(Fonts::ID::Main));
+	mTextLine.setFont(mFonts.get(font));
 	mTextLine.setCharacterSize(14u);
 
 	mPrompt.setString(trmb::Localize::getInstance().getString("prompt"));
-	mPrompt.setFont(mFonts.get(Fonts::ID::Main));
+	mPrompt.setFont(mFonts.get(font));
 	mPrompt.setCharacterSize(14u);
 	mPrompt.setColor(sf::Color(128u, 128u, 128u, 255u));
 	float promptWidth = mPrompt.getGlobalBounds().width;
@@ -165,7 +167,7 @@ void ChatBox::displayMoreText()
 
 		setTextLinePosition();
 		calculateLinesToDraw();
-		mSoundPlayer.play(SoundEffects::ID::Button);
+		mSoundPlayer.play(mSoundEffect);
 		if (!isPrompt())
 			EventHandler::sendEvent(trmb::Event(mClearTextPrompt));
 	}

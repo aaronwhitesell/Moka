@@ -27,7 +27,8 @@ namespace trmb
 class ChatBox : public sf::Drawable, public trmb::EventHandler
 {
 public:
-						  ChatBox(sf::RenderWindow &window, trmb::FontHolder &fonts, trmb::SoundPlayer &soundPlayer);
+						  ChatBox(sf::RenderWindow &window, Fonts::ID font, trmb::FontHolder &fonts, SoundEffects::ID soundEffect
+							  , trmb::SoundPlayer &soundPlayer);
 						  ChatBox(const ChatBox &) = delete;
 	ChatBox &			  operator=(const ChatBox &) = delete;
 
@@ -71,6 +72,7 @@ private:
 
 	sf::RenderWindow	  &mWindow;
 	trmb::FontHolder	  &mFonts;
+	SoundEffects::ID	  mSoundEffect;
 	trmb::SoundPlayer	  &mSoundPlayer;
 
 	sf::RectangleShape	  mChatBox;

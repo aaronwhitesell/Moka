@@ -30,13 +30,13 @@ DaylightUI::DaylightUI(sf::RenderWindow &window, Fonts::ID font, trmb::FontHolde
 	mBackground.setOutlineColor(sf::Color(0u, 0u, 0u, 255u));
 	mBackground.setOutlineThickness(1.0f);
 
-	mDaylightText.setFont(mFonts.get(Fonts::ID::Main));
+	mDaylightText.setFont(mFonts.get(font));
 	mDaylightText.setCharacterSize(14u);
 	mDaylightText.setString(trmb::Localize::getInstance().getString("daylightUI"));
 	trmb::centerOrigin(mDaylightText, true, false);
 	mDaylightText.setPosition(sf::Vector2f(mBackground.getSize().x / 2.0f, 0.0f));
 
-	mHoursText.setFont(mFonts.get(Fonts::ID::Main));
+	mHoursText.setFont(mFonts.get(font));
 	mHoursText.setCharacterSize(22u);
 	mHoursText.setString(trmb::toStringWithPrecision(mHourCount, mFloatPrecision));
 	trmb::centerOrigin(mHoursText, true, false);
