@@ -43,8 +43,8 @@ ChatBox::ChatBox(sf::RenderWindow &window, trmb::FontHolder &fonts, trmb::SoundP
 	trmb::centerOrigin(mChatBox);
 	mChatBox.setPosition(windowCenter.x, windowSize.y - halfOfChatBox.y - bufferFromBottom);
 	mChatBox.setFillColor(sf::Color(0u, 0u, 0u, 200u));
-	mChatBox.setOutlineColor(sf::Color(0u, 0u, 0u, 125u));
-	mChatBox.setOutlineThickness(3.0f);
+	mChatBox.setOutlineColor(sf::Color(0u, 0u, 0u, 255u));
+	mChatBox.setOutlineThickness(1.0f);
 
 	// ALW - Position text at the top left of the ChatBox
 	mTextLine.setPosition(mChatBox.getPosition() - halfOfChatBox);
