@@ -2,6 +2,7 @@
 <!-- Text -->
 <text>
     <en>
+		<daylightUI                attribute="Daylight"/>
 	    <prompt                    attribute="Press Enter"/>
 		<greeting		           attribute="Congratulations, you have just been elected the new mayor of Pleasantville!
 Pleasantville is a wonderful place, but it has one big problem; malaria. Help the residents of your town develop an

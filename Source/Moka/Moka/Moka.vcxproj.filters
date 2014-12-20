@@ -218,6 +218,9 @@
     <ClInclude Include="SceneNodes\windowUpdateNode.h">
       <Filter>Header Files\SceneNodes\Update</Filter>
     </ClInclude>
+    <ClInclude Include="HUD\daylightUI.h">
+      <Filter>Header Files\HUD</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\application.cpp">
@@ -336,6 +339,9 @@
     </ClCompile>
     <ClCompile Include="SceneNodes\windowUpdateNode.cpp">
       <Filter>Source Files\SceneNodes\Update</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD\daylightUI.cpp">
+      <Filter>Source Files\HUD</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
