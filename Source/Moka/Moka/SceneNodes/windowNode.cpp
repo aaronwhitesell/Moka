@@ -1,6 +1,7 @@
 #include "windowNode.h"
 #include "../GameObjects/interactiveObject.h"
 #include "../HUD/chatBox.h"
+#include "../HUD/daylightUI.h"
 #include "../HUD/optionsUI.h"
 #include "../Levels/uiBundle.h"
 #include "../Resources/resourceIdentifiers.h"
@@ -18,7 +19,7 @@
 
 
 WindowNode::WindowNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view
-	, UIBundle &uiBundle, const trmb::TextureHolder &textures, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
+	, UIBundle &uiBundle, const trmb::TextureHolder &textures, trmb::SoundPlayer &soundPlayer, DaylightUI &daylightUI, ChatBox &chatBox)
 : PreventionNode(interactiveObject, window, view, uiBundle)
 , mWindowUIActivated(0x961e8d0b)
 , mDrawWindowUI(0x30459275)
@@ -28,8 +29,11 @@ WindowNode::WindowNode(const InteractiveObject &interactiveObject, const sf::Ren
 , mDrawWindowClosedSprite(0xe0f87a29, interactiveObject.getName())
 , mDoNotDrawWindowClosedSprite(0xdeecc064, interactiveObject.getName())
 , mLeftClickPress(0x6955d309)
+, mScreenCost(1.0f)
+, mCloseCost(0.5f)
 , mTextures(textures)
 , mSoundPlayer(soundPlayer)
+, mDaylightUI(daylightUI)
 , mChatBox(chatBox)
 , mWindowUIActive(false)
 , mIsWindowScreen(false)
@@ -172,6 +176,7 @@ void WindowNode::addScreen()
 	mIsWindowScreen = true;
 	InteractiveNode::sendEvent(mDrawWindowScreenSprite);
 	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseScreenWindow"));
+	mDaylightUI.subtract(mScreenCost);
 
 	const std::size_t screenElement = 0;
 	mUIElemStates.at(screenElement) = false;
@@ -182,6 +187,7 @@ void WindowNode::undoScreen()
 	mIsWindowScreen = false;
 	InteractiveNode::sendEvent(mDoNotDrawWindowScreenSprite);
 	mChatBox.updateText(trmb::Localize::getInstance().getString("refundScreenWindow"));
+	mDaylightUI.add(mScreenCost);
 
 	const std::size_t screenElement = 0;
 	mUIElemStates.at(screenElement) = true;
@@ -192,6 +198,7 @@ void WindowNode::closeWindow()
 	mIsWindowClosed = true;
 	InteractiveNode::sendEvent(mDrawWindowClosedSprite);
 	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseClosedWindow"));
+	mDaylightUI.subtract(mCloseCost);
 
 	const std::size_t windowElement = 1;
 	mUIElemStates.at(windowElement) = false;
@@ -202,6 +209,7 @@ void WindowNode::openWindow()
 	mIsWindowClosed = false;
 	InteractiveNode::sendEvent(mDoNotDrawWindowClosedSprite);
 	mChatBox.updateText(trmb::Localize::getInstance().getString("refundClosedWindow"));
+	mDaylightUI.add(mCloseCost);
 
 	const std::size_t windowElement = 1;
 	mUIElemStates.at(windowElement) = true;

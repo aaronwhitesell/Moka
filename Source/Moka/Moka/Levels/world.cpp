@@ -44,6 +44,7 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mCamera(window.getDefaultView(), mWorldBounds)
 , mMap("Data/Maps/World.tmx")
 , mChatBox(window, fonts, soundPlayer)
+, mDaylightUI(window, Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer)
 , mBarrelUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
 , mDoorUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
 , mWindowUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
@@ -82,6 +83,7 @@ void World::draw()
 	mTarget.setView(mCamera.getView());
 	mTarget.draw(mSceneGraph);
 	mTarget.draw(mChatBox);
+	mTarget.draw(mDaylightUI);
 }
 
 void World::updateSoundPlayer()
@@ -163,7 +165,7 @@ void World::buildScene()
 				new BarrelUpdateNode(*iter, mTextures.get(Textures::ID::Tiles)))));
 
 			mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<BarrelNode>(
-				new BarrelNode(*iter, mWindow, mCamera.getView(), mUIBundle, mTextures, mSoundPlayer, mChatBox))));
+				new BarrelNode(*iter, mWindow, mCamera.getView(), mUIBundle, mTextures, mSoundPlayer, mDaylightUI, mChatBox))));
 		}
 		else if (iter->getType() == "Door")
 		{
@@ -171,7 +173,7 @@ void World::buildScene()
 				new DoorUpdateNode(*iter, mTextures.get(Textures::ID::Tiles)))));
 
 			mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<DoorNode>(
-				new DoorNode(*iter, mWindow, mCamera.getView(), mUIBundle, mTextures, mSoundPlayer, mChatBox))));
+				new DoorNode(*iter, mWindow, mCamera.getView(), mUIBundle, mTextures, mSoundPlayer, mDaylightUI, mChatBox))));
 		}
 		else if (iter->getType() == "Window")
 		{
@@ -179,7 +181,7 @@ void World::buildScene()
 				new WindowUpdateNode(*iter, mTextures.get(Textures::ID::Tiles)))));
 
 			mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<WindowNode>(
-				new WindowNode(*iter, mWindow, mCamera.getView(), mUIBundle, mTextures, mSoundPlayer, mChatBox))));
+				new WindowNode(*iter, mWindow, mCamera.getView(), mUIBundle, mTextures, mSoundPlayer, mDaylightUI, mChatBox))));
 		}
 		else if (iter->getType() == "Clinic")
 		{
@@ -187,14 +189,16 @@ void World::buildScene()
 				new ClinicUpdateNode(*iter, mTextures.get(Textures::ID::Tiles)))));
 
 			mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<ClinicNode>(
-				new ClinicNode(*iter, mWindow, mCamera.getView(), mUIBundle, buildAttachedRects(*iter), mSoundPlayer, mChatBox))));
+				new ClinicNode(*iter, mWindow, mCamera.getView(), mUIBundle, buildAttachedRects(*iter), mSoundPlayer, mDaylightUI
+				, mChatBox))));
 		}
 		else if (iter->getType() == "House")
 		{
 			mSceneLayers[Update]->attachChild(std::move(std::unique_ptr<HouseUpdateNode>(new HouseUpdateNode(*iter))));
 
 			mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<HouseNode>(
-				new HouseNode(*iter, mWindow, mCamera.getView(), mUIBundle, buildAttachedRects(*iter), mSoundPlayer, mChatBox))));
+				new HouseNode(*iter, mWindow, mCamera.getView(), mUIBundle, buildAttachedRects(*iter), mSoundPlayer, mDaylightUI
+				, mChatBox))));
 		}
 		else
 		{

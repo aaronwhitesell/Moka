@@ -1,6 +1,7 @@
 #include "barrelNode.h"
 #include "../GameObjects/interactiveObject.h"
 #include "../HUD/chatBox.h"
+#include "../HUD/daylightUI.h"
 #include "../HUD/optionsUI.h"
 #include "../Levels/uiBundle.h"
 #include "../Resources/resourceIdentifiers.h"
@@ -17,7 +18,7 @@
 
 
 BarrelNode::BarrelNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view
-	, UIBundle &uiBundle, const trmb::TextureHolder &textures, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
+	, UIBundle &uiBundle, const trmb::TextureHolder &textures, trmb::SoundPlayer &soundPlayer, DaylightUI &daylightUI, ChatBox &chatBox)
 : PreventionNode(interactiveObject, window, view, uiBundle)
 , mBarrelUIActivated(0x10a1b42f)
 , mDrawBarrelUI(0xcfdb933d)
@@ -25,8 +26,10 @@ BarrelNode::BarrelNode(const InteractiveObject &interactiveObject, const sf::Ren
 , mDrawBarrelSprite(0xe22f85d5, interactiveObject.getName())
 , mDoNotDrawBarrelSprite(0xcd1fd24, interactiveObject.getName())
 , mLeftClickPress(0x6955d309)
+, mCoverCost(1.0f)
 , mTextures(textures)
 , mSoundPlayer(soundPlayer)
+, mDaylightUI(daylightUI)
 , mChatBox(chatBox)
 , mBarrelUIActive(false)
 , mIsBarrelCovered(false)
@@ -153,6 +156,7 @@ void BarrelNode::addCover()
 	mIsBarrelCovered = true;
 	InteractiveNode::sendEvent(mDrawBarrelSprite);
 	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseCover"));
+	mDaylightUI.subtract(mCoverCost);
 	mUIElemStates.front() = false;
 }
 
@@ -161,5 +165,6 @@ void BarrelNode::undoCover()
 	mIsBarrelCovered = false;
 	InteractiveNode::sendEvent(mDoNotDrawBarrelSprite);
 	mChatBox.updateText(trmb::Localize::getInstance().getString("refundCover"));
+	mDaylightUI.add(mCoverCost);
 	mUIElemStates.front() = true;
 }

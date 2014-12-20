@@ -1,6 +1,7 @@
 #include "houseNode.h"
 #include "../GameObjects/interactiveObject.h"
 #include "../HUD/chatBox.h"
+#include "../HUD/daylightUI.h"
 #include "../HUD/optionsUI.h"
 #include "../HUD/undoUI.h"
 #include "../Levels/uiBundle.h"
@@ -18,7 +19,7 @@
 
 
 HouseNode::HouseNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view, UIBundle &uiBundle
-	, std::vector<sf::FloatRect> attachedRects, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
+	, std::vector<sf::FloatRect> attachedRects, trmb::SoundPlayer &soundPlayer, DaylightUI &daylightUI, ChatBox &chatBox)
 : BuildingNode(interactiveObject, window, view, uiBundle, attachedRects)
 , mHouseUIActivated(0xb5ba9eaf)
 , mAddNet1(0x43702f1a, interactiveObject.getName())
@@ -36,7 +37,10 @@ HouseNode::HouseNode(const InteractiveObject &interactiveObject, const sf::Rende
 , mDrawHouseUI(0xc7353048)
 , mDoNotDrawHouseUI(0x8e6093bf)
 , mLeftClickPress(0x6955d309)
+, mNetCost(1.0f)
+, mRepairCost(0.5f)
 , mSoundPlayer(soundPlayer)
+, mDaylightUI(daylightUI)
 , mChatBox(chatBox)
 , mHouseUIActive(false)
 , mTotalBeds(interactiveObject.getBeds())
@@ -175,6 +179,7 @@ void HouseNode::incrementPurchaseBedNet()
 	calculateNetPurchaseEvent();
 	updateNetDisableState();
 	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseNet"));
+	mDaylightUI.subtract(mNetCost);
 }
 
 void HouseNode::decrementPurchaseBedNet()
@@ -183,6 +188,7 @@ void HouseNode::decrementPurchaseBedNet()
 	calculateNetRefundEvent();
 	updateNetDisableState();
 	mChatBox.updateText(trmb::Localize::getInstance().getString("refundNet"));
+	mDaylightUI.add(mNetCost);
 }
 
 void HouseNode::incrementRepair()
@@ -191,6 +197,7 @@ void HouseNode::incrementRepair()
 	calculateRepairPurchaseEvent();
 	updateRepairDisableState();
 	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseRepair"));
+	mDaylightUI.subtract(mRepairCost);
 }
 
 void HouseNode::decrementRepair()
@@ -199,6 +206,7 @@ void HouseNode::decrementRepair()
 	calculateRepairRefundEvent();
 	updateRepairDisableState();
 	mChatBox.updateText(trmb::Localize::getInstance().getString("refundRepair"));
+	mDaylightUI.add(mRepairCost);
 }
 
 void HouseNode::calculateNetPurchaseEvent()

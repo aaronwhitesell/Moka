@@ -1,6 +1,7 @@
 #include "doorNode.h"
 #include "../GameObjects/interactiveObject.h"
 #include "../HUD/chatBox.h"
+#include "../HUD/daylightUI.h"
 #include "../HUD/optionsUI.h"
 #include "../Levels/uiBundle.h"
 #include "../Resources/resourceIdentifiers.h"
@@ -16,7 +17,7 @@
 
 
 DoorNode::DoorNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view
-	, UIBundle &uiBundle, const trmb::TextureHolder &textures, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
+	, UIBundle &uiBundle, const trmb::TextureHolder &textures, trmb::SoundPlayer &soundPlayer, DaylightUI &daylightUI, ChatBox &chatBox)
 : PreventionNode(interactiveObject, window, view, uiBundle)
 , mDoorUIActivated(0xa704ae55)
 , mDrawDoorUI(0x7cf851c6)
@@ -24,8 +25,10 @@ DoorNode::DoorNode(const InteractiveObject &interactiveObject, const sf::RenderW
 , mDrawDoorSprite(0x5ea6cda9, interactiveObject.getName())
 , mDoNotDrawDoorSprite(0x918c6b78, interactiveObject.getName())
 , mLeftClickPress(0x6955d309)
+, mCloseCost(0.5f)
 , mTextures(textures)
 , mSoundPlayer(soundPlayer)
+, mDaylightUI(daylightUI)
 , mChatBox(chatBox)
 , mDoorUIActive(false)
 , mIsDoorClosed(false)
@@ -152,6 +155,7 @@ void DoorNode::closeDoor()
 	mIsDoorClosed = true;
 	InteractiveNode::sendEvent(mDrawDoorSprite);
 	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseClosedDoor"));
+	mDaylightUI.subtract(mCloseCost);
 	mUIElemStates.front() = false;
 }
 
@@ -160,5 +164,6 @@ void DoorNode::openDoor()
 	mIsDoorClosed = false;
 	InteractiveNode::sendEvent(mDoNotDrawDoorSprite);
 	mChatBox.updateText(trmb::Localize::getInstance().getString("refundClosedDoor"));
+	mDaylightUI.add(mCloseCost);
 	mUIElemStates.front() = true;
 }

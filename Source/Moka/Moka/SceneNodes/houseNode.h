@@ -26,6 +26,7 @@ namespace trmb
 }
 
 class ChatBox;
+class DaylightUI;
 class InteractiveObject;
 class UIBundle;
 
@@ -34,7 +35,7 @@ class HouseNode : public BuildingNode // inherits SceneNode, EventHandler, and I
 public:
 								HouseNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window
 									, const sf::View &view, UIBundle &uiBundle, std::vector<sf::FloatRect> attachedRects
-									, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox);
+									, trmb::SoundPlayer &soundPlayer, DaylightUI &daylightUI, ChatBox &chatBox);
 								HouseNode(const HouseNode &) = delete;
 	HouseNode &					operator=(const HouseNode &) = delete;
 
@@ -87,7 +88,10 @@ private:
 	const trmb::Event			mDrawHouseUI;
 	const trmb::Event			mDoNotDrawHouseUI;
 	const EventGuid				mLeftClickPress;   // ALW - Matches the GUID in the Controller class.
+	const float					mNetCost;
+	const float					mRepairCost;
 	trmb::SoundPlayer			&mSoundPlayer;
+	DaylightUI					&mDaylightUI;
 	ChatBox						&mChatBox;
 	bool						mHouseUIActive;
 

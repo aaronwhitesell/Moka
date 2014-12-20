@@ -29,6 +29,7 @@ namespace trmb
 }
 
 class ChatBox;
+class DaylightUI;
 class InteractiveObject;
 class UIBundle;
 
@@ -41,7 +42,7 @@ private:
 public:
 								DoorNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window
 									, const sf::View &view, UIBundle &uiBundle, const trmb::TextureHolder &textures
-									, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox);
+									, trmb::SoundPlayer &soundPlayer, DaylightUI &daylightUI, ChatBox &chatBox);
 								DoorNode(const DoorNode &) = delete;
 	DoorNode &					operator=(const DoorNode &) = delete;
 
@@ -65,8 +66,10 @@ private:
 	const trmb::EventStr		mDrawDoorSprite;
 	const trmb::EventStr		mDoNotDrawDoorSprite;
 	const EventGuid				mLeftClickPress;   // ALW - Matches the GUID in the Controller class.
+	const float					mCloseCost;
 	const trmb::TextureHolder	&mTextures;
 	trmb::SoundPlayer			&mSoundPlayer;
+	DaylightUI					&mDaylightUI;
 	ChatBox						&mChatBox;
 	bool						mDoorUIActive;
 	bool						mIsDoorClosed;

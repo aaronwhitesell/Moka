@@ -1,6 +1,7 @@
 #include "clinicNode.h"
 #include "../GameObjects/interactiveObject.h"
 #include "../HUD/chatBox.h"
+#include "../HUD/daylightUI.h"
 #include "../HUD/optionsUI.h"
 #include "../HUD/undoUI.h"
 #include "../Levels/uiBundle.h"
@@ -18,7 +19,8 @@
 
 
 ClinicNode::ClinicNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view
-	, UIBundle &mUIBundle, std::vector<sf::FloatRect> attachedRects, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox)
+	, UIBundle &mUIBundle, std::vector<sf::FloatRect> attachedRects, trmb::SoundPlayer &soundPlayer, DaylightUI &daylightUI
+	, ChatBox &chatBox)
 : BuildingNode(interactiveObject, window, view, mUIBundle, attachedRects)
 , mClinicUIActivated(0xcb9e3f21)
 , mDrawClinicUI(0x1363b002)
@@ -32,7 +34,10 @@ ClinicNode::ClinicNode(const InteractiveObject &interactiveObject, const sf::Ren
 , mDrawACTBarrelSprite(0xad344f84, interactiveObject.getName())
 , mDoNotACTDrawSprite(0xd6fe68f2, interactiveObject.getName())
 , mLeftClickPress(0x6955d309)
+, mRDTCost(2.0f)
+, mACTCost(2.0f)
 , mSoundPlayer(soundPlayer)
+, mDaylightUI(daylightUI)
 , mChatBox(chatBox)
 , mClinicUIActive(false)
 , mRDTCount(0)
@@ -169,6 +174,7 @@ void ClinicNode::incrementPurchaseRDT()
 	calculateRDTEvent();
 	updateRDTDisableState();
 	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseRDT"));
+	mDaylightUI.subtract(mRDTCost);
 }
 
 void ClinicNode::decrementPurchaseRDT()
@@ -177,6 +183,7 @@ void ClinicNode::decrementPurchaseRDT()
 	calculateRDTEvent();
 	updateRDTDisableState();
 	mChatBox.updateText(trmb::Localize::getInstance().getString("refundRDT"));
+	mDaylightUI.add(mRDTCost);
 }
 
 void ClinicNode::incrementPurchaseACT()
@@ -185,6 +192,7 @@ void ClinicNode::incrementPurchaseACT()
 	calculateACTEvent();
 	updateACTDisableState();
 	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseACT"));
+	mDaylightUI.subtract(mACTCost);
 }
 
 void ClinicNode::decrementPurchaseACT()
@@ -193,6 +201,7 @@ void ClinicNode::decrementPurchaseACT()
 	calculateACTEvent();
 	updateACTDisableState();
 	mChatBox.updateText(trmb::Localize::getInstance().getString("refundACT"));
+	mDaylightUI.add(mACTCost);
 }
 
 void ClinicNode::calculateRDTEvent()

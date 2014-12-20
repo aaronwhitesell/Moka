@@ -3,6 +3,7 @@
 
 #include "uiBundle.h"
 #include "../HUD/chatBox.h"
+#include "../HUD/daylightUI.h"
 #include "../HUD/optionsUI.h"
 #include "../HUD/undoUI.h"
 #include "../SceneNodes/heroNode.h"
@@ -90,6 +91,7 @@ private:
 	trmb::Camera								mCamera;
 	trmb::Map									mMap;
 	ChatBox										mChatBox;
+	DaylightUI                                  mDaylightUI;
 	UndoUI										mBarrelUI;
 	UndoUI										mDoorUI;
 	UndoUI										mWindowUI;

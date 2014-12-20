@@ -26,6 +26,7 @@ namespace trmb
 }
 
 class ChatBox;
+class DaylightUI;
 class InteractiveObject;
 class UIBundle;
 
@@ -34,7 +35,7 @@ class ClinicNode : public BuildingNode // inherits SceneNode, EventHandler, and 
 public:
 								ClinicNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window
 									, const sf::View &view, UIBundle &mUIBundle, std::vector<sf::FloatRect> attachedRects
-									, trmb::SoundPlayer &soundPlayer, ChatBox &chatBox);
+									, trmb::SoundPlayer &soundPlayer, DaylightUI &daylightUI, ChatBox &chatBox);
 								ClinicNode(const ClinicNode &) = delete;
 	ClinicNode &				operator=(const ClinicNode &) = delete;
 
@@ -93,7 +94,10 @@ private:
 	const trmb::EventStr		mDrawACTBarrelSprite;
 	const trmb::EventStr		mDoNotACTDrawSprite;
 	const EventGuid				mLeftClickPress;   // ALW - Matches the GUID in the Controller class.
+	const float					mRDTCost;
+	const float					mACTCost;
 	trmb::SoundPlayer			&mSoundPlayer;
+	DaylightUI					&mDaylightUI;
 	ChatBox						&mChatBox;
 	bool						mClinicUIActive;
 	int							mRDTCount;
