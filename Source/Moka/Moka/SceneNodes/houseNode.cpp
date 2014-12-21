@@ -175,11 +175,17 @@ void HouseNode::updateOptionsUI()
 
 void HouseNode::incrementPurchaseBedNet()
 {
-	++mNewNetCount;
-	calculateNetPurchaseEvent();
-	updateNetDisableState();
-	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseNet"));
-	mDaylightUI.subtract(mNetCost);
+	if (mDaylightUI.subtract(mNetCost))
+	{
+		++mNewNetCount;
+		calculateNetPurchaseEvent();
+		updateNetDisableState();
+		mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseNet"));
+	}
+	else
+	{
+		mChatBox.updateText(trmb::Localize::getInstance().getString("daylightHours"));
+	}
 }
 
 void HouseNode::decrementPurchaseBedNet()
@@ -193,11 +199,17 @@ void HouseNode::decrementPurchaseBedNet()
 
 void HouseNode::incrementRepair()
 {
-	++mRepairCount;
-	calculateRepairPurchaseEvent();
-	updateRepairDisableState();
-	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseRepair"));
-	mDaylightUI.subtract(mRepairCost);
+	if (mDaylightUI.subtract(mRepairCost))
+	{
+		++mRepairCount;
+		calculateRepairPurchaseEvent();
+		updateRepairDisableState();
+		mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseRepair"));
+	}
+	else
+	{
+		mChatBox.updateText(trmb::Localize::getInstance().getString("daylightHours"));
+	}
 }
 
 void HouseNode::decrementRepair()

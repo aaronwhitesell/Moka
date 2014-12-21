@@ -45,7 +45,7 @@ public:
 	virtual void		  handleEvent(const trmb::Event &gameEvent) final;
 
 	void				  add(float addend);
-	void				  subtract(float subtrahend);
+	bool				  subtract(float subtrahend);
 
 	void			      done();
 
@@ -64,6 +64,8 @@ private:
 	const EventGuid		  mFullscreen;		 // ALW - Matches the GUID in the ToggleFullscreen class.
 	const EventGuid		  mWindowed;		 // ALW - Matches the GUID in the ToggleFullscreen class.
 
+	const float		      mMaxHours;
+	const float			  mMinHours;
 	const int			  mFloatPrecision;
 
 	sf::RenderWindow	  &mWindow;
@@ -75,7 +77,6 @@ private:
 	sf::Text			  mHoursText;
 	float				  mHourCount;
 
-	// ALW - Button portion
 	ButtonPtr             mButton;
 	trmb::ButtonContainer mContainer;
 	bool                  mMouseOver;

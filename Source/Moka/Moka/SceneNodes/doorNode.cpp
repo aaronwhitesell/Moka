@@ -152,11 +152,21 @@ void DoorNode::updateUndoUI()
 
 void DoorNode::closeDoor()
 {
-	mIsDoorClosed = true;
-	InteractiveNode::sendEvent(mDrawDoorSprite);
-	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseClosedDoor"));
-	mDaylightUI.subtract(mCloseCost);
-	mUIElemStates.front() = false;
+	if (mDaylightUI.subtract(mCloseCost))
+	{
+		mIsDoorClosed = true;
+		InteractiveNode::sendEvent(mDrawDoorSprite);
+		mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseClosedDoor"));
+		mUIElemStates.front() = false;
+	}
+	else
+	{
+		// ALW - There weren't enough hours of daylight left to "purchase" the item.
+		// ALW - However, the button state changed. Reset it.
+		mUIElemStates.front() = true;
+		mUIBundle.getDoorUI().setUIElemState(mUIElemStates);
+		mChatBox.updateText(trmb::Localize::getInstance().getString("daylightHours"));
+	}
 }
 
 void DoorNode::openDoor()

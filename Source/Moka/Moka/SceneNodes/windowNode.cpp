@@ -173,13 +173,23 @@ void WindowNode::updateUndoUI()
 
 void WindowNode::addScreen()
 {
-	mIsWindowScreen = true;
-	InteractiveNode::sendEvent(mDrawWindowScreenSprite);
-	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseScreenWindow"));
-	mDaylightUI.subtract(mScreenCost);
-
 	const std::size_t screenElement = 0;
-	mUIElemStates.at(screenElement) = false;
+
+	if (mDaylightUI.subtract(mScreenCost))
+	{
+		mIsWindowScreen = true;
+		InteractiveNode::sendEvent(mDrawWindowScreenSprite);
+		mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseScreenWindow"));
+		mUIElemStates.at(screenElement) = false;
+	}
+	else
+	{
+		// ALW - There weren't enough hours of daylight left to "purchase" the item.
+		// ALW - However, the button state changed. Reset it.
+		mUIElemStates.at(screenElement) = true;
+		mUIBundle.getWindowUI().setUIElemState(mUIElemStates);
+		mChatBox.updateText(trmb::Localize::getInstance().getString("daylightHours"));
+	}
 }
 
 void WindowNode::undoScreen()
@@ -188,20 +198,29 @@ void WindowNode::undoScreen()
 	InteractiveNode::sendEvent(mDoNotDrawWindowScreenSprite);
 	mChatBox.updateText(trmb::Localize::getInstance().getString("refundScreenWindow"));
 	mDaylightUI.add(mScreenCost);
-
 	const std::size_t screenElement = 0;
 	mUIElemStates.at(screenElement) = true;
 }
 
 void WindowNode::closeWindow()
 {
-	mIsWindowClosed = true;
-	InteractiveNode::sendEvent(mDrawWindowClosedSprite);
-	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseClosedWindow"));
-	mDaylightUI.subtract(mCloseCost);
-
 	const std::size_t windowElement = 1;
-	mUIElemStates.at(windowElement) = false;
+
+	if (mDaylightUI.subtract(mCloseCost))
+	{
+		mIsWindowClosed = true;
+		InteractiveNode::sendEvent(mDrawWindowClosedSprite);
+		mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseClosedWindow"));
+		mUIElemStates.at(windowElement) = false;
+	}
+	else
+	{
+		// ALW - There weren't enough hours of daylight left to "purchase" the item.
+		// ALW - However, the button state changed. Reset it.
+		mUIElemStates.at(windowElement) = true;
+		mUIBundle.getWindowUI().setUIElemState(mUIElemStates);
+		mChatBox.updateText(trmb::Localize::getInstance().getString("daylightHours"));
+	}
 }
 
 void WindowNode::openWindow()
@@ -210,7 +229,6 @@ void WindowNode::openWindow()
 	InteractiveNode::sendEvent(mDoNotDrawWindowClosedSprite);
 	mChatBox.updateText(trmb::Localize::getInstance().getString("refundClosedWindow"));
 	mDaylightUI.add(mCloseCost);
-
 	const std::size_t windowElement = 1;
 	mUIElemStates.at(windowElement) = true;
 }

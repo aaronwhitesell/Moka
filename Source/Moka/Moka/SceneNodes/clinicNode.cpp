@@ -170,11 +170,17 @@ void ClinicNode::updateOptionsUI()
 
 void ClinicNode::incrementPurchaseRDT()
 {
-	++mRDTCount;
-	calculateRDTEvent();
-	updateRDTDisableState();
-	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseRDT"));
-	mDaylightUI.subtract(mRDTCost);
+	if (mDaylightUI.subtract(mRDTCost))
+	{
+		++mRDTCount;
+		calculateRDTEvent();
+		updateRDTDisableState();
+		mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseRDT"));
+	}
+	else
+	{
+		mChatBox.updateText(trmb::Localize::getInstance().getString("daylightHours"));
+	}
 }
 
 void ClinicNode::decrementPurchaseRDT()
@@ -188,11 +194,17 @@ void ClinicNode::decrementPurchaseRDT()
 
 void ClinicNode::incrementPurchaseACT()
 {
-	++mACTCount;
-	calculateACTEvent();
-	updateACTDisableState();
-	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseACT"));
-	mDaylightUI.subtract(mACTCost);
+	if (mDaylightUI.subtract(mACTCost))
+	{
+		++mACTCount;
+		calculateACTEvent();
+		updateACTDisableState();
+		mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseACT"));
+	}
+	else
+	{
+		mChatBox.updateText(trmb::Localize::getInstance().getString("daylightHours"));
+	}
 }
 
 void ClinicNode::decrementPurchaseACT()

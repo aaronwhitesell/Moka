@@ -153,11 +153,22 @@ void BarrelNode::updateUndoUI()
 
 void BarrelNode::addCover()
 {
-	mIsBarrelCovered = true;
-	InteractiveNode::sendEvent(mDrawBarrelSprite);
-	mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseCover"));
-	mDaylightUI.subtract(mCoverCost);
-	mUIElemStates.front() = false;
+	if (mDaylightUI.subtract(mCoverCost))
+	{
+		// ALW - There was enough daylight to "purchase" the item.
+		mIsBarrelCovered = true;
+		InteractiveNode::sendEvent(mDrawBarrelSprite);
+		mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseCover"));
+		mUIElemStates.front() = false;
+	}
+	else
+	{
+		// ALW - There weren't enough hours of daylight left to "purchase" the item.
+		// ALW - However, the button state changed. Reset it.
+		mUIElemStates.front() = true;
+		mUIBundle.getBarrelUI().setUIElemState(mUIElemStates);
+		mChatBox.updateText(trmb::Localize::getInstance().getString("daylightHours"));
+	}
 }
 
 void BarrelNode::undoCover()

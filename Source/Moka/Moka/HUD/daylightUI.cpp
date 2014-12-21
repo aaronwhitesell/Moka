@@ -12,11 +12,15 @@
 #include <SFML/Graphics/Transform.hpp>
 #include <SFML/Window/Mouse.hpp>
 
+#include <cassert>
+
 
 DaylightUI::DaylightUI(sf::RenderWindow &window, Fonts::ID font, trmb::FontHolder &fonts, SoundEffects::ID soundEffect
 	, trmb::SoundPlayer &soundPlayer, EventGuid leftClickPress, EventGuid leftClickRelease)
 : mFullscreen(0x5a0d2314)
 , mWindowed(0x11e3c735)
+, mMaxHours(12.0f)
+, mMinHours(0.0f)
 , mFloatPrecision(3)
 , mWindow(window)
 , mFonts(fonts)
@@ -24,7 +28,7 @@ DaylightUI::DaylightUI(sf::RenderWindow &window, Fonts::ID font, trmb::FontHolde
 , mBackground()
 , mDaylightText()
 , mHoursText()
-, mHourCount(12.0f)
+, mHourCount(mMaxHours)
 , mButton(std::make_shared<trmb::GameButton>(font, fonts, soundEffect, soundPlayer, sf::Vector2f(60.0f, 41.0f)))
 , mContainer(leftClickPress, leftClickRelease)
 , mMouseOver(false)
@@ -77,15 +81,26 @@ sf::Vector2f DaylightUI::getSize() const
 void DaylightUI::add(float addend)
 {
 	mHourCount += addend;
+	assert(("ALW - Logic Error: The hour count exceeds the max hours!", mMaxHours >= mHourCount));
+
 	mHoursText.setString(trmb::toStringWithPrecision(mHourCount, mFloatPrecision));
 	trmb::centerOrigin(mHoursText, true, false);
 }
 
-void DaylightUI::subtract(float subtrahend)
+bool DaylightUI::subtract(float subtrahend)
 {
-	mHourCount -= subtrahend;
-	mHoursText.setString(trmb::toStringWithPrecision(mHourCount, mFloatPrecision));
-	trmb::centerOrigin(mHoursText, true, false);
+	bool ret = false;
+	float hourCount = mHourCount - subtrahend;
+
+	if (mMinHours <= hourCount)
+	{
+		ret = true;
+		mHourCount -= subtrahend;
+		mHoursText.setString(trmb::toStringWithPrecision(mHourCount, mFloatPrecision));
+		trmb::centerOrigin(mHoursText, true, false);
+	}
+
+	return ret;
 }
 
 void DaylightUI::handler(const sf::RenderWindow &window, const sf::View &view, const sf::Transform &transform)
