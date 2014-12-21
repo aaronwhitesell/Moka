@@ -2,7 +2,6 @@
 <!-- Text -->
 <text>
     <en>
-		<daylightUI                attribute="Daylight"/>
 	    <prompt                    attribute="Press Enter"/>
 		<greeting		           attribute="Congratulations, you have just been elected the new mayor of Pleasantville!
 Pleasantville is a wonderful place, but it has one big problem; malaria. Help the residents of your town develop an
@@ -38,6 +37,8 @@ damaged bed net it can be repaired."/>
 		<refundNet                 attribute="One hour has been refunded to you."/>
 		<purchaseRepair            attribute="You use a needle and thread to sew up each small hole. Thirty minutes have passed."/>
 		<refundRepair              attribute="Thirty minutes have been refunded to you."/>
+		<daylightUI                attribute="Daylight"/>
+		<daylightUIButton          attribute="Done!"/>
 	</en>
     <fr>
 	    <prompt                    attribute="fr: Press Enter"/>
@@ -75,6 +76,8 @@ damaged bed net it can be repaired."/>
 		<refundNet                 attribute="fr: One hour has been refunded to you."/>
 		<purchaseRepair            attribute="fr: You use a needle and thread to sew up each small hole. Thirty minutes have passed."/>
 		<refundRepair              attribute="fr: Thirty minutes have been refunded to you."/>
+		<daylightUI                attribute="fr: Daylight"/>
+		<daylightUIButton          attribute="fr: Done!"/>
 	</fr>
     <mg>
 	    <prompt                    attribute="mg: Press Enter"/>
@@ -113,5 +116,7 @@ damaged bed net it can be repaired."/>
 		<refundNet                 attribute="mg: One hour has been refunded to you."/>
 		<purchaseRepair            attribute="mg: You use a needle and thread to sew up each small hole. Thirty minutes have passed."/>
 		<refundRepair              attribute="mg: Thirty minutes have been refunded to you."/>
+		<daylightUI                attribute="mg: Daylight"/>
+		<daylightUIButton          attribute="mg: Done!"/>
 	</mg>
 </text>

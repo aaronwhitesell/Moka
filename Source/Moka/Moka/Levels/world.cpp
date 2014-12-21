@@ -44,7 +44,7 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mCamera(window.getDefaultView(), mWorldBounds)
 , mMap("Data/Maps/World.tmx")
 , mChatBox(window, Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer)
-, mDaylightUI(window, Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer)
+, mDaylightUI(window, Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
 , mBarrelUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
 , mDoorUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
 , mWindowUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
@@ -64,6 +64,12 @@ void World::update(sf::Time dt)
 	mSceneGraph.update(dt);					// ALW - Update the hero along with the rest of the scene graph
 	mCamera.update(mHero->getPosition());	// ALW - Update the camera position
 	updateSoundPlayer();
+
+	sf::Vector2f cameraPosition(mCamera.getViewBounds().left, mCamera.getViewBounds().top);
+	sf::Transform transform = sf::Transform::Identity;
+	transform.translate(cameraPosition);
+
+	mDaylightUI.handler(mWindow, mCamera.getView(), transform);
 }
 
 void World::handleEvent(const trmb::Event &gameEvent)
