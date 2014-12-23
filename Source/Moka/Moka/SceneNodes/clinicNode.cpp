@@ -51,7 +51,7 @@ void ClinicNode::handleEvent(const trmb::Event &gameEvent)
 {
 	InteractiveNode::handleEvent(gameEvent);
 
-	if (!mDisableInput)
+	if (!mDisableInput && !isMouseOverUI(mUIBundle.getDaylightUI().getRect()))
 	{
 		if (mClinicUIActivated.getType() == gameEvent.getType())
 		{
@@ -265,14 +265,14 @@ void ClinicNode::updateRDTDisableState()
 	switch (mRDTCount)
 	{
 	case MinRDTCount:
-		mUIBundle.getClinicUI().setDisableDecrementButtonOfLHSTab(true);
+		mUIBundle.getClinicUI().setDisableDecrementButtonOfLHSTab(true, true);
 		break;
 	case MaxRDTCount:
-		mUIBundle.getClinicUI().setDisableIncrementButtonOfLHSTab(true);
+		mUIBundle.getClinicUI().setDisableIncrementButtonOfLHSTab(true, true);
 		break;
 	default:
-		mUIBundle.getClinicUI().setDisableDecrementButtonOfLHSTab(false);
-		mUIBundle.getClinicUI().setDisableIncrementButtonOfLHSTab(false);
+		mUIBundle.getClinicUI().setDisableDecrementButtonOfLHSTab(false, false);
+		mUIBundle.getClinicUI().setDisableIncrementButtonOfLHSTab(false, false);
 	}
 }
 
@@ -283,13 +283,13 @@ void ClinicNode::updateACTDisableState()
 	switch (mACTCount)
 	{
 	case MinACTCount:
-		mUIBundle.getClinicUI().setDisableDecrementButtonOfRHSTab(true);
+		mUIBundle.getClinicUI().setDisableDecrementButtonOfRHSTab(true, true);
 		break;
 	case MaxACTCount:
-		mUIBundle.getClinicUI().setDisableIncrementButtonOfRHSTab(true);
+		mUIBundle.getClinicUI().setDisableIncrementButtonOfRHSTab(true, true);
 		break;
 	default:
-		mUIBundle.getClinicUI().setDisableDecrementButtonOfRHSTab(false);
-		mUIBundle.getClinicUI().setDisableIncrementButtonOfRHSTab(false);
+		mUIBundle.getClinicUI().setDisableDecrementButtonOfRHSTab(false, false);
+		mUIBundle.getClinicUI().setDisableIncrementButtonOfRHSTab(false, false);
 	}
 }

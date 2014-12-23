@@ -1,13 +1,19 @@
 #include "uiBundle.h"
 
 
-UIBundle::UIBundle(UndoUI &barrelUI, UndoUI &doorUI, UndoUI &windowUI, OptionsUI &clinicUI, OptionsUI &houseUI)
-: mBarrelUI(barrelUI)
+UIBundle::UIBundle(DaylightUI &daylightUI, UndoUI &barrelUI, UndoUI &doorUI, UndoUI &windowUI, OptionsUI &clinicUI, OptionsUI &houseUI)
+: mDaylightUI(daylightUI)
+, mBarrelUI(barrelUI)
 , mDoorUI(doorUI)
 , mWindowUI(windowUI)
 , mClinicUI(clinicUI)
 , mHouseUI(houseUI)
 {
+}
+
+DaylightUI & UIBundle::getDaylightUI() const
+{
+	return mDaylightUI;
 }
 
 UndoUI & UIBundle::getBarrelUI() const

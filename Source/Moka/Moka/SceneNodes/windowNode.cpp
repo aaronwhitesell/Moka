@@ -49,7 +49,7 @@ void WindowNode::handleEvent(const trmb::Event &gameEvent)
 {
 	InteractiveNode::handleEvent(gameEvent);
 
-	if (!mDisableInput)
+	if (!mDisableInput && !isMouseOverUI(mUIBundle.getDaylightUI().getRect()))
 	{
 		if (mWindowUIActivated.getType() == gameEvent.getType())
 		{

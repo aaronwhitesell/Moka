@@ -43,6 +43,8 @@ public:
 							UndoUI(const UndoUI &) = delete;
 	UndoUI&					operator=(const UndoUI &) = delete;
 
+	bool					isHidden() const;
+
 	sf::Vector2f			getSize() const;
 	sf::FloatRect			getRect() const;
 
@@ -54,7 +56,7 @@ public:
 	void					handler(const sf::RenderWindow &window, const sf::View &view, const sf::Transform &transform);
 	void					addUIElem(std::string doString, std::string undoString);
 	void					enable();
-	void					disable();
+	void					disable(bool useDisableColorScheme);
 	void					unhide();
 	void					hide();
 
@@ -84,6 +86,7 @@ private:
 	float					mHorizontalBuffer;
 
 	bool					mDisable;
+	bool					mHide;
 
 	sf::Vector2f			mRestoreBackgroundSize;
 

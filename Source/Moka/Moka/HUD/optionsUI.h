@@ -40,6 +40,8 @@ public:
 							OptionsUI(const OptionsUI &) = delete;
 	OptionsUI&				operator=(const OptionsUI &) = delete;
 
+	bool					isHidden() const;
+
 	sf::Vector2f			getSize() const;
 	sf::FloatRect			getRect() const;
 
@@ -47,10 +49,10 @@ public:
 	void					setLHSTabText(std::string string);
 	void					setRHSTabText(std::string string);
 	void					setCharacterSize(unsigned int size);
-	void					setDisableIncrementButtonOfLHSTab(bool flag);
-	void					setDisableDecrementButtonOfLHSTab(bool flag);
-	void					setDisableIncrementButtonOfRHSTab(bool flag);
-	void					setDisableDecrementButtonOfRHSTab(bool flag);
+	void					setDisableIncrementButtonOfLHSTab(bool flag, bool useDisableColorScheme);
+	void					setDisableDecrementButtonOfLHSTab(bool flag, bool useDisableColorScheme);
+	void					setDisableIncrementButtonOfRHSTab(bool flag, bool useDisableColorScheme);
+	void					setDisableDecrementButtonOfRHSTab(bool flag, bool useDisableColorScheme);
 
 	void					handler(const sf::RenderWindow &window, const sf::View &view, const sf::Transform &transform);
 	void					updateIncDecCallbacks(Callback incPurchaseCallback, Callback decPurchaseCallback
@@ -58,7 +60,7 @@ public:
 
 	void					reset();
 	void					enable();
-	void					disable();
+	void					disable(bool useDisableColorScheme);
 	void					unhide();
 	void					hide();
 
@@ -93,6 +95,7 @@ private:
 	bool					mDisableDecrementButtonOfRHSTab;
 
 	bool					mDisable;
+	bool					mHide;
 
 	sf::Vector2f			mRestoreBackgroundSize;
 

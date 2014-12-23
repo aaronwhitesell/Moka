@@ -7,7 +7,9 @@
 #include "Trambo/Resources/resourceHolder.h"
 
 #include <SFML/Graphics/Drawable.hpp>
+#include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/Graphics/Transform.hpp>
 #include <SFML/Graphics/Transformable.hpp>
 #include <SFML/System/Vector2.hpp>
 
@@ -23,9 +25,12 @@ namespace sf
 
 namespace trmb
 {
+	class Camera;
 	class Event;
 	class SoundPlayer;
 }
+
+class UIBundle;
 
 class DaylightUI : public sf::Transformable, public sf::Drawable, public trmb::EventHandler
 {
@@ -34,14 +39,16 @@ public:
 
 
 public:
-						  DaylightUI(sf::RenderWindow &window, Fonts::ID font, trmb::FontHolder &fonts, SoundEffects::ID soundEffect
-							  , trmb::SoundPlayer &soundPlayer, EventGuid leftClickPress, EventGuid leftClickRelease);
+						  DaylightUI(sf::RenderWindow &window, trmb::Camera &camera, Fonts::ID font, trmb::FontHolder &fonts
+						     , SoundEffects::ID soundEffect, trmb::SoundPlayer &soundPlayer, UIBundle &uiBundle
+							 , EventGuid leftClickPress, EventGuid leftClickRelease);
 						  DaylightUI(const DaylightUI &) = delete;
 	DaylightUI            operator=(const DaylightUI &) = delete;
 
 	sf::Vector2f		  getSize() const;
+	sf::FloatRect		  getRect() const;
 
-	void				  handler(const sf::RenderWindow &window, const sf::View &view, const sf::Transform &transform);
+	void				  handler(const sf::RenderWindow &window);
 	virtual void		  handleEvent(const trmb::Event &gameEvent) final;
 
 	void				  add(float addend);
@@ -69,8 +76,10 @@ private:
 	const int			  mFloatPrecision;
 
 	sf::RenderWindow	  &mWindow;
+	trmb::Camera          &mCamera;
 	trmb::FontHolder	  &mFonts;
 	trmb::SoundPlayer	  &mSoundPlayer;
+	UIBundle			  &mUIBundle;
 
 	sf::RectangleShape	  mBackground;
 	sf::Text			  mDaylightText;
@@ -80,6 +89,7 @@ private:
 	ButtonPtr             mButton;
 	trmb::ButtonContainer mContainer;
 	bool                  mMouseOver;
+	bool				  mUIBundleEnabled;
 };
 
 void	centerOrigin(DaylightUI &ui, bool centerXAxis = true, bool centerYAxis = true);

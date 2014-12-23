@@ -56,7 +56,7 @@ void HouseNode::handleEvent(const trmb::Event &gameEvent)
 {
 	InteractiveNode::handleEvent(gameEvent);
 
-	if (!mDisableInput)
+	if (!mDisableInput && !isMouseOverUI(mUIBundle.getDaylightUI().getRect()))
 	{
 		if (mHouseUIActivated.getType() == gameEvent.getType())
 		{
@@ -311,20 +311,20 @@ void HouseNode::updateNetDisableState()
 
 	if (minNewNets == mNewNetCount)
 	{
-		mUIBundle.getHouseUI().setDisableDecrementButtonOfLHSTab(true);
+		mUIBundle.getHouseUI().setDisableDecrementButtonOfLHSTab(true, true);
 	}
 	else
 	{
-		mUIBundle.getHouseUI().setDisableDecrementButtonOfLHSTab(false);
+		mUIBundle.getHouseUI().setDisableDecrementButtonOfLHSTab(false, false);
 	}
 
 	if (mTotalBeds == netCount)
 	{
-		mUIBundle.getHouseUI().setDisableIncrementButtonOfLHSTab(true);
+		mUIBundle.getHouseUI().setDisableIncrementButtonOfLHSTab(true, true);
 	}
 	else
 	{
-		mUIBundle.getHouseUI().setDisableIncrementButtonOfLHSTab(false);
+		mUIBundle.getHouseUI().setDisableIncrementButtonOfLHSTab(false, false);
 	}
 }
 
@@ -335,19 +335,19 @@ void HouseNode::updateRepairDisableState()
 
 	if (minOldNets == mRepairCount)
 	{
-		mUIBundle.getHouseUI().setDisableDecrementButtonOfRHSTab(true);
+		mUIBundle.getHouseUI().setDisableDecrementButtonOfRHSTab(true, true);
 	}
 	else
 	{
-		mUIBundle.getHouseUI().setDisableDecrementButtonOfRHSTab(false);
+		mUIBundle.getHouseUI().setDisableDecrementButtonOfRHSTab(false, false);
 	}
 
 	if (mTotalOldNets == mRepairCount)
 	{
-		mUIBundle.getHouseUI().setDisableIncrementButtonOfRHSTab(true);
+		mUIBundle.getHouseUI().setDisableIncrementButtonOfRHSTab(true, true);
 	}
 	else
 	{
-		mUIBundle.getHouseUI().setDisableIncrementButtonOfRHSTab(false);
+		mUIBundle.getHouseUI().setDisableIncrementButtonOfRHSTab(false, false);
 	}
 }

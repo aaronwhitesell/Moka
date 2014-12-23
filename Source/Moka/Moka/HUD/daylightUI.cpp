@@ -1,6 +1,10 @@
 #include "daylightUI.h"
+#include "../HUD/optionsUI.h"
+#include "../HUD/undoUI.h"
+#include "../Levels/uiBundle.h"
 #include "../Resources/resourceIdentifiers.h"
 
+#include "Trambo/Camera/camera.h"
 #include "Trambo/Events/event.h"
 #include "Trambo/Localize/localize.h"
 #include "Trambo/Sounds/soundPlayer.h"
@@ -15,16 +19,19 @@
 #include <cassert>
 
 
-DaylightUI::DaylightUI(sf::RenderWindow &window, Fonts::ID font, trmb::FontHolder &fonts, SoundEffects::ID soundEffect
-	, trmb::SoundPlayer &soundPlayer, EventGuid leftClickPress, EventGuid leftClickRelease)
+DaylightUI::DaylightUI(sf::RenderWindow &window, trmb::Camera &camera, Fonts::ID font, trmb::FontHolder &fonts
+	, SoundEffects::ID soundEffect, trmb::SoundPlayer &soundPlayer, UIBundle &uiBundle, EventGuid leftClickPress
+	, EventGuid leftClickRelease)
 : mFullscreen(0x5a0d2314)
 , mWindowed(0x11e3c735)
 , mMaxHours(12.0f)
 , mMinHours(0.0f)
 , mFloatPrecision(3)
 , mWindow(window)
+, mCamera(camera)
 , mFonts(fonts)
 , mSoundPlayer(soundPlayer)
+, mUIBundle(uiBundle)
 , mBackground()
 , mDaylightText()
 , mHoursText()
@@ -32,6 +39,7 @@ DaylightUI::DaylightUI(sf::RenderWindow &window, Fonts::ID font, trmb::FontHolde
 , mButton(std::make_shared<trmb::GameButton>(font, fonts, soundEffect, soundPlayer, sf::Vector2f(60.0f, 41.0f)))
 , mContainer(leftClickPress, leftClickRelease)
 , mMouseOver(false)
+, mUIBundleEnabled(true)
 {
 	mBackground.setSize(sf::Vector2f(60.0f, 41.0f));
 	mBackground.setFillColor(sf::Color(0u, 0u, 0u, 200u));
@@ -78,6 +86,21 @@ sf::Vector2f DaylightUI::getSize() const
 	return mBackground.getSize();
 }
 
+sf::FloatRect DaylightUI::getRect() const
+{
+	// ALW - The DaylightUI has an absolute position in the world that is translated by the camera position.
+	const sf::Vector2f backgroundPosition = mBackground.getPosition();
+	const sf::Vector2f backgroundSize = mBackground.getSize();
+	sf::FloatRect rect = sf::FloatRect(backgroundPosition.x, backgroundPosition.y, backgroundSize.x, backgroundSize.y);
+
+	sf::Vector2f cameraPosition(mCamera.getViewBounds().left, mCamera.getViewBounds().top);
+	sf::Transform translatedTransform = getTransform();
+	translatedTransform = translatedTransform.translate(cameraPosition);
+	rect = translatedTransform.transformRect(rect);
+
+	return rect;
+}
+
 void DaylightUI::add(float addend)
 {
 	mHourCount += addend;
@@ -103,28 +126,66 @@ bool DaylightUI::subtract(float subtrahend)
 	return ret;
 }
 
-void DaylightUI::handler(const sf::RenderWindow &window, const sf::View &view, const sf::Transform &transform)
+void DaylightUI::handler(const sf::RenderWindow &window)
 {
-	sf::Transform combinedTransform = getTransform() * transform;
+	// ALW - The DaylightUI has an absolute position in the world that is translated by the camera position.
+	sf::Vector2f cameraPosition(mCamera.getViewBounds().left, mCamera.getViewBounds().top);
+	sf::Transform translatedTransform = getTransform();
+	translatedTransform = translatedTransform.translate(cameraPosition);
 
 	const sf::Vector2i relativeToWindow = sf::Mouse::getPosition(window);
-	const sf::Vector2f relativeToWorld = window.mapPixelToCoords(relativeToWindow, view);
+	const sf::Vector2f relativeToWorld = window.mapPixelToCoords(relativeToWindow, mCamera.getView());
 	const sf::Vector2f mousePosition = relativeToWorld;
 
-	// ALW - The UI origin is centered on the x-axis, so account for this.
-	sf::FloatRect UIRect(getPosition().x - mBackground.getSize().x / 2.0f, getPosition().y, mBackground.getSize().x, mBackground.getSize().y);
-	UIRect = transform.transformRect(UIRect);
+	sf::FloatRect UIRect(mBackground.getPosition().x, mBackground.getPosition().y, mBackground.getSize().x, mBackground.getSize().y);
+	UIRect = translatedTransform.transformRect(UIRect);
 
 	if (UIRect.contains(mousePosition))
 	{
 		mMouseOver = true;
+		mUIBundleEnabled = false;
+
+		if (!mUIBundle.getBarrelUI().isHidden())
+			mUIBundle.getBarrelUI().disable(false);
+
+		if (!mUIBundle.getDoorUI().isHidden())
+			mUIBundle.getDoorUI().disable(false);
+
+		if (!mUIBundle.getWindowUI().isHidden())
+			mUIBundle.getWindowUI().disable(false);
+
+		if (!mUIBundle.getClinicUI().isHidden())
+			mUIBundle.getClinicUI().disable(false);
+
+		if (!mUIBundle.getHouseUI().isHidden())
+			mUIBundle.getHouseUI().disable(false);
 	}
 	else
 	{
 		mMouseOver = false;
+
+		if (!mUIBundleEnabled)
+		{
+			mUIBundleEnabled = true;
+
+			if (!mUIBundle.getBarrelUI().isHidden())
+				mUIBundle.getBarrelUI().enable();
+
+			if (!mUIBundle.getDoorUI().isHidden())
+				mUIBundle.getDoorUI().enable();
+
+			if (!mUIBundle.getWindowUI().isHidden())
+				mUIBundle.getWindowUI().enable();
+
+			if (!mUIBundle.getClinicUI().isHidden())
+				mUIBundle.getClinicUI().enable();
+
+			if (!mUIBundle.getHouseUI().isHidden())
+				mUIBundle.getHouseUI().enable();
+		}
 	}
 
-	mContainer.handler(window, view, combinedTransform);
+	mContainer.handler(window, mCamera.getView(), translatedTransform);
 }
 
 void DaylightUI::handleEvent(const trmb::Event &gameEvent)

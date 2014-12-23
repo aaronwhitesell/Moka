@@ -22,6 +22,7 @@ UndoUI::UndoUI(Fonts::ID font, trmb::FontHolder &fonts, SoundEffects::ID soundEf
 , mFrameBuffer(sf::Vector2f(7.0f, 7.0f))
 , mHorizontalBuffer(1.0f)
 , mDisable(false)
+, mHide(false)
 , mRestoreBackgroundSize()
 {
 	mBackground.setPosition(0.0f, 0.0f);
@@ -30,6 +31,11 @@ UndoUI::UndoUI(Fonts::ID font, trmb::FontHolder &fonts, SoundEffects::ID soundEf
 	mBackground.setOutlineThickness(mOutLineThickness);
 	// ALW - Default mBackground size as if there is one UI element, so it is visible by default.
 	mBackground.setSize(sf::Vector2f(mFrameBuffer.x * 2.0f + mUIElemSize.x, mFrameBuffer.y * 2.0f + mUIElemSize.y));
+}
+
+bool UndoUI::isHidden() const
+{
+	return mHide;
 }
 
 sf::Vector2f UndoUI::getSize() const
@@ -87,17 +93,18 @@ void UndoUI::enable()
 	}
 }
 
-void UndoUI::disable()
+void UndoUI::disable(bool useDisableColorScheme)
 {
 	mDisable = true;
 	for (const auto &uiElem : mUIElems)
 	{
-		uiElem->disable();
+		uiElem->disable(useDisableColorScheme);
 	}
 }
 
 void UndoUI::unhide()
 {
+	mHide = false;
 	mBackground.setSize(mRestoreBackgroundSize);
 
 	for (const auto &uiElem : mUIElems)
@@ -111,7 +118,8 @@ void UndoUI::unhide()
 void UndoUI::hide()
 {
 	// ALW - hide() must be called before unhide(), so the restore values are assigned.
-	disable();
+	mHide = true;
+	disable(false);
 
 	mRestoreBackgroundSize = mBackground.getSize();
 	const sf::Vector2f hideBackground = sf::Vector2f(0.0f, 0.0f);

@@ -41,7 +41,7 @@ void DoorNode::handleEvent(const trmb::Event &gameEvent)
 {
 	InteractiveNode::handleEvent(gameEvent);
 
-	if (!mDisableInput)
+	if (!mDisableInput && !isMouseOverUI(mUIBundle.getDaylightUI().getRect()))
 	{
 		if (mDoorUIActivated.getType() == gameEvent.getType())
 		{

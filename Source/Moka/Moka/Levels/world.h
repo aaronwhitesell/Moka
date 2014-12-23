@@ -90,6 +90,7 @@ private:
 
 	trmb::Camera								mCamera;
 	trmb::Map									mMap;
+	UIBundle									mUIBundle;
 	ChatBox										mChatBox;
 	DaylightUI                                  mDaylightUI;
 	UndoUI										mBarrelUI;
@@ -97,7 +98,6 @@ private:
 	UndoUI										mWindowUI;
 	OptionsUI									mClinicUI;
 	OptionsUI									mHouseUI;
-	UIBundle									mUIBundle;
 	ObjectGroups								mObjectGroups;
 	HeroNode									*mHero;
 };

@@ -23,6 +23,7 @@ OptionsUI::OptionsUI(Fonts::ID font, trmb::FontHolder &fonts, SoundEffects::ID s
 , mDisableIncrementButtonOfRHSTab(false)
 , mDisableDecrementButtonOfRHSTab(false)
 , mDisable(false)
+, mHide(false)
 , mRestoreBackgroundSize()
 {
 	mLHSTab = std::make_shared<trmb::GameTab>(Fonts::ID::Main, fonts, soundEffect, soundPlayer, mTabSize);
@@ -53,6 +54,11 @@ OptionsUI::OptionsUI(Fonts::ID font, trmb::FontHolder &fonts, SoundEffects::ID s
 		, mOutLineThickness);
 
 	buildUI();
+}
+
+bool OptionsUI::isHidden() const
+{
+	return mHide;
 }
 
 sf::Vector2f OptionsUI::getSize() const
@@ -95,28 +101,28 @@ void OptionsUI::setCharacterSize(unsigned int size)
 	mRHSTab->setCharacterSize(size);
 }
 
-void OptionsUI::setDisableIncrementButtonOfLHSTab(bool flag)
+void OptionsUI::setDisableIncrementButtonOfLHSTab(bool flag, bool useDisableColorScheme)
 {
 	mDisableIncrementButtonOfLHSTab = flag;
-	mIncDecUI.setDisableIncrementButton(flag);
+	mIncDecUI.setDisableIncrementButton(flag, useDisableColorScheme);
 }
 
-void OptionsUI::setDisableDecrementButtonOfLHSTab(bool flag)
+void OptionsUI::setDisableDecrementButtonOfLHSTab(bool flag, bool useDisableColorScheme)
 {
 	mDisableDecrementButtonOfLHSTab = flag;
-	mIncDecUI.setDisableDecrementButton(flag);
+	mIncDecUI.setDisableDecrementButton(flag, useDisableColorScheme);
 }
 
-void OptionsUI::setDisableIncrementButtonOfRHSTab(bool flag)
+void OptionsUI::setDisableIncrementButtonOfRHSTab(bool flag, bool useDisableColorScheme)
 {
 	mDisableIncrementButtonOfRHSTab = flag;
-	mIncDecUI.setDisableIncrementButton(flag);
+	mIncDecUI.setDisableIncrementButton(flag, useDisableColorScheme);
 }
 
-void OptionsUI::setDisableDecrementButtonOfRHSTab(bool flag)
+void OptionsUI::setDisableDecrementButtonOfRHSTab(bool flag, bool useDisableColorScheme)
 {
 	mDisableDecrementButtonOfRHSTab = flag;
-	mIncDecUI.setDisableDecrementButton(flag);
+	mIncDecUI.setDisableDecrementButton(flag, useDisableColorScheme);
 }
 
 void OptionsUI::handler(const sf::RenderWindow &window, const sf::View &view, const sf::Transform &transform)
@@ -159,15 +165,16 @@ void OptionsUI::enable()
 	mIncDecUI.enable();
 }
 
-void OptionsUI::disable()
+void OptionsUI::disable(bool useDisableColorScheme)
 {
 	mDisable = true;
-	mTabs.disable();
-	mIncDecUI.disable();
+	mTabs.disable(useDisableColorScheme);
+	mIncDecUI.disable(useDisableColorScheme);
 }
 
 void OptionsUI::unhide()
 {
+	mHide = false;
 	mBackground.setSize(mRestoreBackgroundSize);
 
 	mTabs.unhide();
@@ -179,7 +186,8 @@ void OptionsUI::unhide()
 void OptionsUI::hide()
 {
 	// ALW - hide() must be called before unhide(), so the restore values are assigned.
-	disable();
+	mHide = true;
+	disable(false);
 
 	mRestoreBackgroundSize = mBackground.getSize();
 	const sf::Vector2f hideBackground = sf::Vector2f(0.0f, 0.0f);
@@ -234,20 +242,20 @@ void OptionsUI::lhsTab()
 	// ALW - IncDec UI has been activated, restore enabled/disabled states of increment/decrement button
 	if (mDisableIncrementButtonOfLHSTab)
 	{
-		mIncDecUI.setDisableIncrementButton(true);
+		mIncDecUI.setDisableIncrementButton(true, true);
 	}
 	else
 	{
-		mIncDecUI.setDisableIncrementButton(false);
+		mIncDecUI.setDisableIncrementButton(false, false);
 	}
 
 	if (mDisableDecrementButtonOfLHSTab)
 	{
-		mIncDecUI.setDisableDecrementButton(true);
+		mIncDecUI.setDisableDecrementButton(true, true);
 	}
 	else
 	{
-		mIncDecUI.setDisableDecrementButton(false);
+		mIncDecUI.setDisableDecrementButton(false, false);
 	}
 }
 
@@ -263,20 +271,20 @@ void OptionsUI::rhsTab()
 	// ALW - IncDec UI has been activated, restore enabled/disabled states of increment/decrement button
 	if (mDisableIncrementButtonOfRHSTab)
 	{
-		mIncDecUI.setDisableIncrementButton(true);
+		mIncDecUI.setDisableIncrementButton(true, true);
 	}
 	else
 	{
-		mIncDecUI.setDisableIncrementButton(false);
+		mIncDecUI.setDisableIncrementButton(false, false);
 	}
 
 	if (mDisableDecrementButtonOfRHSTab)
 	{
-		mIncDecUI.setDisableDecrementButton(true);
+		mIncDecUI.setDisableDecrementButton(true, true);
 	}
 	else
 	{
-		mIncDecUI.setDisableDecrementButton(false);
+		mIncDecUI.setDisableDecrementButton(false, false);
 	}
 }
 
