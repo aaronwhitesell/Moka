@@ -179,9 +179,6 @@
     <ClInclude Include="SceneNodes\barrelNode.h">
       <Filter>Header Files\SceneNodes\Interactive\PrevMeth</Filter>
     </ClInclude>
-    <ClInclude Include="Levels\uiBundle.h">
-      <Filter>Header Files\Levels</Filter>
-    </ClInclude>
     <ClInclude Include="SceneNodes\windowNode.h">
       <Filter>Header Files\SceneNodes\Interactive\PrevMeth</Filter>
     </ClInclude>
@@ -219,6 +216,9 @@
       <Filter>Header Files\SceneNodes\Update</Filter>
     </ClInclude>
     <ClInclude Include="HUD\daylightUI.h">
+      <Filter>Header Files\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="HUD\uiBundle.h">
       <Filter>Header Files\HUD</Filter>
     </ClInclude>
   </ItemGroup>
@@ -301,9 +301,6 @@
     <ClCompile Include="SceneNodes\barrelNode.cpp">
       <Filter>Source Files\SceneNodes\Interactive\PrevMeth</Filter>
     </ClCompile>
-    <ClCompile Include="Levels\uiBundle.cpp">
-      <Filter>Source Files\Levels</Filter>
-    </ClCompile>
     <ClCompile Include="SceneNodes\windowNode.cpp">
       <Filter>Source Files\SceneNodes\Interactive\PrevMeth</Filter>
     </ClCompile>
@@ -341,6 +338,9 @@
       <Filter>Source Files\SceneNodes\Update</Filter>
     </ClCompile>
     <ClCompile Include="HUD\daylightUI.cpp">
+      <Filter>Source Files\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD\uiBundle.cpp">
       <Filter>Source Files\HUD</Filter>
     </ClCompile>
   </ItemGroup>

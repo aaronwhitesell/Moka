@@ -1,10 +1,10 @@
 #ifndef WORLD_H
 #define WORLD_H
 
-#include "uiBundle.h"
 #include "../HUD/chatBox.h"
 #include "../HUD/daylightUI.h"
 #include "../HUD/optionsUI.h"
+#include "../HUD/uiBundle.h"
 #include "../HUD/undoUI.h"
 #include "../SceneNodes/heroNode.h"
 #include "../GameObjects/objectGroups.h"

@@ -1,6 +1,6 @@
 #include "preventionNode.h"
 #include "../GameObjects/interactiveObject.h"
-#include "../Levels/uiBundle.h"
+#include "../HUD/uiBundle.h"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Rect.hpp>
