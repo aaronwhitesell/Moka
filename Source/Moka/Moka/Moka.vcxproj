@@ -83,7 +83,7 @@
     <ClInclude Include="GameObjects\interactiveGroup.h" />
     <ClInclude Include="GameObjects\interactiveObject.h" />
     <ClInclude Include="GameObjects\objectGroups.h" />
-    <ClInclude Include="HUD\chatBox.h" />
+    <ClInclude Include="HUD\chatBoxUI.h" />
     <ClInclude Include="HUD\daylightUI.h" />
     <ClInclude Include="HUD\optionsUI.h" />
     <ClInclude Include="HUD\uiBundle.h" />
@@ -126,7 +126,7 @@
     <ClCompile Include="GameObjects\interactiveGroup.cpp" />
     <ClCompile Include="GameObjects\interactiveObject.cpp" />
     <ClCompile Include="GameObjects\objectGroups.cpp" />
-    <ClCompile Include="HUD\chatBox.cpp" />
+    <ClCompile Include="HUD\chatBoxUI.cpp" />
     <ClCompile Include="HUD\daylightUI.cpp" />
     <ClCompile Include="HUD\optionsUI.cpp" />
     <ClCompile Include="HUD\uiBundle.cpp" />

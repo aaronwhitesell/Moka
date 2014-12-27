@@ -1,6 +1,6 @@
 #include "doorNode.h"
 #include "../GameObjects/interactiveObject.h"
-#include "../HUD/chatBox.h"
+#include "../HUD/chatBoxUI.h"
 #include "../HUD/daylightUI.h"
 #include "../HUD/optionsUI.h"
 #include "../HUD/uiBundle.h"
@@ -17,7 +17,8 @@
 
 
 DoorNode::DoorNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view
-	, UIBundle &uiBundle, const trmb::TextureHolder &textures, trmb::SoundPlayer &soundPlayer, DaylightUI &daylightUI, ChatBox &chatBox)
+	, UIBundle &uiBundle, const trmb::TextureHolder &textures, trmb::SoundPlayer &soundPlayer, DaylightUI &daylightUI
+	, ChatBoxUI &chatBoxUI)
 : PreventionNode(interactiveObject, window, view, uiBundle)
 , mDoorUIActivated(0xa704ae55)
 , mDrawDoorUI(0x7cf851c6)
@@ -29,7 +30,7 @@ DoorNode::DoorNode(const InteractiveObject &interactiveObject, const sf::RenderW
 , mTextures(textures)
 , mSoundPlayer(soundPlayer)
 , mDaylightUI(daylightUI)
-, mChatBox(chatBox)
+, mChatBoxUI(chatBoxUI)
 , mDoorUIActive(false)
 , mIsDoorClosed(false)
 {
@@ -112,21 +113,21 @@ void DoorNode::activate()
 	updateUndoUI();	
 	mSoundPlayer.play(SoundEffects::ID::Button);
 	InteractiveNode::sendEvent(mDoorUIActivated);
-	// ALW - ChatBox::UpdateText() can generate a mCreatePrompt event when an interactive object
+	// ALW - ChatBoxUI::UpdateText() can generate a mCreatePrompt event when an interactive object
 	// ALW - is selected. This asynchronous event will force InteractiveNode classes to ignore
 	// ALW - left and right click events. Then if <enter> is pressed an mEnter event will be
 	// ALW - generated allowing InteractiveNode classes to handle left and right click events.
 	// ALW - However, if another interactive object is selected that occurs before the currently
 	// ALW - selected interactive object in the SceneNode then this newly selected interactive
-	// ALW - object will cause ChatBox::UpdateText() to be called which generates a mCreatePrompt.
+	// ALW - object will cause ChatBoxUI::UpdateText() to be called which generates a mCreatePrompt.
 	// ALW - InteractiveNodes are then forced to ignore left and right click events, so the original
 	// ALW - interactive object will be left selected. To remedy this all InteractiveNodes deselect
 	// ALW - themselves when a mCreatePrompt is generated. Immediately afterwards the InteractiveNode
 	// ALW - that generated the mCreatePrompt is reselected.
 	if (mIsDoorClosed)
-		mChatBox.updateText(trmb::Localize::getInstance().getString("inspectClosedDoor"));
+		mChatBoxUI.updateText(trmb::Localize::getInstance().getString("inspectClosedDoor"));
 	else
-		mChatBox.updateText(trmb::Localize::getInstance().getString("inspectDoor"));
+		mChatBoxUI.updateText(trmb::Localize::getInstance().getString("inspectDoor"));
 	mSelected = true;
 }
 
@@ -156,7 +157,7 @@ void DoorNode::closeDoor()
 	{
 		mIsDoorClosed = true;
 		InteractiveNode::sendEvent(mDrawDoorSprite);
-		mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseClosedDoor"));
+		mChatBoxUI.updateText(trmb::Localize::getInstance().getString("purchaseClosedDoor"));
 		mUIElemStates.front() = false;
 	}
 	else
@@ -165,7 +166,7 @@ void DoorNode::closeDoor()
 		// ALW - However, the button state changed. Reset it.
 		mUIElemStates.front() = true;
 		mUIBundle.getDoorUI().setUIElemState(mUIElemStates);
-		mChatBox.updateText(trmb::Localize::getInstance().getString("daylightHours"));
+		mChatBoxUI.updateText(trmb::Localize::getInstance().getString("daylightHours"));
 	}
 }
 
@@ -173,7 +174,7 @@ void DoorNode::openDoor()
 {
 	mIsDoorClosed = false;
 	InteractiveNode::sendEvent(mDoNotDrawDoorSprite);
-	mChatBox.updateText(trmb::Localize::getInstance().getString("refundClosedDoor"));
+	mChatBoxUI.updateText(trmb::Localize::getInstance().getString("refundClosedDoor"));
 	mDaylightUI.add(mCloseCost);
 	mUIElemStates.front() = true;
 }

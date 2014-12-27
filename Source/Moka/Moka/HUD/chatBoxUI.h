@@ -1,5 +1,5 @@
-#ifndef CHAT_BOX_H
-#define CHAT_BOX_H
+#ifndef CHAT_BOX_UI_H
+#define CHAT_BOX_UI_H
 
 #include "Trambo/Events/eventHandler.h"
 #include "Trambo/Resources/resourceHolder.h"
@@ -24,13 +24,13 @@ namespace trmb
 	class SoundPlayer;
 }
 
-class ChatBox : public sf::Drawable, public trmb::EventHandler
+class ChatBoxUI : public sf::Drawable, public trmb::EventHandler
 {
 public:
-						  ChatBox(sf::RenderWindow &window, Fonts::ID font, trmb::FontHolder &fonts, SoundEffects::ID soundEffect
+						  ChatBoxUI(sf::RenderWindow &window, Fonts::ID font, trmb::FontHolder &fonts, SoundEffects::ID soundEffect
 							  , trmb::SoundPlayer &soundPlayer);
-						  ChatBox(const ChatBox &) = delete;
-	ChatBox &			  operator=(const ChatBox &) = delete;
+						  ChatBoxUI(const ChatBoxUI &) = delete;
+	ChatBoxUI &			  operator=(const ChatBoxUI &) = delete;
 
 	virtual void		  handleEvent(const trmb::Event &gameEvent) final;
 	void				  updateText(std::string string);
@@ -52,7 +52,7 @@ private:
 	bool				  isEllipsisLine(std::string string);
 
 	std::string 		  getLine(std::string &string, bool addEllipsis = false);
-	sf::FloatRect		  getChatBoxBounds() const;
+	sf::FloatRect		  getBounds() const;
 
 	std::string			  standardizeString(std::string);
 	std::string			  trimLeadingLeft(std::string string) const;
@@ -75,7 +75,7 @@ private:
 	SoundEffects::ID	  mSoundEffect;
 	trmb::SoundPlayer	  &mSoundPlayer;
 
-	sf::RectangleShape	  mChatBox;
+	sf::RectangleShape	  mBackground;
 	sf::Text			  mTextLine;
 	sf::Text			  mPrompt;
 	std::vector<sf::Text> mWordWrapText;

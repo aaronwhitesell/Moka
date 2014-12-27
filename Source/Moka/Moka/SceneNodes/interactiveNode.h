@@ -62,8 +62,8 @@ protected:
 
 
 private:
-	const EventGuid				mCreateTextPrompt; // ALW - Matches the GUID in the ChatBox class.
-	const EventGuid				mClearTextPrompt;  // ALW - Matches the GUID in the ChatBox class.
+	const EventGuid				mCreateTextPrompt; // ALW - Matches the GUID in the ChatBoxUI class.
+	const EventGuid				mClearTextPrompt;  // ALW - Matches the GUID in the ChatBoxUI class.
 };
 
 #endif

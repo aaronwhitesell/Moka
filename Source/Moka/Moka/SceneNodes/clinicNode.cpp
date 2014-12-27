@@ -1,6 +1,6 @@
 #include "clinicNode.h"
 #include "../GameObjects/interactiveObject.h"
-#include "../HUD/chatBox.h"
+#include "../HUD/chatBoxUI.h"
 #include "../HUD/daylightUI.h"
 #include "../HUD/optionsUI.h"
 #include "../HUD/undoUI.h"
@@ -20,7 +20,7 @@
 
 ClinicNode::ClinicNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view
 	, UIBundle &mUIBundle, std::vector<sf::FloatRect> attachedRects, trmb::SoundPlayer &soundPlayer, DaylightUI &daylightUI
-	, ChatBox &chatBox)
+	, ChatBoxUI &chatBoxUI)
 : BuildingNode(interactiveObject, window, view, mUIBundle, attachedRects)
 , mClinicUIActivated(0xcb9e3f21)
 , mDrawClinicUI(0x1363b002)
@@ -38,7 +38,7 @@ ClinicNode::ClinicNode(const InteractiveObject &interactiveObject, const sf::Ren
 , mACTCost(2.0f)
 , mSoundPlayer(soundPlayer)
 , mDaylightUI(daylightUI)
-, mChatBox(chatBox)
+, mChatBoxUI(chatBoxUI)
 , mClinicUIActive(false)
 , mRDTCount(0)
 , mACTCount(0)
@@ -129,18 +129,18 @@ void ClinicNode::activate()
 	updateOptionsUI();
 	mSoundPlayer.play(SoundEffects::ID::Button);
 	InteractiveNode::sendEvent(mClinicUIActivated);
-	// ALW - ChatBox::UpdateText() can generate a mCreatePrompt event when an interactive object
+	// ALW - ChatBoxUI::UpdateText() can generate a mCreatePrompt event when an interactive object
 	// ALW - is selected. This asynchronous event will force InteractiveNode classes to ignore
 	// ALW - left and right click events. Then if <enter> is pressed an mEnter event will be
 	// ALW - generated allowing InteractiveNode classes to handle left and right click events.
 	// ALW - However, if another interactive object is selected that occurs before the currently
 	// ALW - selected interactive object in the SceneNode then this newly selected interactive
-	// ALW - object will cause ChatBox::UpdateText() to be called which generates a mCreatePrompt.
+	// ALW - object will cause ChatBoxUI::UpdateText() to be called which generates a mCreatePrompt.
 	// ALW - InteractiveNodes are then forced to ignore left and right click events, so the original
 	// ALW - interactive object will be left selected. To remedy this all InteractiveNodes deselect
 	// ALW - themselves when a mCreatePrompt is generated. Immediately afterwards the InteractiveNode
 	// ALW - that generated the mCreatePrompt is reselected.
-	mChatBox.updateText(trmb::Localize::getInstance().getString("inspectClinic"));
+	mChatBoxUI.updateText(trmb::Localize::getInstance().getString("inspectClinic"));
 	mSelected = true;
 }
 
@@ -175,11 +175,11 @@ void ClinicNode::incrementPurchaseRDT()
 		++mRDTCount;
 		calculateRDTEvent();
 		updateRDTDisableState();
-		mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseRDT"));
+		mChatBoxUI.updateText(trmb::Localize::getInstance().getString("purchaseRDT"));
 	}
 	else
 	{
-		mChatBox.updateText(trmb::Localize::getInstance().getString("daylightHours"));
+		mChatBoxUI.updateText(trmb::Localize::getInstance().getString("daylightHours"));
 	}
 }
 
@@ -188,7 +188,7 @@ void ClinicNode::decrementPurchaseRDT()
 	--mRDTCount;
 	calculateRDTEvent();
 	updateRDTDisableState();
-	mChatBox.updateText(trmb::Localize::getInstance().getString("refundRDT"));
+	mChatBoxUI.updateText(trmb::Localize::getInstance().getString("refundRDT"));
 	mDaylightUI.add(mRDTCost);
 }
 
@@ -199,11 +199,11 @@ void ClinicNode::incrementPurchaseACT()
 		++mACTCount;
 		calculateACTEvent();
 		updateACTDisableState();
-		mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseACT"));
+		mChatBoxUI.updateText(trmb::Localize::getInstance().getString("purchaseACT"));
 	}
 	else
 	{
-		mChatBox.updateText(trmb::Localize::getInstance().getString("daylightHours"));
+		mChatBoxUI.updateText(trmb::Localize::getInstance().getString("daylightHours"));
 	}
 }
 
@@ -212,7 +212,7 @@ void ClinicNode::decrementPurchaseACT()
 	--mACTCount;
 	calculateACTEvent();
 	updateACTDisableState();
-	mChatBox.updateText(trmb::Localize::getInstance().getString("refundACT"));
+	mChatBoxUI.updateText(trmb::Localize::getInstance().getString("refundACT"));
 	mDaylightUI.add(mACTCost);
 }
 

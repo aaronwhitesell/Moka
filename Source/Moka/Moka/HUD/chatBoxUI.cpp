@@ -1,4 +1,4 @@
-#include "chatBox.h"
+#include "chatBoxUI.h"
 #include "../Resources/resourceIdentifiers.h"
 
 #include "Trambo/Events/event.h"
@@ -18,7 +18,7 @@
 #include <sstream>
 
 
-ChatBox::ChatBox(sf::RenderWindow &window, Fonts::ID font, trmb::FontHolder &fonts, SoundEffects::ID soundEffect
+ChatBoxUI::ChatBoxUI(sf::RenderWindow &window, Fonts::ID font, trmb::FontHolder &fonts, SoundEffects::ID soundEffect
 	, trmb::SoundPlayer &soundPlayer)
 : mCreateTextPrompt(0x25e87fd8)
 , mClearTextPrompt(0xc1523265)
@@ -38,18 +38,18 @@ ChatBox::ChatBox(sf::RenderWindow &window, Fonts::ID font, trmb::FontHolder &fon
 	// ALW - so GUI elements are equidistance from the center in any resolution.
 	const sf::Vector2f windowSize = sf::Vector2f(mWindow.getSize());
 	const sf::Vector2f windowCenter = sf::Vector2f(mWindow.getSize() / 2u);
-	mChatBox.setSize(sf::Vector2f(300.0f, 77.0f));
-	const sf::Vector2f halfOfChatBox = mChatBox.getSize() / 2.0f;
+	mBackground.setSize(sf::Vector2f(300.0f, 77.0f));
+	const sf::Vector2f halfOfChatBox = mBackground.getSize() / 2.0f;
 	const float bufferFromBottom = 10.0f;
 
-	trmb::centerOrigin(mChatBox);
-	mChatBox.setPosition(windowCenter.x, windowSize.y - halfOfChatBox.y - bufferFromBottom);
-	mChatBox.setFillColor(sf::Color(0u, 0u, 0u, 200u));
-	mChatBox.setOutlineColor(sf::Color(0u, 0u, 0u, 255u));
-	mChatBox.setOutlineThickness(1.0f);
+	trmb::centerOrigin(mBackground);
+	mBackground.setPosition(windowCenter.x, windowSize.y - halfOfChatBox.y - bufferFromBottom);
+	mBackground.setFillColor(sf::Color(0u, 0u, 0u, 200u));
+	mBackground.setOutlineColor(sf::Color(0u, 0u, 0u, 255u));
+	mBackground.setOutlineThickness(1.0f);
 
-	// ALW - Position text at the top left of the ChatBox
-	mTextLine.setPosition(mChatBox.getPosition() - halfOfChatBox);
+	// ALW - Position text at the top left of the ChatBoxUI
+	mTextLine.setPosition(mBackground.getPosition() - halfOfChatBox);
 	mTextLine.setFont(mFonts.get(font));
 	mTextLine.setCharacterSize(14u);
 
@@ -58,11 +58,11 @@ ChatBox::ChatBox(sf::RenderWindow &window, Fonts::ID font, trmb::FontHolder &fon
 	mPrompt.setCharacterSize(14u);
 	mPrompt.setColor(sf::Color(128u, 128u, 128u, 255u));
 	float promptWidth = mPrompt.getGlobalBounds().width;
-	mPrompt.setPosition(mChatBox.getPosition().x - promptWidth / 2.0f,
-		mChatBox.getPosition().y - mChatBox.getSize().y / 2.0f + mVerticalSpacing * (mMaxLinesDrawn - 1));
+	mPrompt.setPosition(mBackground.getPosition().x - promptWidth / 2.0f,
+		mBackground.getPosition().y - mBackground.getSize().y / 2.0f + mVerticalSpacing * (mMaxLinesDrawn - 1));
 }
 
-void ChatBox::handleEvent(const trmb::Event &gameEvent)
+void ChatBoxUI::handleEvent(const trmb::Event &gameEvent)
 {
 	if (mEnter == gameEvent.getType())
 	{
@@ -75,7 +75,7 @@ void ChatBox::handleEvent(const trmb::Event &gameEvent)
 	}
 }
 
-void ChatBox::updateText(std::string string)
+void ChatBoxUI::updateText(std::string string)
 {
 	mWordWrapText.clear();
 	formatText(string);
@@ -86,10 +86,10 @@ void ChatBox::updateText(std::string string)
 		EventHandler::sendEvent(trmb::Event(mCreateTextPrompt));
 }
 
-void ChatBox::draw(sf::RenderTarget &target, sf::RenderStates states) const
+void ChatBoxUI::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	target.setView(target.getDefaultView());
-	target.draw(mChatBox);
+	target.draw(mBackground);
 
 	if (!mWordWrapText.empty())
 	{
@@ -107,13 +107,13 @@ void ChatBox::draw(sf::RenderTarget &target, sf::RenderStates states) const
 		target.draw(mPrompt);
 }
 
-void ChatBox::formatText(std::string string)
+void ChatBoxUI::formatText(std::string string)
 {
 	string = standardizeString(string);
 	mTextLine.setString(string);
 	int lineCount = 0;
 	const int ellipsisLine = 3;
-	const float chatBoxWidth = getChatBoxBounds().width;
+	const float chatBoxWidth = getBounds().width;
 	while (mTextLine.getLocalBounds().width > chatBoxWidth)
 	{
 		// ALW - Current line may need ellipsis
@@ -148,7 +148,7 @@ void ChatBox::formatText(std::string string)
 		mWordWrapText.emplace_back(mTextLine);
 }
 
-void ChatBox::displayMoreText()
+void ChatBoxUI::displayMoreText()
 {
 	if (isPrompt())
 	{
@@ -173,14 +173,14 @@ void ChatBox::displayMoreText()
 	}
 }
 
-void ChatBox::setTextLinePosition()
+void ChatBoxUI::setTextLinePosition()
 {
 	// ALW - Set the position for each line of text in mWordWrapText. Do this by
 	// ALW - calculating the top-left position of the chat box. Then account for 
 	// ALW - horizontal and vertical spacing, and the line number.
 
 	int lineCount = 0;
-	sf::Vector2f topLeftOfBackground = mChatBox.getPosition() - mChatBox.getSize() / 2.0f;
+	sf::Vector2f topLeftOfBackground = mBackground.getPosition() - mBackground.getSize() / 2.0f;
 
 	for (auto &textLine : mWordWrapText)
 	{
@@ -189,7 +189,7 @@ void ChatBox::setTextLinePosition()
 	}
 }
 
-void ChatBox::calculateLinesToDraw()
+void ChatBoxUI::calculateLinesToDraw()
 {
 	if (mWordWrapText.size() < mMaxLinesDrawn)
 	{
@@ -207,7 +207,7 @@ void ChatBox::calculateLinesToDraw()
 		mLinesToDraw = mMaxLinesDrawn;
 }
 
-bool ChatBox::isPrompt() const
+bool ChatBoxUI::isPrompt() const
 {
 	bool ret = false;
 	if (mWordWrapText.size() > mMaxLinesDrawn)
@@ -216,7 +216,7 @@ bool ChatBox::isPrompt() const
 	return ret;
 }
 
-bool ChatBox::isEllipsisLine(std::string string)
+bool ChatBoxUI::isEllipsisLine(std::string string)
 {
 	// ALW - Remember string
 	std::string text = mTextLine.getString();
@@ -224,7 +224,7 @@ bool ChatBox::isEllipsisLine(std::string string)
 
 	std::vector<sf::Text> lines;
 	const int maxLinesLeft = 2; // ALW - Consists of (potential) ellipsis line and next line 
-	const float chatBoxWidth = getChatBoxBounds().width;
+	const float chatBoxWidth = getBounds().width;
 	while (mTextLine.getLocalBounds().width > chatBoxWidth)
 	{
 		mTextLine.setString(getLine(string));
@@ -245,7 +245,7 @@ bool ChatBox::isEllipsisLine(std::string string)
 	return ret;
 }
 
-std::string ChatBox::getLine(std::string &string, bool addEllipsis)
+std::string ChatBoxUI::getLine(std::string &string, bool addEllipsis)
 {
 	std::string verifiedLine;
 	std::istringstream iss;
@@ -254,7 +254,7 @@ std::string ChatBox::getLine(std::string &string, bool addEllipsis)
 	iss >> word;
 	std::string line = word;
 	mTextLine.setString(line);
-	float chatBoxWidth(getChatBoxBounds().width);
+	float chatBoxWidth(getBounds().width);
 	if (addEllipsis)
 	{
 		// ALW - Subtracting width of ellipsis from chatBox width is easier than adding it to the mTextLine's width
@@ -264,7 +264,7 @@ std::string ChatBox::getLine(std::string &string, bool addEllipsis)
 
 	if (mTextLine.getLocalBounds().width > chatBoxWidth)
 	{
-		throw std::runtime_error("ChatBox.cpp - A single word cannot be larger than the chat box!");
+		throw std::runtime_error("ChatBoxUI.cpp - A single word cannot be larger than the chat box!");
 	}
 	else
 	{
@@ -300,17 +300,17 @@ std::string ChatBox::getLine(std::string &string, bool addEllipsis)
 	return verifiedLine;
 }
 
-sf::FloatRect ChatBox::getChatBoxBounds() const
+sf::FloatRect ChatBoxUI::getBounds() const
 {
-	const sf::FloatRect bounds = mChatBox.getLocalBounds();
-	const float outLineThickness = mChatBox.getOutlineThickness();
+	const sf::FloatRect bounds = mBackground.getLocalBounds();
+	const float outLineThickness = mBackground.getOutlineThickness();
 
 	// ALW - Return the writeable bounds.  Remove outline thickness and horizontal spacing.
 	return sf::FloatRect(bounds.left + outLineThickness + mHorizontalSpacing, bounds.top + outLineThickness
 		, bounds.width - outLineThickness * 2.0f - mHorizontalSpacing * 2.0f, bounds.height - outLineThickness * 2.0f);
 }
 
-std::string ChatBox::standardizeString(std::string string)
+std::string ChatBoxUI::standardizeString(std::string string)
 {
 	// ALW - A standardized string is string with a single space between each word.
 	std::replace(begin(string), end(string), '\n', ' ');
@@ -327,7 +327,7 @@ std::string ChatBox::standardizeString(std::string string)
 	return string;
 }
 
-std::string ChatBox::trimLeadingLeft(std::string string) const
+std::string ChatBoxUI::trimLeadingLeft(std::string string) const
 {
 	string.erase(begin(string), std::find_if(begin(string), end(string),
 		[](char c)
@@ -338,19 +338,19 @@ std::string ChatBox::trimLeadingLeft(std::string string) const
 	return string;
 }
 
-void ChatBox::repositionGUI()
+void ChatBoxUI::repositionGUI()
 {
 	// ALW - Calculate x, y coordinates relative to the center of the window,
 	// ALW - so GUI elements are equidistance from the center in any resolution.
 	const sf::Vector2f size = sf::Vector2f(mWindow.getSize());
 	const sf::Vector2f center = sf::Vector2f(mWindow.getSize() / 2u);
-	const sf::Vector2f halfOfChatBox = mChatBox.getSize() / 2.0f;
+	const sf::Vector2f halfOfChatBox = mBackground.getSize() / 2.0f;
 	const float bufferFromBottom = 10.0f;
 
-	mChatBox.setPosition(center.x, size.y - halfOfChatBox.y - bufferFromBottom);
+	mBackground.setPosition(center.x, size.y - halfOfChatBox.y - bufferFromBottom);
 	setTextLinePosition();
 
 	float promptWidth = mPrompt.getGlobalBounds().width;
-	mPrompt.setPosition(mChatBox.getPosition().x - promptWidth / 2.0f,
-		mChatBox.getPosition().y - mChatBox.getSize().y / 2.0f + mVerticalSpacing * (mMaxLinesDrawn - 1));
+	mPrompt.setPosition(mBackground.getPosition().x - promptWidth / 2.0f,
+		mBackground.getPosition().y - mBackground.getSize().y / 2.0f + mVerticalSpacing * (mMaxLinesDrawn - 1));
 }

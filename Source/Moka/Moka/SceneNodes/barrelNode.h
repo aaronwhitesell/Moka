@@ -28,7 +28,7 @@ namespace trmb
 	class SoundPlayer;
 }
 
-class ChatBox;
+class ChatBoxUI;
 class DaylightUI;
 class InteractiveObject;
 class UIBundle;
@@ -42,7 +42,7 @@ private:
 public:
 								BarrelNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window
 									, const sf::View &view, UIBundle &uiBundle, const trmb::TextureHolder &textures
-									, trmb::SoundPlayer &soundPlayer, DaylightUI &daylightUI, ChatBox &chatBox);
+									, trmb::SoundPlayer &soundPlayer, DaylightUI &daylightUI, ChatBoxUI &chatBoxUI);
 								BarrelNode(const BarrelNode &) = delete;
 	BarrelNode &				operator=(const BarrelNode &) = delete;
 
@@ -70,7 +70,7 @@ private:
 	const trmb::TextureHolder	&mTextures;
 	trmb::SoundPlayer			&mSoundPlayer;
 	DaylightUI					&mDaylightUI;
-	ChatBox						&mChatBox;
+	ChatBoxUI					&mChatBoxUI;
 	bool						mBarrelUIActive;
 	bool						mIsBarrelCovered;
 

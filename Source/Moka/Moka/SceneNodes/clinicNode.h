@@ -25,7 +25,7 @@ namespace trmb
 	class SoundPlayer;
 }
 
-class ChatBox;
+class ChatBoxUI;
 class DaylightUI;
 class InteractiveObject;
 class UIBundle;
@@ -35,7 +35,7 @@ class ClinicNode : public BuildingNode // inherits SceneNode, EventHandler, and 
 public:
 								ClinicNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window
 									, const sf::View &view, UIBundle &mUIBundle, std::vector<sf::FloatRect> attachedRects
-									, trmb::SoundPlayer &soundPlayer, DaylightUI &daylightUI, ChatBox &chatBox);
+									, trmb::SoundPlayer &soundPlayer, DaylightUI &daylightUI, ChatBoxUI &chatBoxUI);
 								ClinicNode(const ClinicNode &) = delete;
 	ClinicNode &				operator=(const ClinicNode &) = delete;
 
@@ -98,7 +98,7 @@ private:
 	const float					mACTCost;
 	trmb::SoundPlayer			&mSoundPlayer;
 	DaylightUI					&mDaylightUI;
-	ChatBox						&mChatBox;
+	ChatBoxUI					&mChatBoxUI;
 	bool						mClinicUIActive;
 	int							mRDTCount;
 	int							mACTCount;

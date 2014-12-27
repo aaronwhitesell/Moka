@@ -1,6 +1,6 @@
 #include "windowNode.h"
 #include "../GameObjects/interactiveObject.h"
-#include "../HUD/chatBox.h"
+#include "../HUD/chatBoxUI.h"
 #include "../HUD/daylightUI.h"
 #include "../HUD/optionsUI.h"
 #include "../HUD/uiBundle.h"
@@ -19,7 +19,8 @@
 
 
 WindowNode::WindowNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view
-	, UIBundle &uiBundle, const trmb::TextureHolder &textures, trmb::SoundPlayer &soundPlayer, DaylightUI &daylightUI, ChatBox &chatBox)
+	, UIBundle &uiBundle, const trmb::TextureHolder &textures, trmb::SoundPlayer &soundPlayer, DaylightUI &daylightUI
+	, ChatBoxUI &chatBoxUI)
 : PreventionNode(interactiveObject, window, view, uiBundle)
 , mWindowUIActivated(0x961e8d0b)
 , mDrawWindowUI(0x30459275)
@@ -34,7 +35,7 @@ WindowNode::WindowNode(const InteractiveObject &interactiveObject, const sf::Ren
 , mTextures(textures)
 , mSoundPlayer(soundPlayer)
 , mDaylightUI(daylightUI)
-, mChatBox(chatBox)
+, mChatBoxUI(chatBoxUI)
 , mWindowUIActive(false)
 , mIsWindowScreen(false)
 , mIsWindowClosed(false)
@@ -120,32 +121,32 @@ void WindowNode::activate()
 	updateUndoUI();
 	mSoundPlayer.play(SoundEffects::ID::Button);
 	InteractiveNode::sendEvent(mWindowUIActivated);
-	// ALW - ChatBox::UpdateText() can generate a mCreatePrompt event when an interactive object
+	// ALW - ChatBoxUI::UpdateText() can generate a mCreatePrompt event when an interactive object
 	// ALW - is selected. This asynchronous event will force InteractiveNode classes to ignore
 	// ALW - left and right click events. Then if <enter> is pressed an mEnter event will be
 	// ALW - generated allowing InteractiveNode classes to handle left and right click events.
 	// ALW - However, if another interactive object is selected that occurs before the currently
 	// ALW - selected interactive object in the SceneNode then this newly selected interactive
-	// ALW - object will cause ChatBox::UpdateText() to be called which generates a mCreatePrompt.
+	// ALW - object will cause ChatBoxUI::UpdateText() to be called which generates a mCreatePrompt.
 	// ALW - InteractiveNodes are then forced to ignore left and right click events, so the original
 	// ALW - interactive object will be left selected. To remedy this all InteractiveNodes deselect
 	// ALW - themselves when a mCreatePrompt is generated. Immediately afterwards the InteractiveNode
 	// ALW - that generated the mCreatePrompt is reselected.
 	if (mIsWindowScreen && mIsWindowClosed)
 	{
-		mChatBox.updateText(trmb::Localize::getInstance().getString("inspectScreenClosedWindow"));
+		mChatBoxUI.updateText(trmb::Localize::getInstance().getString("inspectScreenClosedWindow"));
 	}
 	else if (mIsWindowScreen)
 	{
-		mChatBox.updateText(trmb::Localize::getInstance().getString("inspectScreenWindow"));
+		mChatBoxUI.updateText(trmb::Localize::getInstance().getString("inspectScreenWindow"));
 	}
 	else if (mIsWindowClosed)
 	{
-		mChatBox.updateText(trmb::Localize::getInstance().getString("inspectClosedWindow"));
+		mChatBoxUI.updateText(trmb::Localize::getInstance().getString("inspectClosedWindow"));
 	}
 	else
 	{
-		mChatBox.updateText(trmb::Localize::getInstance().getString("inspectWindow"));
+		mChatBoxUI.updateText(trmb::Localize::getInstance().getString("inspectWindow"));
 	}
 
 	mSelected = true;
@@ -179,7 +180,7 @@ void WindowNode::addScreen()
 	{
 		mIsWindowScreen = true;
 		InteractiveNode::sendEvent(mDrawWindowScreenSprite);
-		mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseScreenWindow"));
+		mChatBoxUI.updateText(trmb::Localize::getInstance().getString("purchaseScreenWindow"));
 		mUIElemStates.at(screenElement) = false;
 	}
 	else
@@ -188,7 +189,7 @@ void WindowNode::addScreen()
 		// ALW - However, the button state changed. Reset it.
 		mUIElemStates.at(screenElement) = true;
 		mUIBundle.getWindowUI().setUIElemState(mUIElemStates);
-		mChatBox.updateText(trmb::Localize::getInstance().getString("daylightHours"));
+		mChatBoxUI.updateText(trmb::Localize::getInstance().getString("daylightHours"));
 	}
 }
 
@@ -196,7 +197,7 @@ void WindowNode::undoScreen()
 {
 	mIsWindowScreen = false;
 	InteractiveNode::sendEvent(mDoNotDrawWindowScreenSprite);
-	mChatBox.updateText(trmb::Localize::getInstance().getString("refundScreenWindow"));
+	mChatBoxUI.updateText(trmb::Localize::getInstance().getString("refundScreenWindow"));
 	mDaylightUI.add(mScreenCost);
 	const std::size_t screenElement = 0;
 	mUIElemStates.at(screenElement) = true;
@@ -210,7 +211,7 @@ void WindowNode::closeWindow()
 	{
 		mIsWindowClosed = true;
 		InteractiveNode::sendEvent(mDrawWindowClosedSprite);
-		mChatBox.updateText(trmb::Localize::getInstance().getString("purchaseClosedWindow"));
+		mChatBoxUI.updateText(trmb::Localize::getInstance().getString("purchaseClosedWindow"));
 		mUIElemStates.at(windowElement) = false;
 	}
 	else
@@ -219,7 +220,7 @@ void WindowNode::closeWindow()
 		// ALW - However, the button state changed. Reset it.
 		mUIElemStates.at(windowElement) = true;
 		mUIBundle.getWindowUI().setUIElemState(mUIElemStates);
-		mChatBox.updateText(trmb::Localize::getInstance().getString("daylightHours"));
+		mChatBoxUI.updateText(trmb::Localize::getInstance().getString("daylightHours"));
 	}
 }
 
@@ -227,7 +228,7 @@ void WindowNode::openWindow()
 {
 	mIsWindowClosed = false;
 	InteractiveNode::sendEvent(mDoNotDrawWindowClosedSprite);
-	mChatBox.updateText(trmb::Localize::getInstance().getString("refundClosedWindow"));
+	mChatBoxUI.updateText(trmb::Localize::getInstance().getString("refundClosedWindow"));
 	mDaylightUI.add(mCloseCost);
 	const std::size_t windowElement = 1;
 	mUIElemStates.at(windowElement) = true;

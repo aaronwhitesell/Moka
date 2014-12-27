@@ -155,9 +155,6 @@
     <ClInclude Include="GameObjects\interactiveObject.h">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="HUD\chatBox.h">
-      <Filter>Header Files\HUD</Filter>
-    </ClInclude>
     <ClInclude Include="HUD\optionsUI.h">
       <Filter>Header Files\HUD</Filter>
     </ClInclude>
@@ -221,6 +218,9 @@
     <ClInclude Include="HUD\uiBundle.h">
       <Filter>Header Files\HUD</Filter>
     </ClInclude>
+    <ClInclude Include="HUD\chatBoxUI.h">
+      <Filter>Header Files\HUD</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\application.cpp">
@@ -276,9 +276,6 @@
     </ClCompile>
     <ClCompile Include="GameObjects\interactiveObject.cpp">
       <Filter>Source Files\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="HUD\chatBox.cpp">
-      <Filter>Source Files\HUD</Filter>
     </ClCompile>
     <ClCompile Include="HUD\optionsUI.cpp">
       <Filter>Source Files\HUD</Filter>
@@ -341,6 +338,9 @@
       <Filter>Source Files\HUD</Filter>
     </ClCompile>
     <ClCompile Include="HUD\uiBundle.cpp">
+      <Filter>Source Files\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD\chatBoxUI.cpp">
       <Filter>Source Files\HUD</Filter>
     </ClCompile>
   </ItemGroup>

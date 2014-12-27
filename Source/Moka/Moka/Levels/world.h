@@ -1,7 +1,7 @@
 #ifndef WORLD_H
 #define WORLD_H
 
-#include "../HUD/chatBox.h"
+#include "../HUD/chatBoxUI.h"
 #include "../HUD/daylightUI.h"
 #include "../HUD/optionsUI.h"
 #include "../HUD/uiBundle.h"
@@ -91,7 +91,7 @@ private:
 	trmb::Camera								mCamera;
 	trmb::Map									mMap;
 	UIBundle									mUIBundle;
-	ChatBox										mChatBox;
+	ChatBoxUI									mChatBoxUI;
 	DaylightUI                                  mDaylightUI;
 	UndoUI										mBarrelUI;
 	UndoUI										mDoorUI;
