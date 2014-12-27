@@ -39,7 +39,7 @@ DaylightUI::DaylightUI(sf::RenderWindow &window, trmb::Camera &camera, Fonts::ID
 , mButton(std::make_shared<trmb::GameButton>(font, fonts, soundEffect, soundPlayer, sf::Vector2f(60.0f, 41.0f)))
 , mContainer(leftClickPress, leftClickRelease)
 , mMouseOver(false)
-, mUIBundleEnabled(true)
+, mUIBundleDisabled(false)
 {
 	mBackground.setSize(sf::Vector2f(60.0f, 41.0f));
 	mBackground.setFillColor(sf::Color(0u, 0u, 0u, 200u));
@@ -143,7 +143,7 @@ void DaylightUI::handler()
 	if (UIRect.contains(mousePosition))
 	{
 		mMouseOver = true;
-		mUIBundleEnabled = false;
+		mUIBundleDisabled = true;
 
 		if (!mUIBundle.getBarrelUI().isHidden())
 			mUIBundle.getBarrelUI().disable(false);
@@ -164,9 +164,9 @@ void DaylightUI::handler()
 	{
 		mMouseOver = false;
 
-		if (!mUIBundleEnabled)
+		if (mUIBundleDisabled)
 		{
-			mUIBundleEnabled = true;
+			mUIBundleDisabled = false;
 
 			if (!mUIBundle.getBarrelUI().isHidden())
 				mUIBundle.getBarrelUI().enable();

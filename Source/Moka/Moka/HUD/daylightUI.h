@@ -88,7 +88,7 @@ private:
 	ButtonPtr             mButton;
 	trmb::ButtonContainer mContainer;
 	bool                  mMouseOver;
-	bool				  mUIBundleEnabled;
+	bool				  mUIBundleDisabled;
 };
 
 void	centerOrigin(DaylightUI &ui, bool centerXAxis = true, bool centerYAxis = true);
