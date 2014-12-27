@@ -64,7 +64,7 @@ void World::update(sf::Time dt)
 	mSceneGraph.update(dt);					// ALW - Update the hero along with the rest of the scene graph
 	mCamera.update(mHero->getPosition());	// ALW - Update the camera position
 	updateSoundPlayer();
-	mDaylightUI.handler(mWindow);
+	mDaylightUI.handler();
 }
 
 void World::handleEvent(const trmb::Event &gameEvent)

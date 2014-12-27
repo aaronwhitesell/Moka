@@ -126,15 +126,15 @@ bool DaylightUI::subtract(float subtrahend)
 	return ret;
 }
 
-void DaylightUI::handler(const sf::RenderWindow &window)
+void DaylightUI::handler()
 {
 	// ALW - The DaylightUI has an absolute position in the world that is translated by the camera position.
 	sf::Vector2f cameraPosition(mCamera.getViewBounds().left, mCamera.getViewBounds().top);
 	sf::Transform translatedTransform = getTransform();
 	translatedTransform = translatedTransform.translate(cameraPosition);
 
-	const sf::Vector2i relativeToWindow = sf::Mouse::getPosition(window);
-	const sf::Vector2f relativeToWorld = window.mapPixelToCoords(relativeToWindow, mCamera.getView());
+	const sf::Vector2i relativeToWindow = sf::Mouse::getPosition(mWindow);
+	const sf::Vector2f relativeToWorld = mWindow.mapPixelToCoords(relativeToWindow, mCamera.getView());
 	const sf::Vector2f mousePosition = relativeToWorld;
 
 	sf::FloatRect UIRect(mBackground.getPosition().x, mBackground.getPosition().y, mBackground.getSize().x, mBackground.getSize().y);
@@ -185,7 +185,7 @@ void DaylightUI::handler(const sf::RenderWindow &window)
 		}
 	}
 
-	mContainer.handler(window, mCamera.getView(), translatedTransform);
+	mContainer.handler(mWindow, mCamera.getView(), translatedTransform);
 }
 
 void DaylightUI::handleEvent(const trmb::Event &gameEvent)
@@ -217,6 +217,11 @@ void DaylightUI::repositionGUI()
 	setPosition(windowCenter.x, bufferFromTop);
 }
 
+void DaylightUI::done()
+{
+	// ALW - TODO - Transition to simulation mode.
+}
+
 void centerOrigin(DaylightUI &ui, bool centerXAxis, bool centerYAxis)
 {
 	sf::Vector2f size = ui.getSize();
@@ -232,7 +237,3 @@ void centerOrigin(DaylightUI &ui, bool centerXAxis, bool centerYAxis)
 	ui.setOrigin(xAxis, yAxis);
 }
 
-void DaylightUI::done()
-{
-	// ALW - TODO - Transition to simulation mode.
-}

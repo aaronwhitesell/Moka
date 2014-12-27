@@ -9,7 +9,6 @@
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
-#include <SFML/Graphics/Transform.hpp>
 #include <SFML/Graphics/Transformable.hpp>
 #include <SFML/System/Vector2.hpp>
 
@@ -48,7 +47,7 @@ public:
 	sf::Vector2f		  getSize() const;
 	sf::FloatRect		  getRect() const;
 
-	void				  handler(const sf::RenderWindow &window);
+	void				  handler();
 	virtual void		  handleEvent(const trmb::Event &gameEvent) final;
 
 	void				  add(float addend);
