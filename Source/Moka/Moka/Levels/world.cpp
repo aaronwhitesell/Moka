@@ -43,8 +43,8 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mSpawnPosition(mWorldBounds.width / 2.f, mWorldBounds.height / 2.f)
 , mCamera(window.getDefaultView(), mWorldBounds)
 , mMap("Data/Maps/World.tmx")
-, mUIBundle(mDaylightUI, mBarrelUI, mDoorUI, mWindowUI, mClinicUI, mHouseUI)
-, mChatBoxUI(window, Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer)
+, mUIBundle(mChatBoxUI, mDaylightUI, mBarrelUI, mDoorUI, mWindowUI, mClinicUI, mHouseUI)
+, mChatBoxUI(window, mCamera, Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, mUIBundle)
 , mDaylightUI(window, mCamera, Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, mUIBundle, 0x6955d309, 0x128b8b25)
 , mBarrelUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
 , mDoorUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
@@ -64,6 +64,7 @@ void World::update(sf::Time dt)
 	mSceneGraph.update(dt);					// ALW - Update the hero along with the rest of the scene graph
 	mCamera.update(mHero->getPosition());	// ALW - Update the camera position
 	updateSoundPlayer();
+	mChatBoxUI.handler();
 	mDaylightUI.handler();
 }
 

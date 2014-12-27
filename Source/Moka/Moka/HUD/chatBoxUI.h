@@ -5,8 +5,11 @@
 #include "Trambo/Resources/resourceHolder.h"
 
 #include <SFML/Graphics/Drawable.hpp>
+#include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/Text.hpp>
+#include <SFML/Graphics/Transformable.hpp>
+#include <SFML/System/Vector2.hpp>
 
 #include <string>
 
@@ -20,18 +23,25 @@ namespace sf
 
 namespace trmb
 {
+	class Camera;
 	class Event;
 	class SoundPlayer;
 }
 
-class ChatBoxUI : public sf::Drawable, public trmb::EventHandler
+class UIBundle;
+
+class ChatBoxUI : public sf::Transformable, public sf::Drawable, public trmb::EventHandler
 {
 public:
-						  ChatBoxUI(sf::RenderWindow &window, Fonts::ID font, trmb::FontHolder &fonts, SoundEffects::ID soundEffect
-							  , trmb::SoundPlayer &soundPlayer);
+						  ChatBoxUI(sf::RenderWindow &window, trmb::Camera &camera, Fonts::ID font, trmb::FontHolder &fonts
+							  , SoundEffects::ID soundEffect, trmb::SoundPlayer &soundPlayer, UIBundle &uiBundle);
 						  ChatBoxUI(const ChatBoxUI &) = delete;
 	ChatBoxUI &			  operator=(const ChatBoxUI &) = delete;
 
+	sf::Vector2f		  getSize() const;
+	sf::FloatRect		  getRect() const;
+
+	void				  handler();
 	virtual void		  handleEvent(const trmb::Event &gameEvent) final;
 	void				  updateText(std::string string);
 
@@ -71,15 +81,22 @@ private:
 	const unsigned int	  mMaxLinesDrawn;
 
 	sf::RenderWindow	  &mWindow;
+	trmb::Camera          &mCamera;
 	trmb::FontHolder	  &mFonts;
 	SoundEffects::ID	  mSoundEffect;
 	trmb::SoundPlayer	  &mSoundPlayer;
+	UIBundle			  &mUIBundle;
 
 	sf::RectangleShape	  mBackground;
 	sf::Text			  mTextLine;
 	sf::Text			  mPrompt;
 	std::vector<sf::Text> mWordWrapText;
 	int					  mLinesToDraw;
+
+	bool				  mMouseOver;
+	bool				  mUIBundleDisabled;
 };
+
+void	centerOrigin(ChatBoxUI &ui, bool centerXAxis = true, bool centerYAxis = true);
 
 #endif

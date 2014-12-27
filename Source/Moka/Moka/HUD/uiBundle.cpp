@@ -1,14 +1,21 @@
 #include "uiBundle.h"
 
 
-UIBundle::UIBundle(DaylightUI &daylightUI, UndoUI &barrelUI, UndoUI &doorUI, UndoUI &windowUI, OptionsUI &clinicUI, OptionsUI &houseUI)
-: mDaylightUI(daylightUI)
+UIBundle::UIBundle(ChatBoxUI &chatBoxUI, DaylightUI &daylightUI, UndoUI &barrelUI, UndoUI &doorUI, UndoUI &windowUI
+	, OptionsUI &clinicUI, OptionsUI &houseUI)
+: mChatBoxUI(chatBoxUI)
+, mDaylightUI(daylightUI)
 , mBarrelUI(barrelUI)
 , mDoorUI(doorUI)
 , mWindowUI(windowUI)
 , mClinicUI(clinicUI)
 , mHouseUI(houseUI)
 {
+}
+
+ChatBoxUI & UIBundle::getChatBoxUI() const
+{
+	return mChatBoxUI;
 }
 
 DaylightUI & UIBundle::getDaylightUI() const

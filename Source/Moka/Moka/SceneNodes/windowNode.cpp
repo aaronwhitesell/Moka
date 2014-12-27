@@ -50,7 +50,9 @@ void WindowNode::handleEvent(const trmb::Event &gameEvent)
 {
 	InteractiveNode::handleEvent(gameEvent);
 
-	if (!mDisableInput && !isMouseOverUI(mUIBundle.getDaylightUI().getRect()))
+	if (!mDisableInput
+		&& !isMouseOverUI(mUIBundle.getChatBoxUI().getRect())
+		&& !isMouseOverUI(mUIBundle.getDaylightUI().getRect()))
 	{
 		if (mWindowUIActivated.getType() == gameEvent.getType())
 		{

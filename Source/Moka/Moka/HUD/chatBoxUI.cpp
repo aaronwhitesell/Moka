@@ -1,6 +1,10 @@
 #include "chatBoxUI.h"
+#include "../HUD/optionsUI.h"
+#include "../HUD/undoUI.h"
+#include "../HUD/uiBundle.h"
 #include "../Resources/resourceIdentifiers.h"
 
+#include "Trambo/Camera/camera.h"
 #include "Trambo/Events/event.h"
 #include "Trambo/Localize/localize.h"
 #include "Trambo/Sounds/soundPlayer.h"
@@ -10,7 +14,7 @@
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/System/Vector2.hpp>
+#include <SFML/Graphics/Transform.hpp>
 
 #include <algorithm>
 #include <cassert>
@@ -18,8 +22,8 @@
 #include <sstream>
 
 
-ChatBoxUI::ChatBoxUI(sf::RenderWindow &window, Fonts::ID font, trmb::FontHolder &fonts, SoundEffects::ID soundEffect
-	, trmb::SoundPlayer &soundPlayer)
+ChatBoxUI::ChatBoxUI(sf::RenderWindow &window, trmb::Camera &camera, Fonts::ID font, trmb::FontHolder &fonts
+	, SoundEffects::ID soundEffect, trmb::SoundPlayer &soundPlayer, UIBundle &uiBundle)
 : mCreateTextPrompt(0x25e87fd8)
 , mClearTextPrompt(0xc1523265)
 , mEnter(0xff349d1d)
@@ -29,37 +33,120 @@ ChatBoxUI::ChatBoxUI(sf::RenderWindow &window, Fonts::ID font, trmb::FontHolder 
 , mVerticalSpacing(15.0f)
 , mMaxLinesDrawn(5u)
 , mWindow(window)
+, mCamera(camera)
 , mFonts(fonts)
 , mSoundEffect(soundEffect)
 , mSoundPlayer(soundPlayer)
+, mUIBundle(uiBundle)
 , mLinesToDraw(mMaxLinesDrawn)
+, mMouseOver(false)
+, mUIBundleDisabled(false)
 {
-	// ALW - Calculate x, y coordinates relative to the center of the window,
-	// ALW - so GUI elements are equidistance from the center in any resolution.
-	const sf::Vector2f windowSize = sf::Vector2f(mWindow.getSize());
-	const sf::Vector2f windowCenter = sf::Vector2f(mWindow.getSize() / 2u);
 	mBackground.setSize(sf::Vector2f(300.0f, 77.0f));
-	const sf::Vector2f halfOfChatBox = mBackground.getSize() / 2.0f;
-	const float bufferFromBottom = 10.0f;
-
-	trmb::centerOrigin(mBackground);
-	mBackground.setPosition(windowCenter.x, windowSize.y - halfOfChatBox.y - bufferFromBottom);
 	mBackground.setFillColor(sf::Color(0u, 0u, 0u, 200u));
 	mBackground.setOutlineColor(sf::Color(0u, 0u, 0u, 255u));
 	mBackground.setOutlineThickness(1.0f);
+	mBackground.setPosition(0.0f, 0.0f);
 
 	// ALW - Position text at the top left of the ChatBoxUI
-	mTextLine.setPosition(mBackground.getPosition() - halfOfChatBox);
 	mTextLine.setFont(mFonts.get(font));
 	mTextLine.setCharacterSize(14u);
+	mTextLine.setPosition(sf::Vector2f(0.0f, 0.0f));
 
-	mPrompt.setString(trmb::Localize::getInstance().getString("prompt"));
 	mPrompt.setFont(mFonts.get(font));
 	mPrompt.setCharacterSize(14u);
+	mPrompt.setString(trmb::Localize::getInstance().getString("prompt"));
 	mPrompt.setColor(sf::Color(128u, 128u, 128u, 255u));
 	float promptWidth = mPrompt.getGlobalBounds().width;
-	mPrompt.setPosition(mBackground.getPosition().x - promptWidth / 2.0f,
-		mBackground.getPosition().y - mBackground.getSize().y / 2.0f + mVerticalSpacing * (mMaxLinesDrawn - 1));
+	trmb::centerOrigin(mPrompt, true, false);
+	mPrompt.setPosition(mBackground.getSize().x / 2.0f, mVerticalSpacing * (mMaxLinesDrawn - 1));
+
+	// ALW - Calculate x, y coordinates relative to the center of the window,
+	// ALW - so GUI elements are equidistance from the center in any resolution.
+	const sf::Vector2f windowCenter = sf::Vector2f(mWindow.getSize() / 2u);
+	const float bufferFromBottom = 10.0f;
+	centerOrigin(*this, true, false);
+	setPosition(windowCenter.x, mWindow.getSize().y - mBackground.getSize().y - bufferFromBottom);
+}
+
+sf::Vector2f ChatBoxUI::getSize() const
+{
+	return mBackground.getSize();
+}
+
+sf::FloatRect ChatBoxUI::getRect() const
+{
+	// ALW - The ChatBoxUI has an absolute position in the world that is translated by the camera position.
+	const sf::Vector2f backgroundPosition = mBackground.getPosition();
+	const sf::Vector2f backgroundSize = mBackground.getSize();
+	sf::FloatRect rect = sf::FloatRect(backgroundPosition.x, backgroundPosition.y, backgroundSize.x, backgroundSize.y);
+
+	sf::Vector2f cameraPosition(mCamera.getViewBounds().left, mCamera.getViewBounds().top);
+	sf::Transform translatedTransform = getTransform();
+	translatedTransform = translatedTransform.translate(cameraPosition);
+	rect = translatedTransform.transformRect(rect);
+
+	return rect;
+}
+
+void ChatBoxUI::handler()
+{
+	// ALW - The ChatBoxUI has an absolute position in the world that is translated by the camera position.
+	sf::Vector2f cameraPosition(mCamera.getViewBounds().left, mCamera.getViewBounds().top);
+	sf::Transform translatedTransform = getTransform();
+	translatedTransform = translatedTransform.translate(cameraPosition);
+
+	const sf::Vector2i relativeToWindow = sf::Mouse::getPosition(mWindow);
+	const sf::Vector2f relativeToWorld = mWindow.mapPixelToCoords(relativeToWindow, mCamera.getView());
+	const sf::Vector2f mousePosition = relativeToWorld;
+
+	sf::FloatRect UIRect(mBackground.getPosition().x, mBackground.getPosition().y, mBackground.getSize().x, mBackground.getSize().y);
+	UIRect = translatedTransform.transformRect(UIRect);
+
+	if (UIRect.contains(mousePosition))
+	{
+		mMouseOver = true;
+		mUIBundleDisabled = true;
+
+		if (!mUIBundle.getBarrelUI().isHidden())
+			mUIBundle.getBarrelUI().disable(false);
+
+		if (!mUIBundle.getDoorUI().isHidden())
+			mUIBundle.getDoorUI().disable(false);
+
+		if (!mUIBundle.getWindowUI().isHidden())
+			mUIBundle.getWindowUI().disable(false);
+
+		if (!mUIBundle.getClinicUI().isHidden())
+			mUIBundle.getClinicUI().disable(false);
+
+		if (!mUIBundle.getHouseUI().isHidden())
+			mUIBundle.getHouseUI().disable(false);
+	}
+	else
+	{
+		mMouseOver = false;
+
+		if (mUIBundleDisabled)
+		{
+			mUIBundleDisabled = false;
+
+			if (!mUIBundle.getBarrelUI().isHidden())
+				mUIBundle.getBarrelUI().enable();
+
+			if (!mUIBundle.getDoorUI().isHidden())
+				mUIBundle.getDoorUI().enable();
+
+			if (!mUIBundle.getWindowUI().isHidden())
+				mUIBundle.getWindowUI().enable();
+
+			if (!mUIBundle.getClinicUI().isHidden())
+				mUIBundle.getClinicUI().enable();
+
+			if (!mUIBundle.getHouseUI().isHidden())
+				mUIBundle.getHouseUI().enable();
+		}
+	}
 }
 
 void ChatBoxUI::handleEvent(const trmb::Event &gameEvent)
@@ -88,8 +175,9 @@ void ChatBoxUI::updateText(std::string string)
 
 void ChatBoxUI::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
+	states.transform *= getTransform();
 	target.setView(target.getDefaultView());
-	target.draw(mBackground);
+	target.draw(mBackground, states);
 
 	if (!mWordWrapText.empty())
 	{
@@ -97,14 +185,14 @@ void ChatBoxUI::draw(sf::RenderTarget &target, sf::RenderStates states) const
 		std::vector<sf::Text>::const_iterator line = begin(mWordWrapText);
 		while (count < mLinesToDraw)
 		{
-			target.draw(*line);
+			target.draw(*line, states);
 			++line;
 			++count;
 		}
 	}
 
 	if (isPrompt())
-		target.draw(mPrompt);
+		target.draw(mPrompt, states);
 }
 
 void ChatBoxUI::formatText(std::string string)
@@ -176,11 +264,11 @@ void ChatBoxUI::displayMoreText()
 void ChatBoxUI::setTextLinePosition()
 {
 	// ALW - Set the position for each line of text in mWordWrapText. Do this by
-	// ALW - calculating the top-left position of the chat box. Then account for 
+	// ALW - starting at the top-left position of the chat box. Then account for
 	// ALW - horizontal and vertical spacing, and the line number.
 
 	int lineCount = 0;
-	sf::Vector2f topLeftOfBackground = mBackground.getPosition() - mBackground.getSize() / 2.0f;
+	sf::Vector2f topLeftOfBackground(0.0f, 0.0f);
 
 	for (auto &textLine : mWordWrapText)
 	{
@@ -342,15 +430,22 @@ void ChatBoxUI::repositionGUI()
 {
 	// ALW - Calculate x, y coordinates relative to the center of the window,
 	// ALW - so GUI elements are equidistance from the center in any resolution.
-	const sf::Vector2f size = sf::Vector2f(mWindow.getSize());
-	const sf::Vector2f center = sf::Vector2f(mWindow.getSize() / 2u);
-	const sf::Vector2f halfOfChatBox = mBackground.getSize() / 2.0f;
+	const sf::Vector2f windowCenter = sf::Vector2f(mWindow.getSize() / 2u);
 	const float bufferFromBottom = 10.0f;
+	setPosition(windowCenter.x, mWindow.getSize().y - mBackground.getSize().y - bufferFromBottom);
+}
 
-	mBackground.setPosition(center.x, size.y - halfOfChatBox.y - bufferFromBottom);
-	setTextLinePosition();
+void centerOrigin(ChatBoxUI &ui, bool centerXAxis, bool centerYAxis)
+{
+	sf::Vector2f size = ui.getSize();
+	float xAxis = 0.0f;
+	float yAxis = 0.0f;
 
-	float promptWidth = mPrompt.getGlobalBounds().width;
-	mPrompt.setPosition(mBackground.getPosition().x - promptWidth / 2.0f,
-		mBackground.getPosition().y - mBackground.getSize().y / 2.0f + mVerticalSpacing * (mMaxLinesDrawn - 1));
+	if (centerXAxis)
+		xAxis = std::floor(size.x / 2.0f);
+
+	if (centerYAxis)
+		yAxis = std::floor(size.y / 2.0f);
+
+	ui.setOrigin(xAxis, yAxis);
 }
