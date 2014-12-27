@@ -4,12 +4,11 @@
 04. Finished 08/12/2014 - Toggle between fullscreen and window modes
 05. Finished 08/14/2014 - Add pause menu
 06. Finished 08/17/2014 - Update Hero class
-07. Implement interactive objects
-08. Context menu
-09. HUD
-10. Localization scheme
-11. Simulation mode
-12. Scoreboard
-13. Display malaria facts
-14. Research malaria strings
+07. Finished 10/16/2014 - Localization scheme
+08. Finished 12/18/2014 - Implement interactive objects
+09. Finished 12/27/2014 - HUD
+10. Simulation mode
+11. Scoreboard
+12. Display malaria facts
+13. Research malaria strings
 
