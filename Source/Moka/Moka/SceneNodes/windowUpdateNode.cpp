@@ -21,7 +21,7 @@ WindowUpdateNode::WindowUpdateNode(const InteractiveObject &interactiveObject, c
 , mWindowClosed(false)
 , mDrawn(false)
 {
-	mSprite.setPosition(sf::Vector2f(mInteractiveObject.getPosX0(), mInteractiveObject.getPosY0()));
+	mSprite.setPosition(sf::Vector2f(mInteractiveObject.getAlternateXCoord1(), mInteractiveObject.getAlternateYCoord1()));
 }
 
 void WindowUpdateNode::handleEvent(const trmb::Event &gameEvent)

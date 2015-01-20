@@ -18,7 +18,7 @@ BarrelUpdateNode::BarrelUpdateNode(const InteractiveObject &interactiveObject, c
 , mDrawn(false)
 {
 	mSprite.setTextureRect(sf::IntRect(576, 640, 64, 64)); // ALW - Coordinates for a barrel with lid from Tiles.png
-	mSprite.setPosition(sf::Vector2f(mInteractiveObject.getPosX0(), mInteractiveObject.getPosY0()));
+	mSprite.setPosition(sf::Vector2f(mInteractiveObject.getAlternateXCoord1(), mInteractiveObject.getAlternateYCoord1()));
 }
 
 void BarrelUpdateNode::handleEvent(const trmb::Event &gameEvent)

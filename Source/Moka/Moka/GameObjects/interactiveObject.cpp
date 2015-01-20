@@ -2,22 +2,27 @@
 
 
 InteractiveObject::InteractiveObject(std::string name, std::string type, float x, float y, float width, float height
-	, float posX0, float posY0, float posX1, float posY1, float posX2, float posY2, std::string attachedTo, int beds
-	, std::string color, int nets, int residents, std::string style)
+	, float alternateXCoord1, float alternateXCoord2, float alternateXCoord3, float alternateYCoord1, float alternateYCoord2
+	, float alternateYCoord3, std::string attachedTo, int beds, float collisionBoxHeight, float collisionBoxWidth
+	, float collisionBoxXCoord, float collisionBoxYCoord, std::string color, int nets, int residents, std::string style)
 : mName(name)
 , mType(type)
 , mX(x)
 , mY(y)
 , mWidth(width)
 , mHeight(height)
-, mPosX0(posX0)
-, mPosY0(posY0)
-, mPosX1(posX1)
-, mPosY1(posY1)
-, mPosX2(posX2)
-, mPosY2(posY2)
+, mAlternateXCoord1(alternateXCoord1)
+, mAlternateXCoord2(alternateXCoord2)
+, mAlternateXCoord3(alternateXCoord3)
+, mAlternateYCoord1(alternateYCoord1)
+, mAlternateYCoord2(alternateYCoord2)
+, mAlternateYCoord3(alternateYCoord3)
 , mAttachedTo(attachedTo)
 , mBeds(beds)
+, mCollisionBoxXCoord(collisionBoxXCoord)
+, mCollisionBoxYCoord(collisionBoxYCoord)
+, mCollisionBoxWidth(collisionBoxWidth)
+, mCollisionBoxHeight(collisionBoxHeight)
 , mColor(color)
 , mNets(nets)
 , mResidents(residents)
@@ -25,14 +30,19 @@ InteractiveObject::InteractiveObject(std::string name, std::string type, float x
 {
 }
 
-const std::string InteractiveObject::getName() const
+int InteractiveObject::getBeds() const
 {
-	return mName;
+	return mBeds;
 }
 
-const std::string InteractiveObject::getType() const
+int InteractiveObject::getNets() const
 {
-	return mType;
+	return mNets;
+}
+
+int InteractiveObject::getResidents() const
+{
+	return mResidents;
 }
 
 float InteractiveObject::getX() const
@@ -55,62 +65,77 @@ float InteractiveObject::getHeight() const
 	return mHeight;
 }
 
-float InteractiveObject::getPosX0() const
+float InteractiveObject::getAlternateXCoord1() const
 {
-	return mPosX0;
+	return mAlternateXCoord1;
 }
 
-float InteractiveObject::getPosY0() const
+float InteractiveObject::getAlternateYCoord1() const
 {
-	return mPosY0;
+	return mAlternateYCoord1;
 }
 
-float InteractiveObject::getPosX1() const
+float InteractiveObject::getAlternateXCoord2() const
 {
-	return mPosX1;
+	return mAlternateXCoord2;
 }
 
-float InteractiveObject::getPosY1() const
+float InteractiveObject::getAlternateYCoord2() const
 {
-	return mPosY1;
+	return mAlternateYCoord2;
 }
 
-float InteractiveObject::getPosX2() const
+float InteractiveObject::getAlternateXCoord3() const
 {
-	return mPosX2;
+	return mAlternateXCoord3;
 }
 
-float InteractiveObject::getPosY2() const
+float InteractiveObject::getAlternateYCoord3() const
 {
-	return mPosY2;
+	return mAlternateYCoord3;
 }
 
-const std::string InteractiveObject::getAttachedTo() const
+float InteractiveObject::getCollisionBoxXCoord() const
+{
+	return mCollisionBoxXCoord;
+}
+
+float InteractiveObject::getCollisionBoxYCoord() const
+{
+	return mCollisionBoxYCoord;
+}
+
+float InteractiveObject::getCollisionBoxWidth() const
+{
+	return mCollisionBoxWidth;
+}
+
+float InteractiveObject::getCollisionBoxHeight() const
+{
+	return mCollisionBoxHeight;
+}
+
+std::string InteractiveObject::getName() const
+{
+	return mName;
+}
+
+std::string InteractiveObject::getType() const
+{
+	return mType;
+}
+
+std::string InteractiveObject::getAttachedTo() const
 {
 	return mAttachedTo;
 }
 
-int InteractiveObject::getBeds() const
-{
-	return mBeds;
-}
-
-const std::string InteractiveObject::getColor() const
+std::string InteractiveObject::getColor() const
 {
 	return mColor;
 }
 
-int InteractiveObject::getNets() const
-{
-	return mNets;
-}
-
-int InteractiveObject::getResidents() const
-{
-	return mResidents;
-}
-
-const std::string InteractiveObject::getStyle() const
+std::string InteractiveObject::getStyle() const
 {
 	return mStyle;
 }

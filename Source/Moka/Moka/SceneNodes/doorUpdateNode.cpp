@@ -34,7 +34,7 @@ DoorUpdateNode::DoorUpdateNode(const InteractiveObject &interactiveObject, const
 		throw std::runtime_error("ALW - Runtime Error: Interactive object's color property is not valid.");
 	}
 
-	mSprite.setPosition(sf::Vector2f(mInteractiveObject.getPosX0(), mInteractiveObject.getPosY0()));
+	mSprite.setPosition(sf::Vector2f(mInteractiveObject.getAlternateXCoord1(), mInteractiveObject.getAlternateYCoord1()));
 }
 
 void DoorUpdateNode::handleEvent(const trmb::Event &gameEvent)

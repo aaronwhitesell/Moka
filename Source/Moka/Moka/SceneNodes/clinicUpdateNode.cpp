@@ -25,8 +25,8 @@ ClinicUpdateNode::ClinicUpdateNode(const InteractiveObject &interactiveObject, c
 , mDrawRDT(false)
 , mDrawACT(false)
 {
-	mRDTSprite.setPosition(sf::Vector2f(mInteractiveObject.getPosX0(), mInteractiveObject.getPosY0()));
-	mACTSprite.setPosition(sf::Vector2f(mInteractiveObject.getPosX1(), mInteractiveObject.getPosY1()));
+	mRDTSprite.setPosition(sf::Vector2f(mInteractiveObject.getAlternateXCoord1(), mInteractiveObject.getAlternateYCoord1()));
+	mACTSprite.setPosition(sf::Vector2f(mInteractiveObject.getAlternateXCoord2(), mInteractiveObject.getAlternateYCoord2()));
 }
 
 void ClinicUpdateNode::handleEvent(const trmb::Event &gameEvent)

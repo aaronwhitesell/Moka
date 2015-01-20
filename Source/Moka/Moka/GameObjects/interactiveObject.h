@@ -7,54 +7,63 @@
 class InteractiveObject
 {
 public:
-							InteractiveObject(std::string name, std::string type, float x, float y, float width, float height
-								, float posX0, float posY0, float posX1, float posY1, float posX2, float posY2, std::string attachedTo
-								, int beds, std::string color, int nets, int residents, std::string style);
-							// ALW - Allow copy construction and assignment
+						InteractiveObject(std::string name, std::string type, float x, float y, float width, float height
+							, float alternateXCoord1, float alternateXCoord2, float alternateXCoord3
+							, float alternateYCoord1, float alternateYCoord2, float alternateYCoord3
+							, std::string attachedTo, int beds, float collisionBoxHeight, float collisionBoxWidth
+						    , float collisionBoxXCoord, float collisionBoxYCoord
+							, std::string color, int nets, int residents, std::string style);
+						// ALW - Allow copy construction and assignment
 
-	const std::string		getName() const;
-	const std::string		getType() const;
-	float					getX() const;
-	float					getY() const;
-	float					getWidth() const;
-	float					getHeight() const;
+	int					getBeds() const;
+	int					getNets() const;
+	int					getResidents() const;
 
-	float					getPosX0() const;
-	float					getPosY0() const;
-	float					getPosX1() const;
-	float					getPosY1() const;
-	float					getPosX2() const;
-	float					getPosY2() const;
-	const std::string		getAttachedTo() const;
-	int						getBeds() const;
-	const std::string		getColor() const;
-	int						getNets() const;
-	int						getResidents() const;
-	const std::string		getStyle() const;
+	float				getX() const;
+	float				getY() const;
+	float				getWidth() const;
+	float				getHeight() const;
+	float				getAlternateXCoord1() const;
+	float				getAlternateYCoord1() const;
+	float				getAlternateXCoord2() const;
+	float				getAlternateYCoord2() const;
+	float				getAlternateXCoord3() const;
+	float				getAlternateYCoord3() const;
+	float               getCollisionBoxXCoord() const;
+	float               getCollisionBoxYCoord() const;
+	float               getCollisionBoxWidth() const;
+	float               getCollisionBoxHeight() const;
+
+	std::string		    getName() const;
+	std::string		    getType() const;
+	std::string		    getAttachedTo() const;
+	std::string		    getColor() const;
+	std::string		    getStyle() const;
 
 
 private:
-	std::string				mName;
-	std::string				mType;
-	float					mX;
-	float					mY;
-	float					mWidth;
-	float					mHeight;
-
-	float					mPosX0;
-	float					mPosY0;
-	float					mPosX1;
-	float					mPosY1;
-	float					mPosX2;
-	float					mPosY2;
-	std::string				mAttachedTo;
-	int						mBeds;
-	std::string				mColor;
-	int						mNets;
-	int						mResidents;
-	std::string				mStyle;
-
-
+	std::string			mName;
+	std::string			mType;
+	float				mX;
+	float				mY;
+	float				mWidth;
+	float				mHeight;
+	float				mAlternateXCoord1;
+	float				mAlternateXCoord2;
+	float				mAlternateXCoord3;
+	float				mAlternateYCoord1;
+	float				mAlternateYCoord2;
+	float				mAlternateYCoord3;
+	std::string			mAttachedTo;
+	int					mBeds;
+	float               mCollisionBoxHeight;
+	float               mCollisionBoxWidth;
+	float               mCollisionBoxXCoord;
+	float               mCollisionBoxYCoord;
+	std::string			mColor;
+	int					mNets;
+	int					mResidents;
+	std::string			mStyle;
 };
 
 #endif
