@@ -163,7 +163,7 @@ void World::buildScene()
 	std::vector<InteractiveObject>::const_iterator iter    = begin(mObjectGroups.getInteractiveGroup().getInteractiveObjects());
 	std::vector<InteractiveObject>::const_iterator iterEnd = end(mObjectGroups.getInteractiveGroup().getInteractiveObjects());
 
-	for (; iter != end(mObjectGroups.getInteractiveGroup().getInteractiveObjects()); ++iter)
+	for (; iter != iterEnd; ++iter)
 	{
 		if (iter->getType() == "Barrel")
 		{
