@@ -18,6 +18,7 @@
 #include "../Resources/resourceIdentifiers.h"
 
 #include "Trambo/Events/event.h"
+#include "Trambo/Localize/localize.h"
 #include "Trambo/SceneNodes/mapLayerNode.h"
 #include "Trambo/SceneNodes/spriteNode.h"
 #include "Trambo/Sounds/soundPlayer.h"
@@ -55,8 +56,8 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mHero(nullptr)
 {
 	mTextures.load(Textures::ID::Tiles, "Data/Textures/Tiles.png");
-	configureUIs();
 	buildScene();
+	configureUIs();
 }
 
 void World::update(sf::Time dt)
@@ -96,6 +97,9 @@ void World::updateSoundPlayer()
 
 void World::configureUIs()
 {
+	// ALW - Must occur after World::buildScene(), otherwise the Nodes will miss the mCreateTextPrompt event.
+	mChatBoxUI.updateText(trmb::Localize::getInstance().getString("greeting"));
+
 	const unsigned int characterSize = 13;
 
 	mBarrelUI.addUIElem("Cover", "Undo");
