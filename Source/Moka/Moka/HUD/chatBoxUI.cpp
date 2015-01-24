@@ -106,22 +106,26 @@ void ChatBoxUI::handler()
 	if (UIRect.contains(mousePosition))
 	{
 		mMouseOver = true;
-		mUIBundleDisabled = true;
 
-		if (!mUIBundle.getBarrelUI().isHidden())
-			mUIBundle.getBarrelUI().disable(false);
+		if (!mUIBundleDisabled)
+		{
+			mUIBundleDisabled = true;
 
-		if (!mUIBundle.getDoorUI().isHidden())
-			mUIBundle.getDoorUI().disable(false);
+			if (!mUIBundle.getBarrelUI().isHidden())
+				mUIBundle.getBarrelUI().disable(false);
 
-		if (!mUIBundle.getWindowUI().isHidden())
-			mUIBundle.getWindowUI().disable(false);
+			if (!mUIBundle.getDoorUI().isHidden())
+				mUIBundle.getDoorUI().disable(false);
 
-		if (!mUIBundle.getClinicUI().isHidden())
-			mUIBundle.getClinicUI().disable(false);
+			if (!mUIBundle.getWindowUI().isHidden())
+				mUIBundle.getWindowUI().disable(false);
 
-		if (!mUIBundle.getHouseUI().isHidden())
-			mUIBundle.getHouseUI().disable(false);
+			if (!mUIBundle.getClinicUI().isHidden())
+				mUIBundle.getClinicUI().disable(false);
+
+			if (!mUIBundle.getHouseUI().isHidden())
+				mUIBundle.getHouseUI().disable(false);
+		}
 	}
 	else
 	{
