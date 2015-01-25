@@ -58,10 +58,12 @@ protected:
 	sf::RectangleShape			mHightlight;
 	bool						mSelected;
 	bool						mPreviousSelectedState;
+	bool                        mDisableBuildMode;
 	bool						mDisableInput;
 
 
 private:
+	const EventGuid             mBeginSimulationMode; // ALW - Matches the GUID in the DaylightUI class.
 	const EventGuid				mCreateTextPrompt; // ALW - Matches the GUID in the ChatBoxUI class.
 	const EventGuid				mClearTextPrompt;  // ALW - Matches the GUID in the ChatBoxUI class.
 };

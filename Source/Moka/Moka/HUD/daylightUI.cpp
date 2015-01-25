@@ -1,4 +1,5 @@
 #include "daylightUI.h"
+#include "chatBoxUI.h"
 #include "../HUD/optionsUI.h"
 #include "../HUD/undoUI.h"
 #include "../HUD/uiBundle.h"
@@ -22,7 +23,8 @@
 DaylightUI::DaylightUI(sf::RenderWindow &window, trmb::Camera &camera, Fonts::ID font, trmb::FontHolder &fonts
 	, SoundEffects::ID soundEffect, trmb::SoundPlayer &soundPlayer, UIBundle &uiBundle, EventGuid leftClickPress
 	, EventGuid leftClickRelease)
-: mFullscreen(0x5a0d2314)
+: mBeginSimulationMode(0x5000e550)
+, mFullscreen(0x5a0d2314)
 , mWindowed(0x11e3c735)
 , mMaxHours(12.0f)
 , mMinHours(0.0f)
@@ -223,7 +225,8 @@ void DaylightUI::repositionGUI()
 
 void DaylightUI::done()
 {
-	// ALW - TODO - Transition to simulation mode.
+	EventHandler::sendEvent(mBeginSimulationMode);
+	mUIBundle.getChatBoxUI().updateText(trmb::Localize::getInstance().getString("simulationGreeting"));
 }
 
 void centerOrigin(DaylightUI &ui, bool centerXAxis, bool centerYAxis)

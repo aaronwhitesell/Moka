@@ -23,7 +23,9 @@ InteractiveNode::InteractiveNode(const InteractiveObject &interactiveObject, con
 , mUIBundle(uiBundle)
 , mSelected(false)
 , mPreviousSelectedState(false)
+, mDisableBuildMode(false)
 , mDisableInput(false)
+, mBeginSimulationMode(0x5000e550)
 , mCreateTextPrompt(0x25e87fd8)
 , mClearTextPrompt(0xc1523265)
 {
@@ -36,7 +38,12 @@ InteractiveNode::InteractiveNode(const InteractiveObject &interactiveObject, con
 
 void InteractiveNode::handleEvent(const trmb::Event& gameEvent)
 {
-	if (mCreateTextPrompt == gameEvent.getType())
+	if (mBeginSimulationMode == gameEvent.getType())
+	{
+		mDisableBuildMode = true;
+		mSelected = false;
+	}
+	else if (mCreateTextPrompt == gameEvent.getType())
 	{
 		mDisableInput = true;
 		mSelected = false;

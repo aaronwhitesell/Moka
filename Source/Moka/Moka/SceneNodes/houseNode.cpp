@@ -56,9 +56,13 @@ void HouseNode::handleEvent(const trmb::Event &gameEvent)
 {
 	InteractiveNode::handleEvent(gameEvent);
 
-	if (!mDisableInput
-		&& !isMouseOverUI(mUIBundle.getChatBoxUI().getRect())
-		&& !isMouseOverUI(mUIBundle.getDaylightUI().getRect()))
+	if (mDisableBuildMode)
+	{
+		mUIBundle.getHouseUI().hide();
+	}
+	else if (!mDisableInput
+		  && !isMouseOverUI(mUIBundle.getChatBoxUI().getRect())
+		  && !isMouseOverUI(mUIBundle.getDaylightUI().getRect()))
 	{
 		if (mHouseUIActivated.getType() == gameEvent.getType())
 		{

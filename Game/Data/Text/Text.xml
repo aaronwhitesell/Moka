@@ -7,6 +7,8 @@
 Pleasantville is a wonderful place, but it has one big problem; malaria. Help the residents of your town develop an
 effective strategy to fight malaria. First, have a look around and identify different ways to combat malaria.
 Then spend your resources wisely. Afterwards, we will check the effectiveness of your work."/>
+        <simulationGreeting        attribute="The town darkens as night approaches and the buzz of mosquitoes drowns
+everything else out."/>
         <daylightHours             attribute="There are not enough daylight hours left!"/>
 	    <inspectBarrel             attribute="You see a barrel full of water. Would you like to cover the barrel?"/>
 	    <inspectCoveredBarrel      attribute="Would you like to uncover the barrel?"/>
@@ -46,6 +48,8 @@ damaged bed net it can be repaired."/>
 Pleasantville is a wonderful place, but it has one big problem; malaria. Help the residents of your town develop an
 effective strategy to fight malaria. First, have a look around and identify different ways to combat malaria.
 Then spend your resources wisely. Afterwards, we will check the effectiveness of your work."/>
+        <simulationGreeting        attribute="fr: The town darkens as night approaches and the buzz of mosquitoes drowns
+everything else out."/>
         <daylightHours             attribute="fr: There are not enough daylight hours left!"/>
 	    <inspectBarrel             attribute="fr: You see a barrel full of water. Would you like to cover the barrel?"/>
 	    <inspectCoveredBarrel      attribute="fr: Would you like to uncover the barrel?"/>
@@ -85,6 +89,8 @@ damaged bed net it can be repaired."/>
 Pleasantville is a wonderful place, but it has one big problem; malaria. Help the residents of your town develop an
 effective strategy to fight malaria. First, have a look around and identify different ways to combat malaria.
 Then spend your resources wisely. Afterwards, we will check the effectiveness of your work."/>
+        <simulationGreeting        attribute="mg: The town darkens as night approaches and the buzz of mosquitoes drowns
+everything else out."/>
         <daylightHours             attribute="mg: There are not enough daylight hours left!"/>
 	    <inspectBarrel             attribute="mg: You see a barrel full of water. Would you like to cover the barrel?"/>
 	    <inspectCoveredBarrel      attribute="mg: Would you like to uncover the barrel?"/>
