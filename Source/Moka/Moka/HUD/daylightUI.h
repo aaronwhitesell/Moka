@@ -65,6 +65,7 @@ private:
 private:
 	virtual void		  draw(sf::RenderTarget &target, sf::RenderStates states) const final;
 	void				  disable();
+	void				  hide();
 	void				  repositionGUI();
 
 
@@ -90,6 +91,8 @@ private:
 
 	ButtonPtr             mButton;
 	trmb::ButtonContainer mContainer;
+	bool                  mDisable;
+	bool                  mHide;
 	bool                  mMouseOver;
 	bool				  mUIBundleDisabled;
 };

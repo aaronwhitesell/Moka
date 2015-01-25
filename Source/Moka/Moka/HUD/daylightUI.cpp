@@ -40,6 +40,8 @@ DaylightUI::DaylightUI(sf::RenderWindow &window, trmb::Camera &camera, Fonts::ID
 , mHourCount(mMaxHours)
 , mButton(std::make_shared<trmb::GameButton>(font, fonts, soundEffect, soundPlayer, sf::Vector2f(60.0f, 41.0f)))
 , mContainer(leftClickPress, leftClickRelease)
+, mDisable(false)
+, mHide(false)
 , mMouseOver(false)
 , mUIBundleDisabled(false)
 {
@@ -130,68 +132,73 @@ bool DaylightUI::subtract(float subtrahend)
 
 void DaylightUI::handler()
 {
-	// ALW - The DaylightUI has an absolute position in the world that is translated by the camera position.
-	sf::Vector2f cameraPosition(mCamera.getViewBounds().left, mCamera.getViewBounds().top);
-	sf::Transform translatedTransform = getTransform();
-	translatedTransform = translatedTransform.translate(cameraPosition);
+	mMouseOver = false;
 
-	const sf::Vector2i relativeToWindow = sf::Mouse::getPosition(mWindow);
-	const sf::Vector2f relativeToWorld = mWindow.mapPixelToCoords(relativeToWindow, mCamera.getView());
-	const sf::Vector2f mousePosition = relativeToWorld;
-
-	sf::FloatRect UIRect(mBackground.getPosition().x, mBackground.getPosition().y, mBackground.getSize().x, mBackground.getSize().y);
-	UIRect = translatedTransform.transformRect(UIRect);
-
-	if (UIRect.contains(mousePosition))
+	if (!mDisable)
 	{
-		mMouseOver = true;
+		// ALW - The DaylightUI has an absolute position in the world that is translated by the camera position.
+		sf::Vector2f cameraPosition(mCamera.getViewBounds().left, mCamera.getViewBounds().top);
+		sf::Transform translatedTransform = getTransform();
+		translatedTransform = translatedTransform.translate(cameraPosition);
 
-		if (!mUIBundleDisabled)
+		const sf::Vector2i relativeToWindow = sf::Mouse::getPosition(mWindow);
+		const sf::Vector2f relativeToWorld = mWindow.mapPixelToCoords(relativeToWindow, mCamera.getView());
+		const sf::Vector2f mousePosition = relativeToWorld;
+
+		sf::FloatRect UIRect(mBackground.getPosition().x, mBackground.getPosition().y, mBackground.getSize().x, mBackground.getSize().y);
+		UIRect = translatedTransform.transformRect(UIRect);
+
+		if (UIRect.contains(mousePosition))
 		{
-			mUIBundleDisabled = true;
+			mMouseOver = true;
 
-			if (!mUIBundle.getBarrelUI().isHidden())
-				mUIBundle.getBarrelUI().disable(false);
+			if (!mUIBundleDisabled)
+			{
+				mUIBundleDisabled = true;
 
-			if (!mUIBundle.getDoorUI().isHidden())
-				mUIBundle.getDoorUI().disable(false);
+				if (!mUIBundle.getBarrelUI().isHidden())
+					mUIBundle.getBarrelUI().disable(false);
 
-			if (!mUIBundle.getWindowUI().isHidden())
-				mUIBundle.getWindowUI().disable(false);
+				if (!mUIBundle.getDoorUI().isHidden())
+					mUIBundle.getDoorUI().disable(false);
 
-			if (!mUIBundle.getClinicUI().isHidden())
-				mUIBundle.getClinicUI().disable(false);
+				if (!mUIBundle.getWindowUI().isHidden())
+					mUIBundle.getWindowUI().disable(false);
 
-			if (!mUIBundle.getHouseUI().isHidden())
-				mUIBundle.getHouseUI().disable(false);
+				if (!mUIBundle.getClinicUI().isHidden())
+					mUIBundle.getClinicUI().disable(false);
+
+				if (!mUIBundle.getHouseUI().isHidden())
+					mUIBundle.getHouseUI().disable(false);
+			}
 		}
-	}
-	else
-	{
-		mMouseOver = false;
-
-		if (mUIBundleDisabled)
+		else
 		{
-			mUIBundleDisabled = false;
+			mMouseOver = false;
 
-			if (!mUIBundle.getBarrelUI().isHidden())
-				mUIBundle.getBarrelUI().enable();
+			if (mUIBundleDisabled)
+			{
+				mUIBundleDisabled = false;
 
-			if (!mUIBundle.getDoorUI().isHidden())
-				mUIBundle.getDoorUI().enable();
+				if (!mUIBundle.getBarrelUI().isHidden())
+					mUIBundle.getBarrelUI().enable();
 
-			if (!mUIBundle.getWindowUI().isHidden())
-				mUIBundle.getWindowUI().enable();
+				if (!mUIBundle.getDoorUI().isHidden())
+					mUIBundle.getDoorUI().enable();
 
-			if (!mUIBundle.getClinicUI().isHidden())
-				mUIBundle.getClinicUI().enable();
+				if (!mUIBundle.getWindowUI().isHidden())
+					mUIBundle.getWindowUI().enable();
 
-			if (!mUIBundle.getHouseUI().isHidden())
-				mUIBundle.getHouseUI().enable();
+				if (!mUIBundle.getClinicUI().isHidden())
+					mUIBundle.getClinicUI().enable();
+
+				if (!mUIBundle.getHouseUI().isHidden())
+					mUIBundle.getHouseUI().enable();
+			}
 		}
-	}
 
-	mContainer.handler(mWindow, mCamera.getView(), translatedTransform);
+		mContainer.handler(mWindow, mCamera.getView(), translatedTransform);
+	}
 }
 
 void DaylightUI::handleEvent(const trmb::Event &gameEvent)
@@ -207,11 +214,28 @@ void DaylightUI::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
 	target.setView(target.getDefaultView());
-	target.draw(mBackground, states);
-	target.draw(mDaylightText, states);
-	target.draw(mHoursText, states);
-	if (mMouseOver)
+
+	if (!mHide)
+	{
+		target.draw(mBackground, states);
+		target.draw(mDaylightText, states);
+		target.draw(mHoursText, states);
+	}
+
+	if (!mHide && mMouseOver)
 		target.draw(mContainer, states);
+}
+
+void DaylightUI::disable()
+{
+	mDisable = true;
+	mContainer.disable(true);
+}
+
+void DaylightUI::hide()
+{
+	mHide = true;
+	disable();
 }
 
 void DaylightUI::repositionGUI()
@@ -227,6 +251,7 @@ void DaylightUI::done()
 {
 	EventHandler::sendEvent(mBeginSimulationMode);
 	mUIBundle.getChatBoxUI().updateText(trmb::Localize::getInstance().getString("simulationGreeting"));
+	hide();
 }
 
 void centerOrigin(DaylightUI &ui, bool centerXAxis, bool centerYAxis)
