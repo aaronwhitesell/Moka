@@ -100,6 +100,7 @@
     <ClInclude Include="SceneNodes\clinicNode.h" />
     <ClInclude Include="SceneNodes\clinicUpdateNode.h" />
     <ClInclude Include="SceneNodes\clinicUINode.h" />
+    <ClInclude Include="SceneNodes\darkness.h" />
     <ClInclude Include="SceneNodes\doorNode.h" />
     <ClInclude Include="SceneNodes\doorUpdateNode.h" />
     <ClInclude Include="SceneNodes\doorUINode.h" />
@@ -143,6 +144,7 @@
     <ClCompile Include="SceneNodes\clinicNode.cpp" />
     <ClCompile Include="SceneNodes\clinicUpdateNode.cpp" />
     <ClCompile Include="SceneNodes\clinicUINode.cpp" />
+    <ClCompile Include="SceneNodes\darkness.cpp" />
     <ClCompile Include="SceneNodes\doorNode.cpp" />
     <ClCompile Include="SceneNodes\doorUpdateNode.cpp" />
     <ClCompile Include="SceneNodes\doorUINode.cpp" />

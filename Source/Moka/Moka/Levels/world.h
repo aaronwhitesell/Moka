@@ -66,6 +66,7 @@ private:
 		Background,
 		Update,
 		Selection,
+		Sky,
 		UI,
 		Camera,
 		LayerCount

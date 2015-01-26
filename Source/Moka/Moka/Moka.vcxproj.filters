@@ -96,6 +96,12 @@
     <Filter Include="Source Files\SceneNodes\Update">
       <UniqueIdentifier>{d4956e01-3dc9-420e-b126-4c8927518f9c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\SceneNodes\Darkness">
+      <UniqueIdentifier>{32996536-94fb-45b3-b854-028d6850e553}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SceneNodes\Darkness">
+      <UniqueIdentifier>{dd6eaf16-4006-41ff-a427-eff3e8ac2bae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\application.h">
@@ -221,6 +227,9 @@
     <ClInclude Include="HUD\chatBoxUI.h">
       <Filter>Header Files\HUD</Filter>
     </ClInclude>
+    <ClInclude Include="SceneNodes\darkness.h">
+      <Filter>Header Files\SceneNodes\Darkness</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\application.cpp">
@@ -342,6 +351,9 @@
     </ClCompile>
     <ClCompile Include="HUD\chatBoxUI.cpp">
       <Filter>Source Files\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNodes\darkness.cpp">
+      <Filter>Source Files\SceneNodes\Darkness</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

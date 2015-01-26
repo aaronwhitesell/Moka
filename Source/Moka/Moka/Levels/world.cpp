@@ -2,6 +2,7 @@
 #include "../SceneNodes/barrelNode.h"
 #include "../SceneNodes/barrelUpdateNode.h"
 #include "../SceneNodes/barrelUINode.h"
+#include "../SceneNodes/darkness.h"
 #include "../SceneNodes/doorNode.h"
 #include "../SceneNodes/doorUINode.h"
 #include "../SceneNodes/doorUpdateNode.h"
@@ -158,6 +159,9 @@ void World::buildScene()
 	// Add tiled roofs
 	std::unique_ptr<trmb::MapLayerNode> layer2(new trmb::MapLayerNode(mMap, 2));
 	mSceneLayers[Background]->attachChild(std::move(layer2));
+
+	// ALW - Add darkess
+	mSceneLayers[Sky]->attachChild(std::move(std::unique_ptr<Darkness>(new Darkness(mWindow))));
 
 	// ALW - Add sprite and logic nodes
 	std::vector<InteractiveObject>::const_iterator iter    = begin(mObjectGroups.getInteractiveGroup().getInteractiveObjects());
