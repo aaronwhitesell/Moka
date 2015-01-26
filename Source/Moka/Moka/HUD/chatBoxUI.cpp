@@ -22,7 +22,7 @@
 #include <sstream>
 
 
-ChatBoxUI::ChatBoxUI(sf::RenderWindow &window, trmb::Camera &camera, Fonts::ID font, trmb::FontHolder &fonts
+ChatBoxUI::ChatBoxUI(const sf::RenderWindow &window, trmb::Camera &camera, Fonts::ID font, trmb::FontHolder &fonts
 	, SoundEffects::ID soundEffect, trmb::SoundPlayer &soundPlayer, UIBundle &uiBundle)
 : mCreateTextPrompt(0x25e87fd8)
 , mClearTextPrompt(0xc1523265)
@@ -180,7 +180,11 @@ void ChatBoxUI::updateText(std::string string)
 void ChatBoxUI::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
+
+	// ALW - Save then change view
+	sf::View previousView = target.getView();
 	target.setView(target.getDefaultView());
+
 	target.draw(mBackground, states);
 
 	if (!mWordWrapText.empty())
@@ -197,6 +201,9 @@ void ChatBoxUI::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
 	if (isPrompt())
 		target.draw(mPrompt, states);
+
+	// ALW - Restore the view
+	target.setView(previousView);
 }
 
 void ChatBoxUI::formatText(std::string string)

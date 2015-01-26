@@ -35,69 +35,69 @@ class UIBundle;
 class DaylightUI : public sf::Transformable, public sf::Drawable, public trmb::EventHandler
 {
 public:
-	using EventGuid = unsigned long;
+	using                  EventGuid = unsigned long;
 
 
 public:
-						  DaylightUI(sf::RenderWindow &window, trmb::Camera &camera, Fonts::ID font, trmb::FontHolder &fonts
-						     , SoundEffects::ID soundEffect, trmb::SoundPlayer &soundPlayer, UIBundle &uiBundle
-							 , EventGuid leftClickPress, EventGuid leftClickRelease);
-						  DaylightUI(const DaylightUI &) = delete;
-	DaylightUI            operator=(const DaylightUI &) = delete;
+						    DaylightUI(const sf::RenderWindow &window, trmb::Camera &camera, Fonts::ID font, trmb::FontHolder &fonts
+								, SoundEffects::ID soundEffect, trmb::SoundPlayer &soundPlayer, UIBundle &uiBundle
+								, EventGuid leftClickPress, EventGuid leftClickRelease);
+						    DaylightUI(const DaylightUI &) = delete;
+	DaylightUI              operator=(const DaylightUI &) = delete;
 
-	sf::Vector2f		  getSize() const;
-	sf::FloatRect		  getRect() const;
+	sf::Vector2f		    getSize() const;
+	sf::FloatRect		    getRect() const;
 
-	void				  handler();
-	virtual void		  handleEvent(const trmb::Event &gameEvent) final;
+	void				    handler();
+	virtual void		    handleEvent(const trmb::Event &gameEvent) final;
 
-	void				  add(float addend);
-	bool				  subtract(float subtrahend);
+	void				    add(float addend);
+	bool				    subtract(float subtrahend);
 
-	void			      done();
+	void			        done();
 
 
 private:
-	using EventGuid = unsigned long;
-	using ButtonPtr = trmb::ButtonContainer::Ptr;
+	using                   EventGuid = unsigned long;
+	using                   ButtonPtr = trmb::ButtonContainer::Ptr;
 
 	
 private:
-	virtual void		  draw(sf::RenderTarget &target, sf::RenderStates states) const final;
-	void				  enable();
-	void				  disable();
-	void				  hide();
-	void				  repositionGUI();
+	virtual void		    draw(sf::RenderTarget &target, sf::RenderStates states) const final;
+	void				    enable();
+	void				    disable();
+	void				    hide();
+	void				    repositionGUI();
 
 
 private:
-	const trmb::Event     mBeginSimulationMode; // ALW - Is sent from here.
-	const EventGuid		  mFullscreen;		    // ALW - Matches the GUID in the ToggleFullscreen class.
-	const EventGuid		  mWindowed;		    // ALW - Matches the GUID in the ToggleFullscreen class.
-	const EventGuid		  mCreateTextPrompt;    // ALW - Matches the GUID in the ChatBoxUI class.
-	const EventGuid		  mClearTextPrompt;     // ALW - Matches the GUID in the ChatBoxUI class.
+	const trmb::Event       mBeginSimulationMode; // ALW - Is sent from here.
+	const EventGuid		    mFullscreen;		    // ALW - Matches the GUID in the ToggleFullscreen class.
+	const EventGuid		    mWindowed;		    // ALW - Matches the GUID in the ToggleFullscreen class.
+	const EventGuid		    mCreateTextPrompt;    // ALW - Matches the GUID in the ChatBoxUI class.
+	const EventGuid		    mClearTextPrompt;     // ALW - Matches the GUID in the ChatBoxUI class.
 
-	const float		      mMaxHours;
-	const float			  mMinHours;
-	const int			  mFloatPrecision;
+	const float		        mMaxHours;
+	const float			    mMinHours;
+	const int			    mFloatPrecision;
 
-	sf::RenderWindow	  &mWindow;
-	trmb::Camera          &mCamera;
-	trmb::FontHolder	  &mFonts;
-	trmb::SoundPlayer	  &mSoundPlayer;
-	UIBundle			  &mUIBundle;
+	const sf::RenderWindow	&mWindow;
+	trmb::Camera			&mCamera;
+	trmb::FontHolder	    &mFonts;
+	trmb::SoundPlayer	    &mSoundPlayer;
+	UIBundle			    &mUIBundle;
 
-	sf::RectangleShape	  mBackground;
-	sf::Text			  mDaylightText;
-	sf::Text			  mHoursText;
-	float				  mHourCount;
+	sf::RectangleShape	    mBackground;
+	sf::Text			    mDaylightText;
+	sf::Text			    mHoursText;
+	float				    mHourCount;
 
-	ButtonPtr             mButton;
-	trmb::ButtonContainer mContainer;
-	bool                  mDisable;
-	bool                  mHide;
-	bool                  mMouseOver;
-	bool				  mUIBundleDisabled;
+	ButtonPtr               mButton;
+	trmb::ButtonContainer   mContainer;
+	bool                    mDisable;
+	bool                    mHide;
+	bool                    mMouseOver;
+	bool				    mUIBundleDisabled;
 };
 
 void	centerOrigin(DaylightUI &ui, bool centerXAxis = true, bool centerYAxis = true);

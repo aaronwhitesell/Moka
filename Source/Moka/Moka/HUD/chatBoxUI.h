@@ -33,68 +33,68 @@ class UIBundle;
 class ChatBoxUI : public sf::Transformable, public sf::Drawable, public trmb::EventHandler
 {
 public:
-						  ChatBoxUI(sf::RenderWindow &window, trmb::Camera &camera, Fonts::ID font, trmb::FontHolder &fonts
-							  , SoundEffects::ID soundEffect, trmb::SoundPlayer &soundPlayer, UIBundle &uiBundle);
-						  ChatBoxUI(const ChatBoxUI &) = delete;
-	ChatBoxUI &			  operator=(const ChatBoxUI &) = delete;
+							ChatBoxUI(const sf::RenderWindow &window, trmb::Camera &camera, Fonts::ID font, trmb::FontHolder &fonts
+								, SoundEffects::ID soundEffect, trmb::SoundPlayer &soundPlayer, UIBundle &uiBundle);
+							ChatBoxUI(const ChatBoxUI &) = delete;
+	ChatBoxUI &				operator=(const ChatBoxUI &) = delete;
 
-	sf::Vector2f		  getSize() const;
-	sf::FloatRect		  getRect() const;
+	sf::Vector2f			getSize() const;
+	sf::FloatRect			getRect() const;
 
-	void				  handler();
-	virtual void		  handleEvent(const trmb::Event &gameEvent) final;
-	void				  updateText(std::string string);
+	void					handler();
+	virtual void			handleEvent(const trmb::Event &gameEvent) final;
+	void					updateText(std::string string);
 
 
 private:
-	typedef unsigned long EventGuid;
+	typedef					unsigned long EventGuid;
 
 	
 private:
-	virtual void		  draw(sf::RenderTarget &target, sf::RenderStates states) const final;
+	virtual void			draw(sf::RenderTarget &target, sf::RenderStates states) const final;
 
-	void				  formatText(std::string string);
-	void				  displayMoreText();
-	void				  setTextLinePosition();
-	void				  calculateLinesToDraw();
+	void					formatText(std::string string);
+	void					displayMoreText();
+	void					setTextLinePosition();
+	void					calculateLinesToDraw();
 
-	bool				  isPrompt() const;
-	bool				  isEllipsisLine(std::string string);
+	bool					isPrompt() const;
+	bool					isEllipsisLine(std::string string);
 
-	std::string 		  getLine(std::string &string, bool addEllipsis = false);
-	sf::FloatRect		  getBounds() const;
+	std::string 			getLine(std::string &string, bool addEllipsis = false);
+	sf::FloatRect			getBounds() const;
 
-	std::string			  standardizeString(std::string);
-	std::string			  trimLeadingLeft(std::string string) const;
-	void				  repositionGUI();
+	std::string				standardizeString(std::string);
+	std::string				trimLeadingLeft(std::string string) const;
+	void					repositionGUI();
 
 
 private:
-	const EventGuid		  mCreateTextPrompt; // ALW - Is sent from here.
-	const EventGuid		  mClearTextPrompt;  // ALW - Is sent from here.
-	const EventGuid		  mEnter;            // ALW - Matches the GUID in the Controller class.
-	const EventGuid		  mFullscreen;		 // ALW - Matches the GUID in the ToggleFullscreen class.
-	const EventGuid		  mWindowed;		 // ALW - Matches the GUID in the ToggleFullscreen class.
+	const EventGuid			mCreateTextPrompt; // ALW - Is sent from here.
+	const EventGuid			mClearTextPrompt;  // ALW - Is sent from here.
+	const EventGuid			mEnter;            // ALW - Matches the GUID in the Controller class.
+	const EventGuid			mFullscreen;		 // ALW - Matches the GUID in the ToggleFullscreen class.
+	const EventGuid			mWindowed;		 // ALW - Matches the GUID in the ToggleFullscreen class.
 
-	const float			  mHorizontalSpacing;
-	const float			  mVerticalSpacing;
-	const unsigned int	  mMaxLinesDrawn;
+	const float				mHorizontalSpacing;
+	const float				mVerticalSpacing;
+	const unsigned int		mMaxLinesDrawn;
 
-	sf::RenderWindow	  &mWindow;
-	trmb::Camera          &mCamera;
-	trmb::FontHolder	  &mFonts;
-	SoundEffects::ID	  mSoundEffect;
-	trmb::SoundPlayer	  &mSoundPlayer;
-	UIBundle			  &mUIBundle;
+	const sf::RenderWindow	&mWindow;
+	trmb::Camera			&mCamera;
+	trmb::FontHolder		&mFonts;
+	SoundEffects::ID		mSoundEffect;
+	trmb::SoundPlayer		&mSoundPlayer;
+	UIBundle				&mUIBundle;
 
-	sf::RectangleShape	  mBackground;
-	sf::Text			  mTextLine;
-	sf::Text			  mPrompt;
-	std::vector<sf::Text> mWordWrapText;
-	int					  mLinesToDraw;
+	sf::RectangleShape		mBackground;
+	sf::Text				mTextLine;
+	sf::Text				mPrompt;
+	std::vector<sf::Text>	mWordWrapText;
+	int						mLinesToDraw;
 
-	bool				  mMouseOver;
-	bool				  mUIBundleDisabled;
+	bool					mMouseOver;
+	bool					mUIBundleDisabled;
 };
 
 void	centerOrigin(ChatBoxUI &ui, bool centerXAxis = true, bool centerYAxis = true);

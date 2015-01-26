@@ -20,7 +20,7 @@
 #include <cassert>
 
 
-DaylightUI::DaylightUI(sf::RenderWindow &window, trmb::Camera &camera, Fonts::ID font, trmb::FontHolder &fonts
+DaylightUI::DaylightUI(const sf::RenderWindow &window, trmb::Camera &camera, Fonts::ID font, trmb::FontHolder &fonts
 	, SoundEffects::ID soundEffect, trmb::SoundPlayer &soundPlayer, UIBundle &uiBundle, EventGuid leftClickPress
 	, EventGuid leftClickRelease)
 : mBeginSimulationMode(0x5000e550)
@@ -223,6 +223,9 @@ void DaylightUI::handleEvent(const trmb::Event &gameEvent)
 void DaylightUI::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
+
+	// ALW - Save then change view
+	sf::View previousView = target.getView();
 	target.setView(target.getDefaultView());
 
 	if (!mHide)
@@ -234,6 +237,9 @@ void DaylightUI::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
 	if (!mHide && mMouseOver)
 		target.draw(mContainer, states);
+
+	// ALW - Restore the view
+	target.setView(previousView);
 }
 
 void DaylightUI::enable()
