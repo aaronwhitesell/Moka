@@ -26,6 +26,8 @@ DaylightUI::DaylightUI(sf::RenderWindow &window, trmb::Camera &camera, Fonts::ID
 : mBeginSimulationMode(0x5000e550)
 , mFullscreen(0x5a0d2314)
 , mWindowed(0x11e3c735)
+, mCreateTextPrompt(0x25e87fd8)
+, mClearTextPrompt(0xc1523265)
 , mMaxHours(12.0f)
 , mMinHours(0.0f)
 , mFloatPrecision(3)
@@ -208,6 +210,14 @@ void DaylightUI::handleEvent(const trmb::Event &gameEvent)
 	{
 		repositionGUI();
 	}
+	else if (mCreateTextPrompt == gameEvent.getType())
+	{
+		disable();
+	}
+	else if (mClearTextPrompt == gameEvent.getType())
+	{
+		enable();
+	}
 }
 
 void DaylightUI::draw(sf::RenderTarget &target, sf::RenderStates states) const
@@ -224,6 +234,12 @@ void DaylightUI::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
 	if (!mHide && mMouseOver)
 		target.draw(mContainer, states);
+}
+
+void DaylightUI::enable()
+{
+	mDisable = false;
+	mContainer.enable();
 }
 
 void DaylightUI::disable()
