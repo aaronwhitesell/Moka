@@ -15,6 +15,7 @@
 #include "../SceneNodes/houseNode.h"
 #include "../SceneNodes/houseUINode.h"
 #include "../SceneNodes/houseUpdateNode.h"
+#include "../SceneNodes/mosquitoNode.h"
 #include "../GameObjects/interactiveObject.h"
 #include "../Resources/resourceIdentifiers.h"
 
@@ -42,7 +43,7 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mSceneGraph()
 , mSceneLayers()
 , mWorldBounds(0.f, 0.f, 1600.0, 1600.0)
-, mSpawnPosition(mWorldBounds.width / 2.f, mWorldBounds.height / 2.f)
+, mHeroPosition(mWorldBounds.width / 2.f, mWorldBounds.height / 2.f)
 , mCamera(window.getDefaultView(), mWorldBounds)
 , mMap("Data/Maps/World.tmx")
 , mUIBundle(mChatBoxUI, mDaylightUI, mBarrelUI, mDoorUI, mWindowUI, mClinicUI, mHouseUI)
@@ -55,8 +56,16 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mHouseUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
 , mObjectGroups("Data/Maps/World.tmx")
 , mHero(nullptr)
+, mSpawnPositions()
+, mRandomDevice()				// ALW - obtain random number from hardware
+, mGenerator(mRandomDevice())	// ALW - Seed the generator
+, mDistribution(0				// ALW - Define the range
+	, mObjectGroups.getInteractiveGroup().getWidth() * mObjectGroups.getInteractiveGroup().getHeight() - 1)
 {
 	mTextures.load(Textures::ID::Tiles, "Data/Textures/Tiles.png");
+	mTextures.load(Textures::ID::MosquitoAnimation, "Data/Textures/mosquitoAnimation.png");
+
+	generateSpawnPositions();
 	buildScene();
 	configureUIs();
 }
@@ -160,6 +169,13 @@ void World::buildScene()
 	std::unique_ptr<trmb::MapLayerNode> layer2(new trmb::MapLayerNode(mMap, 2));
 	mSceneLayers[Background]->attachChild(std::move(layer2));
 
+	const int mosquitoPopulation = 500;
+	for (int i = 0; i < mosquitoPopulation; ++i)
+	{
+		mSceneLayers[Mosquitoes]->attachChild(std::move(std::unique_ptr<MosquitoNode>(new MosquitoNode(mTextures
+			, getRandomSpawnPosition()))));
+	}
+
 	// ALW - Add darkess
 	mSceneLayers[Sky]->attachChild(std::move(std::unique_ptr<Darkness>(new Darkness(mWindow))));
 
@@ -227,7 +243,7 @@ void World::buildScene()
 	// Add player's character
 	std::unique_ptr<HeroNode> player(new HeroNode(mWorldBounds, mCamera.getView()));
 	mHero = player.get();
-	mHero->setPosition(mSpawnPosition);
+	mHero->setPosition(mHeroPosition);
 	mSceneLayers[Camera]->attachChild(std::move(player));
 }
 
@@ -246,4 +262,27 @@ std::vector<sf::FloatRect> World::buildAttachedRects(const InteractiveObject &in
 	}
 
 	return attachedRects;
+}
+
+void World::generateSpawnPositions()
+{
+	// ALW - Width and height of map
+	const int maxTilesWide = mObjectGroups.getInteractiveGroup().getWidth();
+	const int maxTilesHigh = mObjectGroups.getInteractiveGroup().getHeight();
+
+	const float tileWidth = 64;
+	const float tileHeight = 64;
+
+	for (int column = 0; column < maxTilesWide; ++column)
+	{
+		for (int row = 0; row < maxTilesHigh; ++row)
+		{
+			mSpawnPositions.emplace_back(sf::Vector2f(column * tileWidth, row * tileHeight));
+		}
+	}
+}
+
+sf::Vector2f World::getRandomSpawnPosition()
+{
+	return mSpawnPositions.at(mDistribution(mGenerator));
 }

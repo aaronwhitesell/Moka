@@ -8,6 +8,7 @@ namespace Textures
 	{
 		Buttons,
 		Heroes,
+		MosquitoAnimation,
 		Tiles,
 		TitleScreen,
 	};

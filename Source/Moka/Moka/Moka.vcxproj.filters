@@ -102,6 +102,12 @@
     <Filter Include="Source Files\SceneNodes\Darkness">
       <UniqueIdentifier>{dd6eaf16-4006-41ff-a427-eff3e8ac2bae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\SceneNodes\Mosquito">
+      <UniqueIdentifier>{ced1c4f3-50ad-4713-9e15-a2ed22f767dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SceneNodes\Mosquito">
+      <UniqueIdentifier>{742f0fd4-4d94-4107-92b1-a5bb00a1ea1d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\application.h">
@@ -230,6 +236,9 @@
     <ClInclude Include="SceneNodes\darkness.h">
       <Filter>Header Files\SceneNodes\Darkness</Filter>
     </ClInclude>
+    <ClInclude Include="SceneNodes\mosquitoNode.h">
+      <Filter>Header Files\SceneNodes\Mosquito</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\application.cpp">
@@ -354,6 +363,9 @@
     </ClCompile>
     <ClCompile Include="SceneNodes\darkness.cpp">
       <Filter>Source Files\SceneNodes\Darkness</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNodes\mosquitoNode.cpp">
+      <Filter>Source Files\SceneNodes\Mosquito</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

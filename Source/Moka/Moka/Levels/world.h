@@ -22,6 +22,7 @@
 #include <SFML/Graphics/Rect.hpp>
 
 #include <array>
+#include <random>
 #include <vector>
 
 
@@ -58,12 +59,14 @@ private:
 	void								configureUIs();
 	void								buildScene();
 	std::vector<sf::FloatRect>			buildAttachedRects(const InteractiveObject &interactiveObj);
-
+	void								generateSpawnPositions();
+	sf::Vector2f						getRandomSpawnPosition();
 
 private:
 	enum Layer
 	{
 		Background,
+		Mosquitoes,
 		Update,
 		Selection,
 		Sky,
@@ -87,7 +90,7 @@ private:
 	std::array<trmb::SceneNode *, LayerCount>	mSceneLayers;
 
 	sf::FloatRect								mWorldBounds;
-	sf::Vector2f								mSpawnPosition;
+	sf::Vector2f								mHeroPosition;
 
 	trmb::Camera								mCamera;
 	trmb::Map									mMap;
@@ -101,6 +104,10 @@ private:
 	OptionsUI									mHouseUI;
 	ObjectGroups								mObjectGroups;
 	HeroNode									*mHero;
+	std::vector<sf::Vector2f>					mSpawnPositions;
+	std::random_device							mRandomDevice;
+	std::mt19937								mGenerator;
+	std::uniform_int_distribution<>				mDistribution;
 };
 
 #endif

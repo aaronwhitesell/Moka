@@ -16,6 +16,9 @@ public:
 
 	const std::vector<InteractiveObject> &	getInteractiveObjects() const;
 
+	int								getWidth() const;
+	int								getHeight() const;
+
 	void							setName(const std::string &name);
 	void							setWidth(int width);
 	void							setHeight(int height);
