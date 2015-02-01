@@ -12,6 +12,7 @@
 #include "../SceneNodes/clinicNode.h"
 #include "../SceneNodes/clinicUINode.h"
 #include "../SceneNodes/clinicUpdateNode.h"
+#include "../SceneNodes/heroNode.h"
 #include "../SceneNodes/houseNode.h"
 #include "../SceneNodes/houseUINode.h"
 #include "../SceneNodes/houseUpdateNode.h"
@@ -37,15 +38,17 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mWindowed(0x11e3c735)
 , mWindow(window)
 , mTarget(window)
-, mTextures()
 , mFonts(fonts)
 , mSoundPlayer(soundPlayer)
+, mTextures()
 , mSceneGraph()
 , mSceneLayers()
-, mWorldBounds(0.f, 0.f, 1600.0, 1600.0)
-, mHeroPosition(mWorldBounds.width / 2.f, mWorldBounds.height / 2.f)
-, mCamera(window.getDefaultView(), mWorldBounds)
+, mObjectGroups("Data/Maps/World.tmx")
 , mMap("Data/Maps/World.tmx")
+, mWorldBounds(0.f, 0.f, static_cast<float>(mMap.getWidth() * mMap.getTileWidth()), static_cast<float>(mMap.getHeight() * mMap.getTileHeight()))
+, mCamera(window.getDefaultView(), mWorldBounds)
+, mHeroPosition(mWorldBounds.width / 2.f, mWorldBounds.height / 2.f)
+, mHero(nullptr)
 , mUIBundle(mChatBoxUI, mDaylightUI, mBarrelUI, mDoorUI, mWindowUI, mClinicUI, mHouseUI)
 , mChatBoxUI(window, mCamera, Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, mUIBundle)
 , mDaylightUI(window, mCamera, Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, mUIBundle, 0x6955d309, 0x128b8b25)
@@ -54,13 +57,10 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mWindowUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
 , mClinicUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
 , mHouseUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
-, mObjectGroups("Data/Maps/World.tmx")
-, mHero(nullptr)
 , mSpawnPositions()
-, mRandomDevice()				// ALW - obtain random number from hardware
-, mGenerator(mRandomDevice())	// ALW - Seed the generator
-, mDistribution(0				// ALW - Define the range
-	, mObjectGroups.getInteractiveGroup().getWidth() * mObjectGroups.getInteractiveGroup().getHeight() - 1)
+, mRandomDevice()											// ALW - obtain random number from hardware
+, mGenerator(mRandomDevice())								// ALW - Seed the generator
+, mDistribution(0, mMap.getWidth() * mMap.getHeight() - 1)	// ALW - Define the range
 {
 	mTextures.load(Textures::ID::Tiles, "Data/Textures/Tiles.png");
 	mTextures.load(Textures::ID::MosquitoAnimation, "Data/Textures/mosquitoAnimation.png");

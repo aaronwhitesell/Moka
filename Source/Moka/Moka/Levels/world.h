@@ -6,7 +6,6 @@
 #include "../HUD/optionsUI.h"
 #include "../HUD/uiBundle.h"
 #include "../HUD/undoUI.h"
-#include "../SceneNodes/heroNode.h"
 #include "../GameObjects/objectGroups.h"
 
 #include "Trambo/Camera/camera.h"
@@ -18,8 +17,6 @@
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/View.hpp>
 #include <SFML/System/Vector2.hpp>
-
-#include <SFML/Graphics/Rect.hpp>
 
 #include <array>
 #include <random>
@@ -38,6 +35,8 @@ namespace trmb
 	class SoundPlayer;
 }
 
+class HeroNode;
+
 class World : public trmb::EventHandler
 {
 public:
@@ -51,7 +50,7 @@ public:
 
 
 private:
-	typedef unsigned long EventGuid;
+	typedef								unsigned long EventGuid;
 
 
 private:
@@ -66,9 +65,9 @@ private:
 	enum Layer
 	{
 		Background,
-		Mosquitoes,
 		Update,
 		Selection,
+		Mosquitoes,
 		Sky,
 		UI,
 		Camera,
@@ -82,18 +81,20 @@ private:
 
 	const sf::RenderWindow						&mWindow;
 	sf::RenderTarget							&mTarget;
-	trmb::TextureHolder							mTextures;
 	trmb::FontHolder							&mFonts;
 	trmb::SoundPlayer							&mSoundPlayer;
+	trmb::TextureHolder							mTextures;
 	
 	trmb::SceneNode								mSceneGraph;
 	std::array<trmb::SceneNode *, LayerCount>	mSceneLayers;
+	ObjectGroups								mObjectGroups;
 
-	sf::FloatRect								mWorldBounds;
-	sf::Vector2f								mHeroPosition;
-
-	trmb::Camera								mCamera;
 	trmb::Map									mMap;
+	sf::FloatRect								mWorldBounds;
+	trmb::Camera								mCamera;
+	sf::Vector2f								mHeroPosition;
+	HeroNode									*mHero;
+
 	UIBundle									mUIBundle;
 	ChatBoxUI									mChatBoxUI;
 	DaylightUI                                  mDaylightUI;
@@ -102,8 +103,7 @@ private:
 	UndoUI										mWindowUI;
 	OptionsUI									mClinicUI;
 	OptionsUI									mHouseUI;
-	ObjectGroups								mObjectGroups;
-	HeroNode									*mHero;
+
 	std::vector<sf::Vector2f>					mSpawnPositions;
 	std::random_device							mRandomDevice;
 	std::mt19937								mGenerator;
