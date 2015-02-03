@@ -74,6 +74,9 @@ void World::update(sf::Time dt)
 {
 	mSceneGraph.update(dt);					// ALW - Update the hero along with the rest of the scene graph
 	mCamera.update(mHero->getPosition());	// ALW - Update the camera position
+
+
+
 	updateSoundPlayer();
 	mChatBoxUI.handler();
 	mDaylightUI.handler();
@@ -173,7 +176,7 @@ void World::buildScene()
 	for (int i = 0; i < mosquitoPopulation; ++i)
 	{
 		mSceneLayers[Mosquitoes]->attachChild(std::move(std::unique_ptr<MosquitoNode>(new MosquitoNode(mTextures
-			, getRandomSpawnPosition()))));
+			, getRandomSpawnPosition(), mWorldBounds))));
 	}
 
 	// ALW - Add darkess

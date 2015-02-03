@@ -6,6 +6,7 @@
 #include "Trambo/SceneNodes/sceneNode.h"
 #include "Trambo/Resources/resourceHolder.h"
 
+#include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Time.hpp>
 #include <SFML/System/Vector2.hpp>
 
@@ -26,7 +27,7 @@ namespace trambo
 class MosquitoNode : public trmb::SceneNode, trmb::EventHandler
 {
 public:
-							MosquitoNode(const trmb::TextureHolder &textures, sf::Vector2f position);
+							MosquitoNode(const trmb::TextureHolder &textures, sf::Vector2f position, sf::FloatRect worldBounds);
 							MosquitoNode(const MosquitoNode &) = delete;
 	MosquitoNode &			operator=(const MosquitoNode &) = delete;
 
@@ -35,25 +36,42 @@ public:
 
 
 private:
+	enum Direction
+	{
+		Up    = 0,
+		Down  = 1,
+		Left  = 2,
+		Right = 3,
+	};
+
+
+private:
 	using					EventGuid = unsigned long;
 
 
 private:
 	virtual void			drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const override;
+	void					setNextPosition(sf::Time dt);
+	void					delaySpawn(sf::Time dt);
 	float					getDelay();
 
 
 private:
 	const EventGuid         mBeginSimulationMode;   // ALW - Matches the GUID in the DaylightUI class.
 	trmb::Animation			mMosquito;
-	sf::Time				mDelay;
-	sf::Time				mUpdateTime;
+	sf::FloatRect			mWorldBounds;
+	sf::Vector2f			mNextPosition;
+	sf::Time				mTotalDelayTime;
+	sf::Time				mUpdateDelayTime;
+	sf::Time				mTotalMovementTime;
+	sf::Time				mUpdateMovementTime;
 	bool					mActivate;
 	bool                    mDelaySet;
 	bool					mActive;
 	std::random_device		mRandomDevice;
 	std::mt19937			mGenerator;
-	std::piecewise_constant_distribution<float>	mDistribution;
+	std::uniform_int_distribution<>				mDistribution;
+	std::piecewise_constant_distribution<float>	mWeightedDistribution;
 };
 
 #endif
