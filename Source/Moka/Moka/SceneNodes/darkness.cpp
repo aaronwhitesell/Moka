@@ -11,7 +11,7 @@
 Darkness::Darkness(const sf::RenderWindow &window)
 : mFullscreen(0x5a0d2314)
 , mWindowed(0x11e3c735)
-, mBeginSimulationMode(0x5000e550)
+, mBeginSimulationEvent(0x5000e550)
 , mWindow(window)
 , mBackground()
 , mDarken(false)
@@ -50,7 +50,7 @@ void Darkness::handleEvent(const trmb::Event &gameEvent)
 	{
 		reposition();
 	}
-	else if (mBeginSimulationMode == gameEvent.getType())
+	else if (mBeginSimulationEvent == gameEvent.getType())
 	{
 		mDarken = true;
 	}

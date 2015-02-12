@@ -38,6 +38,12 @@ DoorNode::DoorNode(const InteractiveObject &interactiveObject, const sf::RenderW
 	mUIElemStates.emplace_back(true);
 }
 
+sf::FloatRect DoorNode::getBoundingRect() const
+{
+	return sf::FloatRect(mInteractiveObject.getCollisionBoxXCoord(), mInteractiveObject.getCollisionBoxYCoord()
+		, mInteractiveObject.getCollisionBoxWidth(), mInteractiveObject.getCollisionBoxHeight());
+}
+
 void DoorNode::handleEvent(const trmb::Event &gameEvent)
 {
 	InteractiveNode::handleEvent(gameEvent);

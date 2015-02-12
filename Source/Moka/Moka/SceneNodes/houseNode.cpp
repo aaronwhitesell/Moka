@@ -19,7 +19,7 @@
 
 
 HouseNode::HouseNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view, UIBundle &uiBundle
-	, std::vector<sf::FloatRect> attachedRects, trmb::SoundPlayer &soundPlayer, DaylightUI &daylightUI, ChatBoxUI &chatBoxUI)
+	, std::vector<sf::FloatRect> attachedRects, trmb::FontHolder &fonts, trmb::SoundPlayer &soundPlayer)
 : BuildingNode(interactiveObject, window, view, uiBundle, attachedRects)
 , mHouseUIActivated(0xb5ba9eaf)
 , mAddNet1(0x43702f1a, interactiveObject.getName())
@@ -40,16 +40,46 @@ HouseNode::HouseNode(const InteractiveObject &interactiveObject, const sf::Rende
 , mNetCost(1.0f)
 , mRepairCost(0.5f)
 , mSoundPlayer(soundPlayer)
-, mDaylightUI(daylightUI)
-, mChatBoxUI(chatBoxUI)
+, mCountUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer)
+, mDaylightUI(uiBundle.getDaylightUI())
+, mChatBoxUI(uiBundle.getChatBoxUI())
 , mHouseUIActive(false)
 , mTotalBeds(interactiveObject.getBeds())
 , mTotalOldNets(interactiveObject.getNets())
 , mNewNetCount(0)
 , mRepairCount(0)
 {
+	const float xCountUI = mInteractiveObject.getCollisionBoxWidth() / 2.0f;
+	const float yCountUI = mInteractiveObject.getCollisionBoxHeight() + 10.0f;
+	mCountUI.setPosition(sf::Vector2f(xCountUI, yCountUI));
 	updateNetDisableState();
 	updateRepairDisableState();
+}
+
+sf::FloatRect HouseNode::getBoundingRect() const
+{
+	return sf::FloatRect(mInteractiveObject.getCollisionBoxXCoord(), mInteractiveObject.getCollisionBoxYCoord()
+		, mInteractiveObject.getCollisionBoxWidth(), mInteractiveObject.getCollisionBoxHeight());
+}
+
+void HouseNode::addMosquito()
+{
+	mCountUI.addLeft();
+}
+
+void HouseNode::addMalariaMosquito()
+{
+	mCountUI.addRight();
+}
+
+void HouseNode::subtractMosquito()
+{
+	mCountUI.subtractLeft();
+}
+
+void HouseNode::subtractMalariaMosquito()
+{
+	mCountUI.subtractRight();
 }
 
 void HouseNode::handleEvent(const trmb::Event &gameEvent)
@@ -121,6 +151,8 @@ void HouseNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) c
 	{
 		target.draw(mHightlight, states);
 	}
+
+	target.draw(mCountUI, states);
 }
 
 void HouseNode::updateCurrent(sf::Time)

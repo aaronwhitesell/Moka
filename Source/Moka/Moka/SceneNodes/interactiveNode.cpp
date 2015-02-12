@@ -25,10 +25,12 @@ InteractiveNode::InteractiveNode(const InteractiveObject &interactiveObject, con
 , mPreviousSelectedState(false)
 , mDisableBuildMode(false)
 , mDisableInput(false)
-, mBeginSimulationMode(0x5000e550)
+, mBeginSimulationEvent(0x5000e550)
 , mCreateTextPrompt(0x25e87fd8)
 , mClearTextPrompt(0xc1523265)
 {
+	setPosition(sf::Vector2f(mInteractiveObject.getX(), mInteractiveObject.getY()));
+
 	mHightlight.setSize(sf::Vector2f(mInteractiveObject.getWidth(), mInteractiveObject.getHeight()));
 	mHightlight.setPosition(sf::Vector2f(mInteractiveObject.getX(), mInteractiveObject.getY()));
 	mHightlight.setFillColor(sf::Color(0u, 0u, 0u, 50u));
@@ -38,7 +40,7 @@ InteractiveNode::InteractiveNode(const InteractiveObject &interactiveObject, con
 
 void InteractiveNode::handleEvent(const trmb::Event& gameEvent)
 {
-	if (mBeginSimulationMode == gameEvent.getType())
+	if (mBeginSimulationEvent == gameEvent.getType())
 	{
 		mDisableBuildMode = true;
 		mSelected = false;

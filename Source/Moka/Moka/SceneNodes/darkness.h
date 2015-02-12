@@ -43,14 +43,13 @@ private:
 private:
 	const EventGuid		    mFullscreen;		    // ALW - Matches the GUID in the ToggleFullscreen class.
 	const EventGuid		    mWindowed;		        // ALW - Matches the GUID in the ToggleFullscreen class.
-	const EventGuid         mBeginSimulationMode;   // ALW - Matches the GUID in the DaylightUI class.
+	const EventGuid         mBeginSimulationEvent;  // ALW - Matches the GUID in the DaylightUI class.
 	const sf::RenderWindow  &mWindow;
 	sf::RectangleShape		mBackground;
 	bool					mDarken;
 	int						mCount;
 	unsigned char           mAlpha;
 	sf::Time				mUpdateTime;
-
 };
 
 #endif

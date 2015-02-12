@@ -2,9 +2,11 @@
 #define HOUSE_NODE_H
 
 #include "buildingNode.h"
+#include "../HUD/countUI.h"
 
 #include "Trambo/Events/event.h"
 #include "Trambo/Events/eventStr.h"
+#include "Trambo/Resources/resourceHolder.h"
 
 #include <SFML/Graphics/Rect.hpp>
 
@@ -35,9 +37,16 @@ class HouseNode : public BuildingNode // inherits SceneNode, EventHandler, and I
 public:
 								HouseNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window
 									, const sf::View &view, UIBundle &uiBundle, std::vector<sf::FloatRect> attachedRects
-									, trmb::SoundPlayer &soundPlayer, DaylightUI &daylightUI, ChatBoxUI &chatBoxUI);
+									, trmb::FontHolder &fonts, trmb::SoundPlayer &soundPlayer);
 								HouseNode(const HouseNode &) = delete;
 	HouseNode &					operator=(const HouseNode &) = delete;
+
+	virtual sf::FloatRect		getBoundingRect() const override;
+
+	void						addMosquito();
+	void						addMalariaMosquito();
+	void						subtractMosquito();
+	void						subtractMalariaMosquito();
 
 	virtual void				handleEvent(const trmb::Event &gameEvent) override final;
 
@@ -91,6 +100,7 @@ private:
 	const float					mNetCost;
 	const float					mRepairCost;
 	trmb::SoundPlayer			&mSoundPlayer;
+	CountUI						mCountUI;
 	DaylightUI					&mDaylightUI;
 	ChatBoxUI					&mChatBoxUI;
 	bool						mHouseUIActive;

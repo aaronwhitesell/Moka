@@ -239,6 +239,9 @@
     <ClInclude Include="SceneNodes\mosquitoNode.h">
       <Filter>Header Files\SceneNodes\Mosquito</Filter>
     </ClInclude>
+    <ClInclude Include="HUD\countUI.h">
+      <Filter>Header Files\HUD</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\application.cpp">
@@ -366,6 +369,9 @@
     </ClCompile>
     <ClCompile Include="SceneNodes\mosquitoNode.cpp">
       <Filter>Source Files\SceneNodes\Mosquito</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD\countUI.cpp">
+      <Filter>Source Files\HUD</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

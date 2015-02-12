@@ -11,24 +11,27 @@
 #include <vector>
 
 
-MosquitoNode::MosquitoNode(const trmb::TextureHolder& textures, sf::Vector2f position, sf::FloatRect worldBounds)
-: mBeginSimulationMode(0x5000e550)
+MosquitoNode::MosquitoNode(const trmb::TextureHolder& textures, sf::Vector2f position, sf::FloatRect worldBounds, SceneNode &houseLayer)
+: mBeginSimulationEvent(0x5000e550)
 , mMosquito(textures.get(Textures::ID::MosquitoAnimation))
 , mWorldBounds(worldBounds)
-, mNextPosition(position)
+, mHouseLayer(houseLayer)
+, mPreviousPosition()
+, mIndoor(false)
+, mBeginSimulationMode(false)
+, mDelaySet(false)
+, mActive(false)
 , mTotalDelayTime()
 , mUpdateDelayTime()
 , mTotalMovementTime(sf::seconds(1.0))
 , mUpdateMovementTime()
-, mActivate(false)
-, mDelaySet(false)
-, mActive(false)
 , mRandomDevice()				// ALW - obtain random number from hardware
 , mGenerator(mRandomDevice())	// ALW - Seed the generator
 , mDistribution(0, 3)			// ALW - Define the range
 , mWeightedDistribution()
 {
-	mMosquito.setPosition(position);
+	setPosition(position);
+
 	mMosquito.setFrameSize(sf::Vector2i(64, 64));
 	mMosquito.setNumFrames(8);
 	mMosquito.setDuration(sf::seconds(1));
@@ -39,6 +42,24 @@ MosquitoNode::MosquitoNode(const trmb::TextureHolder& textures, sf::Vector2f pos
 	std::vector<float> weights   = { 0.05f, 0.1f, 0.20f };
 	decltype(mWeightedDistribution.param()) new_range(intervals.begin(), intervals.end(), weights.begin());
 	mWeightedDistribution.param(new_range);
+}
+
+sf::FloatRect MosquitoNode::getBoundingRect() const
+{
+	const float tileWidth = 64;
+	const float tileHeight = 64;
+
+	return sf::FloatRect(getPosition().x, getPosition().y, tileWidth, tileHeight);
+}
+
+bool MosquitoNode::isIndoor() const
+{
+	return mIndoor;
+}
+
+void MosquitoNode::setIndoor(bool indoors)
+{
+	mIndoor = indoors;
 }
 
 void MosquitoNode::updateCurrent(sf::Time dt)
@@ -54,15 +75,15 @@ void MosquitoNode::updateCurrent(sf::Time dt)
 
 void MosquitoNode::handleEvent(const trmb::Event &gameEvent)
 {
-	if (mBeginSimulationMode == gameEvent.getType())
+	if (mBeginSimulationEvent == gameEvent.getType())
 	{
-		mActivate = true;
+		mBeginSimulationMode = true;
 	}
 }
 
 void MosquitoNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const
 {
-	if (mActive)
+	if (mActive && !mIndoor)
 		target.draw(mMosquito, states);
 }
 
@@ -83,31 +104,45 @@ void MosquitoNode::setNextPosition(sf::Time dt)
 		switch (direction)
 		{
 		case Up:
-			position = mMosquito.getPosition() - sf::Vector2f(0, tileHeight);
+			position = getPosition() - sf::Vector2f(0, tileHeight);
 			break;
 		case Down:
-			position = mMosquito.getPosition() + sf::Vector2f(0, tileHeight);
+			position = getPosition() + sf::Vector2f(0, tileHeight);
 			break;
 		case Left:
-			position = mMosquito.getPosition() - sf::Vector2f(tileWidth, 0);
+			position = getPosition() - sf::Vector2f(tileWidth, 0);
 			break;
 		case Right:
-			position = mMosquito.getPosition() + sf::Vector2f(tileWidth, 0);
+			position = getPosition() + sf::Vector2f(tileWidth, 0);
 			break;
 		}
 
 		if (mWorldBounds.left <= position.x && mWorldBounds.width > position.x
 			&& mWorldBounds.top <= position.y && mWorldBounds.height > position.y)
 		{
-			// ALW - Next position is within the world bounds
-			mNextPosition = position;
+			// ALW - The position is within the world bounds
+			mPreviousPosition = getPosition();
+			setPosition(position);
+
+			if (mIndoor)
+			{
+				// ALW - Verify indoor mosquito is inside a house's boundaries
+				std::set<trmb::SceneNode::Pair> collisionPairs;
+				this->checkSceneCollision(mHouseLayer, collisionPairs);
+
+				if (!collisionPairs.size())
+				{
+					// ALW - There were no collisions between the mosquito and a house. Revert the position.
+					setPosition(mPreviousPosition);
+				}
+			}
 		}
 	}
 }
 
 void MosquitoNode::delaySpawn(sf::Time dt)
 {
-	if (mActivate)
+	if (mBeginSimulationMode)
 	{
 		if (!mDelaySet)
 		{

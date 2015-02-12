@@ -63,7 +63,7 @@ protected:
 
 
 private:
-	const EventGuid             mBeginSimulationMode; // ALW - Matches the GUID in the DaylightUI class.
+	const EventGuid             mBeginSimulationEvent; // ALW - Matches the GUID in the DaylightUI class.
 	const EventGuid				mCreateTextPrompt; // ALW - Matches the GUID in the ChatBoxUI class.
 	const EventGuid				mClearTextPrompt;  // ALW - Matches the GUID in the ChatBoxUI class.
 };

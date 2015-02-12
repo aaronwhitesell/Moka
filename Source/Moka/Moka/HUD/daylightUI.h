@@ -58,7 +58,6 @@ public:
 
 
 private:
-	using                   EventGuid = unsigned long;
 	using                   ButtonPtr = trmb::ButtonContainer::Ptr;
 
 	
@@ -71,11 +70,11 @@ private:
 
 
 private:
-	const trmb::Event       mBeginSimulationMode; // ALW - Is sent from here.
-	const EventGuid		    mFullscreen;		    // ALW - Matches the GUID in the ToggleFullscreen class.
-	const EventGuid		    mWindowed;		    // ALW - Matches the GUID in the ToggleFullscreen class.
-	const EventGuid		    mCreateTextPrompt;    // ALW - Matches the GUID in the ChatBoxUI class.
-	const EventGuid		    mClearTextPrompt;     // ALW - Matches the GUID in the ChatBoxUI class.
+	const trmb::Event       mBeginSimulationEvent; // ALW - Is sent from here.
+	const EventGuid		    mFullscreen;		   // ALW - Matches the GUID in the ToggleFullscreen class.
+	const EventGuid		    mWindowed;		       // ALW - Matches the GUID in the ToggleFullscreen class.
+	const EventGuid		    mCreateTextPrompt;     // ALW - Matches the GUID in the ChatBoxUI class.
+	const EventGuid		    mClearTextPrompt;      // ALW - Matches the GUID in the ChatBoxUI class.
 
 	const float		        mMaxHours;
 	const float			    mMinHours;

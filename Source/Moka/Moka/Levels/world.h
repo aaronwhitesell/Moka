@@ -16,6 +16,7 @@
 
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/View.hpp>
+#include <SFML/System/Time.hpp>
 #include <SFML/System/Vector2.hpp>
 
 #include <array>
@@ -36,6 +37,9 @@ namespace trmb
 }
 
 class HeroNode;
+class DoorNode;
+class HouseNode;
+class WindowNode;
 
 class World : public trmb::EventHandler
 {
@@ -54,6 +58,13 @@ private:
 
 
 private:
+	void								initializeDoorToHouseMap();
+	void								initializeWindowToHouseMap();
+
+	void								updateCollisions(sf::Time dt);
+	void								mosquitoDoorCollisions();
+	void								mosquitoWindowCollisions();
+
 	void								updateSoundPlayer();
 	void								configureUIs();
 	void								buildScene();
@@ -61,11 +72,15 @@ private:
 	void								generateSpawnPositions();
 	sf::Vector2f						getRandomSpawnPosition();
 
+
 private:
 	enum Layer
 	{
 		Background,
 		Update,
+		DoorSelection,
+		HouseSelection,
+		WindowSelection,
 		Selection,
 		Mosquitoes,
 		Sky,
@@ -76,8 +91,9 @@ private:
 
 
 private:
-	const EventGuid								mFullscreen; // ALW - Matches the GUID in the ToggleFullscreen class.
-	const EventGuid								mWindowed;   // ALW - Matches the GUID in the ToggleFullscreen class.
+	const EventGuid								mBeginSimulationEvent;   // ALW - Matches the GUID in the DaylightUI class.
+	const EventGuid								mFullscreen;			 // ALW - Matches the GUID in the ToggleFullscreen class.
+	const EventGuid								mWindowed;				 // ALW - Matches the GUID in the ToggleFullscreen class.
 
 	const sf::RenderWindow						&mWindow;
 	sf::RenderTarget							&mTarget;
@@ -108,6 +124,12 @@ private:
 	std::random_device							mRandomDevice;
 	std::mt19937								mGenerator;
 	std::uniform_int_distribution<>				mDistribution;
+
+	bool										mBeginSimulationMode;
+	sf::Time									mTotalCollisionTime;
+	sf::Time									mUpdateCollisionTime;
+	std::map<DoorNode *, HouseNode *>			mDoorToHouse;
+	std::map<WindowNode *, HouseNode *>			mWindowToHouse;
 };
 
 #endif

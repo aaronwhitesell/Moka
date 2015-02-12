@@ -31,10 +31,12 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 
 #include <algorithm>
+#include <cassert>
 
 
 World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlayer& soundPlayer)
-: mFullscreen(0x5a0d2314)
+: mBeginSimulationEvent(0x5000e550)
+, mFullscreen(0x5a0d2314)
 , mWindowed(0x11e3c735)
 , mWindow(window)
 , mTarget(window)
@@ -61,6 +63,11 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mRandomDevice()											// ALW - obtain random number from hardware
 , mGenerator(mRandomDevice())								// ALW - Seed the generator
 , mDistribution(0, mMap.getWidth() * mMap.getHeight() - 1)	// ALW - Define the range
+, mBeginSimulationMode(false)
+, mTotalCollisionTime(sf::seconds(1.0))
+, mUpdateCollisionTime()
+, mDoorToHouse()
+, mWindowToHouse()
 {
 	mTextures.load(Textures::ID::Tiles, "Data/Textures/Tiles.png");
 	mTextures.load(Textures::ID::MosquitoAnimation, "Data/Textures/mosquitoAnimation.png");
@@ -68,6 +75,9 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 	generateSpawnPositions();
 	buildScene();
 	configureUIs();
+
+	initializeDoorToHouseMap();
+	initializeWindowToHouseMap();
 }
 
 void World::update(sf::Time dt)
@@ -75,7 +85,7 @@ void World::update(sf::Time dt)
 	mSceneGraph.update(dt);					// ALW - Update the hero along with the rest of the scene graph
 	mCamera.update(mHero->getPosition());	// ALW - Update the camera position
 
-
+	updateCollisions(dt);
 
 	updateSoundPlayer();
 	mChatBoxUI.handler();
@@ -92,6 +102,10 @@ void World::handleEvent(const trmb::Event &gameEvent)
 		// ALW - Manually correct position of camera, necessary when pause menu is active.
 		mCamera.update(mHero->getPosition());
 	}
+	else if (mBeginSimulationEvent == gameEvent.getType())
+	{
+		mBeginSimulationMode = true;
+	}
 }
 
 void World::draw()
@@ -100,6 +114,117 @@ void World::draw()
 	mTarget.draw(mSceneGraph);
 	mTarget.draw(mChatBoxUI);
 	mTarget.draw(mDaylightUI);
+}
+
+void World::initializeDoorToHouseMap()
+{
+	std::set<trmb::SceneNode::Pair> collisionPairs;
+	mSceneLayers[DoorSelection]->checkSceneCollision(*mSceneLayers[HouseSelection], collisionPairs, true);
+
+	for (const auto &pair : collisionPairs)
+	{
+		assert(("Dynamic cast failed.", dynamic_cast<DoorNode *>(pair.first) != nullptr));
+		assert(("Dynamic cast failed.", dynamic_cast<HouseNode *>(pair.second) != nullptr));
+
+		mDoorToHouse[static_cast<DoorNode *>(pair.first)] = static_cast<HouseNode *>(pair.second);
+	}
+}
+
+void World::initializeWindowToHouseMap()
+{
+	std::set<trmb::SceneNode::Pair> collisionPairs;
+	mSceneLayers[WindowSelection]->checkSceneCollision(*mSceneLayers[HouseSelection], collisionPairs, true);
+
+	for (const auto &pair : collisionPairs)
+	{
+		assert(("Dynamic cast failed.", dynamic_cast<WindowNode *>(pair.first) != nullptr));
+		assert(("Dynamic cast failed.", dynamic_cast<HouseNode *>(pair.second) != nullptr));
+
+		mWindowToHouse[static_cast<WindowNode *>(pair.first)] = static_cast<HouseNode *>(pair.second);
+	}
+}
+
+void World::updateCollisions(sf::Time dt)
+{
+	mUpdateCollisionTime += dt;
+
+	if (mBeginSimulationMode && mUpdateCollisionTime >= mTotalCollisionTime)
+	{
+		mUpdateCollisionTime -= mTotalCollisionTime;
+
+		mosquitoDoorCollisions();
+		mosquitoWindowCollisions();
+	}
+}
+
+void World::mosquitoDoorCollisions()
+{
+	std::set<trmb::SceneNode::Pair> collisionPairs;
+	mSceneLayers[Mosquitoes]->checkSceneCollision(*mSceneLayers[DoorSelection], collisionPairs, true);
+
+	for (auto &pair : collisionPairs)
+	{
+		assert(("Dynamic cast failed.", dynamic_cast<MosquitoNode *>(pair.first) != nullptr));
+		MosquitoNode * const mosquito = static_cast<MosquitoNode *>(pair.first);
+
+		assert(("Dynamic cast failed.", dynamic_cast<DoorNode *>(pair.second) != nullptr));
+		DoorNode * const door = static_cast<DoorNode *>(pair.second);
+		assert(("The door key does not exist!", mDoorToHouse.count(door)));
+		std::map<DoorNode *, HouseNode *>::const_iterator found = mDoorToHouse.find(door);
+		HouseNode * const house = found->second;
+
+		if (mosquito->isIndoor())
+		{
+			// ALW - Mosquito exits house
+			const float tileHeight = 64.0f;
+			const sf::Vector2f position = door->getPosition() + sf::Vector2f(0, tileHeight);
+			mosquito->setPosition(position); // ALW - Move mosquito one tile below the door
+			mosquito->setIndoor(false);
+			house->subtractMosquito();
+		}
+		else
+		{
+			// ALW - Mosquito enters house
+			mosquito->setPosition(house->getPosition());
+			mosquito->setIndoor(true);
+			house->addMosquito();
+		}
+	}
+}
+
+void World::mosquitoWindowCollisions()
+{
+	std::set<trmb::SceneNode::Pair> collisionPairs;
+	mSceneLayers[Mosquitoes]->checkSceneCollision(*mSceneLayers[WindowSelection], collisionPairs, true);
+
+	for (auto &pair : collisionPairs)
+	{
+		assert(("Dynamic cast failed.", dynamic_cast<MosquitoNode *>(pair.first) != nullptr));
+		MosquitoNode * const mosquito = static_cast<MosquitoNode *>(pair.first);
+
+		assert(("Dynamic cast failed.", dynamic_cast<WindowNode *>(pair.second) != nullptr));
+		WindowNode * const window = static_cast<WindowNode *>(pair.second);
+		assert(("The window key does not exist!", mWindowToHouse.count(window)));
+		std::map<WindowNode *, HouseNode *>::const_iterator found = mWindowToHouse.find(window);
+		HouseNode * const house = found->second;
+
+		if (mosquito->isIndoor())
+		{
+			// ALW - Mosquito exits house
+			const float tileHeight = 64.0f;
+			const sf::Vector2f position = window->getPosition() - sf::Vector2f(0, tileHeight);
+			mosquito->setPosition(position); // ALW - Move mosquito one tile above the window
+			mosquito->setIndoor(false);
+			house->subtractMosquito();
+		}
+		else
+		{
+			// ALW - Mosquito enters house
+			mosquito->setPosition(house->getPosition());
+			mosquito->setIndoor(true);
+			house->addMosquito();
+		}
+	}
 }
 
 void World::updateSoundPlayer()
@@ -172,13 +297,6 @@ void World::buildScene()
 	std::unique_ptr<trmb::MapLayerNode> layer2(new trmb::MapLayerNode(mMap, 2));
 	mSceneLayers[Background]->attachChild(std::move(layer2));
 
-	const int mosquitoPopulation = 500;
-	for (int i = 0; i < mosquitoPopulation; ++i)
-	{
-		mSceneLayers[Mosquitoes]->attachChild(std::move(std::unique_ptr<MosquitoNode>(new MosquitoNode(mTextures
-			, getRandomSpawnPosition(), mWorldBounds))));
-	}
-
 	// ALW - Add darkess
 	mSceneLayers[Sky]->attachChild(std::move(std::unique_ptr<Darkness>(new Darkness(mWindow))));
 
@@ -201,7 +319,7 @@ void World::buildScene()
 			mSceneLayers[Update]->attachChild(std::move(std::unique_ptr<DoorUpdateNode>(
 				new DoorUpdateNode(*iter, mTextures.get(Textures::ID::Tiles)))));
 
-			mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<DoorNode>(
+			mSceneLayers[DoorSelection]->attachChild(std::move(std::unique_ptr<DoorNode>(
 				new DoorNode(*iter, mWindow, mCamera.getView(), mUIBundle, mTextures, mSoundPlayer, mDaylightUI, mChatBoxUI))));
 		}
 		else if (iter->getType() == "Window")
@@ -209,7 +327,7 @@ void World::buildScene()
 			mSceneLayers[Update]->attachChild(std::move(std::unique_ptr<WindowUpdateNode>(
 				new WindowUpdateNode(*iter, mTextures.get(Textures::ID::Tiles)))));
 
-			mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<WindowNode>(
+			mSceneLayers[WindowSelection]->attachChild(std::move(std::unique_ptr<WindowNode>(
 				new WindowNode(*iter, mWindow, mCamera.getView(), mUIBundle, mTextures, mSoundPlayer, mDaylightUI, mChatBoxUI))));
 		}
 		else if (iter->getType() == "Clinic")
@@ -225,15 +343,22 @@ void World::buildScene()
 		{
 			mSceneLayers[Update]->attachChild(std::move(std::unique_ptr<HouseUpdateNode>(new HouseUpdateNode(*iter))));
 
-			mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<HouseNode>(
-				new HouseNode(*iter, mWindow, mCamera.getView(), mUIBundle, buildAttachedRects(*iter), mSoundPlayer, mDaylightUI
-				, mChatBoxUI))));
+			mSceneLayers[HouseSelection]->attachChild(std::move(std::unique_ptr<HouseNode>(
+				new HouseNode(*iter, mWindow, mCamera.getView(), mUIBundle, buildAttachedRects(*iter), mFonts, mSoundPlayer))));
 		}
 		else
 		{
 			// ALW - TODO - Uncomment when all object types have been handled.
 			//assert(("ALW - Logic Error: The interactive object type is not handled!", false));
 		}
+	}
+
+	// ALW - Add mosquitoes
+	const int mosquitoPopulation = 500;
+	for (int i = 0; i < mosquitoPopulation; ++i)
+	{
+		mSceneLayers[Mosquitoes]->attachChild(std::move(std::unique_ptr<MosquitoNode>(new MosquitoNode(mTextures
+			, getRandomSpawnPosition(), mWorldBounds, *mSceneLayers[HouseSelection]))));
 	}
 
 	// Add UIs

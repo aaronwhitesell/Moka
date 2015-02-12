@@ -1720,8 +1720,8 @@
    <tile gid="227"/>
    <tile gid="247"/>
    <tile gid="170"/>
-   <tile gid="198"/>
-   <tile gid="198"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
    <tile gid="171"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1746,7 +1746,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="260"/>
+   <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -2271,46 +2271,6 @@
     <property name="Style" value="Simple"/>
    </properties>
   </object>
-  <object name="Window 10" type="Window" x="464" y="1163" width="32" height="44">
-   <properties>
-    <property name="AlternateXCoord1" value="448"/>
-    <property name="AlternateXCoord2" value="0"/>
-    <property name="AlternateXCoord3" value="0"/>
-    <property name="AlternateYCoord1" value="1152"/>
-    <property name="AlternateYCoord2" value="0"/>
-    <property name="AlternateYCoord3" value="0"/>
-    <property name="AttachedTo" value="Clinic 0"/>
-    <property name="Beds" value="0"/>
-    <property name="CollisionBoxHeight" value="64"/>
-    <property name="CollisionBoxWidth" value="64"/>
-    <property name="CollisionBoxXCoord" value="448"/>
-    <property name="CollisionBoxYCoord" value="1152"/>
-    <property name="Color" value="Slate"/>
-    <property name="Nets" value="0"/>
-    <property name="Residents" value="0"/>
-    <property name="Style" value="Wooden"/>
-   </properties>
-  </object>
-  <object name="Window 11" type="Window" x="528" y="1163" width="32" height="44">
-   <properties>
-    <property name="AlternateXCoord1" value="512"/>
-    <property name="AlternateXCoord2" value="0"/>
-    <property name="AlternateXCoord3" value="0"/>
-    <property name="AlternateYCoord1" value="1152"/>
-    <property name="AlternateYCoord2" value="0"/>
-    <property name="AlternateYCoord3" value="0"/>
-    <property name="AttachedTo" value="Clinic 0"/>
-    <property name="Beds" value="0"/>
-    <property name="CollisionBoxHeight" value="64"/>
-    <property name="CollisionBoxWidth" value="64"/>
-    <property name="CollisionBoxXCoord" value="512"/>
-    <property name="CollisionBoxYCoord" value="1152"/>
-    <property name="Color" value="Slate"/>
-    <property name="Nets" value="0"/>
-    <property name="Residents" value="0"/>
-    <property name="Style" value="Wooden"/>
-   </properties>
-  </object>
   <object name="Door 0" type="Door" x="1219" y="452" width="58" height="60">
    <properties>
     <property name="AlternateXCoord1" value="1216"/>
@@ -2326,26 +2286,6 @@
     <property name="CollisionBoxXCoord" value="1216"/>
     <property name="CollisionBoxYCoord" value="448"/>
     <property name="Color" value="Tan"/>
-    <property name="Nets" value="0"/>
-    <property name="Residents" value="0"/>
-    <property name="Style" value="na"/>
-   </properties>
-  </object>
-  <object name="Door 1" type="Door" x="515" y="1220" width="58" height="60">
-   <properties>
-    <property name="AlternateXCoord1" value="512"/>
-    <property name="AlternateXCoord2" value="0"/>
-    <property name="AlternateXCoord3" value="0"/>
-    <property name="AlternateYCoord1" value="1216"/>
-    <property name="AlternateYCoord2" value="0"/>
-    <property name="AlternateYCoord3" value="0"/>
-    <property name="AttachedTo" value="Clinic 0"/>
-    <property name="Beds" value="0"/>
-    <property name="CollisionBoxHeight" value="64"/>
-    <property name="CollisionBoxWidth" value="64"/>
-    <property name="CollisionBoxXCoord" value="512"/>
-    <property name="CollisionBoxYCoord" value="1216"/>
-    <property name="Color" value="Slate"/>
     <property name="Nets" value="0"/>
     <property name="Residents" value="0"/>
     <property name="Style" value="na"/>

@@ -23,7 +23,7 @@
 DaylightUI::DaylightUI(const sf::RenderWindow &window, trmb::Camera &camera, Fonts::ID font, trmb::FontHolder &fonts
 	, SoundEffects::ID soundEffect, trmb::SoundPlayer &soundPlayer, UIBundle &uiBundle, EventGuid leftClickPress
 	, EventGuid leftClickRelease)
-: mBeginSimulationMode(0x5000e550)
+: mBeginSimulationEvent(0x5000e550)
 , mFullscreen(0x5a0d2314)
 , mWindowed(0x11e3c735)
 , mCreateTextPrompt(0x25e87fd8)
@@ -271,7 +271,7 @@ void DaylightUI::repositionGUI()
 
 void DaylightUI::done()
 {
-	EventHandler::sendEvent(mBeginSimulationMode);
+	EventHandler::sendEvent(mBeginSimulationEvent);
 	mUIBundle.getChatBoxUI().updateText(trmb::Localize::getInstance().getString("simulationGreeting"));
 	hide();
 }

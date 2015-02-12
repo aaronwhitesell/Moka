@@ -46,6 +46,8 @@ public:
 								DoorNode(const DoorNode &) = delete;
 	DoorNode &					operator=(const DoorNode &) = delete;
 
+	virtual sf::FloatRect		getBoundingRect() const override;
+
 	virtual void				handleEvent(const trmb::Event &gameEvent) override final;
 
 

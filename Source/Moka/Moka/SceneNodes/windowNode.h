@@ -46,6 +46,8 @@ public:
 								WindowNode(const WindowNode &) = delete;
 	WindowNode &				operator=(const WindowNode &) = delete;
 
+	virtual sf::FloatRect		getBoundingRect() const override;
+
 	virtual void				handleEvent(const trmb::Event &gameEvent) override final;
 
 
