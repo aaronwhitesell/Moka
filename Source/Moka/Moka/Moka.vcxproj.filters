@@ -242,6 +242,9 @@
     <ClInclude Include="HUD\countUI.h">
       <Filter>Header Files\HUD</Filter>
     </ClInclude>
+    <ClInclude Include="HUD\mainTrackerUI.h">
+      <Filter>Header Files\HUD</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\application.cpp">
@@ -371,6 +374,9 @@
       <Filter>Source Files\SceneNodes\Mosquito</Filter>
     </ClCompile>
     <ClCompile Include="HUD\countUI.cpp">
+      <Filter>Source Files\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD\mainTrackerUI.cpp">
       <Filter>Source Files\HUD</Filter>
     </ClCompile>
   </ItemGroup>

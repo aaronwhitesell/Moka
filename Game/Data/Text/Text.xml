@@ -34,13 +34,17 @@ therapies (ACTs)."/>
         <purchaseACT               attribute="It takes two hour to purchase and deliver the ACTs."/>
 		<refundACT                 attribute="Two hours have been refunded to you."/>
 	    <inspectHouse              attribute="You see a house. Would you like to deliver a new insecticide-treated bed net, or if they have a
-damaged bed net it can be repaired."/>
+damaged bed net it can be repaired?"/>
 		<purchaseNet               attribute="It takes one hour to deliver and hang the insecticide-treated bed net."/>
 		<refundNet                 attribute="One hour has been refunded to you."/>
 		<purchaseRepair            attribute="You use a needle and thread to sew up each small hole. Thirty minutes have passed."/>
 		<refundRepair              attribute="Thirty minutes have been refunded to you."/>
 		<daylightUI                attribute="Daylight"/>
 		<daylightUIButton          attribute="Done!"/>
+		<mosquitoesUI		   	   attribute="Mosquitoes"/>
+		<residentsUI		   	   attribute="Residents"/>
+		<totalUI		           attribute="Total"/>
+		<infectedUI		   		   attribute="Infected"/>
 	</en>
     <fr>
 	    <prompt                    attribute="fr: Press Enter"/>
@@ -75,13 +79,17 @@ therapies (ACTs)."/>
         <purchaseACT               attribute="fr: It takes two hour to purchase and deliver the ACTs."/>
 		<refundACT                 attribute="fr: Two hours have been refunded to you."/>
 	    <inspectHouse              attribute="fr: You see a house. Would you like to deliver a new insecticide-treated bed net, or if they have a
-damaged bed net it can be repaired."/>
+damaged bed net it can be repaired?"/>
 		<purchaseNet               attribute="fr: It takes one hour to deliver and hang the insecticide-treated bed net."/>
 		<refundNet                 attribute="fr: One hour has been refunded to you."/>
 		<purchaseRepair            attribute="fr: You use a needle and thread to sew up each small hole. Thirty minutes have passed."/>
 		<refundRepair              attribute="fr: Thirty minutes have been refunded to you."/>
 		<daylightUI                attribute="fr: Daylight"/>
 		<daylightUIButton          attribute="fr: Done!"/>
+		<mosquitoesUI		   	   attribute="fr: Mosquitoes"/>
+		<residentsUI		   	   attribute="fr: Residents"/>
+		<totalUI		           attribute="fr: Total"/>
+		<infectedUI		   		   attribute="fr: Infected"/>
 	</fr>
     <mg>
 	    <prompt                    attribute="mg: Press Enter"/>
@@ -117,12 +125,16 @@ therapies (ACTs)."/>
 		<refundACT                 attribute="mg: Two hours have been refunded to you."/>
 	    <inspectHouse              attribute="mg: You see a house."/>
 	    <inspectHouse              attribute="mg: You see a house. Would you like to deliver a new insecticide-treated bed net, or if they have a
-damaged bed net it can be repaired."/>
+damaged bed net it can be repaired?"/>
 		<purchaseNet               attribute="mg: It takes one hour to deliver and hang the insecticide-treated bed net."/>
 		<refundNet                 attribute="mg: One hour has been refunded to you."/>
 		<purchaseRepair            attribute="mg: You use a needle and thread to sew up each small hole. Thirty minutes have passed."/>
 		<refundRepair              attribute="mg: Thirty minutes have been refunded to you."/>
 		<daylightUI                attribute="mg: Daylight"/>
 		<daylightUIButton          attribute="mg: Done!"/>
+		<mosquitoesUI		   	   attribute="mg: Mosquitoes"/>
+		<residentsUI		   	   attribute="mg: Residents"/>
+		<totalUI		           attribute="mg: Total"/>
+		<infectedUI		   		   attribute="mg: Infected"/>
 	</mg>
 </text>

@@ -54,6 +54,7 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mUIBundle(mChatBoxUI, mDaylightUI, mBarrelUI, mDoorUI, mWindowUI, mClinicUI, mHouseUI)
 , mChatBoxUI(window, mCamera, Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, mUIBundle)
 , mDaylightUI(window, mCamera, Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, mUIBundle, 0x6955d309, 0x128b8b25)
+, mMainTrackerUI(window, Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer)
 , mBarrelUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
 , mDoorUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
 , mWindowUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
@@ -114,6 +115,7 @@ void World::draw()
 	mTarget.draw(mSceneGraph);
 	mTarget.draw(mChatBoxUI);
 	mTarget.draw(mDaylightUI);
+	mTarget.draw(mMainTrackerUI);
 }
 
 void World::initializeDoorToHouseMap()
@@ -272,6 +274,9 @@ void World::configureUIs()
 	mHouseUI.setCharacterSize(characterSize);
 	centerOrigin(mHouseUI, true, false);
 	mHouseUI.hide();
+
+	mMainTrackerUI.setTotalMosquito(500);
+	mMainTrackerUI.setTotalResident(30);
 }
 
 void World::buildScene()

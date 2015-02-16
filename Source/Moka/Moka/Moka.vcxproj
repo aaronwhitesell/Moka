@@ -86,6 +86,7 @@
     <ClInclude Include="HUD\chatBoxUI.h" />
     <ClInclude Include="HUD\countUI.h" />
     <ClInclude Include="HUD\daylightUI.h" />
+    <ClInclude Include="HUD\mainTrackerUI.h" />
     <ClInclude Include="HUD\optionsUI.h" />
     <ClInclude Include="HUD\uiBundle.h" />
     <ClInclude Include="HUD\undoUI.h" />
@@ -132,6 +133,7 @@
     <ClCompile Include="HUD\chatBoxUI.cpp" />
     <ClCompile Include="HUD\countUI.cpp" />
     <ClCompile Include="HUD\daylightUI.cpp" />
+    <ClCompile Include="HUD\mainTrackerUI.cpp" />
     <ClCompile Include="HUD\optionsUI.cpp" />
     <ClCompile Include="HUD\uiBundle.cpp" />
     <ClCompile Include="HUD\undoUI.cpp" />

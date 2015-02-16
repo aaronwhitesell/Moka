@@ -3,6 +3,7 @@
 
 #include "../HUD/chatBoxUI.h"
 #include "../HUD/daylightUI.h"
+#include "../HUD/mainTrackerUI.h"
 #include "../HUD/optionsUI.h"
 #include "../HUD/uiBundle.h"
 #include "../HUD/undoUI.h"
@@ -114,6 +115,7 @@ private:
 	UIBundle									mUIBundle;
 	ChatBoxUI									mChatBoxUI;
 	DaylightUI                                  mDaylightUI;
+	MainTrackerUI								mMainTrackerUI;
 	UndoUI										mBarrelUI;
 	UndoUI										mDoorUI;
 	UndoUI										mWindowUI;
