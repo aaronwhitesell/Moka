@@ -32,7 +32,7 @@ InteractiveNode::InteractiveNode(const InteractiveObject &interactiveObject, con
 	setPosition(sf::Vector2f(mInteractiveObject.getX(), mInteractiveObject.getY()));
 
 	mHightlight.setSize(sf::Vector2f(mInteractiveObject.getWidth(), mInteractiveObject.getHeight()));
-	mHightlight.setPosition(sf::Vector2f(mInteractiveObject.getX(), mInteractiveObject.getY()));
+	mHightlight.setPosition(sf::Vector2f(0.0f, 0.0f));
 	mHightlight.setFillColor(sf::Color(0u, 0u, 0u, 50u));
 	mHightlight.setOutlineColor(sf::Color(0u, 0u, 0u, 125u));
 	mHightlight.setOutlineThickness(2.0f);
