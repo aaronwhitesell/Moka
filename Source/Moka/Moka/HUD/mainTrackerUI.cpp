@@ -11,6 +11,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 
 #include <cassert>
+#include <cmath>
 #include <string>
 
 
@@ -22,14 +23,14 @@ MainTrackerUI::MainTrackerUI(const sf::RenderWindow &window, Fonts::ID font, con
 , mWindow(window)
 , mSoundPlayer(soundPlayer)
 , mBackground()
-, mMosquitoTextTextBackground()
+, mMosquitoTextBackground()
 , mMosquitoText(trmb::Localize::getInstance().getString("mosquitoesUI"), fonts.get(font), 13u)
 , mInfectedMosquitoTextBackground()
 , mTotalMosquitoTextBackground()
 , mInfectedMosquitoText(trmb::Localize::getInstance().getString("infectedUI"), fonts.get(font), 13u)
 , mTotalMosquitoText(trmb::Localize::getInstance().getString("totalUI"), fonts.get(font), 13u)
 , mInfectedMosquitoCountBackground()
-, mTotalMosquitoBackground()
+, mMosquitoTotalBackground()
 , mInfectedMosquitoCountText("0", fonts.get(font), 13u)
 , mMosquitoTotalText("0", fonts.get(font), 13u)
 , mInfectedMosquitoCount(0)
@@ -84,15 +85,15 @@ void MainTrackerUI::buildMosquitoUI()
 	const sf::Color outlineColor = sf::Color(0u, 0u, 0u, 255u);
 	const float outlineThickness = 1.0f;
 
-	mMosquitoTextTextBackground.setSize(sf::Vector2f(element.x + element.x + elementBuffer, element.y));
-	mMosquitoTextTextBackground.setFillColor(backgroundColor);
-	mMosquitoTextTextBackground.setOutlineColor(outlineColor);
-	mMosquitoTextTextBackground.setOutlineThickness(outlineThickness);
-	mMosquitoTextTextBackground.setPosition(0.0f, 0.0f);
+	mMosquitoTextBackground.setSize(sf::Vector2f(element.x + element.x + elementBuffer, element.y));
+	mMosquitoTextBackground.setFillColor(backgroundColor);
+	mMosquitoTextBackground.setOutlineColor(outlineColor);
+	mMosquitoTextBackground.setOutlineThickness(outlineThickness);
+	mMosquitoTextBackground.setPosition(0.0f, 0.0f);
 
 	trmb::centerOrigin(mMosquitoText, true, false);
-	const float xMosquitoText = std::floor(mMosquitoTextTextBackground.getPosition().x + mMosquitoTextTextBackground.getSize().x / 2.0f);
-	const float yMosquitoText = mMosquitoTextTextBackground.getPosition().y - 2.0f;
+	const float xMosquitoText = std::floor(mMosquitoTextBackground.getPosition().x + mMosquitoTextBackground.getSize().x / 2.0f);
+	const float yMosquitoText = mMosquitoTextBackground.getPosition().y - 1.0f;
 	mMosquitoText.setPosition(sf::Vector2f(xMosquitoText, yMosquitoText));
 
 	mInfectedMosquitoTextBackground.setSize(element);
@@ -109,12 +110,12 @@ void MainTrackerUI::buildMosquitoUI()
 
 	mInfectedMosquitoText.setColor(sf::Color::Red);
 	trmb::centerOrigin(mInfectedMosquitoText, true, false);
-	const float xInfectedMosquitoText = mInfectedMosquitoTextBackground.getPosition().x + mInfectedMosquitoTextBackground.getSize().x / 2.0f;
+	const float xInfectedMosquitoText = std::floor(mInfectedMosquitoTextBackground.getPosition().x + mInfectedMosquitoTextBackground.getSize().x / 2.0f);
 	const float yInfectedMosquitoText = mTotalMosquitoTextBackground.getPosition().y - 1.0f;
 	mInfectedMosquitoText.setPosition(sf::Vector2f(xInfectedMosquitoText, yInfectedMosquitoText));
 
 	trmb::centerOrigin(mTotalMosquitoText, true, false);
-	const float xTotalMosquitoText = mTotalMosquitoTextBackground.getPosition().x + mTotalMosquitoTextBackground.getSize().x / 2.0f;
+	const float xTotalMosquitoText = std::floor(mTotalMosquitoTextBackground.getPosition().x + mTotalMosquitoTextBackground.getSize().x / 2.0f);
 	const float yTotalMosquitoText = mTotalMosquitoTextBackground.getPosition().y - 1.0f;
 	mTotalMosquitoText.setPosition(sf::Vector2f(xTotalMosquitoText, yTotalMosquitoText));
 
@@ -124,21 +125,21 @@ void MainTrackerUI::buildMosquitoUI()
 	mInfectedMosquitoCountBackground.setOutlineThickness(outlineThickness);
 	mInfectedMosquitoCountBackground.setPosition(0.0f, element.y * 2.0f + elementBuffer * 2.0f);
 
-	mTotalMosquitoBackground.setSize(element);
-	mTotalMosquitoBackground.setFillColor(backgroundColor);
-	mTotalMosquitoBackground.setOutlineColor(outlineColor);
-	mTotalMosquitoBackground.setOutlineThickness(outlineThickness);
-	mTotalMosquitoBackground.setPosition(element.x + elementBuffer, element.y * 2.0f + elementBuffer * 2.0f);
+	mMosquitoTotalBackground.setSize(element);
+	mMosquitoTotalBackground.setFillColor(backgroundColor);
+	mMosquitoTotalBackground.setOutlineColor(outlineColor);
+	mMosquitoTotalBackground.setOutlineThickness(outlineThickness);
+	mMosquitoTotalBackground.setPosition(element.x + elementBuffer, element.y * 2.0f + elementBuffer * 2.0f);
 
 	mInfectedMosquitoCountText.setColor(sf::Color::Red);
 	trmb::centerOrigin(mInfectedMosquitoCountText, true, false);
-	const float xInfectedMosquitoCountText = mInfectedMosquitoCountBackground.getPosition().x + mInfectedMosquitoCountBackground.getSize().x / 2.0f;
-	const float yInfectedMosquitoCountText = mTotalMosquitoBackground.getPosition().y - 1.0f;
+	const float xInfectedMosquitoCountText = std::floor(mInfectedMosquitoCountBackground.getPosition().x + mInfectedMosquitoCountBackground.getSize().x / 2.0f);
+	const float yInfectedMosquitoCountText = mMosquitoTotalBackground.getPosition().y - 1.0f;
 	mInfectedMosquitoCountText.setPosition(sf::Vector2f(xInfectedMosquitoCountText, yInfectedMosquitoCountText));
 
 	trmb::centerOrigin(mMosquitoTotalText, true, false);
-	const float xMosquitoTotalText = mTotalMosquitoBackground.getPosition().x + mTotalMosquitoBackground.getSize().x / 2.0f;
-	const float yMosquitoTotalText = mTotalMosquitoBackground.getPosition().y - 1.0f;
+	const float xMosquitoTotalText = std::floor(mMosquitoTotalBackground.getPosition().x + mMosquitoTotalBackground.getSize().x / 2.0f);
+	const float yMosquitoTotalText = mMosquitoTotalBackground.getPosition().y - 1.0f;
 	mMosquitoTotalText.setPosition(sf::Vector2f(xMosquitoTotalText, yMosquitoTotalText));
 }
 
@@ -291,14 +292,14 @@ void MainTrackerUI::draw(sf::RenderTarget &target, sf::RenderStates states) cons
 		target.draw(mBackground, states);
 
 		// ALW - Mosquito UI
-		target.draw(mMosquitoTextTextBackground, states);
+		target.draw(mMosquitoTextBackground, states);
 		target.draw(mMosquitoText, states);
 		target.draw(mInfectedMosquitoTextBackground, states);
 		target.draw(mTotalMosquitoTextBackground, states);
 		target.draw(mInfectedMosquitoText, states);
 		target.draw(mTotalMosquitoText, states);
 		target.draw(mInfectedMosquitoCountBackground, states);
-		target.draw(mTotalMosquitoBackground, states);
+		target.draw(mMosquitoTotalBackground, states);
 		target.draw(mInfectedMosquitoCountText, states);
 		target.draw(mMosquitoTotalText, states);
 

@@ -73,14 +73,14 @@ private:
 	sf::RectangleShape	    mBackground;
 
 	// ALW - Mosquito UI
-	sf::RectangleShape	    mMosquitoTextTextBackground;
+	sf::RectangleShape	    mMosquitoTextBackground;
 	sf::Text			    mMosquitoText;
 	sf::RectangleShape	    mInfectedMosquitoTextBackground;
 	sf::RectangleShape	    mTotalMosquitoTextBackground;
 	sf::Text			    mInfectedMosquitoText;
 	sf::Text			    mTotalMosquitoText;
 	sf::RectangleShape	    mInfectedMosquitoCountBackground;
-	sf::RectangleShape	    mTotalMosquitoBackground;
+	sf::RectangleShape	    mMosquitoTotalBackground;
 	sf::Text			    mInfectedMosquitoCountText;
 	sf::Text			    mMosquitoTotalText;
 	int						mInfectedMosquitoCount;
