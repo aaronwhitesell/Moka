@@ -40,7 +40,7 @@ HouseNode::HouseNode(const InteractiveObject &interactiveObject, const sf::Rende
 , mNetCost(1.0f)
 , mRepairCost(0.5f)
 , mSoundPlayer(soundPlayer)
-, mCountUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer)
+, mHouseTrackerUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer)
 , mDaylightUI(uiBundle.getDaylightUI())
 , mChatBoxUI(uiBundle.getChatBoxUI())
 , mHouseUIActive(false)
@@ -49,9 +49,9 @@ HouseNode::HouseNode(const InteractiveObject &interactiveObject, const sf::Rende
 , mNewNetCount(0)
 , mRepairCount(0)
 {
-	const float xCountUI = mInteractiveObject.getCollisionBoxWidth() / 2.0f;
-	const float yCountUI = mInteractiveObject.getCollisionBoxHeight() + 10.0f;
-	mCountUI.setPosition(sf::Vector2f(xCountUI, yCountUI));
+	const float xHouseTrackerUI = mInteractiveObject.getCollisionBoxWidth() / 2.0f;
+	const float yHouseTrackerUI = mInteractiveObject.getCollisionBoxHeight() + 10.0f;
+	mHouseTrackerUI.setPosition(sf::Vector2f(xHouseTrackerUI, yHouseTrackerUI));
 	updateNetDisableState();
 	updateRepairDisableState();
 }
@@ -62,24 +62,24 @@ sf::FloatRect HouseNode::getBoundingRect() const
 		, mInteractiveObject.getCollisionBoxWidth(), mInteractiveObject.getCollisionBoxHeight());
 }
 
-void HouseNode::addMosquito()
+void HouseNode::addInfectedMosquito()
 {
-	mCountUI.addLeft();
+	mHouseTrackerUI.addInfectedMosquito();
 }
 
-void HouseNode::addMalariaMosquito()
+void HouseNode::subtractInfectedMosquito()
 {
-	mCountUI.addRight();
+	mHouseTrackerUI.subtractInfectedMosquito();
 }
 
-void HouseNode::subtractMosquito()
+void HouseNode::addMosquitoTotal()
 {
-	mCountUI.subtractLeft();
+	mHouseTrackerUI.addMosquitoTotal();
 }
 
-void HouseNode::subtractMalariaMosquito()
+void HouseNode::subtractMosquitoTotal()
 {
-	mCountUI.subtractRight();
+	mHouseTrackerUI.subtractMosquitoTotal();
 }
 
 void HouseNode::handleEvent(const trmb::Event &gameEvent)
@@ -152,7 +152,7 @@ void HouseNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) c
 		target.draw(mHightlight, states);
 	}
 
-	target.draw(mCountUI, states);
+	target.draw(mHouseTrackerUI, states);
 }
 
 void HouseNode::updateCurrent(sf::Time)

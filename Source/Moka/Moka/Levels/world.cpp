@@ -182,14 +182,14 @@ void World::mosquitoDoorCollisions()
 			const sf::Vector2f position = door->getPosition() + sf::Vector2f(0, tileHeight);
 			mosquito->setPosition(position); // ALW - Move mosquito one tile below the door
 			mosquito->setIndoor(false);
-			house->subtractMosquito();
+			house->subtractMosquitoTotal();
 		}
 		else
 		{
 			// ALW - Mosquito enters house
 			mosquito->setPosition(house->getPosition());
 			mosquito->setIndoor(true);
-			house->addMosquito();
+			house->addMosquitoTotal();
 		}
 	}
 }
@@ -217,14 +217,14 @@ void World::mosquitoWindowCollisions()
 			const sf::Vector2f position = window->getPosition() - sf::Vector2f(0, tileHeight);
 			mosquito->setPosition(position); // ALW - Move mosquito one tile above the window
 			mosquito->setIndoor(false);
-			house->subtractMosquito();
+			house->subtractMosquitoTotal();
 		}
 		else
 		{
 			// ALW - Mosquito enters house
 			mosquito->setPosition(house->getPosition());
 			mosquito->setIndoor(true);
-			house->addMosquito();
+			house->addMosquitoTotal();
 		}
 	}
 }
