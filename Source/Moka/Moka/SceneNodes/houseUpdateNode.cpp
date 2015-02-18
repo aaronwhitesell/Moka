@@ -105,20 +105,22 @@ HouseUpdateNode::HouseUpdateNode(const InteractiveObject &interactiveObject)
 	mBed3.setSize(bedSize);
 
 	const sf::Vector2f housePosition = sf::Vector2f(mInteractiveObject.getX(), mInteractiveObject.getY());
+	const sf::Vector2f bedPosition = sf::Vector2f(mInteractiveObject.getAlternateXCoord2(), mInteractiveObject.getAlternateYCoord2());
+	const float yBedOffset = 15.0f;
 
 	switch (mInteractiveObject.getBeds())
 	{
 	case (OneBed):
-		mBed1.setPosition(housePosition.x + mInteractiveObject.getAlternateXCoord1(), housePosition.y + mInteractiveObject.getAlternateYCoord1());
+		mBed1.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y);
 		break;
 	case (TwoBeds):
-		mBed2.setPosition(housePosition.x + mInteractiveObject.getAlternateXCoord1(), housePosition.y + mInteractiveObject.getAlternateYCoord1());
-		mBed1.setPosition(housePosition.x + mInteractiveObject.getAlternateXCoord2(), housePosition.y + mInteractiveObject.getAlternateYCoord2());
+		mBed2.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y);
+		mBed1.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y + yBedOffset);
 		break;
 	case (ThreeBeds):
-		mBed3.setPosition(housePosition.x + mInteractiveObject.getAlternateXCoord1(), housePosition.y + mInteractiveObject.getAlternateYCoord1());
-		mBed2.setPosition(housePosition.x + mInteractiveObject.getAlternateXCoord2(), housePosition.y + mInteractiveObject.getAlternateYCoord2());
-		mBed1.setPosition(housePosition.x + mInteractiveObject.getAlternateXCoord3(), housePosition.y + mInteractiveObject.getAlternateYCoord3());
+		mBed3.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y);
+		mBed2.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y + yBedOffset);
+		mBed1.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y + yBedOffset * 2.0f);
 		break;
 	default:
 		assert(("The total number of beds is out of range!", false));
@@ -141,21 +143,21 @@ HouseUpdateNode::HouseUpdateNode(const InteractiveObject &interactiveObject)
 	mSheet2.setSize(sheetSize);
 	mSheet3.setSize(sheetSize);
 
-	const float offset = 4.0f;
+	const float sheetOffset = 4.0f;
 
 	switch (mInteractiveObject.getBeds())
 	{
 	case (OneBed):
-		mSheet1.setPosition(housePosition.x + mInteractiveObject.getAlternateXCoord1() + offset, housePosition.y + mInteractiveObject.getAlternateYCoord1());
+		mSheet1.setPosition(housePosition.x + bedPosition.x + sheetOffset, housePosition.y + bedPosition.y);
 		break;
 	case (TwoBeds):
-		mSheet2.setPosition(housePosition.x + mInteractiveObject.getAlternateXCoord1() + offset, housePosition.y + mInteractiveObject.getAlternateYCoord1());
-		mSheet1.setPosition(housePosition.x + mInteractiveObject.getAlternateXCoord2() + offset, housePosition.y + mInteractiveObject.getAlternateYCoord2());
+		mSheet2.setPosition(housePosition.x + bedPosition.x + sheetOffset, housePosition.y + bedPosition.y);
+		mSheet1.setPosition(housePosition.x + bedPosition.x + sheetOffset, housePosition.y + bedPosition.y + yBedOffset);
 		break;
 	case (ThreeBeds):
-		mSheet3.setPosition(housePosition.x + mInteractiveObject.getAlternateXCoord1() + offset, housePosition.y + mInteractiveObject.getAlternateYCoord1());
-		mSheet2.setPosition(housePosition.x + mInteractiveObject.getAlternateXCoord2() + offset, housePosition.y + mInteractiveObject.getAlternateYCoord2());
-		mSheet1.setPosition(housePosition.x + mInteractiveObject.getAlternateXCoord3() + offset, housePosition.y + mInteractiveObject.getAlternateYCoord3());
+		mSheet3.setPosition(housePosition.x + bedPosition.x + sheetOffset, housePosition.y + bedPosition.y);
+		mSheet2.setPosition(housePosition.x + bedPosition.x + sheetOffset, housePosition.y + bedPosition.y + yBedOffset);
+		mSheet1.setPosition(housePosition.x + bedPosition.x + sheetOffset, housePosition.y + bedPosition.y + yBedOffset * 2.0f);
 		break;
 	default:
 		assert(("The total number of beds is out of range!", false));
@@ -174,16 +176,16 @@ HouseUpdateNode::HouseUpdateNode(const InteractiveObject &interactiveObject)
 	switch (mInteractiveObject.getBeds())
 	{
 	case (OneBed) :
-		mNet1.setPosition(housePosition.x + mInteractiveObject.getAlternateXCoord1(), housePosition.y + mInteractiveObject.getAlternateYCoord1());
+		mNet1.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y);
 		break;
 	case (TwoBeds) :
-		mNet2.setPosition(housePosition.x + mInteractiveObject.getAlternateXCoord1(), housePosition.y + mInteractiveObject.getAlternateYCoord1());
-		mNet1.setPosition(housePosition.x + mInteractiveObject.getAlternateXCoord2(), housePosition.y + mInteractiveObject.getAlternateYCoord2());
+		mNet2.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y);
+		mNet1.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y + yBedOffset);
 		break;
 	case (ThreeBeds) :
-		mNet3.setPosition(housePosition.x + mInteractiveObject.getAlternateXCoord1(), housePosition.y + mInteractiveObject.getAlternateYCoord1());
-		mNet2.setPosition(housePosition.x + mInteractiveObject.getAlternateXCoord2(), housePosition.y + mInteractiveObject.getAlternateYCoord2());
-		mNet1.setPosition(housePosition.x + mInteractiveObject.getAlternateXCoord3(), housePosition.y + mInteractiveObject.getAlternateYCoord3());
+		mNet3.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y);
+		mNet2.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y + yBedOffset);
+		mNet1.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y + yBedOffset * 2.0f);
 		break;
 	default:
 		assert(("The total number of beds is out of range!", false));

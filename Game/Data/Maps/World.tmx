@@ -1893,12 +1893,12 @@
  <objectgroup name="Interactive" width="25" height="25">
   <object name="House 0" type="House" x="128" y="320" width="64" height="192">
    <properties>
-    <property name="AlternateXCoord1" value="38"/>
+    <property name="AlternateXCoord1" value="0"/>
     <property name="AlternateXCoord2" value="38"/>
-    <property name="AlternateXCoord3" value="38"/>
-    <property name="AlternateYCoord1" value="40"/>
-    <property name="AlternateYCoord2" value="55"/>
-    <property name="AlternateYCoord3" value="70"/>
+    <property name="AlternateXCoord3" value="0"/>
+    <property name="AlternateYCoord1" value="0"/>
+    <property name="AlternateYCoord2" value="40"/>
+    <property name="AlternateYCoord3" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
     <property name="Beds" value="1"/>
     <property name="CollisionBoxHeight" value="192"/>
@@ -1913,12 +1913,12 @@
   </object>
   <object name="House 1" type="House" x="256" y="320" width="64" height="192">
    <properties>
-    <property name="AlternateXCoord1" value="38"/>
+    <property name="AlternateXCoord1" value="0"/>
     <property name="AlternateXCoord2" value="38"/>
-    <property name="AlternateXCoord3" value="38"/>
-    <property name="AlternateYCoord1" value="40"/>
-    <property name="AlternateYCoord2" value="55"/>
-    <property name="AlternateYCoord3" value="70"/>
+    <property name="AlternateXCoord3" value="0"/>
+    <property name="AlternateYCoord1" value="0"/>
+    <property name="AlternateYCoord2" value="40"/>
+    <property name="AlternateYCoord3" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
     <property name="Beds" value="1"/>
     <property name="CollisionBoxHeight" value="192"/>
@@ -1933,12 +1933,12 @@
   </object>
   <object name="House 2" type="House" x="192" y="576" width="64" height="192">
    <properties>
-    <property name="AlternateXCoord1" value="38"/>
+    <property name="AlternateXCoord1" value="0"/>
     <property name="AlternateXCoord2" value="38"/>
-    <property name="AlternateXCoord3" value="38"/>
-    <property name="AlternateYCoord1" value="40"/>
-    <property name="AlternateYCoord2" value="55"/>
-    <property name="AlternateYCoord3" value="70"/>
+    <property name="AlternateXCoord3" value="0"/>
+    <property name="AlternateYCoord1" value="0"/>
+    <property name="AlternateYCoord2" value="40"/>
+    <property name="AlternateYCoord3" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
     <property name="Beds" value="1"/>
     <property name="CollisionBoxHeight" value="192"/>
@@ -1953,12 +1953,12 @@
   </object>
   <object name="House 3" type="House" x="320" y="576" width="64" height="192">
    <properties>
-    <property name="AlternateXCoord1" value="38"/>
+    <property name="AlternateXCoord1" value="0"/>
     <property name="AlternateXCoord2" value="38"/>
-    <property name="AlternateXCoord3" value="38"/>
-    <property name="AlternateYCoord1" value="40"/>
-    <property name="AlternateYCoord2" value="55"/>
-    <property name="AlternateYCoord3" value="70"/>
+    <property name="AlternateXCoord3" value="0"/>
+    <property name="AlternateYCoord1" value="0"/>
+    <property name="AlternateYCoord2" value="40"/>
+    <property name="AlternateYCoord3" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
     <property name="Beds" value="2"/>
     <property name="CollisionBoxHeight" value="192"/>
@@ -1973,12 +1973,12 @@
   </object>
   <object name="House 4" type="House" x="448" y="576" width="64" height="192">
    <properties>
-    <property name="AlternateXCoord1" value="38"/>
+    <property name="AlternateXCoord1" value="0"/>
     <property name="AlternateXCoord2" value="38"/>
-    <property name="AlternateXCoord3" value="38"/>
-    <property name="AlternateYCoord1" value="40"/>
-    <property name="AlternateYCoord2" value="55"/>
-    <property name="AlternateYCoord3" value="70"/>
+    <property name="AlternateXCoord3" value="0"/>
+    <property name="AlternateYCoord1" value="0"/>
+    <property name="AlternateYCoord2" value="40"/>
+    <property name="AlternateYCoord3" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
     <property name="Beds" value="2"/>
     <property name="CollisionBoxHeight" value="192"/>
@@ -1993,12 +1993,12 @@
   </object>
   <object name="House 5" type="House" x="576" y="576" width="64" height="192">
    <properties>
-    <property name="AlternateXCoord1" value="38"/>
+    <property name="AlternateXCoord1" value="0"/>
     <property name="AlternateXCoord2" value="38"/>
-    <property name="AlternateXCoord3" value="38"/>
-    <property name="AlternateYCoord1" value="40"/>
-    <property name="AlternateYCoord2" value="55"/>
-    <property name="AlternateYCoord3" value="70"/>
+    <property name="AlternateXCoord3" value="0"/>
+    <property name="AlternateYCoord1" value="0"/>
+    <property name="AlternateYCoord2" value="40"/>
+    <property name="AlternateYCoord3" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
     <property name="Beds" value="1"/>
     <property name="CollisionBoxHeight" value="192"/>
@@ -2013,12 +2013,12 @@
   </object>
   <object name="House 6" type="House" x="1152" y="256" width="128" height="256">
    <properties>
-    <property name="AlternateXCoord1" value="102"/>
+    <property name="AlternateXCoord1" value="0"/>
     <property name="AlternateXCoord2" value="102"/>
-    <property name="AlternateXCoord3" value="102"/>
-    <property name="AlternateYCoord1" value="17"/>
-    <property name="AlternateYCoord2" value="32"/>
-    <property name="AlternateYCoord3" value="47"/>
+    <property name="AlternateXCoord3" value="0"/>
+    <property name="AlternateYCoord1" value="0"/>
+    <property name="AlternateYCoord2" value="17"/>
+    <property name="AlternateYCoord3" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
     <property name="Beds" value="3"/>
     <property name="CollisionBoxHeight" value="256"/>
@@ -2033,12 +2033,12 @@
   </object>
   <object name="House 7" type="House" x="1408" y="704" width="128" height="192">
    <properties>
-    <property name="AlternateXCoord1" value="102"/>
+    <property name="AlternateXCoord1" value="0"/>
     <property name="AlternateXCoord2" value="102"/>
-    <property name="AlternateXCoord3" value="102"/>
-    <property name="AlternateYCoord1" value="17"/>
-    <property name="AlternateYCoord2" value="32"/>
-    <property name="AlternateYCoord3" value="47"/>
+    <property name="AlternateXCoord3" value="0"/>
+    <property name="AlternateYCoord1" value="0"/>
+    <property name="AlternateYCoord2" value="17"/>
+    <property name="AlternateYCoord3" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
     <property name="Beds" value="3"/>
     <property name="CollisionBoxHeight" value="192"/>
