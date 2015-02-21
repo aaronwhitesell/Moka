@@ -1893,10 +1893,10 @@
  <objectgroup name="Interactive" width="25" height="25">
   <object name="House 0" type="House" x="128" y="320" width="64" height="192">
    <properties>
-    <property name="AlternateXCoord1" value="0"/>
+    <property name="AlternateXCoord1" value="5"/>
     <property name="AlternateXCoord2" value="38"/>
     <property name="AlternateXCoord3" value="0"/>
-    <property name="AlternateYCoord1" value="0"/>
+    <property name="AlternateYCoord1" value="40"/>
     <property name="AlternateYCoord2" value="40"/>
     <property name="AlternateYCoord3" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
@@ -1913,10 +1913,10 @@
   </object>
   <object name="House 1" type="House" x="256" y="320" width="64" height="192">
    <properties>
-    <property name="AlternateXCoord1" value="0"/>
+    <property name="AlternateXCoord1" value="5"/>
     <property name="AlternateXCoord2" value="38"/>
     <property name="AlternateXCoord3" value="0"/>
-    <property name="AlternateYCoord1" value="0"/>
+    <property name="AlternateYCoord1" value="40"/>
     <property name="AlternateYCoord2" value="40"/>
     <property name="AlternateYCoord3" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
@@ -1933,10 +1933,10 @@
   </object>
   <object name="House 2" type="House" x="192" y="576" width="64" height="192">
    <properties>
-    <property name="AlternateXCoord1" value="0"/>
+    <property name="AlternateXCoord1" value="5"/>
     <property name="AlternateXCoord2" value="38"/>
     <property name="AlternateXCoord3" value="0"/>
-    <property name="AlternateYCoord1" value="0"/>
+    <property name="AlternateYCoord1" value="40"/>
     <property name="AlternateYCoord2" value="40"/>
     <property name="AlternateYCoord3" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
@@ -1953,10 +1953,10 @@
   </object>
   <object name="House 3" type="House" x="320" y="576" width="64" height="192">
    <properties>
-    <property name="AlternateXCoord1" value="0"/>
+    <property name="AlternateXCoord1" value="5"/>
     <property name="AlternateXCoord2" value="38"/>
     <property name="AlternateXCoord3" value="0"/>
-    <property name="AlternateYCoord1" value="0"/>
+    <property name="AlternateYCoord1" value="40"/>
     <property name="AlternateYCoord2" value="40"/>
     <property name="AlternateYCoord3" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
@@ -1967,16 +1967,16 @@
     <property name="CollisionBoxYCoord" value="576"/>
     <property name="Color" value="Slate"/>
     <property name="Nets" value="1"/>
-    <property name="Residents" value="5"/>
+    <property name="Residents" value="2"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="House 4" type="House" x="448" y="576" width="64" height="192">
    <properties>
-    <property name="AlternateXCoord1" value="0"/>
+    <property name="AlternateXCoord1" value="5"/>
     <property name="AlternateXCoord2" value="38"/>
     <property name="AlternateXCoord3" value="0"/>
-    <property name="AlternateYCoord1" value="0"/>
+    <property name="AlternateYCoord1" value="40"/>
     <property name="AlternateYCoord2" value="40"/>
     <property name="AlternateYCoord3" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
@@ -1993,10 +1993,10 @@
   </object>
   <object name="House 5" type="House" x="576" y="576" width="64" height="192">
    <properties>
-    <property name="AlternateXCoord1" value="0"/>
+    <property name="AlternateXCoord1" value="5"/>
     <property name="AlternateXCoord2" value="38"/>
     <property name="AlternateXCoord3" value="0"/>
-    <property name="AlternateYCoord1" value="0"/>
+    <property name="AlternateYCoord1" value="40"/>
     <property name="AlternateYCoord2" value="40"/>
     <property name="AlternateYCoord3" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
@@ -2013,10 +2013,10 @@
   </object>
   <object name="House 6" type="House" x="1152" y="256" width="128" height="256">
    <properties>
-    <property name="AlternateXCoord1" value="0"/>
+    <property name="AlternateXCoord1" value="5"/>
     <property name="AlternateXCoord2" value="102"/>
     <property name="AlternateXCoord3" value="0"/>
-    <property name="AlternateYCoord1" value="0"/>
+    <property name="AlternateYCoord1" value="17"/>
     <property name="AlternateYCoord2" value="17"/>
     <property name="AlternateYCoord3" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
@@ -2027,16 +2027,16 @@
     <property name="CollisionBoxYCoord" value="256"/>
     <property name="Color" value="Tan"/>
     <property name="Nets" value="2"/>
-    <property name="Residents" value="7"/>
+    <property name="Residents" value="6"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
   <object name="House 7" type="House" x="1408" y="704" width="128" height="192">
    <properties>
-    <property name="AlternateXCoord1" value="0"/>
+    <property name="AlternateXCoord1" value="5"/>
     <property name="AlternateXCoord2" value="102"/>
     <property name="AlternateXCoord3" value="0"/>
-    <property name="AlternateYCoord1" value="0"/>
+    <property name="AlternateYCoord1" value="17"/>
     <property name="AlternateYCoord2" value="17"/>
     <property name="AlternateYCoord3" value="0"/>
     <property name="AttachedTo" value="Standalone"/>
@@ -2047,7 +2047,7 @@
     <property name="CollisionBoxYCoord" value="704"/>
     <property name="Color" value="Tan"/>
     <property name="Nets" value="1"/>
-    <property name="Residents" value="6"/>
+    <property name="Residents" value="5"/>
     <property name="Style" value="na"/>
    </properties>
   </object>

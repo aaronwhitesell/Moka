@@ -113,6 +113,8 @@
     <ClInclude Include="SceneNodes\interactiveNode.h" />
     <ClInclude Include="SceneNodes\mosquitoNode.h" />
     <ClInclude Include="SceneNodes\preventionNode.h" />
+    <ClInclude Include="SceneNodes\residentNode.h" />
+    <ClInclude Include="SceneNodes\residentUpdateNode.h" />
     <ClInclude Include="SceneNodes\windowNode.h" />
     <ClInclude Include="SceneNodes\windowUpdateNode.h" />
     <ClInclude Include="SceneNodes\windowUINode.h" />
@@ -160,6 +162,8 @@
     <ClCompile Include="SceneNodes\interactiveNode.cpp" />
     <ClCompile Include="SceneNodes\mosquitoNode.cpp" />
     <ClCompile Include="SceneNodes\preventionNode.cpp" />
+    <ClCompile Include="SceneNodes\residentNode.cpp" />
+    <ClCompile Include="SceneNodes\residentUpdateNode.cpp" />
     <ClCompile Include="SceneNodes\windowNode.cpp" />
     <ClCompile Include="SceneNodes\windowUpdateNode.cpp" />
     <ClCompile Include="SceneNodes\windowUINode.cpp" />

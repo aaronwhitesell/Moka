@@ -108,6 +108,12 @@
     <Filter Include="Header Files\SceneNodes\Mosquito">
       <UniqueIdentifier>{742f0fd4-4d94-4107-92b1-a5bb00a1ea1d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\SceneNodes\Resident">
+      <UniqueIdentifier>{70c0b9f2-02d0-4798-b041-817b363db4e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SceneNodes\Resident">
+      <UniqueIdentifier>{d49fc01e-1d24-4abc-8738-b8ea16ff69b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\application.h">
@@ -245,6 +251,12 @@
     <ClInclude Include="HUD\houseTrackerUI.h">
       <Filter>Header Files\HUD</Filter>
     </ClInclude>
+    <ClInclude Include="SceneNodes\residentNode.h">
+      <Filter>Header Files\SceneNodes\Resident</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneNodes\residentUpdateNode.h">
+      <Filter>Header Files\SceneNodes\Update</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\application.cpp">
@@ -378,6 +390,12 @@
     </ClCompile>
     <ClCompile Include="HUD\houseTrackerUI.cpp">
       <Filter>Source Files\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNodes\residentNode.cpp">
+      <Filter>Source Files\SceneNodes\Resident</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNodes\residentUpdateNode.cpp">
+      <Filter>Source Files\SceneNodes\Update</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

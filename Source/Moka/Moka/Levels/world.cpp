@@ -17,6 +17,8 @@
 #include "../SceneNodes/houseUINode.h"
 #include "../SceneNodes/houseUpdateNode.h"
 #include "../SceneNodes/mosquitoNode.h"
+#include "../SceneNodes/residentNode.h"
+#include "../SceneNodes/residentUpdateNode.h"
 #include "../GameObjects/interactiveObject.h"
 #include "../Resources/resourceIdentifiers.h"
 
@@ -348,8 +350,17 @@ void World::buildScene()
 		{
 			mSceneLayers[Update]->attachChild(std::move(std::unique_ptr<HouseUpdateNode>(new HouseUpdateNode(*iter))));
 
-			mSceneLayers[HouseSelection]->attachChild(std::move(std::unique_ptr<HouseNode>(
-				new HouseNode(*iter, mWindow, mCamera.getView(), mUIBundle, buildAttachedRects(*iter), mFonts, mSoundPlayer))));
+			std::unique_ptr<HouseNode> house(
+				new HouseNode(*iter, mWindow, mCamera.getView(), mUIBundle, buildAttachedRects(*iter), mFonts, mSoundPlayer));
+
+			const int totalResidents = iter->getResidents();
+			for (int i = 0; i < totalResidents; ++i)
+			{
+				mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<ResidentNode>(new ResidentNode(i, house.get()))));
+				mSceneLayers[Update]->attachChild(std::move(std::unique_ptr<ResidentUpdateNode>(new ResidentUpdateNode(i, house.get()))));
+			}
+
+			mSceneLayers[HouseSelection]->attachChild(std::move(house));
 		}
 		else
 		{

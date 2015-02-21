@@ -38,6 +38,17 @@ InteractiveNode::InteractiveNode(const InteractiveObject &interactiveObject, con
 	mHightlight.setOutlineThickness(2.0f);
 }
 
+sf::FloatRect InteractiveNode::getCollisionBox() const
+{
+	return sf::FloatRect(mInteractiveObject.getCollisionBoxXCoord(), mInteractiveObject.getCollisionBoxYCoord(),
+		mInteractiveObject.getCollisionBoxWidth(), mInteractiveObject.getCollisionBoxHeight());
+}
+
+const InteractiveObject & InteractiveNode::getInteractiveObject() const
+{
+	return mInteractiveObject;
+}
+
 void InteractiveNode::handleEvent(const trmb::Event& gameEvent)
 {
 	if (mBeginSimulationEvent == gameEvent.getType())

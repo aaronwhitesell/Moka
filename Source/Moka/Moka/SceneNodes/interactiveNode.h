@@ -36,6 +36,9 @@ public:
 								InteractiveNode(const InteractiveNode &) = delete;
 	InteractiveNode &			operator=(const InteractiveNode &) = delete;
 
+	sf::FloatRect				getCollisionBox() const;
+	const InteractiveObject &   getInteractiveObject() const;
+
 	virtual void				handleEvent(const trmb::Event &gameEvent) override;
 
 
