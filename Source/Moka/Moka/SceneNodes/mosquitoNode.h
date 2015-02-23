@@ -27,19 +27,22 @@ namespace trambo
 class MosquitoNode : public trmb::SceneNode, trmb::EventHandler
 {
 public:
-							MosquitoNode(const trmb::TextureHolder &textures, sf::Vector2f position, sf::FloatRect worldBounds
-								, SceneNode &houseLayer);
-							MosquitoNode(const MosquitoNode &) = delete;
-	MosquitoNode &			operator=(const MosquitoNode &) = delete;
+								MosquitoNode(const trmb::TextureHolder &textures, sf::Vector2f position, sf::FloatRect worldBounds
+									, SceneNode &houseLayer);
+								MosquitoNode(const MosquitoNode &) = delete;
+	MosquitoNode &				operator=(const MosquitoNode &) = delete;
 
-	bool					isIndoor() const;
+	bool						hasMalaria() const;
+	bool						isIndoor() const;
 
-	virtual sf::FloatRect	getBoundingRect() const override;
+	virtual sf::FloatRect		getBoundingRect() const override;
 
-	void					setIndoor(bool indoors);
+	void						setIndoor(bool indoors);
 
-	virtual void			updateCurrent(sf::Time dt) override final;
-	virtual void			handleEvent(const trmb::Event &gameEvent) override final;
+	void						contractMalaria();
+
+	virtual void				updateCurrent(sf::Time dt) override final;
+	virtual void				handleEvent(const trmb::Event &gameEvent) override final;
 
 
 private:
@@ -53,35 +56,37 @@ private:
 
 
 private:
-	using					EventGuid = unsigned long;
+	using						EventGuid = unsigned long;
 
 
 private:
-	virtual void			drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const override;
-	void					setNextPosition(sf::Time dt);
-	void					delaySpawn(sf::Time dt);
-	float					getDelay();
+	virtual void				drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const override;
+	void						setNextPosition(sf::Time dt);
+	void						delaySpawn(sf::Time dt);
+	float						getDelay();
 
 
 private:
-	const EventGuid         mBeginSimulationEvent;   // ALW - Matches the GUID in the DaylightUI class.
-	trmb::Animation			mMosquito;
-	sf::FloatRect			mWorldBounds;
-	trmb::SceneNode			&mHouseLayer;
-	sf::Vector2f			mPreviousPosition;
-	bool					mIndoor;
+	const EventGuid				mBeginSimulationEvent;   // ALW - Matches the GUID in the DaylightUI class.
+	const trmb::TextureHolder	&mTextures;
+	const sf::FloatRect			mWorldBounds;
+	trmb::SceneNode				&mHouseLayer;
+	trmb::Animation				mAnimation;
+	sf::Vector2f				mPreviousPosition;
+	bool						mHasMalaria;
+	bool						mIndoor;
 
-	bool					mBeginSimulationMode;
-	bool                    mDelaySet;
-	bool					mActive;
+	bool						mBeginSimulationMode;
+	bool						mDelaySet;
+	bool						mActive;
 
-	sf::Time				mTotalDelayTime;
-	sf::Time				mUpdateDelayTime;
-	sf::Time				mTotalMovementTime;
-	sf::Time				mUpdateMovementTime;
+	sf::Time					mTotalDelayTime;
+	sf::Time					mUpdateDelayTime;
+	sf::Time					mTotalMovementTime;
+	sf::Time					mUpdateMovementTime;
 
-	std::random_device		mRandomDevice;
-	std::mt19937			mGenerator;
+	std::random_device			mRandomDevice;
+	std::mt19937				mGenerator;
 	std::uniform_int_distribution<>				mDistribution;
 	std::piecewise_constant_distribution<float>	mWeightedDistribution;
 };

@@ -234,18 +234,18 @@ void MainTrackerUI::setTotalResident(int total)
 
 void MainTrackerUI::addInfectedMosquito()
 {
-	++mInfectedResidentCount;
+	++mInfectedMosquitoCount;
 
-	mInfectedMosquitoCountText.setString(std::to_string(mInfectedResidentCount));
+	mInfectedMosquitoCountText.setString(std::to_string(mInfectedMosquitoCount));
 	trmb::centerOrigin(mInfectedMosquitoCountText, true, false);
 }
 
 void MainTrackerUI::subtractInfectedMosquito()
 {
-	-- mInfectedResidentCount;
-	assert(("Count cannot be less than 0.", 0 <=  mInfectedResidentCount));
+	--mInfectedMosquitoCount;
+	assert(("Count cannot be less than 0.", 0 <= mInfectedMosquitoCount));
 
-	mInfectedMosquitoCountText.setString(std::to_string(mInfectedResidentCount));
+	mInfectedMosquitoCountText.setString(std::to_string(mInfectedMosquitoCount));
 	trmb::centerOrigin(mInfectedMosquitoCountText, true, false);
 }
 

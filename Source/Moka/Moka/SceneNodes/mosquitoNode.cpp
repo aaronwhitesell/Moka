@@ -5,7 +5,6 @@
 
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
-#include <SFML/System/Time.hpp>
 
 #include <cassert>
 #include <vector>
@@ -13,10 +12,12 @@
 
 MosquitoNode::MosquitoNode(const trmb::TextureHolder& textures, sf::Vector2f position, sf::FloatRect worldBounds, SceneNode &houseLayer)
 : mBeginSimulationEvent(0x5000e550)
-, mMosquito(textures.get(Textures::ID::MosquitoAnimation))
+, mTextures(textures)
 , mWorldBounds(worldBounds)
 , mHouseLayer(houseLayer)
+, mAnimation(textures.get(Textures::ID::MosquitoAnimation))
 , mPreviousPosition()
+, mHasMalaria(false)
 , mIndoor(false)
 , mBeginSimulationMode(false)
 , mDelaySet(false)
@@ -32,10 +33,10 @@ MosquitoNode::MosquitoNode(const trmb::TextureHolder& textures, sf::Vector2f pos
 {
 	setPosition(position);
 
-	mMosquito.setFrameSize(sf::Vector2i(64, 64));
-	mMosquito.setNumFrames(8);
-	mMosquito.setDuration(sf::seconds(1));
-	mMosquito.setRepeating(true);
+	mAnimation.setFrameSize(sf::Vector2i(64, 64));
+	mAnimation.setNumFrames(8);
+	mAnimation.setDuration(sf::seconds(1));
+	mAnimation.setRepeating(true);
 
 	// ALW - Change the range and weights 
 	std::vector<float> intervals = { 0, 1, 2, 3 };
@@ -52,6 +53,11 @@ sf::FloatRect MosquitoNode::getBoundingRect() const
 	return sf::FloatRect(getPosition().x, getPosition().y, tileWidth, tileHeight);
 }
 
+bool MosquitoNode::hasMalaria() const
+{
+	return mHasMalaria;
+}
+
 bool MosquitoNode::isIndoor() const
 {
 	return mIndoor;
@@ -62,6 +68,12 @@ void MosquitoNode::setIndoor(bool indoors)
 	mIndoor = indoors;
 }
 
+void MosquitoNode::contractMalaria()
+{
+	mHasMalaria = true;
+	mAnimation.setTexture(mTextures.get(Textures::ID::InfectedMosquitoAnimation));
+}
+
 void MosquitoNode::updateCurrent(sf::Time dt)
 {
 	delaySpawn(dt);
@@ -69,7 +81,7 @@ void MosquitoNode::updateCurrent(sf::Time dt)
 	if (mActive)
 	{
 		setNextPosition(dt);
-		mMosquito.update(dt);
+		mAnimation.update(dt);
 	}
 }
 
@@ -84,7 +96,7 @@ void MosquitoNode::handleEvent(const trmb::Event &gameEvent)
 void MosquitoNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	if (mActive && !mIndoor)
-		target.draw(mMosquito, states);
+		target.draw(mAnimation, states);
 }
 
 void MosquitoNode::setNextPosition(sf::Time dt)

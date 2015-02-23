@@ -41,6 +41,7 @@ namespace trmb
 class HeroNode;
 class DoorNode;
 class HouseNode;
+class ResidentNode;
 class WindowNode;
 
 class World : public trmb::EventHandler
@@ -62,10 +63,12 @@ private:
 private:
 	void								initializeDoorToHouseMap();
 	void								initializeWindowToHouseMap();
+	void								initializeResidentToHouseMap();
 
 	void								updateCollisions(sf::Time dt);
 	void								mosquitoDoorCollisions();
 	void								mosquitoWindowCollisions();
+	void								mosquitoResidentCollisions();
 
 	void								updateSoundPlayer();
 	void								configureUIs();
@@ -136,6 +139,7 @@ private:
 	sf::Time									mUpdateCollisionTime;
 	std::map<DoorNode *, HouseNode *>			mDoorToHouse;
 	std::map<WindowNode *, HouseNode *>			mWindowToHouse;
+	std::map<ResidentNode *, HouseNode *>		mResidentToHouse;
 };
 
 #endif

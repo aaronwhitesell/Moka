@@ -71,8 +71,10 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mUpdateCollisionTime()
 , mDoorToHouse()
 , mWindowToHouse()
+, mResidentToHouse()
 {
 	mTextures.load(Textures::ID::Tiles, "Data/Textures/Tiles.png");
+	mTextures.load(Textures::ID::InfectedMosquitoAnimation, "Data/Textures/InfectedMosquitoAnimation.png");
 	mTextures.load(Textures::ID::MosquitoAnimation, "Data/Textures/MosquitoAnimation.png");
 
 	generateSpawnPositions();
@@ -81,6 +83,7 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 
 	initializeDoorToHouseMap();
 	initializeWindowToHouseMap();
+	initializeResidentToHouseMap();
 }
 
 void World::update(sf::Time dt)
@@ -107,6 +110,7 @@ void World::handleEvent(const trmb::Event &gameEvent)
 	}
 	else if (mBeginSimulationEvent == gameEvent.getType())
 	{
+		mMainTrackerUI.addInfectedResident(); // ALW - Track patient zero
 		mBeginSimulationMode = true;
 	}
 }
@@ -148,6 +152,20 @@ void World::initializeWindowToHouseMap()
 	}
 }
 
+void World::initializeResidentToHouseMap()
+{
+	std::set<trmb::SceneNode::Pair> collisionPairs;
+	mSceneLayers[Residents]->checkSceneCollision(*mSceneLayers[HouseSelection], collisionPairs, true);
+
+	for (const auto &pair : collisionPairs)
+	{
+		assert(("Dynamic cast failed.", dynamic_cast<ResidentNode *>(pair.first) != nullptr));
+		assert(("Dynamic cast failed.", dynamic_cast<HouseNode *>(pair.second) != nullptr));
+
+		mResidentToHouse[static_cast<ResidentNode *>(pair.first)] = static_cast<HouseNode *>(pair.second);
+	}
+}
+
 void World::updateCollisions(sf::Time dt)
 {
 	mUpdateCollisionTime += dt;
@@ -156,6 +174,7 @@ void World::updateCollisions(sf::Time dt)
 	{
 		mUpdateCollisionTime -= mTotalCollisionTime;
 
+		mosquitoResidentCollisions(); // ALW - Check residents before letting a mosquito exit the house.
 		mosquitoDoorCollisions();
 		mosquitoWindowCollisions();
 	}
@@ -185,6 +204,9 @@ void World::mosquitoDoorCollisions()
 			mosquito->setPosition(position); // ALW - Move mosquito one tile below the door
 			mosquito->setIndoor(false);
 			house->subtractMosquitoTotal();
+
+			if (mosquito->hasMalaria())
+				house->subtractInfectedMosquito();
 		}
 		else
 		{
@@ -192,6 +214,9 @@ void World::mosquitoDoorCollisions()
 			mosquito->setPosition(house->getPosition());
 			mosquito->setIndoor(true);
 			house->addMosquitoTotal();
+
+			if (mosquito->hasMalaria())
+				house->addInfectedMosquito();
 		}
 	}
 }
@@ -220,6 +245,9 @@ void World::mosquitoWindowCollisions()
 			mosquito->setPosition(position); // ALW - Move mosquito one tile above the window
 			mosquito->setIndoor(false);
 			house->subtractMosquitoTotal();
+
+			if (mosquito->hasMalaria())
+				house->subtractInfectedMosquito();
 		}
 		else
 		{
@@ -227,6 +255,45 @@ void World::mosquitoWindowCollisions()
 			mosquito->setPosition(house->getPosition());
 			mosquito->setIndoor(true);
 			house->addMosquitoTotal();
+
+			if (mosquito->hasMalaria())
+				house->addInfectedMosquito();
+		}
+	}
+}
+
+void World::mosquitoResidentCollisions()
+{
+	std::set<trmb::SceneNode::Pair> collisionPairs;
+	mSceneLayers[Mosquitoes]->checkSceneCollision(*mSceneLayers[Residents], collisionPairs, true);
+
+	for (auto &pair : collisionPairs)
+	{
+		assert(("Dynamic cast failed.", dynamic_cast<MosquitoNode *>(pair.first) != nullptr));
+		MosquitoNode * const mosquito = static_cast<MosquitoNode *>(pair.first);
+
+		assert(("Dynamic cast failed.", dynamic_cast<ResidentNode *>(pair.second) != nullptr));
+		ResidentNode * const resident = static_cast<ResidentNode *>(pair.second);
+		assert(("The resident key does not exist!", mResidentToHouse.count(resident)));
+		std::map<ResidentNode *, HouseNode *>::const_iterator found = mResidentToHouse.find(resident);
+		HouseNode * const house = found->second;
+
+		if (mosquito->isIndoor())
+		{
+			if (mosquito->hasMalaria() && !resident->hasMalaria())
+			{
+				// ALW - Transmit malaria to resident
+				resident->contractMalaria();
+				mMainTrackerUI.addInfectedResident();
+			}
+
+			if (resident->hasMalaria() && !mosquito->hasMalaria())
+			{
+				// ALW - Transmit malaria to mosquito
+				mosquito->contractMalaria();
+				house->addInfectedMosquito();
+				mMainTrackerUI.addInfectedMosquito();
+			}
 		}
 	}
 }

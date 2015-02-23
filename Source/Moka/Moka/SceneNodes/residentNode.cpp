@@ -37,12 +37,23 @@ ResidentNode::ResidentNode(int residentID, bool hasMalaria, const HouseNode * co
 	generateSpawnPosition(houseNode->getCollisionBox());
 }
 
+bool ResidentNode::hasMalaria() const
+{
+	return mHasMalaria;
+}
+
 sf::FloatRect ResidentNode::getBoundingRect() const
 {
 	const float tileWidth = 64.0f;
 	const float tileHeight = 64.0f;
 
 	return sf::FloatRect(getPosition().x, getPosition().y, tileWidth, tileHeight);
+}
+
+void ResidentNode::contractMalaria()
+{
+	mHasMalaria = true;
+	sendMalariaMsg();
 }
 
 void ResidentNode::updateCurrent(sf::Time dt)
@@ -54,7 +65,7 @@ void ResidentNode::handleEvent(const trmb::Event &gameEvent)
 	if (mBeginSimulationEvent == gameEvent.getType())
 	{
 		if (mHasMalaria)
-			sendMalariaMsg();
+			sendMalariaMsg(); // ALW - Display patient zero
 	}
 }
 
