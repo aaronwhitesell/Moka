@@ -22,6 +22,7 @@
 
 #include <array>
 #include <random>
+#include <string>
 #include <vector>
 
 
@@ -71,7 +72,9 @@ private:
 	void								buildScene();
 	std::vector<sf::FloatRect>			buildAttachedRects(const InteractiveObject &interactiveObj);
 	void								generateSpawnPositions();
-	sf::Vector2f						getRandomSpawnPosition();
+	sf::Vector2f						getRandomSpawnPosition() const;
+	std::string							getRandomHouseName(int exlusiveMax) const;
+	int									getHouseCount() const;
 
 
 private:
@@ -83,6 +86,7 @@ private:
 		HouseSelection,
 		WindowSelection,
 		Selection,
+		Residents,
 		Mosquitoes,
 		Sky,
 		UI,
@@ -123,9 +127,9 @@ private:
 	OptionsUI									mHouseUI;
 
 	std::vector<sf::Vector2f>					mSpawnPositions;
-	std::random_device							mRandomDevice;
-	std::mt19937								mGenerator;
-	std::uniform_int_distribution<>				mDistribution;
+
+	int											mMosquitoCount;
+	int											mResidentCount;
 
 	bool										mBeginSimulationMode;
 	sf::Time									mTotalCollisionTime;

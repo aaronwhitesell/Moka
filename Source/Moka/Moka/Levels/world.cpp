@@ -27,6 +27,7 @@
 #include "Trambo/SceneNodes/mapLayerNode.h"
 #include "Trambo/SceneNodes/spriteNode.h"
 #include "Trambo/Sounds/soundPlayer.h"
+#include "Trambo/Utilities/utility.h"
 
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderTexture.hpp>
@@ -62,10 +63,9 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mWindowUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
 , mClinicUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
 , mHouseUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
+, mMosquitoCount(500)
+, mResidentCount(0)
 , mSpawnPositions()
-, mRandomDevice()											// ALW - obtain random number from hardware
-, mGenerator(mRandomDevice())								// ALW - Seed the generator
-, mDistribution(0, mMap.getWidth() * mMap.getHeight() - 1)	// ALW - Define the range
 , mBeginSimulationMode(false)
 , mTotalCollisionTime(sf::seconds(1.0))
 , mUpdateCollisionTime()
@@ -73,7 +73,7 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mWindowToHouse()
 {
 	mTextures.load(Textures::ID::Tiles, "Data/Textures/Tiles.png");
-	mTextures.load(Textures::ID::MosquitoAnimation, "Data/Textures/mosquitoAnimation.png");
+	mTextures.load(Textures::ID::MosquitoAnimation, "Data/Textures/MosquitoAnimation.png");
 
 	generateSpawnPositions();
 	buildScene();
@@ -277,8 +277,8 @@ void World::configureUIs()
 	centerOrigin(mHouseUI, true, false);
 	mHouseUI.hide();
 
-	mMainTrackerUI.setTotalMosquito(500);
-	mMainTrackerUI.setTotalResident(30);
+	mMainTrackerUI.setTotalMosquito(mMosquitoCount);
+	mMainTrackerUI.setTotalResident(mResidentCount);
 }
 
 void World::buildScene()
@@ -310,6 +310,9 @@ void World::buildScene()
 	// ALW - Add sprite and logic nodes
 	std::vector<InteractiveObject>::const_iterator iter    = begin(mObjectGroups.getInteractiveGroup().getInteractiveObjects());
 	std::vector<InteractiveObject>::const_iterator iterEnd = end(mObjectGroups.getInteractiveGroup().getInteractiveObjects());
+
+	// ALW - What house will start with an infected resident?
+	std::string infectHouse = getRandomHouseName(getHouseCount());
 
 	for (; iter != iterEnd; ++iter)
 	{
@@ -348,18 +351,30 @@ void World::buildScene()
 		}
 		else if (iter->getType() == "House")
 		{
-			mSceneLayers[Update]->attachChild(std::move(std::unique_ptr<HouseUpdateNode>(new HouseUpdateNode(*iter))));
-
 			std::unique_ptr<HouseNode> house(
 				new HouseNode(*iter, mWindow, mCamera.getView(), mUIBundle, buildAttachedRects(*iter), mFonts, mSoundPlayer));
+
+			bool houseMatch = false;
+			int infectResident = 0;
+			if (infectHouse == iter->getName())
+			{
+				houseMatch = true;
+				infectResident = trmb::randomInt(iter->getResidents()); // ALW - Randomly select resident to infect
+			}
 
 			const int totalResidents = iter->getResidents();
 			for (int i = 0; i < totalResidents; ++i)
 			{
-				mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<ResidentNode>(new ResidentNode(i, house.get()))));
+				bool infect = false;
+				if (houseMatch && infectResident == i)
+					infect = true;
+
 				mSceneLayers[Update]->attachChild(std::move(std::unique_ptr<ResidentUpdateNode>(new ResidentUpdateNode(i, house.get()))));
+				mSceneLayers[Residents]->attachChild(std::move(std::unique_ptr<ResidentNode>(new ResidentNode(i, infect, house.get()))));
+				++mResidentCount;
 			}
 
+			mSceneLayers[Update]->attachChild(std::move(std::unique_ptr<HouseUpdateNode>(new HouseUpdateNode(*iter))));
 			mSceneLayers[HouseSelection]->attachChild(std::move(house));
 		}
 		else
@@ -370,8 +385,7 @@ void World::buildScene()
 	}
 
 	// ALW - Add mosquitoes
-	const int mosquitoPopulation = 500;
-	for (int i = 0; i < mosquitoPopulation; ++i)
+	for (int i = 0; i < mMosquitoCount; ++i)
 	{
 		mSceneLayers[Mosquitoes]->attachChild(std::move(std::unique_ptr<MosquitoNode>(new MosquitoNode(mTextures
 			, getRandomSpawnPosition(), mWorldBounds, *mSceneLayers[HouseSelection]))));
@@ -426,7 +440,32 @@ void World::generateSpawnPositions()
 	}
 }
 
-sf::Vector2f World::getRandomSpawnPosition()
+sf::Vector2f World::getRandomSpawnPosition() const
 {
-	return mSpawnPositions.at(mDistribution(mGenerator));
+	return mSpawnPositions.at(trmb::randomInt(mMap.getWidth() * mMap.getHeight()));
+}
+
+std::string World::getRandomHouseName(int exlusiveMax) const
+{
+	const int houseNumber = trmb::randomInt(exlusiveMax);
+
+	return "House " + std::to_string(houseNumber);
+}
+
+int World::getHouseCount() const
+{
+	int count = 0;
+	std::vector<InteractiveObject>::const_iterator iter = begin(mObjectGroups.getInteractiveGroup().getInteractiveObjects());
+	std::vector<InteractiveObject>::const_iterator iterEnd = end(mObjectGroups.getInteractiveGroup().getInteractiveObjects());
+
+	for (; iter != iterEnd; ++iter)
+	{
+		if (iter->getType() == "House")
+		{
+			// ALW - How many houses are there?
+			++count;
+		}
+	}
+
+	return count;
 }

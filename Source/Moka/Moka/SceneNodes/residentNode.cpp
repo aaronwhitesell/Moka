@@ -12,8 +12,9 @@
 #include <random>
 
 
-ResidentNode::ResidentNode(int residentID, const HouseNode * const houseNode)
-: mCured0(0xfedc3227, houseNode->getInteractiveObject().getName())
+ResidentNode::ResidentNode(int residentID, bool hasMalaria, const HouseNode * const houseNode)
+: mBeginSimulationEvent(0x5000e550)
+, mCured0(0xfedc3227, houseNode->getInteractiveObject().getName())
 , mCured1(0x72b8b78e, houseNode->getInteractiveObject().getName())
 , mCured2(0x4f0b0c7a, houseNode->getInteractiveObject().getName())
 , mCured3(0x56549eca, houseNode->getInteractiveObject().getName())
@@ -29,7 +30,7 @@ ResidentNode::ResidentNode(int residentID, const HouseNode * const houseNode)
 , mHasMalaria6(0xc9bc4d1,  houseNode->getInteractiveObject().getName())
 , mResidentID(residentID)
 , mHouseNode(houseNode)
-, mHasMalaria(false)
+, mHasMalaria(hasMalaria)
 , mHasBedNet(false)
 , mIsRepaired(false)
 {
@@ -50,6 +51,71 @@ void ResidentNode::updateCurrent(sf::Time dt)
 
 void ResidentNode::handleEvent(const trmb::Event &gameEvent)
 {
+	if (mBeginSimulationEvent == gameEvent.getType())
+	{
+		if (mHasMalaria)
+			sendMalariaMsg();
+	}
+}
+
+void ResidentNode::sendCureMsg()
+{
+	switch (mResidentID)
+	{
+	case Resident0:
+		sendEvent(mCured0);
+		break;
+	case Resident1:
+		sendEvent(mCured1);
+		break;
+	case Resident2:
+		sendEvent(mCured2);
+		break;
+	case Resident3:
+		sendEvent(mCured3);
+		break;
+	case Resident4:
+		sendEvent(mCured4);
+		break;
+	case Resident5:
+		sendEvent(mCured5);
+		break;
+	case Resident6:
+		sendEvent(mCured6);
+		break;
+	default:
+		assert(("The resident ID is out of range!", false));
+	}
+}
+
+void ResidentNode::sendMalariaMsg()
+{
+	switch (mResidentID)
+	{
+	case Resident0:
+		sendEvent(mHasMalaria0);
+		break;
+	case Resident1:
+		sendEvent(mHasMalaria1);
+		break;
+	case Resident2:
+		sendEvent(mHasMalaria2);
+		break;
+	case Resident3:
+		sendEvent(mHasMalaria3);
+		break;
+	case Resident4:
+		sendEvent(mHasMalaria4);
+		break;
+	case Resident5:
+		sendEvent(mHasMalaria5);
+		break;
+	case Resident6:
+		sendEvent(mHasMalaria6);
+		break;
+	default:
+		assert(("The resident ID is out of range!", false));
+	}
 }
 
 void ResidentNode::generateSpawnPosition(sf::FloatRect houseBoundingRect)

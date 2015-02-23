@@ -23,7 +23,7 @@ class HouseNode;
 class ResidentNode : public trmb::SceneNode, trmb::EventHandler
 {
 public:
-							ResidentNode(int residentID, const HouseNode * const houseNode);
+							ResidentNode(int residentID, bool hasMalaria, const HouseNode * const houseNode);
 							ResidentNode(const ResidentNode &) = delete;
 	ResidentNode &			operator=(const ResidentNode &) = delete;
 
@@ -34,29 +34,46 @@ public:
 
 
 private:
+	enum ResidentCount
+	{
+		Resident0 = 0,
+		Resident1 = 1,
+		Resident2 = 2,
+		Resident3 = 3,
+		Resident4 = 4,
+		Resident5 = 5,
+		Resident6 = 6,
+	};
+
+
+private:
 	using					EventGuid = unsigned long;
 
 
 private:
+	void					sendCureMsg();
+	void					sendMalariaMsg();
 	void					generateSpawnPosition(sf::FloatRect houseBoundingRect);
 
 
 private:
-	const trmb::EventStr	mCured0;	// ALW - Is sent from here.
-	const trmb::EventStr	mCured1;	// ALW - Is sent from here.
-	const trmb::EventStr	mCured2;	// ALW - Is sent from here.
-	const trmb::EventStr	mCured3;	// ALW - Is sent from here.
-	const trmb::EventStr	mCured4;	// ALW - Is sent from here.
-	const trmb::EventStr	mCured5;	// ALW - Is sent from here.
-	const trmb::EventStr	mCured6;	// ALW - Is sent from here.
+	const EventGuid         mBeginSimulationEvent;	// ALW - Matches the GUID in the DaylightUI class.
 
-	const trmb::EventStr	mHasMalaria0;	// ALW - Is sent from here.
-	const trmb::EventStr	mHasMalaria1;	// ALW - Is sent from here.
-	const trmb::EventStr	mHasMalaria2;	// ALW - Is sent from here.
-	const trmb::EventStr	mHasMalaria3;	// ALW - Is sent from here.
-	const trmb::EventStr	mHasMalaria4;	// ALW - Is sent from here.
-	const trmb::EventStr	mHasMalaria5;	// ALW - Is sent from here.
-	const trmb::EventStr	mHasMalaria6;	// ALW - Is sent from here.
+	const trmb::EventStr	mCured0;				// ALW - Is sent from here.
+	const trmb::EventStr	mCured1;				// ALW - Is sent from here.
+	const trmb::EventStr	mCured2;				// ALW - Is sent from here.
+	const trmb::EventStr	mCured3;				// ALW - Is sent from here.
+	const trmb::EventStr	mCured4;				// ALW - Is sent from here.
+	const trmb::EventStr	mCured5;				// ALW - Is sent from here.
+	const trmb::EventStr	mCured6;				// ALW - Is sent from here.
+
+	const trmb::EventStr	mHasMalaria0;			// ALW - Is sent from here.
+	const trmb::EventStr	mHasMalaria1;			// ALW - Is sent from here.
+	const trmb::EventStr	mHasMalaria2;			// ALW - Is sent from here.
+	const trmb::EventStr	mHasMalaria3;			// ALW - Is sent from here.
+	const trmb::EventStr	mHasMalaria4;			// ALW - Is sent from here.
+	const trmb::EventStr	mHasMalaria5;			// ALW - Is sent from here.
+	const trmb::EventStr	mHasMalaria6;			// ALW - Is sent from here.
 
 	const int				mResidentID;
 	const HouseNode * const mHouseNode;
