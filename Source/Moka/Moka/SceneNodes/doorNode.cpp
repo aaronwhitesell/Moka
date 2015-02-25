@@ -8,6 +8,7 @@
 
 #include "Trambo/Localize/localize.h"
 #include "Trambo/Sounds/soundPlayer.h"
+#include "Trambo/Utilities/utility.h"
 
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
@@ -42,6 +43,24 @@ sf::FloatRect DoorNode::getBoundingRect() const
 {
 	return sf::FloatRect(mInteractiveObject.getCollisionBoxXCoord(), mInteractiveObject.getCollisionBoxYCoord()
 		, mInteractiveObject.getCollisionBoxWidth(), mInteractiveObject.getCollisionBoxHeight());
+}
+
+bool DoorNode::passThrough() const
+{
+	const int enter = 0;
+	bool passThrough = false;
+
+	if (mIsDoorClosed)
+	{
+		const int diceRoll = trmb::randomInt(3); // ALW - 1/3 chance to pass through a closed door
+
+		if (diceRoll == enter)
+			passThrough = true;
+	}
+	else
+		passThrough = true; // ALW - 100% chance to pass through a open door
+
+	return passThrough;
 }
 
 void DoorNode::handleEvent(const trmb::Event &gameEvent)

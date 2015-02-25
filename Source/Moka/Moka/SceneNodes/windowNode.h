@@ -48,6 +48,8 @@ public:
 
 	virtual sf::FloatRect		getBoundingRect() const override;
 
+	bool						passThrough() const;
+
 	virtual void				handleEvent(const trmb::Event &gameEvent) override final;
 
 

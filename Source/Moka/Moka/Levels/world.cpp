@@ -198,25 +198,31 @@ void World::mosquitoDoorCollisions()
 
 		if (mosquito->isIndoor())
 		{
-			// ALW - Mosquito exits house
-			const float tileHeight = 64.0f;
-			const sf::Vector2f position = door->getPosition() + sf::Vector2f(0, tileHeight);
-			mosquito->setPosition(position); // ALW - Move mosquito one tile below the door
-			mosquito->setIndoor(false);
-			house->subtractMosquitoTotal();
+			if (door->passThrough())
+			{
+				// ALW - Mosquito exits house
+				const float tileHeight = 64.0f;
+				const sf::Vector2f position = door->getPosition() + sf::Vector2f(0, tileHeight);
+				mosquito->setPosition(position); // ALW - Move mosquito one tile below the door
+				mosquito->setIndoor(false);
+				house->subtractMosquitoTotal();
 
-			if (mosquito->hasMalaria())
-				house->subtractInfectedMosquito();
+				if (mosquito->hasMalaria())
+					house->subtractInfectedMosquito();
+			}
 		}
 		else
 		{
-			// ALW - Mosquito enters house
-			mosquito->setPosition(house->getPosition());
-			mosquito->setIndoor(true);
-			house->addMosquitoTotal();
+			if (door->passThrough())
+			{
+				// ALW - Mosquito enters house
+				mosquito->setPosition(house->getPosition());
+				mosquito->setIndoor(true);
+				house->addMosquitoTotal();
 
-			if (mosquito->hasMalaria())
-				house->addInfectedMosquito();
+				if (mosquito->hasMalaria())
+					house->addInfectedMosquito();
+			}
 		}
 	}
 }
@@ -239,25 +245,31 @@ void World::mosquitoWindowCollisions()
 
 		if (mosquito->isIndoor())
 		{
-			// ALW - Mosquito exits house
-			const float tileHeight = 64.0f;
-			const sf::Vector2f position = window->getPosition() - sf::Vector2f(0, tileHeight);
-			mosquito->setPosition(position); // ALW - Move mosquito one tile above the window
-			mosquito->setIndoor(false);
-			house->subtractMosquitoTotal();
+			if (window->passThrough())
+			{
+				// ALW - Mosquito exits house
+				const float tileHeight = 64.0f;
+				const sf::Vector2f position = window->getPosition() - sf::Vector2f(0, tileHeight);
+				mosquito->setPosition(position); // ALW - Move mosquito one tile above the window
+				mosquito->setIndoor(false);
+				house->subtractMosquitoTotal();
 
-			if (mosquito->hasMalaria())
-				house->subtractInfectedMosquito();
+				if (mosquito->hasMalaria())
+					house->subtractInfectedMosquito();
+			}
 		}
 		else
 		{
-			// ALW - Mosquito enters house
-			mosquito->setPosition(house->getPosition());
-			mosquito->setIndoor(true);
-			house->addMosquitoTotal();
+			if (window->passThrough())
+			{
+				// ALW - Mosquito enters house
+				mosquito->setPosition(house->getPosition());
+				mosquito->setIndoor(true);
+				house->addMosquitoTotal();
 
-			if (mosquito->hasMalaria())
-				house->addInfectedMosquito();
+				if (mosquito->hasMalaria())
+					house->addInfectedMosquito();
+			}
 		}
 	}
 }
