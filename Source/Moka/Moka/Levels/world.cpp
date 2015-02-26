@@ -292,19 +292,22 @@ void World::mosquitoResidentCollisions()
 
 		if (mosquito->isIndoor())
 		{
-			if (mosquito->hasMalaria() && !resident->hasMalaria())
+			if (resident->isBitten(house->getTotalMintNets(), house->getTotalDamagedNets()))
 			{
-				// ALW - Transmit malaria to resident
-				resident->contractMalaria();
-				mMainTrackerUI.addInfectedResident();
-			}
+				if (mosquito->hasMalaria() && !resident->hasMalaria())
+				{
+					// ALW - Transmit malaria to resident
+					resident->contractMalaria();
+					mMainTrackerUI.addInfectedResident();
+				}
 
-			if (resident->hasMalaria() && !mosquito->hasMalaria())
-			{
-				// ALW - Transmit malaria to mosquito
-				mosquito->contractMalaria();
-				house->addInfectedMosquito();
-				mMainTrackerUI.addInfectedMosquito();
+				if (resident->hasMalaria() && !mosquito->hasMalaria())
+				{
+					// ALW - Transmit malaria to mosquito
+					mosquito->contractMalaria();
+					house->addInfectedMosquito();
+					mMainTrackerUI.addInfectedMosquito();
+				}
 			}
 		}
 	}
@@ -442,6 +445,7 @@ void World::buildScene()
 			}
 
 			const int totalResidents = iter->getResidents();
+			assert(("There are not enough beds for the residents (two per bed)!", (totalResidents / 2.0f) <= iter->getBeds()));
 			for (int i = 0; i < totalResidents; ++i)
 			{
 				bool infect = false;

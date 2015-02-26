@@ -41,6 +41,8 @@ public:
 								HouseNode(const HouseNode &) = delete;
 	HouseNode &					operator=(const HouseNode &) = delete;
 
+	int							getTotalMintNets() const;
+	int							getTotalDamagedNets() const;
 	virtual sf::FloatRect		getBoundingRect() const override;
 
 	void						addInfectedMosquito();

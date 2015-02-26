@@ -114,13 +114,13 @@ HouseUpdateNode::HouseUpdateNode(const InteractiveObject &interactiveObject)
 		mBed1.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y);
 		break;
 	case (TwoBeds):
-		mBed2.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y);
-		mBed1.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y + yBedOffset);
+		mBed1.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y);
+		mBed2.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y + yBedOffset);
 		break;
 	case (ThreeBeds):
-		mBed3.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y);
+		mBed1.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y);
 		mBed2.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y + yBedOffset);
-		mBed1.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y + yBedOffset * 2.0f);
+		mBed3.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y + yBedOffset * 2.0f);
 		break;
 	default:
 		assert(("The total number of beds is out of range!", false));
@@ -151,13 +151,13 @@ HouseUpdateNode::HouseUpdateNode(const InteractiveObject &interactiveObject)
 		mSheet1.setPosition(housePosition.x + bedPosition.x + sheetOffset, housePosition.y + bedPosition.y);
 		break;
 	case (TwoBeds):
-		mSheet2.setPosition(housePosition.x + bedPosition.x + sheetOffset, housePosition.y + bedPosition.y);
-		mSheet1.setPosition(housePosition.x + bedPosition.x + sheetOffset, housePosition.y + bedPosition.y + yBedOffset);
+		mSheet1.setPosition(housePosition.x + bedPosition.x + sheetOffset, housePosition.y + bedPosition.y);
+		mSheet2.setPosition(housePosition.x + bedPosition.x + sheetOffset, housePosition.y + bedPosition.y + yBedOffset);
 		break;
 	case (ThreeBeds):
-		mSheet3.setPosition(housePosition.x + bedPosition.x + sheetOffset, housePosition.y + bedPosition.y);
+		mSheet1.setPosition(housePosition.x + bedPosition.x + sheetOffset, housePosition.y + bedPosition.y);
 		mSheet2.setPosition(housePosition.x + bedPosition.x + sheetOffset, housePosition.y + bedPosition.y + yBedOffset);
-		mSheet1.setPosition(housePosition.x + bedPosition.x + sheetOffset, housePosition.y + bedPosition.y + yBedOffset * 2.0f);
+		mSheet3.setPosition(housePosition.x + bedPosition.x + sheetOffset, housePosition.y + bedPosition.y + yBedOffset * 2.0f);
 		break;
 	default:
 		assert(("The total number of beds is out of range!", false));
@@ -179,13 +179,13 @@ HouseUpdateNode::HouseUpdateNode(const InteractiveObject &interactiveObject)
 		mNet1.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y);
 		break;
 	case (TwoBeds) :
-		mNet2.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y);
-		mNet1.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y + yBedOffset);
+		mNet1.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y);
+		mNet2.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y + yBedOffset);
 		break;
 	case (ThreeBeds) :
-		mNet3.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y);
+		mNet1.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y);
 		mNet2.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y + yBedOffset);
-		mNet1.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y + yBedOffset * 2.0f);
+		mNet3.setPosition(housePosition.x + bedPosition.x, housePosition.y + bedPosition.y + yBedOffset * 2.0f);
 		break;
 	default:
 		assert(("The total number of beds is out of range!", false));

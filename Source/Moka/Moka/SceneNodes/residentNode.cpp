@@ -3,6 +3,7 @@
 #include "../GameObjects/interactiveObject.h"
 
 #include "Trambo/Events/event.h"
+#include "Trambo/Utilities/utility.h"
 
 #include <SFML/System/Time.hpp>
 #include <SFML/System/Vector2.hpp>
@@ -31,8 +32,6 @@ ResidentNode::ResidentNode(int residentID, bool hasMalaria, const HouseNode * co
 , mResidentID(residentID)
 , mHouseNode(houseNode)
 , mHasMalaria(hasMalaria)
-, mHasBedNet(false)
-, mIsRepaired(false)
 {
 	generateSpawnPosition(houseNode->getCollisionBox());
 }
@@ -40,6 +39,36 @@ ResidentNode::ResidentNode(int residentID, bool hasMalaria, const HouseNode * co
 bool ResidentNode::hasMalaria() const
 {
 	return mHasMalaria;
+}
+
+bool ResidentNode::isBitten(int totalMintNets, int totalDamagedNets) const
+{
+	const int bitten = 0;
+	bool ret = false;
+
+	if (isNetDamaged(totalDamagedNets))
+	{
+		// ALW - Mosquito has a 20% chance to pass through damaged net and bite resident.
+		const int diceRoll = trmb::randomInt(5);
+
+		if (diceRoll == bitten)
+			ret = true;
+	}
+	else if (isNetMint(totalMintNets, totalDamagedNets))
+	{
+		// ALW - Mosquito has a 10% chance to pass through mint net and bite resident.
+		const int diceRoll = trmb::randomInt(10);
+
+		if (diceRoll == bitten)
+			ret = true;
+	}
+	else
+	{
+		// ALW - Mosquito has a 100% chance to pass through no net and bite resident.
+		ret = true;
+	}
+
+	return ret;
 }
 
 sf::FloatRect ResidentNode::getBoundingRect() const
@@ -67,6 +96,49 @@ void ResidentNode::handleEvent(const trmb::Event &gameEvent)
 		if (mHasMalaria)
 			sendMalariaMsg(); // ALW - Display patient zero
 	}
+}
+
+bool ResidentNode::isNetDamaged(int totalDamagedNets) const
+{
+	bool ret = false;
+	// ALW - ResidentIDs has zero-based numbering, so it is necessary to add 1 before working with it.
+	// ALW - Divide by 2, because there are two residents per bed max.
+	const float sleepingPairs = (mResidentID + 1.0f) / 2.0f;
+
+	// ALW - We assume damaged nets come first. Continue reading for explanation.
+	// ALW - Beds are displayed from top to bottom in this order; damaged nets, mint nets, and no nets.
+	// ALW - The ordering is important. If mint nets came before damaged nets and the player does not
+	// ALW - repair the net then the first bed would not have a net. This could leave a bed with a
+	// ALW - damaged net not at full capcity while filling a bed with no net, since the total residents
+	// ALW - per house is not known here the "order" is filled on a first come first served basis.
+	if (sleepingPairs <= totalDamagedNets)
+	{
+		ret = true;
+	}
+
+	return ret;
+}
+
+bool ResidentNode::isNetMint(int totalMintNets, int totalDamagedNets) const
+{
+	bool ret = false;
+	const int totalNets = totalDamagedNets + totalMintNets;
+	// ALW - ResidentIDs has zero-based numbering, so it is necessary to add 1 before working with it.
+	// ALW - Divide by 2, because there are two residents per bed max.
+	const float sleepingPairs = (mResidentID + 1.0f) / 2.0f;
+
+	// ALW - Assume mint nets come after damaged nets. Continue reading for explanation.
+	// ALW - Beds are displayed from top to bottom in this order; damaged nets, mint nets, and no nets.
+	// ALW - The ordering is important. If mint nets came before damaged nets and the player does not
+	// ALW - repair the net then the first bed would not have a net. This could leave a bed with a
+	// ALW - damaged net not at full capcity while filling a bed with no net, since the total residents
+	// ALW - per house is not known here the "order" is filled on a first come first served basis.
+	if (totalDamagedNets < sleepingPairs && sleepingPairs <= totalNets)
+	{
+		ret = true;
+	}
+
+	return ret;
 }
 
 void ResidentNode::sendCureMsg()

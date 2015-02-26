@@ -56,6 +56,16 @@ HouseNode::HouseNode(const InteractiveObject &interactiveObject, const sf::Rende
 	updateRepairDisableState();
 }
 
+int	HouseNode::getTotalMintNets() const
+{
+	return mNewNetCount + mRepairCount;
+}
+
+int	HouseNode::getTotalDamagedNets() const
+{
+	return mTotalOldNets - mRepairCount;
+}
+
 sf::FloatRect HouseNode::getBoundingRect() const
 {
 	return sf::FloatRect(mInteractiveObject.getCollisionBoxXCoord(), mInteractiveObject.getCollisionBoxYCoord()

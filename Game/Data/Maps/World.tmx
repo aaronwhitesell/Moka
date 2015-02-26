@@ -1907,7 +1907,7 @@
     <property name="CollisionBoxYCoord" value="320"/>
     <property name="Color" value="Tan"/>
     <property name="Nets" value="0"/>
-    <property name="Residents" value="3"/>
+    <property name="Residents" value="2"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
@@ -1927,7 +1927,7 @@
     <property name="CollisionBoxYCoord" value="320"/>
     <property name="Color" value="Tan"/>
     <property name="Nets" value="0"/>
-    <property name="Residents" value="4"/>
+    <property name="Residents" value="2"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
@@ -1947,7 +1947,7 @@
     <property name="CollisionBoxYCoord" value="576"/>
     <property name="Color" value="Slate"/>
     <property name="Nets" value="0"/>
-    <property name="Residents" value="3"/>
+    <property name="Residents" value="2"/>
     <property name="Style" value="na"/>
    </properties>
   </object>
@@ -1967,7 +1967,7 @@
     <property name="CollisionBoxYCoord" value="576"/>
     <property name="Color" value="Slate"/>
     <property name="Nets" value="1"/>
-    <property name="Residents" value="2"/>
+    <property name="Residents" value="3"/>
     <property name="Style" value="na"/>
    </properties>
   </object>

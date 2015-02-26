@@ -28,6 +28,7 @@ public:
 	ResidentNode &			operator=(const ResidentNode &) = delete;
 
 	bool					hasMalaria() const;
+	bool					isBitten(int totalNewNets, int totalOldNets) const;
 
 	virtual sf::FloatRect	getBoundingRect() const override;
 
@@ -55,6 +56,9 @@ private:
 
 
 private:
+	bool					isNetDamaged(int totalDamagedNets) const;
+	bool					isNetMint(int totalMintNets, int totalDamagedNets) const;
+
 	void					sendCureMsg();
 	void					sendMalariaMsg();
 	void					generateSpawnPosition(sf::FloatRect houseBoundingRect);
@@ -82,8 +86,6 @@ private:
 	const int				mResidentID;
 	const HouseNode * const mHouseNode;
 	bool					mHasMalaria;
-	bool					mHasBedNet;
-	bool					mIsRepaired;
 };
 
 #endif
