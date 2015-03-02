@@ -71,6 +71,18 @@ bool ResidentNode::isBitten(int totalMintNets, int totalDamagedNets) const
 	return ret;
 }
 
+bool ResidentNode::isCured(int RDTs, int ACTs) const
+{
+	bool ret = false;
+
+	if (isDiagnosed(RDTs))
+	{
+		ret = isTreated(ACTs);
+	}
+
+	return ret;
+}
+
 sf::FloatRect ResidentNode::getBoundingRect() const
 {
 	const float tileWidth = 64.0f;
@@ -136,6 +148,66 @@ bool ResidentNode::isNetMint(int totalMintNets, int totalDamagedNets) const
 	if (totalDamagedNets < sleepingPairs && sleepingPairs <= totalNets)
 	{
 		ret = true;
+	}
+
+	return ret;
+}
+
+bool ResidentNode::isDiagnosed(int RDTs) const
+{
+	bool ret = false;
+	const int diceRoll = trmb::randomInt(100);
+
+	switch (RDTs)
+	{
+	case Stock::None:
+		if (diceRoll == 0)
+			ret = true;			// ALW - 1% chance to seek diagnosis
+		break;
+	case Stock::Small:
+		if (diceRoll < 30)
+			ret = true;			// ALW - 30% chance to seek diagnosis
+		break;
+	case Stock::Medium:
+		if (diceRoll < 60)
+			ret = true;			// ALW - 60% chance to seek diagnosis
+		break;
+	case Stock::Large:
+		if (diceRoll < 90)
+			ret = true;			// ALW - 90% chance to seek diagnosis
+		break;
+	default:
+		assert(("The RDTs total is out of range!", false));
+	}
+
+	return ret;
+}
+
+bool ResidentNode::isTreated(int ACTs) const
+{
+	bool ret = false;
+	const int diceRoll = trmb::randomInt(100);
+
+	switch (ACTs)
+	{
+	case Stock::None:
+		if (diceRoll == 0)
+			ret = true;			// ALW - 1% chance to receive treatment
+		break;
+	case Stock::Small:
+		if (diceRoll < 30)
+			ret = true;			// ALW - 30% chance to receive treatment
+		break;
+	case Stock::Medium:
+		if (diceRoll < 60)
+			ret = true;			// ALW - 60% chance to receive treatment
+		break;
+	case Stock::Large:
+		if (diceRoll < 90)
+			ret = true;			// ALW - 90% chance to receive treatment
+		break;
+	default:
+		assert(("The ACTs total is out of range!", false));
 	}
 
 	return ret;

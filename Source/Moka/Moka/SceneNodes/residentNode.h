@@ -29,6 +29,7 @@ public:
 
 	bool					hasMalaria() const;
 	bool					isBitten(int totalNewNets, int totalOldNets) const;
+	bool					isCured(int RDTs, int ACTs) const;
 
 	virtual sf::FloatRect	getBoundingRect() const override;
 
@@ -50,6 +51,14 @@ private:
 		Resident6 = 6,
 	};
 
+	enum Stock
+	{
+		None   = 0,
+		Small  = 1,
+		Medium = 2,
+		Large  = 3,
+	};
+
 
 private:
 	using					EventGuid = unsigned long;
@@ -58,6 +67,9 @@ private:
 private:
 	bool					isNetDamaged(int totalDamagedNets) const;
 	bool					isNetMint(int totalMintNets, int totalDamagedNets) const;
+
+	bool					isDiagnosed(int RDTs) const;
+	bool					isTreated(int ACTs) const;
 
 	void					sendCureMsg();
 	void					sendMalariaMsg();

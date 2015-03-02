@@ -47,6 +47,16 @@ ClinicNode::ClinicNode(const InteractiveObject &interactiveObject, const sf::Ren
 	updateACTDisableState();
 }
 
+int ClinicNode::getTotalRDTs() const
+{
+	return mRDTCount;
+}
+
+int ClinicNode::getTotalACTs() const
+{
+	return mACTCount;
+}
+
 void ClinicNode::handleEvent(const trmb::Event &gameEvent)
 {
 	InteractiveNode::handleEvent(gameEvent);

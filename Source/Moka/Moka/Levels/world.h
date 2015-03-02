@@ -39,6 +39,7 @@ namespace trmb
 }
 
 class HeroNode;
+class ClinicNode;
 class DoorNode;
 class HouseNode;
 class ResidentNode;
@@ -85,6 +86,7 @@ private:
 	{
 		Background,
 		Update,
+		ClinicSelection,
 		DoorSelection,
 		HouseSelection,
 		WindowSelection,
@@ -137,6 +139,8 @@ private:
 	bool										mBeginSimulationMode;
 	sf::Time									mTotalCollisionTime;
 	sf::Time									mUpdateCollisionTime;
+	int											mClinicCount;			// ALW - Only allow one clinic
+	ClinicNode									*mClinic;
 	std::map<DoorNode *, HouseNode *>			mDoorToHouse;
 	std::map<WindowNode *, HouseNode *>			mWindowToHouse;
 	std::map<ResidentNode *, HouseNode *>		mResidentToHouse;

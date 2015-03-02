@@ -69,6 +69,8 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mBeginSimulationMode(false)
 , mTotalCollisionTime(sf::seconds(1.0))
 , mUpdateCollisionTime()
+, mClinicCount(0)
+, mClinic(nullptr)
 , mDoorToHouse()
 , mWindowToHouse()
 , mResidentToHouse()
@@ -296,9 +298,12 @@ void World::mosquitoResidentCollisions()
 			{
 				if (mosquito->hasMalaria() && !resident->hasMalaria())
 				{
-					// ALW - Transmit malaria to resident
-					resident->contractMalaria();
-					mMainTrackerUI.addInfectedResident();
+					if (!resident->isCured(mClinic->getTotalRDTs(), mClinic->getTotalACTs()))
+					{
+						// ALW - Transmit malaria to resident
+						resident->contractMalaria();
+						mMainTrackerUI.addInfectedResident();
+					}
 				}
 
 				if (resident->hasMalaria() && !mosquito->hasMalaria())
@@ -424,12 +429,15 @@ void World::buildScene()
 		}
 		else if (iter->getType() == "Clinic")
 		{
+			assert(("There can only be one clinic!", ++mClinicCount == 1));
+
 			mSceneLayers[Update]->attachChild(std::move(std::unique_ptr<ClinicUpdateNode>(
 				new ClinicUpdateNode(*iter, mTextures.get(Textures::ID::Tiles)))));
 
-			mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<ClinicNode>(
-				new ClinicNode(*iter, mWindow, mCamera.getView(), mUIBundle, buildAttachedRects(*iter), mSoundPlayer, mDaylightUI
-				, mChatBoxUI))));
+			std::unique_ptr<ClinicNode> clinic(new ClinicNode(*iter, mWindow, mCamera.getView(), mUIBundle, buildAttachedRects(*iter),
+				mSoundPlayer, mDaylightUI, mChatBoxUI));
+			mClinic = clinic.get();
+			mSceneLayers[ClinicSelection]->attachChild(std::move(clinic));
 		}
 		else if (iter->getType() == "House")
 		{

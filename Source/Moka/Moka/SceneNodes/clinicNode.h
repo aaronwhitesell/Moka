@@ -39,6 +39,9 @@ public:
 								ClinicNode(const ClinicNode &) = delete;
 	ClinicNode &				operator=(const ClinicNode &) = delete;
 
+	int							getTotalRDTs() const;
+	int							getTotalACTs() const;
+
 	virtual void				handleEvent(const trmb::Event &gameEvent) override final;
 
 
