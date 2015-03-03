@@ -37,8 +37,10 @@ public:
 
 	sf::Vector2f		    getSize() const;
 
-	void					setTotalMosquito(int total);
-	void					setTotalResident(int total);
+	void					setMosquitoCount(int count);
+	void					setResidentCount(int count);
+
+	void				    addMosquito();
 
 	void				    addInfectedMosquito();
 	void				    subtractInfectedMosquito();
@@ -80,11 +82,11 @@ private:
 	sf::Text			    mInfectedMosquitoText;
 	sf::Text			    mTotalMosquitoText;
 	sf::RectangleShape	    mInfectedMosquitoCountBackground;
-	sf::RectangleShape	    mMosquitoTotalBackground;
+	sf::RectangleShape	    mMosquitoCountBackground;
 	sf::Text			    mInfectedMosquitoCountText;
-	sf::Text			    mMosquitoTotalText;
+	sf::Text			    mMosquitoCountText;
 	int						mInfectedMosquitoCount;
-	int						mMosquitoTotal;
+	int						mMosquitoCount;
 	
 	// ALW - Resident UI
 	sf::RectangleShape	    mResidentTextTextBackground;
@@ -94,11 +96,11 @@ private:
 	sf::Text			    mInfectedResidentText;
 	sf::Text			    mTotalResidentText;
 	sf::RectangleShape	    mInfectedResidentCountBackground;
-	sf::RectangleShape	    mTotalResidentBackground;
+	sf::RectangleShape	    mResidentCountBackground;
 	sf::Text			    mInfectedResidentCountText;
-	sf::Text			    mResidentTotalText;
+	sf::Text			    mResidentCountText;
 	int						mInfectedResidentCount;
-	int						mResidentTotal;
+	int						mResidentCount;
 
 	bool                    mHide;
 };

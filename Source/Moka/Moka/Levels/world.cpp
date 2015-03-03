@@ -364,8 +364,8 @@ void World::configureUIs()
 	centerOrigin(mHouseUI, true, false);
 	mHouseUI.hide();
 
-	mMainTrackerUI.setTotalMosquito(mMosquitoCount);
-	mMainTrackerUI.setTotalResident(mResidentCount);
+	mMainTrackerUI.setMosquitoCount(mMosquitoCount);
+	mMainTrackerUI.setResidentCount(mResidentCount);
 }
 
 void World::buildScene()
