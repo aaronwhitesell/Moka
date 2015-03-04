@@ -39,6 +39,7 @@ namespace trmb
 }
 
 class HeroNode;
+class BarrelNode;
 class ClinicNode;
 class DoorNode;
 class HouseNode;
@@ -58,6 +59,17 @@ public:
 
 
 private:
+	enum Direction
+	{
+		Up    = 0,
+		Down  = 1,
+		Left  = 2,
+		Right = 3,
+		Count
+	};
+
+
+private:
 	typedef								unsigned long EventGuid;
 
 
@@ -71,12 +83,16 @@ private:
 	void								mosquitoWindowCollisions();
 	void								mosquitoResidentCollisions();
 
+	void								spawnBarrelMosquitoes();
+	void								spawnBarrelMosquito(std::size_t barrelID);
+
 	void								updateSoundPlayer();
 	void								configureUIs();
 	void								buildScene();
 	std::vector<sf::FloatRect>			buildAttachedRects(const InteractiveObject &interactiveObj);
 	void								generateSpawnPositions();
 	sf::Vector2f						getRandomSpawnPosition() const;
+	sf::Vector2f						getRandomSpawnPositionNearBarrel(std::size_t barrelID) const;
 	std::string							getRandomHouseName(int exlusiveMax) const;
 	int									getHouseCount() const;
 
@@ -101,9 +117,10 @@ private:
 
 
 private:
-	const EventGuid								mBeginSimulationEvent;   // ALW - Matches the GUID in the DaylightUI class.
 	const EventGuid								mFullscreen;			 // ALW - Matches the GUID in the ToggleFullscreen class.
 	const EventGuid								mWindowed;				 // ALW - Matches the GUID in the ToggleFullscreen class.
+	const EventGuid								mBeginSimulationEvent;   // ALW - Matches the GUID in the DaylightUI class.
+	const EventGuid								mSpawnMosquitoEvent;	 // ALW - matches the GUID in the BarrelNode class.
 
 	const sf::RenderWindow						&mWindow;
 	sf::RenderTarget							&mTarget;
@@ -139,7 +156,9 @@ private:
 	bool										mBeginSimulationMode;
 	sf::Time									mTotalCollisionTime;
 	sf::Time									mUpdateCollisionTime;
-	int											mClinicCount;			// ALW - Only allow one clinic
+	std::vector<std::size_t>					mBarrelIDsToSpawnMosquito;
+	std::vector<BarrelNode *>					mBarrels;
+	int											mClinicCount;					// ALW - Only allow one clinic
 	ClinicNode									*mClinic;
 	std::map<DoorNode *, HouseNode *>			mDoorToHouse;
 	std::map<WindowNode *, HouseNode *>			mWindowToHouse;

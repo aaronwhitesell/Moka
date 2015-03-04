@@ -16,9 +16,8 @@
 #include <SFML/Graphics/View.hpp>
 
 
-
 BarrelNode::BarrelNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view
-	, UIBundle &uiBundle, const trmb::TextureHolder &textures, trmb::SoundPlayer &soundPlayer, DaylightUI &daylightUI
+	, UIBundle &uiBundle, int barrelID, const trmb::TextureHolder &textures, trmb::SoundPlayer &soundPlayer, DaylightUI &daylightUI
 	, ChatBoxUI &chatBoxUI)
 : PreventionNode(interactiveObject, window, view, uiBundle)
 , mBarrelUIActivated(0x10a1b42f)
@@ -26,6 +25,7 @@ BarrelNode::BarrelNode(const InteractiveObject &interactiveObject, const sf::Ren
 , mDoNotDrawBarrelUI(0x210832f5)
 , mDrawBarrelSprite(0xe22f85d5, interactiveObject.getName())
 , mDoNotDrawBarrelSprite(0xcd1fd24, interactiveObject.getName())
+, mSpawnMosquitoEvent(0xbd01d8d, std::to_string(barrelID))
 , mLeftClickPress(0x6955d309)
 , mCoverCost(1.0f)
 , mTextures(textures)
@@ -34,9 +34,17 @@ BarrelNode::BarrelNode(const InteractiveObject &interactiveObject, const sf::Ren
 , mChatBoxUI(chatBoxUI)
 , mBarrelUIActive(false)
 , mIsBarrelCovered(false)
+, mSpawnDelay(sf::seconds(5))
+, mSpawnTimer()
 {
 	mCallbackPairs.emplace_back(CallbackPair(std::bind(&BarrelNode::addCover, this), std::bind(&BarrelNode::undoCover, this)));
 	mUIElemStates.emplace_back(true);
+}
+
+sf::FloatRect BarrelNode::getBoundingRect() const
+{
+	return sf::FloatRect(mInteractiveObject.getCollisionBoxXCoord(), mInteractiveObject.getCollisionBoxYCoord()
+		, mInteractiveObject.getCollisionBoxWidth(), mInteractiveObject.getCollisionBoxHeight());
 }
 
 void BarrelNode::handleEvent(const trmb::Event &gameEvent)
@@ -103,8 +111,18 @@ void BarrelNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) 
 	}
 }
 
-void BarrelNode::updateCurrent(sf::Time)
+void BarrelNode::updateCurrent(sf::Time dt)
 {
+	if (!mIsBarrelCovered && mDisableBuildMode)
+	{
+		mSpawnTimer += dt;
+		if (mSpawnTimer >= mSpawnDelay)
+		{
+			mSpawnTimer -= mSpawnDelay;
+			InteractiveNode::sendEvent(mSpawnMosquitoEvent);
+		}
+	}
+
 	// ALW - Do not apply the InteractiveNode's transform, because there are multiple instances that share a single UndoUI. If the 
 	// ALW - transform is applied then the UndoUI would be at the location specified by the translation of multiple InteractiveNodes
 	// ALW - which is not correct. The workaround is to let the InteractiveNode's position default to 0.0f, 0.0f and then use the

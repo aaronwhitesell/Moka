@@ -27,8 +27,8 @@ namespace trambo
 class MosquitoNode : public trmb::SceneNode, trmb::EventHandler
 {
 public:
-								MosquitoNode(const trmb::TextureHolder &textures, sf::Vector2f position, sf::FloatRect worldBounds
-									, SceneNode &houseLayer);
+								MosquitoNode(const trmb::TextureHolder &textures, sf::Vector2f position, bool active
+									, sf::FloatRect worldBounds, SceneNode &houseLayer);
 								MosquitoNode(const MosquitoNode &) = delete;
 	MosquitoNode &				operator=(const MosquitoNode &) = delete;
 
@@ -52,6 +52,7 @@ private:
 		Down  = 1,
 		Left  = 2,
 		Right = 3,
+		Count
 	};
 
 
@@ -87,7 +88,6 @@ private:
 
 	std::random_device			mRandomDevice;
 	std::mt19937				mGenerator;
-	std::uniform_int_distribution<>				mDistribution;
 	std::piecewise_constant_distribution<float>	mWeightedDistribution;
 };
 

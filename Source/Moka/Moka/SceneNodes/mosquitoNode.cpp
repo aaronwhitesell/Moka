@@ -2,6 +2,7 @@
 #include "../Resources/resourceIdentifiers.h"
 
 #include "Trambo/Events/event.h"
+#include "Trambo/Utilities/utility.h"
 
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
@@ -10,7 +11,8 @@
 #include <vector>
 
 
-MosquitoNode::MosquitoNode(const trmb::TextureHolder& textures, sf::Vector2f position, sf::FloatRect worldBounds, SceneNode &houseLayer)
+MosquitoNode::MosquitoNode(const trmb::TextureHolder& textures, sf::Vector2f position, bool active, sf::FloatRect worldBounds
+	, SceneNode &houseLayer)
 : mBeginSimulationEvent(0x5000e550)
 , mTextures(textures)
 , mWorldBounds(worldBounds)
@@ -21,14 +23,13 @@ MosquitoNode::MosquitoNode(const trmb::TextureHolder& textures, sf::Vector2f pos
 , mIndoor(false)
 , mBeginSimulationMode(false)
 , mDelaySet(false)
-, mActive(false)
+, mActive(active)
 , mTotalDelayTime()
 , mUpdateDelayTime()
 , mTotalMovementTime(sf::seconds(1.0))
 , mUpdateMovementTime()
 , mRandomDevice()				// ALW - obtain random number from hardware
 , mGenerator(mRandomDevice())	// ALW - Seed the generator
-, mDistribution(0, 3)			// ALW - Define the range
 , mWeightedDistribution()
 {
 	setPosition(position);
@@ -76,7 +77,8 @@ void MosquitoNode::contractMalaria()
 
 void MosquitoNode::updateCurrent(sf::Time dt)
 {
-	delaySpawn(dt);
+	if (mDelaySet)
+		delaySpawn(dt);
 
 	if (mActive)
 	{
@@ -89,7 +91,7 @@ void MosquitoNode::handleEvent(const trmb::Event &gameEvent)
 {
 	if (mBeginSimulationEvent == gameEvent.getType())
 	{
-		mBeginSimulationMode = true;
+		delaySpawn(sf::seconds(0));	// ALW - Each time after this method will be fed the time delta
 	}
 }
 
@@ -110,21 +112,21 @@ void MosquitoNode::setNextPosition(sf::Time dt)
 		sf::Vector2f position;
 		const float tileWidth = 64;
 		const float tileHeight = 64;
-		const int direction = mDistribution(mGenerator);
-		assert(("The direction is invalid", 0 <= direction && direction <= 3));
+		const int direction = trmb::randomInt(Direction::Count);
+		assert(("The direction is invalid", 0 <= direction && direction < Direction::Count));
 
 		switch (direction)
 		{
-		case Up:
+		case Direction::Up:
 			position = getPosition() - sf::Vector2f(0, tileHeight);
 			break;
-		case Down:
+		case Direction::Down:
 			position = getPosition() + sf::Vector2f(0, tileHeight);
 			break;
-		case Left:
+		case Direction::Left:
 			position = getPosition() - sf::Vector2f(tileWidth, 0);
 			break;
-		case Right:
+		case Direction::Right:
 			position = getPosition() + sf::Vector2f(tileWidth, 0);
 			break;
 		}
@@ -154,20 +156,17 @@ void MosquitoNode::setNextPosition(sf::Time dt)
 
 void MosquitoNode::delaySpawn(sf::Time dt)
 {
-	if (mBeginSimulationMode)
+	if (!mDelaySet)
 	{
-		if (!mDelaySet)
-		{
-			mTotalDelayTime = sf::seconds(getDelay());
-			mDelaySet = true;
-		}
+		mTotalDelayTime = sf::seconds(getDelay());
+		mDelaySet = true;
+	}
 
-		mUpdateDelayTime += dt;
+	mUpdateDelayTime += dt;
 
-		if (mUpdateDelayTime >= mTotalDelayTime)
-		{
-			mActive = true;
-		}
+	if (mUpdateDelayTime >= mTotalDelayTime)
+	{
+		mActive = true;
 	}
 }
 

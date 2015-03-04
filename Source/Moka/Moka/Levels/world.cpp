@@ -38,9 +38,10 @@
 
 
 World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlayer& soundPlayer)
-: mBeginSimulationEvent(0x5000e550)
-, mFullscreen(0x5a0d2314)
+: mFullscreen(0x5a0d2314)
 , mWindowed(0x11e3c735)
+, mBeginSimulationEvent(0x5000e550)
+, mSpawnMosquitoEvent(0xbd01d8d)
 , mWindow(window)
 , mTarget(window)
 , mFonts(fonts)
@@ -69,6 +70,8 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mBeginSimulationMode(false)
 , mTotalCollisionTime(sf::seconds(1.0))
 , mUpdateCollisionTime()
+, mBarrelIDsToSpawnMosquito()
+, mBarrels()
 , mClinicCount(0)
 , mClinic(nullptr)
 , mDoorToHouse()
@@ -98,6 +101,8 @@ void World::update(sf::Time dt)
 	updateSoundPlayer();
 	mChatBoxUI.handler();
 	mDaylightUI.handler();
+
+	spawnBarrelMosquitoes();
 }
 
 void World::handleEvent(const trmb::Event &gameEvent)
@@ -114,6 +119,15 @@ void World::handleEvent(const trmb::Event &gameEvent)
 	{
 		mMainTrackerUI.addInfectedResident(); // ALW - Track patient zero
 		mBeginSimulationMode = true;
+	}
+	else if (mSpawnMosquitoEvent == gameEvent.getType())
+	{
+		// ALW - Incidentally confirmed event is an EventStr. Downcasting is safe.
+		const trmb::EventStr &eventStr = static_cast<const trmb::EventStr &>(gameEvent);
+		assert(("The barrel ID is negative and cannot be converted to std::size_t!", 0 <= std::stoi(eventStr.getString())));
+		const std::size_t barrelID = std::stoi(eventStr.getString());
+		assert(("The barrel ID is out of range!", barrelID < mBarrels.size()));
+		mBarrelIDsToSpawnMosquito.push_back(barrelID);
 	}
 }
 
@@ -318,6 +332,27 @@ void World::mosquitoResidentCollisions()
 	}
 }
 
+void World::spawnBarrelMosquitoes()
+{
+	for (const int barrelID : mBarrelIDsToSpawnMosquito)
+	{
+		const int numberOfMosquitoes = trmb::randomInt(2);
+		for (int i = 0; i < numberOfMosquitoes; ++i)
+		{
+			spawnBarrelMosquito(barrelID);
+		}
+	}
+
+	mBarrelIDsToSpawnMosquito.clear();
+}
+
+void World::spawnBarrelMosquito(std::size_t barrelID)
+{
+	mSceneLayers[Mosquitoes]->attachChild(std::move(std::unique_ptr<MosquitoNode>(new MosquitoNode(mTextures
+		, getRandomSpawnPositionNearBarrel(barrelID), true, mWorldBounds, *mSceneLayers[HouseSelection]))));
+	mMainTrackerUI.addMosquito();
+}
+
 void World::updateSoundPlayer()
 {
 	// ALW - Delete sound effects that have finished playing.
@@ -401,6 +436,8 @@ void World::buildScene()
 	// ALW - What house will start with an infected resident?
 	std::string infectHouse = getRandomHouseName(getHouseCount());
 
+	int barrelID = 0;
+
 	for (; iter != iterEnd; ++iter)
 	{
 		if (iter->getType() == "Barrel")
@@ -408,8 +445,11 @@ void World::buildScene()
 			mSceneLayers[Update]->attachChild(std::move(std::unique_ptr<BarrelUpdateNode>(
 				new BarrelUpdateNode(*iter, mTextures.get(Textures::ID::Tiles)))));
 
-			mSceneLayers[Selection]->attachChild(std::move(std::unique_ptr<BarrelNode>(
-				new BarrelNode(*iter, mWindow, mCamera.getView(), mUIBundle, mTextures, mSoundPlayer, mDaylightUI, mChatBoxUI))));
+			std::unique_ptr<BarrelNode> barrel(new BarrelNode(*iter, mWindow, mCamera.getView(), mUIBundle, barrelID, mTextures
+				, mSoundPlayer, mDaylightUI, mChatBoxUI));
+			mBarrels.push_back(barrel.get());
+			mSceneLayers[Selection]->attachChild(std::move(barrel));
+			++barrelID;
 		}
 		else if (iter->getType() == "Door")
 		{
@@ -479,7 +519,7 @@ void World::buildScene()
 	for (int i = 0; i < mMosquitoCount; ++i)
 	{
 		mSceneLayers[Mosquitoes]->attachChild(std::move(std::unique_ptr<MosquitoNode>(new MosquitoNode(mTextures
-			, getRandomSpawnPosition(), mWorldBounds, *mSceneLayers[HouseSelection]))));
+			, getRandomSpawnPosition(), false, mWorldBounds, *mSceneLayers[HouseSelection]))));
 	}
 
 	// Add UIs
@@ -541,6 +581,34 @@ std::string World::getRandomHouseName(int exlusiveMax) const
 	const int houseNumber = trmb::randomInt(exlusiveMax);
 
 	return "House " + std::to_string(houseNumber);
+}
+
+sf::Vector2f World::getRandomSpawnPositionNearBarrel(std::size_t barrelID) const
+{
+	const float tileWidth = 64;
+	const float tileHeight = 64;
+	const sf::FloatRect barrelRect = mBarrels.at(barrelID)->getBoundingRect();
+	const sf::Vector2f barrelPosition = sf::Vector2f(barrelRect.left, barrelRect.top);
+	const int direction = trmb::randomInt(Direction::Count);
+	sf::Vector2f position;
+
+	switch (direction)
+	{
+	case Direction::Up:
+		position = barrelPosition - sf::Vector2f(0, tileHeight);
+		break;
+	case Direction::Down:
+		position = barrelPosition + sf::Vector2f(0, tileHeight);
+		break;
+	case Direction::Left:
+		position = barrelPosition - sf::Vector2f(tileWidth, 0);
+		break;
+	case Direction::Right:
+		position = barrelPosition + sf::Vector2f(tileWidth, 0);
+		break;
+	}
+
+	return position;
 }
 
 int World::getHouseCount() const
