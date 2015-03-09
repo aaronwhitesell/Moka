@@ -14,6 +14,8 @@
 MosquitoNode::MosquitoNode(const trmb::TextureHolder& textures, sf::Vector2f position, bool active, sf::FloatRect worldBounds
 	, SceneNode &houseLayer)
 : mBeginSimulationEvent(0x5000e550)
+, mCreateTextPrompt(0x25e87fd8)
+, mClearTextPrompt(0xc1523265)
 , mTextures(textures)
 , mWorldBounds(worldBounds)
 , mHouseLayer(houseLayer)
@@ -22,6 +24,7 @@ MosquitoNode::MosquitoNode(const trmb::TextureHolder& textures, sf::Vector2f pos
 , mHasMalaria(false)
 , mIndoor(false)
 , mBeginSimulationMode(false)
+, mPause(false)
 , mDelaySet(false)
 , mActive(active)
 , mTotalDelayTime()
@@ -77,13 +80,16 @@ void MosquitoNode::contractMalaria()
 
 void MosquitoNode::updateCurrent(sf::Time dt)
 {
-	if (mDelaySet)
-		delaySpawn(dt);
-
-	if (mActive)
+	if (!mPause)
 	{
-		setNextPosition(dt);
-		mAnimation.update(dt);
+		if (mDelaySet)
+			delaySpawn(dt);
+
+		if (mActive)
+		{
+			setNextPosition(dt);
+			mAnimation.update(dt);
+		}
 	}
 }
 
@@ -92,6 +98,14 @@ void MosquitoNode::handleEvent(const trmb::Event &gameEvent)
 	if (mBeginSimulationEvent == gameEvent.getType())
 	{
 		delaySpawn(sf::seconds(0));	// ALW - Each time after this method will be fed the time delta
+	}
+	else if (mCreateTextPrompt == gameEvent.getType())
+	{
+		mPause = true;
+	}
+	else if (mClearTextPrompt == gameEvent.getType())
+	{
+		mPause = false;
 	}
 }
 

@@ -69,6 +69,8 @@ private:
 	const trmb::EventStr		mDoNotDrawBarrelSprite;
 	const trmb::EventStr		mSpawnMosquitoEvent;		// ALW - Is sent from here.
 	const EventGuid				mLeftClickPress;			// ALW - Matches the GUID in the Controller class.
+	const EventGuid				mCreateTextPrompt;			// ALW - Matches the GUID in the ChatBoxUI class.
+	const EventGuid				mClearTextPrompt;			// ALW - Matches the GUID in the ChatBoxUI class.
 	const float					mCoverCost;
 	const trmb::TextureHolder	&mTextures;
 	trmb::SoundPlayer			&mSoundPlayer;

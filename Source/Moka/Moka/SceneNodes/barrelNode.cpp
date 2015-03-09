@@ -27,6 +27,8 @@ BarrelNode::BarrelNode(const InteractiveObject &interactiveObject, const sf::Ren
 , mDoNotDrawBarrelSprite(0xcd1fd24, interactiveObject.getName())
 , mSpawnMosquitoEvent(0xbd01d8d, std::to_string(barrelID))
 , mLeftClickPress(0x6955d309)
+, mCreateTextPrompt(0x25e87fd8)
+, mClearTextPrompt(0xc1523265)
 , mCoverCost(1.0f)
 , mTextures(textures)
 , mSoundPlayer(soundPlayer)
@@ -113,8 +115,9 @@ void BarrelNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) 
 
 void BarrelNode::updateCurrent(sf::Time dt)
 {
-	if (!mIsBarrelCovered && mDisableBuildMode)
+	if (!mIsBarrelCovered && mDisableBuildMode && !mDisableInput)
 	{
+		// ALW - The barrel is not covered, the simulation mode has started, and there isn't an interrupt prompt active.
 		mSpawnTimer += dt;
 		if (mSpawnTimer >= mSpawnDelay)
 		{

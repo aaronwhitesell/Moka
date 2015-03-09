@@ -69,6 +69,8 @@ private:
 
 private:
 	const EventGuid				mBeginSimulationEvent;   // ALW - Matches the GUID in the DaylightUI class.
+	const EventGuid				mCreateTextPrompt;		 // ALW - Matches the GUID in the ChatBoxUI class.
+	const EventGuid				mClearTextPrompt;		 // ALW - Matches the GUID in the ChatBoxUI class.
 	const trmb::TextureHolder	&mTextures;
 	const sf::FloatRect			mWorldBounds;
 	trmb::SceneNode				&mHouseLayer;
@@ -78,6 +80,7 @@ private:
 	bool						mIndoor;
 
 	bool						mBeginSimulationMode;
+	bool						mPause;
 	bool						mDelaySet;
 	bool						mActive;
 
