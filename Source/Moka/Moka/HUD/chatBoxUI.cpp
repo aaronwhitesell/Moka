@@ -39,6 +39,7 @@ ChatBoxUI::ChatBoxUI(const sf::RenderWindow &window, trmb::Camera &camera, Fonts
 , mSoundPlayer(soundPlayer)
 , mUIBundle(uiBundle)
 , mLinesToDraw(mMaxLinesDrawn)
+, mForceEndPrompt(false)
 , mMouseOver(false)
 , mUIBundleDisabled(false)
 {
@@ -157,7 +158,18 @@ void ChatBoxUI::handleEvent(const trmb::Event &gameEvent)
 {
 	if (mEnter == gameEvent.getType())
 	{
-		displayMoreText();
+		// ALW - There are three possibilities when an <Enter> is handled. There is an overflow of of text.
+		// ALW - More text will be displayed and the prompt will be cleared if there is not more text and
+		// ALW - an end prompt is not being forced. Next, if there is no more text to be displayed and an
+		// ALW - end prompt was forced then it will be cleared. Otherwise, there is nothing to do here.
+		if (isOverFlow())
+		{
+			displayMoreText();
+		}
+		else if (mForceEndPrompt)
+		{
+			clearPrompt();
+		}
 	}
 	// ALW - Currently, fullscreen and windowed mode are the same.
 	else if (mFullscreen == gameEvent.getType() || mWindowed == gameEvent.getType())
@@ -166,14 +178,22 @@ void ChatBoxUI::handleEvent(const trmb::Event &gameEvent)
 	}
 }
 
-void ChatBoxUI::updateText(std::string string)
+void ChatBoxUI::updateText(std::string string, bool forceEndPrompt)
 {
+	// ALW - Non-interupting messages do not force an end prompt and their length is less than the capacity of a chatbox. These 
+	// ALW - messages are used when you select a barrel for example. They do not interrupt gameplay. Interupting messages force
+	// ALW - an end prompt and can be of any length. They force the user to acknowledge the message. They are used for narrtive
+	// ALW - and educational messages.
+	mForceEndPrompt = forceEndPrompt;
 	mWordWrapText.clear();
 	formatText(string);
 	setTextLinePosition();
 	calculateLinesToDraw();
 
-	if (isPrompt())
+	if (!mForceEndPrompt)
+		assert(("Non-interupting messages do not force an end prompt and cannot be longer that the capacity of a chatbox!", !isOverFlow()));
+
+	if (isOverFlow() || mForceEndPrompt)
 		EventHandler::sendEvent(trmb::Event(mCreateTextPrompt));
 }
 
@@ -199,7 +219,7 @@ void ChatBoxUI::draw(sf::RenderTarget &target, sf::RenderStates states) const
 		}
 	}
 
-	if (isPrompt())
+	if (isOverFlow() || mForceEndPrompt)
 		target.draw(mPrompt, states);
 
 	// ALW - Restore the view
@@ -249,7 +269,7 @@ void ChatBoxUI::formatText(std::string string)
 
 void ChatBoxUI::displayMoreText()
 {
-	if (isPrompt())
+	if (isOverFlow())
 	{
 		assert(("ALW - Logic Error: The vector cannot be empty!", mWordWrapText.size() > (mMaxLinesDrawn - 1)));
 
@@ -267,7 +287,7 @@ void ChatBoxUI::displayMoreText()
 		setTextLinePosition();
 		calculateLinesToDraw();
 		mSoundPlayer.play(mSoundEffect);
-		if (!isPrompt())
+		if (!isOverFlow() && !mForceEndPrompt)
 			EventHandler::sendEvent(trmb::Event(mClearTextPrompt));
 	}
 }
@@ -295,7 +315,8 @@ void ChatBoxUI::calculateLinesToDraw()
 		// ALW - All lines in mWordWrapText will be drawn
 		mLinesToDraw = mWordWrapText.size();
 	}
-	else if (mWordWrapText.size() > mMaxLinesDrawn)
+	else if (mWordWrapText.size() > mMaxLinesDrawn
+		|| (mForceEndPrompt && mWordWrapText.size() == mMaxLinesDrawn))
 	{
 		// ALW - Not all of the lines in mWordWrapText can be drawn.
 		// ALW - Draw one minus the maximum number of lines, so a text
@@ -306,11 +327,23 @@ void ChatBoxUI::calculateLinesToDraw()
 		mLinesToDraw = mMaxLinesDrawn;
 }
 
-bool ChatBoxUI::isPrompt() const
+void ChatBoxUI::clearPrompt()
 {
+	mForceEndPrompt = false;
+	mSoundPlayer.play(mSoundEffect);
+	EventHandler::sendEvent(trmb::Event(mClearTextPrompt));
+}
+
+bool ChatBoxUI::isOverFlow() const
+{
+	// ALW - The text fills an entire chatbox and then some. Or an end prompt is forced
+	// ALW - and the text plus the prompt fills an entire chatbox and then some.
 	bool ret = false;
-	if (mWordWrapText.size() > mMaxLinesDrawn)
+	if (mWordWrapText.size() > mMaxLinesDrawn
+		|| (mForceEndPrompt && mWordWrapText.size() == mMaxLinesDrawn))
+	{
 		ret = true;
+	}
 
 	return ret;
 }
@@ -322,9 +355,13 @@ bool ChatBoxUI::isEllipsisLine(std::string string)
 	bool ret = false;
 
 	std::vector<sf::Text> lines;
-	const int maxLinesLeft = 2; // ALW - Consists of (potential) ellipsis line and next line 
-	const float chatBoxWidth = getBounds().width;
-	while (mTextLine.getLocalBounds().width > chatBoxWidth)
+	std::size_t maxLinesLeft = 0;
+	if (mForceEndPrompt)
+		maxLinesLeft = 1; // ALW - Consists of (potential) ellipsis line and assumes there will be a prompt
+	else
+		maxLinesLeft = 2; // ALW - Consists of (potential) ellipsis line and next line
+
+	while (mTextLine.getLocalBounds().width != 0.0f)
 	{
 		mTextLine.setString(getLine(string));
 		lines.emplace_back(mTextLine);

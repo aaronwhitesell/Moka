@@ -362,7 +362,7 @@ void World::updateSoundPlayer()
 void World::configureUIs()
 {
 	// ALW - Must occur after World::buildScene(), otherwise the Nodes will miss the mCreateTextPrompt event.
-	mChatBoxUI.updateText(trmb::Localize::getInstance().getString("greeting"));
+	mChatBoxUI.updateText(trmb::Localize::getInstance().getString("greeting"), true);
 
 	const unsigned int characterSize = 13;
 

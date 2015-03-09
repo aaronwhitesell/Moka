@@ -272,7 +272,7 @@ void DaylightUI::repositionGUI()
 void DaylightUI::done()
 {
 	EventHandler::sendEvent(mBeginSimulationEvent);
-	mUIBundle.getChatBoxUI().updateText(trmb::Localize::getInstance().getString("simulationGreeting"));
+	mUIBundle.getChatBoxUI().updateText(trmb::Localize::getInstance().getString("simulationGreeting"), true);
 	hide();
 }
 

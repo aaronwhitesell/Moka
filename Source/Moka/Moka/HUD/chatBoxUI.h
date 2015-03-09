@@ -43,7 +43,7 @@ public:
 
 	void					handler();
 	virtual void			handleEvent(const trmb::Event &gameEvent) final;
-	void					updateText(std::string string);
+	void					updateText(std::string string, bool forceEndPrompt = false);
 
 
 private:
@@ -57,8 +57,9 @@ private:
 	void					displayMoreText();
 	void					setTextLinePosition();
 	void					calculateLinesToDraw();
+	void					clearPrompt();
 
-	bool					isPrompt() const;
+	bool					isOverFlow() const;
 	bool					isEllipsisLine(std::string string);
 
 	std::string 			getLine(std::string &string, bool addEllipsis = false);
@@ -73,8 +74,8 @@ private:
 	const EventGuid			mCreateTextPrompt; // ALW - Is sent from here.
 	const EventGuid			mClearTextPrompt;  // ALW - Is sent from here.
 	const EventGuid			mEnter;            // ALW - Matches the GUID in the Controller class.
-	const EventGuid			mFullscreen;		 // ALW - Matches the GUID in the ToggleFullscreen class.
-	const EventGuid			mWindowed;		 // ALW - Matches the GUID in the ToggleFullscreen class.
+	const EventGuid			mFullscreen;	   // ALW - Matches the GUID in the ToggleFullscreen class.
+	const EventGuid			mWindowed;		   // ALW - Matches the GUID in the ToggleFullscreen class.
 
 	const float				mHorizontalSpacing;
 	const float				mVerticalSpacing;
@@ -93,6 +94,7 @@ private:
 	std::vector<sf::Text>	mWordWrapText;
 	int						mLinesToDraw;
 
+	bool					mForceEndPrompt;
 	bool					mMouseOver;
 	bool					mUIBundleDisabled;
 };
