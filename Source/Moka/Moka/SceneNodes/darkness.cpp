@@ -26,8 +26,8 @@ Darkness::Darkness(const sf::RenderWindow &window)
 
 void Darkness::updateCurrent(sf::Time dt)
 {
+	// ALW - Simulation Mode
 	const int iterations = 30;
-
 	if (mDarken && mCount < iterations)
 	{
 		mUpdateTime += dt;

@@ -129,14 +129,18 @@ void DoorNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) co
 
 void DoorNode::updateCurrent(sf::Time)
 {
-	// ALW - Do not apply the InteractiveNode's transform, because there are multiple instances that share a single UndoUI. If the 
-	// ALW - transform is applied then the UndoUI would be at the location specified by the translation of multiple InteractiveNodes
-	// ALW - which is not correct. The workaround is to let the InteractiveNode's position default to 0.0f, 0.0f and then use the
-	// ALW - InteractiveObjects coordinates to position the UndoUI in the world. This way the InteractiveNode's transform does not
-	// ALW - need to be applied to the UndoUI. To keep the handler interface consistent the Identity transform is passed in and applied.
-	sf::Transform transform = sf::Transform::Identity;
+	// ALW - Build Mode
+	if (!mDisableBuildMode)
+	{
+		// ALW - Do not apply the InteractiveNode's transform, because there are multiple instances that share a single UndoUI. If the 
+		// ALW - transform is applied then the UndoUI would be at the location specified by the translation of multiple InteractiveNodes
+		// ALW - which is not correct. The workaround is to let the InteractiveNode's position default to 0.0f, 0.0f and then use the
+		// ALW - InteractiveObjects coordinates to position the UndoUI in the world. This way the InteractiveNode's transform does not
+		// ALW - need to be applied to the UndoUI. To keep the handler interface consistent the Identity transform is passed in and applied.
+		sf::Transform transform = sf::Transform::Identity;
 
-	mUIBundle.getDoorUI().handler(mWindow, mView, transform);
+		mUIBundle.getDoorUI().handler(mWindow, mView, transform);
+	}
 }
 
 void DoorNode::activate()

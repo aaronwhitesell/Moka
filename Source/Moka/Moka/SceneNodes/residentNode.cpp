@@ -97,10 +97,6 @@ void ResidentNode::contractMalaria()
 	sendMalariaMsg();
 }
 
-void ResidentNode::updateCurrent(sf::Time dt)
-{
-}
-
 void ResidentNode::handleEvent(const trmb::Event &gameEvent)
 {
 	if (mBeginSimulationEvent == gameEvent.getType())

@@ -35,7 +35,6 @@ public:
 
 	void					contractMalaria();
 
-	virtual void			updateCurrent(sf::Time dt) override final;
 	virtual void			handleEvent(const trmb::Event &gameEvent) override final;
 
 

@@ -80,6 +80,7 @@ void MosquitoNode::contractMalaria()
 
 void MosquitoNode::updateCurrent(sf::Time dt)
 {
+	// ALW - Simulation Mode
 	if (!mPause)
 	{
 		if (mDelaySet)
