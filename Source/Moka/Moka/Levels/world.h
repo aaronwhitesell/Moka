@@ -119,6 +119,8 @@ private:
 private:
 	const EventGuid								mFullscreen;			 // ALW - Matches the GUID in the ToggleFullscreen class.
 	const EventGuid								mWindowed;				 // ALW - Matches the GUID in the ToggleFullscreen class.
+	const EventGuid								mCreateTextPrompt;		 // ALW - Matches the GUID in the ChatBoxUI class.
+	const EventGuid								mClearTextPrompt;		 // ALW - Matches the GUID in the ChatBoxUI class.
 	const EventGuid								mBeginSimulationEvent;   // ALW - Matches the GUID in the DaylightUI class.
 	const EventGuid								mSpawnMosquitoEvent;	 // ALW - matches the GUID in the BarrelNode class.
 
@@ -153,6 +155,7 @@ private:
 	int											mMosquitoCount;
 	int											mResidentCount;
 
+	bool										mDisableInput;
 	bool										mBeginSimulationMode;
 	sf::Time									mTotalCollisionTime;
 	sf::Time									mUpdateCollisionTime;

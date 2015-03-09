@@ -40,6 +40,8 @@
 World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlayer& soundPlayer)
 : mFullscreen(0x5a0d2314)
 , mWindowed(0x11e3c735)
+, mCreateTextPrompt(0x25e87fd8)
+, mClearTextPrompt(0xc1523265)
 , mBeginSimulationEvent(0x5000e550)
 , mSpawnMosquitoEvent(0xbd01d8d)
 , mWindow(window)
@@ -67,6 +69,7 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mMosquitoCount(500)
 , mResidentCount(0)
 , mSpawnPositions()
+, mDisableInput(false)
 , mBeginSimulationMode(false)
 , mTotalCollisionTime(sf::seconds(1.0))
 , mUpdateCollisionTime()
@@ -93,16 +96,22 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 
 void World::update(sf::Time dt)
 {
+	// ALW - Both modes
 	mSceneGraph.update(dt);					// ALW - Update the hero along with the rest of the scene graph
 	mCamera.update(mHero->getPosition());	// ALW - Update the camera position
-
-	updateCollisions(dt);
-
 	updateSoundPlayer();
 	mChatBoxUI.handler();
-	mDaylightUI.handler();
 
-	spawnBarrelMosquitoes();
+	// ALW - Build Mode
+	if (!mBeginSimulationMode)
+		mDaylightUI.handler();
+
+	// ALW - Simulation Mode
+	if (mBeginSimulationMode && !mDisableInput)
+	{
+		updateCollisions(dt);
+		spawnBarrelMosquitoes();
+	}
 }
 
 void World::handleEvent(const trmb::Event &gameEvent)
@@ -114,6 +123,14 @@ void World::handleEvent(const trmb::Event &gameEvent)
 
 		// ALW - Manually correct position of camera, necessary when pause menu is active.
 		mCamera.update(mHero->getPosition());
+	}
+	else if (mCreateTextPrompt == gameEvent.getType())
+	{
+		mDisableInput = true;
+	}
+	else if (mClearTextPrompt == gameEvent.getType())
+	{
+		mDisableInput = false;
 	}
 	else if (mBeginSimulationEvent == gameEvent.getType())
 	{
