@@ -1,6 +1,7 @@
 #ifndef WORLD_H
 #define WORLD_H
 
+#include "../DidYouKnow/didYouKnow.h"
 #include "../HUD/chatBoxUI.h"
 #include "../HUD/daylightUI.h"
 #include "../HUD/mainTrackerUI.h"
@@ -74,6 +75,8 @@ private:
 
 
 private:
+	bool								isFirstTransmission() const;
+
 	void								initializeDoorToHouseMap();
 	void								initializeWindowToHouseMap();
 	void								initializeResidentToHouseMap();
@@ -95,6 +98,7 @@ private:
 	sf::Vector2f						getRandomSpawnPositionNearBarrel(std::size_t barrelID) const;
 	std::string							getRandomHouseName(int exlusiveMax) const;
 	int									getHouseCount() const;
+	void								triggerEventMessage(const std::string eventMessage);
 
 
 private:
@@ -166,6 +170,10 @@ private:
 	std::map<DoorNode *, HouseNode *>			mDoorToHouse;
 	std::map<WindowNode *, HouseNode *>			mWindowToHouse;
 	std::map<ResidentNode *, HouseNode *>		mResidentToHouse;
+
+	// ALW - Special Event Dialog
+	DidYouKnow									mDidYouKnow;
+	int											mTransmissionCount;
 };
 
 #endif
