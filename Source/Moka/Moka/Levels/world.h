@@ -76,6 +76,7 @@ private:
 
 private:
 	bool								isFirstTransmission() const;
+	bool								hasMosquitoPopulationDoubled();
 
 	void								initializeDoorToHouseMap();
 	void								initializeWindowToHouseMap();
@@ -174,6 +175,7 @@ private:
 	// ALW - Special Event Dialog
 	DidYouKnow									mDidYouKnow;
 	int											mTransmissionCount;
+	bool										mDisableMosquitoPopulationCheck;
 };
 
 #endif

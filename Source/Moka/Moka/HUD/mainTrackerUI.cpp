@@ -216,6 +216,11 @@ sf::Vector2f MainTrackerUI::getSize() const
 	return mBackground.getSize();
 }
 
+int MainTrackerUI::getMosquitoCount() const
+{
+	return mMosquitoCount;
+}
+
 void MainTrackerUI::setMosquitoCount(int count)
 {
 	mMosquitoCount = count;

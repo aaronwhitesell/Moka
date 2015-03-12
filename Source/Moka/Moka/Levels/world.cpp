@@ -82,6 +82,7 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mResidentToHouse()
 , mDidYouKnow(10)			// ALW - Total number of DidYouKnow facts in Text.xml
 , mTransmissionCount(0)
+, mDisableMosquitoPopulationCheck(false)
 {
 	mTextures.load(Textures::ID::Tiles, "Data/Textures/Tiles.png");
 	mTextures.load(Textures::ID::InfectedMosquitoAnimation, "Data/Textures/InfectedMosquitoAnimation.png");
@@ -113,6 +114,8 @@ void World::update(sf::Time dt)
 	{
 		updateCollisions(dt);
 		spawnBarrelMosquitoes();
+		if (hasMosquitoPopulationDoubled())
+			triggerEventMessage(trmb::Localize::getInstance().getString("mosquitoPopulationEvent"));
 	}
 }
 
@@ -163,6 +166,25 @@ bool World::isFirstTransmission() const
 {
 	const int firstTransmission = 1;
 	return firstTransmission == mTransmissionCount;
+}
+
+bool World::hasMosquitoPopulationDoubled()
+{
+	bool ret = false;
+	if (!mDisableMosquitoPopulationCheck)
+	{
+		const int initialPopulation = mMosquitoCount;
+		const int currentPopulation = mMainTrackerUI.getMosquitoCount();
+
+		ret = currentPopulation >= initialPopulation * 2;
+		if (ret)
+		{
+			// ALW - Only return a doubling of the population once
+			mDisableMosquitoPopulationCheck = true;
+		}
+	}
+
+	return ret;
 }
 
 void World::initializeDoorToHouseMap()

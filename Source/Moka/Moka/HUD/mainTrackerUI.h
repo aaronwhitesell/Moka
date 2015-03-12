@@ -37,6 +37,8 @@ public:
 
 	sf::Vector2f		    getSize() const;
 
+	int						getMosquitoCount() const;
+
 	void					setMosquitoCount(int count);
 	void					setResidentCount(int count);
 
