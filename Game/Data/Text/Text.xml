@@ -45,6 +45,21 @@ damaged bed net it can be repaired?"/>
 		<residentsUI		   	   attribute="Residents"/>
 		<totalUI		           attribute="Total"/>
 		<infectedUI		   		   attribute="Infected"/>
+		<didYouKnow0			   attribute="DID YOU KNOW: Everyone with a fever should get tested for malaria."/>
+		<didYouKnow1			   attribute="DID YOU KNOW: A mosquito needs your blood for her eggs to develop? Squash her!"/>
+		<didYouKnow2			   attribute="DID YOU KNOW: A mosquito net has to be tucked in on all sides of the bed to be effective."/>
+		<didYouKnow3			   attribute="DID YOU KNOW: Women are four times more likely to get malaria while pregnant?"/>
+		<didYouKnow4			   attribute="DID YOU KNOW: If you ever have malaria, remember to take ACTs and not other medicines."/>
+		<didYouKnow5			   attribute="DID YOU KNOW: The most common symptoms of malaria are high fever, vomiting, nausea, weakness,
+and body aches, among others."/>
+		<didYouKnow6			   attribute="DID YOU KNOW: Even if you are young and healthy, you still need to sleep under a net because you
+can spread the disease to others who are not young and healthy."/>
+		<didYouKnow7			   attribute="DID YOU KNOW: Malaria is caused by a parasite carried by the female Anopheles mosquito. When she
+bites someone who has malaria and then bites another person, she transfers the disease."/>
+		<didYouKnow8			   attribute="DID YOU KNOW: If you ever have malaria, remember even after you begin to feel better, you MUST
+continue to take your medicine as the doctor says or the infection will not go away completely."/>
+		<didYouKnow9			   attribute="DID YOU KNOW: If left untreated, malaria can develop into a more virulent form of the disease.
+Symptoms of a complication include jaundice, unconsciousness, inability to sit, convulsions, and shallow breathing. Brain damage may develop."/>
 	</en>
     <fr>
 	    <prompt                    attribute="fr: Press Enter"/>
