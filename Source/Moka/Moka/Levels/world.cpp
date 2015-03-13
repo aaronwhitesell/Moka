@@ -112,10 +112,16 @@ void World::update(sf::Time dt)
 	// ALW - Simulation Mode
 	if (mBeginSimulationMode && !mDisableInput)
 	{
-		updateCollisions(dt);
-		spawnBarrelMosquitoes();
-		if (hasMosquitoPopulationDoubled())
-			triggerEventMessage(trmb::Localize::getInstance().getString("mosquitoPopulationEvent"));
+		if (!mDisableInput)
+			updateCollisions(dt);
+
+		// ALW - updateCollisions() can change the value of mDisableInput, so it should be checked again.
+		if (!mDisableInput)
+		{
+			spawnBarrelMosquitoes();
+			if (hasMosquitoPopulationDoubled())
+				triggerEventMessage(trmb::Localize::getInstance().getString("mosquitoPopulationEvent"));
+		}
 	}
 }
 
