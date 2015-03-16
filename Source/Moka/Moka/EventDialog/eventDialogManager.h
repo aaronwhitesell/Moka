@@ -3,6 +3,13 @@
 
 #include <SFML/System/Time.hpp>
 
+#include <string>
+
+
+namespace trmb
+{
+	class SoundPlayer;
+}
 
 class ChatBoxUI;
 class DidYouKnow;
@@ -10,11 +17,14 @@ class DidYouKnow;
 class EventDialogManager
 {
 public:
-								EventDialogManager(ChatBoxUI &chatBoxUI, DidYouKnow &didYouKnow);
+								EventDialogManager(ChatBoxUI &chatBoxUI, DidYouKnow &didYouKnow, trmb::SoundPlayer &soundPlayer);
 								EventDialogManager(const EventDialogManager &) = delete;
 	EventDialogManager &		operator=(const EventDialogManager &) = delete;
 
 	bool						isFinished() const;
+
+	void						updateText(std::string didYouKnow);
+	void						updateText(std::string eventDialog, std::string didYouKnow);
 
 	void						start();
 	void						stop();
@@ -33,6 +43,7 @@ private:
 
 	ChatBoxUI					&mChatBoxUI;
 	DidYouKnow					&mDidYouKnow;
+	trmb::SoundPlayer			&mSoundPlayer;
 
 	sf::Time					mTimer;
 	bool						mPause;

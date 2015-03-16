@@ -80,7 +80,7 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mDoorToHouse()
 , mWindowToHouse()
 , mResidentToHouse()
-, mEventDialogManager(mChatBoxUI, mDidYouKnow)
+, mEventDialogManager(mChatBoxUI, mDidYouKnow, soundPlayer)
 , mDidYouKnow(10)			// ALW - Total number of DidYouKnow facts in Text.xml
 , mTransmissionCount(0)
 , mDisableMosquitoPopulationCheck(false)
@@ -126,7 +126,8 @@ void World::update(sf::Time dt)
 		{
 			spawnBarrelMosquitoes();
 			if (hasMosquitoPopulationDoubled())
-				triggerEventMessage(trmb::Localize::getInstance().getString("mosquitoPopulationEvent"));
+				mEventDialogManager.updateText(trmb::Localize::getInstance().getString("mosquitoPopulationEvent")
+					, trmb::Localize::getInstance().getString(mDidYouKnow.getDidYouKnow()));
 		}
 	}
 	mEventDialogManager.update(dt);
@@ -388,7 +389,8 @@ void World::mosquitoResidentCollisions()
 
 							if (isFirstTransmission())
 							{
-								triggerEventMessage(trmb::Localize::getInstance().getString("transmissionEvent"));
+								mEventDialogManager.updateText(trmb::Localize::getInstance().getString("transmissionEvent")
+									, trmb::Localize::getInstance().getString(mDidYouKnow.getDidYouKnow()));
 								// ALW - This will ignore the rest of the collision pairs and potential malaria transmissions
 								// ALW - for this pass only. This is done, so the user sees exactly one transmission when the
 								// ALW - transmission message appears. Otherwise, there may be multiple transmissions when the
@@ -707,9 +709,3 @@ int World::getHouseCount() const
 	return count;
 }
 
-void World::triggerEventMessage(const std::string eventMessage)
-{
-	const std::string didYouKnowMsg = trmb::Localize::getInstance().getString(mDidYouKnow.getDidYouKnow());
-	mChatBoxUI.updateText(eventMessage + " " + didYouKnowMsg, true);
-	mSoundPlayer.play(SoundEffects::ID::Button);
-}

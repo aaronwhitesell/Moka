@@ -102,7 +102,6 @@ private:
 	sf::Vector2f						getRandomSpawnPositionNearBarrel(std::size_t barrelID) const;
 	std::string							getRandomHouseName(int exlusiveMax) const;
 	int									getHouseCount() const;
-	void								triggerEventMessage(const std::string eventMessage);
 
 
 private:

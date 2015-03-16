@@ -1,11 +1,13 @@
 #include "eventDialogManager.h"
 #include "didYouKnow.h"
 #include "../HUD/chatBoxUI.h"
+#include "../Resources/resourceIdentifiers.h"
 
 #include "Trambo/Localize/localize.h"
+#include "Trambo/Sounds/soundPlayer.h"
 
 
-EventDialogManager::EventDialogManager(ChatBoxUI &chatBoxUI, DidYouKnow &didYouKnow)
+EventDialogManager::EventDialogManager(ChatBoxUI &chatBoxUI, DidYouKnow &didYouKnow, trmb::SoundPlayer &soundPlayer)
 : mEventDialog1(sf::seconds(20))
 , mEventDialog2(sf::seconds(40))
 , mEventDialog3(sf::seconds(60))
@@ -14,6 +16,7 @@ EventDialogManager::EventDialogManager(ChatBoxUI &chatBoxUI, DidYouKnow &didYouK
 , mSimulationDuration(sf::seconds(120))
 , mChatBoxUI(chatBoxUI)
 , mDidYouKnow(didYouKnow)
+, mSoundPlayer(soundPlayer)
 , mTimer()
 , mPause(true)
 , mFinished(false)
@@ -28,6 +31,18 @@ EventDialogManager::EventDialogManager(ChatBoxUI &chatBoxUI, DidYouKnow &didYouK
 bool EventDialogManager::isFinished() const
 {
 	return mFinished;
+}
+
+void EventDialogManager::updateText(std::string didYouKnow)
+{
+	mChatBoxUI.updateText(didYouKnow, true);
+	mSoundPlayer.play(SoundEffects::ID::Button);
+}
+
+void EventDialogManager::updateText(std::string eventDialog, std::string didYouKnow)
+{
+	mChatBoxUI.updateText(eventDialog + " " + didYouKnow, true);
+	mSoundPlayer.play(SoundEffects::ID::Button);
 }
 
 void EventDialogManager::start()
@@ -58,27 +73,27 @@ void EventDialogManager::update(sf::Time dt)
 		}
 		else if (mEventDialog5 <= mTimer && !mDisableEventDialog5)
 		{
-			mChatBoxUI.updateText(trmb::Localize::getInstance().getString(mDidYouKnow.getDidYouKnow()), true);
+			updateText(trmb::Localize::getInstance().getString(mDidYouKnow.getDidYouKnow()));
 			mDisableEventDialog5 = true;
 		}
 		if (mEventDialog4 <= mTimer && !mDisableEventDialog4)
 		{
-			mChatBoxUI.updateText(trmb::Localize::getInstance().getString(mDidYouKnow.getDidYouKnow()), true);
+			updateText(trmb::Localize::getInstance().getString(mDidYouKnow.getDidYouKnow()));
 			mDisableEventDialog4 = true;
 		}
 		if (mEventDialog3 <= mTimer && !mDisableEventDialog3)
 		{
-			mChatBoxUI.updateText(trmb::Localize::getInstance().getString(mDidYouKnow.getDidYouKnow()), true);
+			updateText(trmb::Localize::getInstance().getString(mDidYouKnow.getDidYouKnow()));
 			mDisableEventDialog3 = true;
 		}
 		if (mEventDialog2 <= mTimer && !mDisableEventDialog2)
 		{
-			mChatBoxUI.updateText(trmb::Localize::getInstance().getString(mDidYouKnow.getDidYouKnow()), true);
+			updateText(trmb::Localize::getInstance().getString(mDidYouKnow.getDidYouKnow()));
 			mDisableEventDialog2 = true;
 		}
 		if (mEventDialog1 <= mTimer && !mDisableEventDialog1)
 		{
-			mChatBoxUI.updateText(trmb::Localize::getInstance().getString(mDidYouKnow.getDidYouKnow()), true);
+			updateText(trmb::Localize::getInstance().getString(mDidYouKnow.getDidYouKnow()));
 			mDisableEventDialog1 = true;
 		}
 	}
