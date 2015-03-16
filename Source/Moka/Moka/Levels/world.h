@@ -1,13 +1,14 @@
 #ifndef WORLD_H
 #define WORLD_H
 
-#include "../DidYouKnow/didYouKnow.h"
+#include "../EventDialog/didYouKnow.h"
 #include "../HUD/chatBoxUI.h"
 #include "../HUD/daylightUI.h"
 #include "../HUD/mainTrackerUI.h"
 #include "../HUD/optionsUI.h"
 #include "../HUD/uiBundle.h"
 #include "../HUD/undoUI.h"
+#include "../EventDialog/eventDialogManager.h"
 #include "../GameObjects/objectGroups.h"
 
 #include "Trambo/Camera/camera.h"
@@ -53,6 +54,8 @@ public:
 										World(sf::RenderWindow &window, trmb::FontHolder &fonts, trmb::SoundPlayer &soundPlayer);
 										World(const World &) = delete;
 	World &								operator=(const World &) = delete;
+
+	bool								isSimulationFinished() const;
 
 	void								update(sf::Time dt);
 	virtual void						handleEvent(const trmb::Event &gameEvent);
@@ -173,6 +176,7 @@ private:
 	std::map<ResidentNode *, HouseNode *>		mResidentToHouse;
 
 	// ALW - Special Event Dialog
+	EventDialogManager							mEventDialogManager;
 	DidYouKnow									mDidYouKnow;
 	int											mTransmissionCount;
 	bool										mDisableMosquitoPopulationCheck;

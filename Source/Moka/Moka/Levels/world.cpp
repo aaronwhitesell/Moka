@@ -80,6 +80,7 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mDoorToHouse()
 , mWindowToHouse()
 , mResidentToHouse()
+, mEventDialogManager(mChatBoxUI, mDidYouKnow)
 , mDidYouKnow(10)			// ALW - Total number of DidYouKnow facts in Text.xml
 , mTransmissionCount(0)
 , mDisableMosquitoPopulationCheck(false)
@@ -95,6 +96,11 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 	initializeDoorToHouseMap();
 	initializeWindowToHouseMap();
 	initializeResidentToHouseMap();
+}
+
+bool World::isSimulationFinished() const
+{
+	return mEventDialogManager.isFinished();
 }
 
 void World::update(sf::Time dt)
@@ -123,6 +129,7 @@ void World::update(sf::Time dt)
 				triggerEventMessage(trmb::Localize::getInstance().getString("mosquitoPopulationEvent"));
 		}
 	}
+	mEventDialogManager.update(dt);
 }
 
 void World::handleEvent(const trmb::Event &gameEvent)
@@ -138,15 +145,22 @@ void World::handleEvent(const trmb::Event &gameEvent)
 	else if (mCreateTextPrompt == gameEvent.getType())
 	{
 		mDisableInput = true;
+
+		if (mBeginSimulationMode)
+			mEventDialogManager.stop();
 	}
 	else if (mClearTextPrompt == gameEvent.getType())
 	{
 		mDisableInput = false;
+
+		if (mBeginSimulationMode)
+			mEventDialogManager.start();
 	}
 	else if (mBeginSimulationEvent == gameEvent.getType())
 	{
-		mMainTrackerUI.addInfectedResident(); // ALW - Track patient zero
 		mBeginSimulationMode = true;
+		mMainTrackerUI.addInfectedResident(); // ALW - Track patient zero
+		mEventDialogManager.start();
 	}
 	else if (mSpawnMosquitoEvent == gameEvent.getType())
 	{

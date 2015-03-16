@@ -114,10 +114,10 @@
     <Filter Include="Source Files\SceneNodes\Resident">
       <UniqueIdentifier>{d49fc01e-1d24-4abc-8738-b8ea16ff69b5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\DidYouKnow">
+    <Filter Include="Header Files\EventDialog">
       <UniqueIdentifier>{679898fb-6997-4990-89c3-8ef4f5576cfd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\DidYouKnow">
+    <Filter Include="Source Files\EventDialog">
       <UniqueIdentifier>{ba10d0b1-7ed7-4e8b-b7e9-8d5bbc4cf1b8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -263,8 +263,11 @@
     <ClInclude Include="SceneNodes\residentUpdateNode.h">
       <Filter>Header Files\SceneNodes\Update</Filter>
     </ClInclude>
-    <ClInclude Include="DidYouKnow\didYouKnow.h">
-      <Filter>Header Files\DidYouKnow</Filter>
+    <ClInclude Include="EventDialog\eventDialogManager.h">
+      <Filter>Header Files\EventDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="EventDialog\didYouKnow.h">
+      <Filter>Header Files\EventDialog</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -406,8 +409,11 @@
     <ClCompile Include="SceneNodes\residentUpdateNode.cpp">
       <Filter>Source Files\SceneNodes\Update</Filter>
     </ClCompile>
-    <ClCompile Include="DidYouKnow\didYouKnow.cpp">
-      <Filter>Source Files\DidYouKnow</Filter>
+    <ClCompile Include="EventDialog\eventDialogManager.cpp">
+      <Filter>Source Files\EventDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="EventDialog\didYouKnow.cpp">
+      <Filter>Source Files\EventDialog</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
