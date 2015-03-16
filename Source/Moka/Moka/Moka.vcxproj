@@ -121,6 +121,7 @@
     <ClInclude Include="SceneNodes\windowUpdateNode.h" />
     <ClInclude Include="SceneNodes\windowUINode.h" />
     <ClInclude Include="States\creditState.h" />
+    <ClInclude Include="States\gameOverState.h" />
     <ClInclude Include="States\gameState.h" />
     <ClInclude Include="States\menuState.h" />
     <ClInclude Include="States\pauseState.h" />
@@ -172,6 +173,7 @@
     <ClCompile Include="SceneNodes\windowUpdateNode.cpp" />
     <ClCompile Include="SceneNodes\windowUINode.cpp" />
     <ClCompile Include="States\creditState.cpp" />
+    <ClCompile Include="States\gameOverState.cpp" />
     <ClCompile Include="States\gameState.cpp" />
     <ClCompile Include="States\menuState.cpp" />
     <ClCompile Include="States\pauseState.cpp" />

@@ -269,6 +269,9 @@
     <ClInclude Include="EventDialog\didYouKnow.h">
       <Filter>Header Files\EventDialog</Filter>
     </ClInclude>
+    <ClInclude Include="States\gameOverState.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\application.cpp">
@@ -414,6 +417,9 @@
     </ClCompile>
     <ClCompile Include="EventDialog\didYouKnow.cpp">
       <Filter>Source Files\EventDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="States\gameOverState.cpp">
+      <Filter>Source Files\States</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

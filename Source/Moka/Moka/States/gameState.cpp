@@ -42,6 +42,11 @@ bool GameState::update(sf::Time dt)
 //		requestStackPush(States::ID::GameOver);
 //	}
 
+	if (mWorld.isSimulationFinished())
+	{
+		requestStackPush(States::ID::GameOver);
+	}
+
 	mPlayer.update();
 
 	return true;

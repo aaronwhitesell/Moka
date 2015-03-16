@@ -2,7 +2,7 @@
 
 #include "../Resources/resourceIdentifiers.h"
 #include "../States/gameState.h"
-//#include "../Game/State/gameOverState.h"
+#include "../States/gameOverState.h"
 #include "../States/menuState.h"
 #include "../States/pauseState.h"
 #include "../States/creditState.h"
@@ -155,5 +155,5 @@ void Application::registerStates()
 	mStateStack.registerState<GameState>(States::ID::Game);
 	mStateStack.registerState<PauseState>(States::ID::Pause);
 	mStateStack.registerState<CreditState>(States::ID::Credits);
-//	mStateStack.registerState<GameOverState>(States::ID::GameOver);
+	mStateStack.registerState<GameOverState>(States::ID::GameOver);
 }

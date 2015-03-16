@@ -12,7 +12,7 @@ namespace States
 		Credits,
 		Game,
 		Pause,
-//		GameOver
+		GameOver
 	};
 }
 
