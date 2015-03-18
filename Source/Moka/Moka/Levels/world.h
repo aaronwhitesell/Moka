@@ -81,10 +81,12 @@ private:
 	bool								isFirstTransmission() const;
 	bool								hasMosquitoPopulationDoubled();
 	bool								existsClinicEventDialog() const;
+	bool								existsHouseEventDialog() const;
 
 	void								updateScheduledEventDialog(sf::Time dt);
 	void								calculateTotalScheduledEventDialogs();
 	void								displayClinicEventDialog();
+	void								displayHouseEventDialog();
 
 	void								initializeDoorToHouseMap();
 	void								initializeWindowToHouseMap();
@@ -184,7 +186,9 @@ private:
 	DidYouKnow									mDidYouKnow;
 
 	// ALW - Scheduled Event Dialog
+	std::vector<HouseNode *>					mHouses;
 	bool										mDisplayClinicEventDialog;
+	bool										mDisplayHouseEventDialog;
 
 	// ALW - Unscheduled Event Dialog
 	int											mTransmissionCount;

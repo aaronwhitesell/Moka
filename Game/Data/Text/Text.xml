@@ -51,6 +51,11 @@ damaged bed net it can be repaired?"/>
 treatment."/>
 		<RDTEvent                  attribute="The clinic has no RDTs! The residents will not go to the clinic to be diagnosed."/>
 		<ACTEvent                  attribute="The clinic has no ACTs! The residents will not receive treatment."/>
+		<PurchaseAndRepairEvent    attribute="No mosquito nets were purchased or repaired. Mosquito nets are one of the most effective ways to
+protect yourself. Repairing a mosquito net with a needle and thread is simple and cheap."/>
+		<PurchaseEvent			   attribute="No mosquito nets were purchased! Mosquito nets are one of the most effective ways to protect yourself."/>
+		<RepairEvent			   attribute="No repairs were made to the mosquito nets! Repairing a mosquito net with a needle and thread is simple
+and cheap."/>
 		<didYouKnow0			   attribute="DID YOU KNOW: Everyone with a fever should get tested for malaria."/>
 		<didYouKnow1			   attribute="DID YOU KNOW: A mosquito needs your blood for her eggs to develop? Squash her!"/>
 		<didYouKnow2			   attribute="DID YOU KNOW: A mosquito net has to be tucked in on all sides of the bed to be effective."/>

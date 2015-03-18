@@ -82,7 +82,9 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mResidentToHouse()
 , mEventDialogManager(mChatBoxUI, mDidYouKnow, soundPlayer)
 , mDidYouKnow(10)			// ALW - Total number of DidYouKnow facts in Text.xml
+, mHouses()
 , mDisplayClinicEventDialog(false)
+, mDisplayHouseEventDialog(false)
 , mTransmissionCount(0)
 , mDisableMosquitoPopulationCheck(false)
 {
@@ -219,13 +221,32 @@ bool World::existsClinicEventDialog() const
 	return totalRDTs == 0 || totalACTs == 0;
 }
 
+bool World::existsHouseEventDialog() const
+{
+	int totalPurchases = 0;
+	int totalRepairs = 0;
+
+	for (const HouseNode * const house : mHouses)
+	{
+		totalPurchases += house->getTotalPurchases();
+		totalRepairs += house->getTotalRepairs();
+	}
+
+	return totalPurchases == 0 || totalRepairs == 0;
+}
+
 void World::updateScheduledEventDialog(sf::Time dt)
 {
 	mEventDialogManager.update(dt);
 
 	if (mEventDialogManager.isReadyToDisplay())
 	{
-		if (mDisplayClinicEventDialog)
+		if (mDisplayHouseEventDialog)
+		{
+			displayHouseEventDialog();			// ALW - No bednets were purchased or repaired. Remind the player.
+			mDisplayHouseEventDialog = false;	// ALW - Only display once.
+		}
+		else if (mDisplayClinicEventDialog)
 		{
 			displayClinicEventDialog();			// ALW - There are no RDTs or ACTs. Remind the player.
 			mDisplayClinicEventDialog = false;	// ALW - Only display once.
@@ -240,8 +261,12 @@ void World::calculateTotalScheduledEventDialogs()
 	int totalScheduledEventDialogs = 0;
 
 	mDisplayClinicEventDialog = existsClinicEventDialog();
+	mDisplayHouseEventDialog = existsHouseEventDialog();
 
 	if (mDisplayClinicEventDialog)
+		++totalScheduledEventDialogs;
+
+	if (mDisplayHouseEventDialog)
 		++totalScheduledEventDialogs;
 
 	mEventDialogManager.initialize(totalScheduledEventDialogs);
@@ -252,7 +277,7 @@ void World::displayClinicEventDialog()
 	const int totalRDTs = mClinic->getTotalRDTs();
 	const int totalACTs = mClinic->getTotalACTs();
 
-	assert(("The clinic is stocked!", totalRDTs == 0 || totalACTs == 0));
+	assert(("A RDT or ACT reminder is not needed!", totalRDTs == 0 || totalACTs == 0));
 
 	if (totalRDTs == 0 && totalACTs == 0)
 		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("RDTandACTEvent"));
@@ -260,6 +285,27 @@ void World::displayClinicEventDialog()
 		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("RDTEvent"));
 	else if (totalACTs == 0)
 		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("ACTEvent"));
+}
+
+void World::displayHouseEventDialog()
+{
+	int totalPurchases = 0;
+	int totalRepairs = 0;
+
+	for (const HouseNode * const house : mHouses)
+	{
+		totalPurchases += house->getTotalPurchases();
+		totalRepairs += house->getTotalRepairs();
+	}
+
+	assert(("A bednet reminder is not needed!", totalPurchases == 0 || totalRepairs == 0));
+
+	if (totalPurchases == 0 && totalRepairs == 0)
+		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("PurchaseAndRepairEvent"));
+	else if (totalPurchases == 0)
+		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("PurchaseEvent"));
+	else if (totalRepairs == 0)
+		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("RepairEvent"));
 }
 
 void World::initializeDoorToHouseMap()
@@ -616,6 +662,7 @@ void World::buildScene()
 		{
 			std::unique_ptr<HouseNode> house(
 				new HouseNode(*iter, mWindow, mCamera.getView(), mUIBundle, buildAttachedRects(*iter), mFonts, mSoundPlayer));
+			mHouses.emplace_back(house.get());
 
 			bool houseMatch = false;
 			int infectResident = 0;

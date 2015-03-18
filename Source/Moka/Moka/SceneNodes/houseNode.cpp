@@ -66,6 +66,16 @@ int	HouseNode::getTotalDamagedNets() const
 	return mTotalOldNets - mRepairCount;
 }
 
+int	HouseNode::getTotalPurchases() const
+{
+	return mNewNetCount;
+}
+
+int	HouseNode::getTotalRepairs() const
+{
+	return mRepairCount;
+}
+
 sf::FloatRect HouseNode::getBoundingRect() const
 {
 	return sf::FloatRect(mInteractiveObject.getCollisionBoxXCoord(), mInteractiveObject.getCollisionBoxYCoord()

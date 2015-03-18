@@ -43,6 +43,8 @@ public:
 
 	int							getTotalMintNets() const;
 	int							getTotalDamagedNets() const;
+	int							getTotalPurchases() const;
+	int							getTotalRepairs() const;
 	virtual sf::FloatRect		getBoundingRect() const override;
 
 	void						addInfectedMosquito();
