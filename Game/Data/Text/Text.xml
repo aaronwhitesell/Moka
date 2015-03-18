@@ -56,7 +56,12 @@ protect yourself. Repairing a mosquito net with a needle and thread is simple an
 		<PurchaseEvent			   attribute="No mosquito nets were purchased! Mosquito nets are one of the most effective ways to protect yourself."/>
 		<RepairEvent			   attribute="No repairs were made to the mosquito nets! Repairing a mosquito net with a needle and thread is simple
 and cheap."/>
-		<didYouKnow0			   attribute="DID YOU KNOW: Everyone with a fever should get tested for malaria."/>
+		<ScreenAndClosedEvent      attribute="No windows have a screen or have been closed. A screen is a great way to reduce the mosquitoes inside
+a house. Simply closing a window can be very effective also."/>
+		<ScreenEvent      		   attribute="No windows have a screen. A screen is a great way to reduce the mosquitoes inside a house."/>
+		<ClosedEvent      		   attribute="No windows have been closed. Simply closing a window can be very effective way to reduce mosquitoes
+inside a house."/>
+ 		<didYouKnow0			   attribute="DID YOU KNOW: Everyone with a fever should get tested for malaria."/>
 		<didYouKnow1			   attribute="DID YOU KNOW: A mosquito needs your blood for her eggs to develop? Squash her!"/>
 		<didYouKnow2			   attribute="DID YOU KNOW: A mosquito net has to be tucked in on all sides of the bed to be effective."/>
 		<didYouKnow3			   attribute="DID YOU KNOW: Women are four times more likely to get malaria while pregnant?"/>

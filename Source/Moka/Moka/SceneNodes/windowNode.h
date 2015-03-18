@@ -46,6 +46,9 @@ public:
 								WindowNode(const WindowNode &) = delete;
 	WindowNode &				operator=(const WindowNode &) = delete;
 
+	bool						isWindowScreen() const;
+	bool						isWindowClosed() const;
+
 	virtual sf::FloatRect		getBoundingRect() const override;
 
 	bool						passThrough() const;

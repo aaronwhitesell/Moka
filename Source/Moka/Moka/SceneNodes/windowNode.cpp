@@ -47,6 +47,16 @@ WindowNode::WindowNode(const InteractiveObject &interactiveObject, const sf::Ren
 	mUIElemStates.emplace_back(true);
 }
 
+bool WindowNode::isWindowScreen() const
+{
+	return mIsWindowScreen;
+}
+
+bool WindowNode::isWindowClosed() const
+{
+	return mIsWindowClosed;
+}
+
 sf::FloatRect WindowNode::getBoundingRect() const
 {
 	return sf::FloatRect(mInteractiveObject.getCollisionBoxXCoord(), mInteractiveObject.getCollisionBoxYCoord()

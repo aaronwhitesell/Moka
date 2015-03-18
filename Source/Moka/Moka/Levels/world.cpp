@@ -83,8 +83,10 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mEventDialogManager(mChatBoxUI, mDidYouKnow, soundPlayer)
 , mDidYouKnow(10)			// ALW - Total number of DidYouKnow facts in Text.xml
 , mHouses()
+, mWindows()
 , mDisplayClinicEventDialog(false)
 , mDisplayHouseEventDialog(false)
+, mDisplayWindowEventDialog(false)
 , mTransmissionCount(0)
 , mDisableMosquitoPopulationCheck(false)
 {
@@ -235,13 +237,32 @@ bool World::existsHouseEventDialog() const
 	return totalPurchases == 0 || totalRepairs == 0;
 }
 
+bool World::existsWindowEventDialog() const
+{
+	bool anyScreen = false;
+	bool anyClosed = false;
+
+	for (const WindowNode * const window : mWindows)
+	{
+		anyScreen = anyScreen || window->isWindowScreen();
+		anyClosed = anyClosed || window->isWindowClosed();
+	}
+
+	return !anyScreen || !anyClosed;
+}
+
 void World::updateScheduledEventDialog(sf::Time dt)
 {
 	mEventDialogManager.update(dt);
 
 	if (mEventDialogManager.isReadyToDisplay())
 	{
-		if (mDisplayHouseEventDialog)
+		if (mDisplayWindowEventDialog)
+		{
+			displayWindowEventDialog();			// ALW - No windows have screens or were closed. Remind the player.
+			mDisplayWindowEventDialog = false;	// ALW - Only display once.
+		}
+		else if (mDisplayHouseEventDialog)
 		{
 			displayHouseEventDialog();			// ALW - No bednets were purchased or repaired. Remind the player.
 			mDisplayHouseEventDialog = false;	// ALW - Only display once.
@@ -262,11 +283,15 @@ void World::calculateTotalScheduledEventDialogs()
 
 	mDisplayClinicEventDialog = existsClinicEventDialog();
 	mDisplayHouseEventDialog = existsHouseEventDialog();
+	mDisplayWindowEventDialog = existsWindowEventDialog();
 
 	if (mDisplayClinicEventDialog)
 		++totalScheduledEventDialogs;
 
 	if (mDisplayHouseEventDialog)
+		++totalScheduledEventDialogs;
+
+	if (mDisplayWindowEventDialog)
 		++totalScheduledEventDialogs;
 
 	mEventDialogManager.initialize(totalScheduledEventDialogs);
@@ -306,6 +331,27 @@ void World::displayHouseEventDialog()
 		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("PurchaseEvent"));
 	else if (totalRepairs == 0)
 		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("RepairEvent"));
+}
+
+void World::displayWindowEventDialog()
+{
+	bool anyScreen = false;
+	bool anyClosed = false;
+
+	for (const WindowNode * const window : mWindows)
+	{
+		anyScreen = anyScreen || window->isWindowScreen();
+		anyClosed = anyClosed || window->isWindowClosed();
+	}
+
+	assert(("A window reminder is not needed!", !anyScreen || !anyClosed));
+
+	if (!anyScreen && !anyClosed)
+		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("ScreenAndClosedEvent"));
+	else if (!anyScreen)
+		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("ScreenEvent"));
+	else if (!anyClosed)
+		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("ClosedEvent"));
 }
 
 void World::initializeDoorToHouseMap()
@@ -643,8 +689,10 @@ void World::buildScene()
 			mSceneLayers[Update]->attachChild(std::move(std::unique_ptr<WindowUpdateNode>(
 				new WindowUpdateNode(*iter, mTextures.get(Textures::ID::Tiles)))));
 
-			mSceneLayers[WindowSelection]->attachChild(std::move(std::unique_ptr<WindowNode>(
-				new WindowNode(*iter, mWindow, mCamera.getView(), mUIBundle, mTextures, mSoundPlayer, mDaylightUI, mChatBoxUI))));
+			std::unique_ptr<WindowNode> window(new WindowNode(*iter, mWindow, mCamera.getView(), mUIBundle, mTextures, mSoundPlayer
+				, mDaylightUI, mChatBoxUI));
+			mWindows.emplace_back(window.get());
+			mSceneLayers[WindowSelection]->attachChild(std::move(window));
 		}
 		else if (iter->getType() == "Clinic")
 		{
