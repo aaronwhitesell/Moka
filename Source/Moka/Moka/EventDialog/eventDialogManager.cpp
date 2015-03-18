@@ -8,24 +8,29 @@
 
 
 EventDialogManager::EventDialogManager(ChatBoxUI &chatBoxUI, DidYouKnow &didYouKnow, trmb::SoundPlayer &soundPlayer)
-: mEventDialog1(sf::seconds(20))
-, mEventDialog2(sf::seconds(40))
-, mEventDialog3(sf::seconds(60))
-, mEventDialog4(sf::seconds(80))
-, mEventDialog5(sf::seconds(100))
-, mSimulationDuration(sf::seconds(120))
+: mSimulationDuration(sf::seconds(120))
+, mMinimumEventDialogs(3)
 , mChatBoxUI(chatBoxUI)
 , mDidYouKnow(didYouKnow)
 , mSoundPlayer(soundPlayer)
 , mTimer()
 , mPause(true)
+, mIntervalDuration()
+, mTotalIntervals(0)
+, mIntervalCount(0)
+, mReadyToDisplay(false)
 , mFinished(false)
-, mDisableEventDialog1(false)
-, mDisableEventDialog2(false)
-, mDisableEventDialog3(false)
-, mDisableEventDialog4(false)
-, mDisableEventDialog5(false)
 {
+}
+
+void EventDialogManager::initialize(int totalScheduledEventDialogs)
+{
+	if (totalScheduledEventDialogs > mMinimumEventDialogs)
+		mTotalIntervals = totalScheduledEventDialogs + 1;
+	else
+		mTotalIntervals = mMinimumEventDialogs + 1;
+
+	mIntervalDuration = mSimulationDuration / static_cast<float>(mTotalIntervals);
 }
 
 bool EventDialogManager::isFinished() const
@@ -33,15 +38,20 @@ bool EventDialogManager::isFinished() const
 	return mFinished;
 }
 
-void EventDialogManager::updateText(std::string didYouKnow)
+bool EventDialogManager::isReadyToDisplay()
 {
-	mChatBoxUI.updateText(didYouKnow, true);
-	mSoundPlayer.play(SoundEffects::ID::Button);
+	bool ret = mReadyToDisplay;
+
+	// ALW - Only return true once per interval.
+	if (mReadyToDisplay)
+		mReadyToDisplay = false;
+
+	return ret;
 }
 
-void EventDialogManager::updateText(std::string eventDialog, std::string didYouKnow)
+void EventDialogManager::displayText(std::string string)
 {
-	mChatBoxUI.updateText(eventDialog + " " + didYouKnow, true);
+	mChatBoxUI.updateText(string, true);
 	mSoundPlayer.play(SoundEffects::ID::Button);
 }
 
@@ -63,38 +73,29 @@ void EventDialogManager::reset()
 
 void EventDialogManager::update(sf::Time dt)
 {
-	if (!mPause)
+	// ALW - Event dialogs are not displayed at the beginning of the first interval or then end of the last interval.
+	// ALW - If an asterisk represents the displaying of an event dialog and there 3 synchronous event dialogs then it 
+	// ALW - look like this. | interval 1 |* interval 2 |* interval 3 |* interval 4 |
+	if (!mPause && !mFinished)
 	{
 		mTimer += dt;
 
-		if (mSimulationDuration <= mTimer)
+		if (mIntervalCount < mTotalIntervals)
 		{
-			mFinished = true;
-		}
-		else if (mEventDialog5 <= mTimer && !mDisableEventDialog5)
-		{
-			updateText(trmb::Localize::getInstance().getString(mDidYouKnow.getDidYouKnow()));
-			mDisableEventDialog5 = true;
-		}
-		if (mEventDialog4 <= mTimer && !mDisableEventDialog4)
-		{
-			updateText(trmb::Localize::getInstance().getString(mDidYouKnow.getDidYouKnow()));
-			mDisableEventDialog4 = true;
-		}
-		if (mEventDialog3 <= mTimer && !mDisableEventDialog3)
-		{
-			updateText(trmb::Localize::getInstance().getString(mDidYouKnow.getDidYouKnow()));
-			mDisableEventDialog3 = true;
-		}
-		if (mEventDialog2 <= mTimer && !mDisableEventDialog2)
-		{
-			updateText(trmb::Localize::getInstance().getString(mDidYouKnow.getDidYouKnow()));
-			mDisableEventDialog2 = true;
-		}
-		if (mEventDialog1 <= mTimer && !mDisableEventDialog1)
-		{
-			updateText(trmb::Localize::getInstance().getString(mDidYouKnow.getDidYouKnow()));
-			mDisableEventDialog1 = true;
+			sf::Time startOfNextInterval = mIntervalDuration * static_cast<float>(mIntervalCount + 1);
+
+			if (startOfNextInterval <= mTimer)
+			{
+				++mIntervalCount;
+
+				if (mIntervalCount >= mTotalIntervals)
+				{
+					mReadyToDisplay = false;
+					mFinished = true;
+				}
+				else
+					mReadyToDisplay = true;
+			}
 		}
 	}
 }

@@ -21,10 +21,12 @@ public:
 								EventDialogManager(const EventDialogManager &) = delete;
 	EventDialogManager &		operator=(const EventDialogManager &) = delete;
 
-	bool						isFinished() const;
+	void						initialize(int totalScheduledEventDialogs);
 
-	void						updateText(std::string didYouKnow);
-	void						updateText(std::string eventDialog, std::string didYouKnow);
+	bool						isFinished() const;
+	bool						isReadyToDisplay();
+
+	void						displayText(std::string string);
 
 	void						start();
 	void						stop();
@@ -34,12 +36,8 @@ public:
 
 
 private:
-	const sf::Time				mEventDialog1;
-	const sf::Time				mEventDialog2;
-	const sf::Time				mEventDialog3;
-	const sf::Time				mEventDialog4;
-	const sf::Time				mEventDialog5;
 	const sf::Time              mSimulationDuration;
+	const int					mMinimumEventDialogs;
 
 	ChatBoxUI					&mChatBoxUI;
 	DidYouKnow					&mDidYouKnow;
@@ -47,13 +45,12 @@ private:
 
 	sf::Time					mTimer;
 	bool						mPause;
-	bool						mFinished;
 
-	bool						mDisableEventDialog1;
-	bool						mDisableEventDialog2;
-	bool						mDisableEventDialog3;
-	bool						mDisableEventDialog4;
-	bool						mDisableEventDialog5;
+	sf::Time					mIntervalDuration;
+	int							mTotalIntervals;
+	int							mIntervalCount;
+	bool						mReadyToDisplay;
+	bool						mFinished;
 };
 
 #endif

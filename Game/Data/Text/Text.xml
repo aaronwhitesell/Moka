@@ -47,6 +47,10 @@ damaged bed net it can be repaired?"/>
 		<infectedUI		   		   attribute="Infected"/>
 		<transmissionEvent         attribute="Malaria has spread from one resident to another!"/>
 		<mosquitoPopulationEvent   attribute="The mosquito population has doubled!"/>
+		<RDTandACTEvent            attribute="The clinic has no RDTs or ACTs! The residents will not go to the clinic to be diagnosed or receive
+treatment."/>
+		<RDTEvent                  attribute="The clinic has no RDTs! The residents will not go to the clinic to be diagnosed."/>
+		<ACTEvent                  attribute="The clinic has no ACTs! The residents will not receive treatment."/>
 		<didYouKnow0			   attribute="DID YOU KNOW: Everyone with a fever should get tested for malaria."/>
 		<didYouKnow1			   attribute="DID YOU KNOW: A mosquito needs your blood for her eggs to develop? Squash her!"/>
 		<didYouKnow2			   attribute="DID YOU KNOW: A mosquito net has to be tucked in on all sides of the bed to be effective."/>

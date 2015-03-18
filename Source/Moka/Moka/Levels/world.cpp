@@ -82,6 +82,7 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mResidentToHouse()
 , mEventDialogManager(mChatBoxUI, mDidYouKnow, soundPlayer)
 , mDidYouKnow(10)			// ALW - Total number of DidYouKnow facts in Text.xml
+, mDisplayClinicEventDialog(false)
 , mTransmissionCount(0)
 , mDisableMosquitoPopulationCheck(false)
 {
@@ -126,11 +127,11 @@ void World::update(sf::Time dt)
 		{
 			spawnBarrelMosquitoes();
 			if (hasMosquitoPopulationDoubled())
-				mEventDialogManager.updateText(trmb::Localize::getInstance().getString("mosquitoPopulationEvent")
-					, trmb::Localize::getInstance().getString(mDidYouKnow.getDidYouKnow()));
+				mEventDialogManager.displayText(trmb::Localize::getInstance().getString("mosquitoPopulationEvent"));
+
+			updateScheduledEventDialog(dt);
 		}
 	}
-	mEventDialogManager.update(dt);
 }
 
 void World::handleEvent(const trmb::Event &gameEvent)
@@ -161,6 +162,8 @@ void World::handleEvent(const trmb::Event &gameEvent)
 	{
 		mBeginSimulationMode = true;
 		mMainTrackerUI.addInfectedResident(); // ALW - Track patient zero
+
+		calculateTotalScheduledEventDialogs();
 		mEventDialogManager.start();
 	}
 	else if (mSpawnMosquitoEvent == gameEvent.getType())
@@ -206,6 +209,57 @@ bool World::hasMosquitoPopulationDoubled()
 	}
 
 	return ret;
+}
+
+bool World::existsClinicEventDialog() const
+{
+	const int totalRDTs = mClinic->getTotalRDTs();
+	const int totalACTs = mClinic->getTotalACTs();
+
+	return totalRDTs == 0 || totalACTs == 0;
+}
+
+void World::updateScheduledEventDialog(sf::Time dt)
+{
+	mEventDialogManager.update(dt);
+
+	if (mEventDialogManager.isReadyToDisplay())
+	{
+		if (mDisplayClinicEventDialog)
+		{
+			displayClinicEventDialog();			// ALW - There are no RDTs or ACTs. Remind the player.
+			mDisplayClinicEventDialog = false;	// ALW - Only display once.
+		}
+		else
+			mEventDialogManager.displayText(trmb::Localize::getInstance().getString(mDidYouKnow.getDidYouKnow()));
+	}
+}
+
+void World::calculateTotalScheduledEventDialogs()
+{
+	int totalScheduledEventDialogs = 0;
+
+	mDisplayClinicEventDialog = existsClinicEventDialog();
+
+	if (mDisplayClinicEventDialog)
+		++totalScheduledEventDialogs;
+
+	mEventDialogManager.initialize(totalScheduledEventDialogs);
+}
+
+void World::displayClinicEventDialog()
+{
+	const int totalRDTs = mClinic->getTotalRDTs();
+	const int totalACTs = mClinic->getTotalACTs();
+
+	assert(("The clinic is stocked!", totalRDTs == 0 || totalACTs == 0));
+
+	if (totalRDTs == 0 && totalACTs == 0)
+		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("RDTandACTEvent"));
+	else if (totalRDTs == 0)
+		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("RDTEvent"));
+	else if (totalACTs == 0)
+		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("ACTEvent"));
 }
 
 void World::initializeDoorToHouseMap()
@@ -389,8 +443,7 @@ void World::mosquitoResidentCollisions()
 
 							if (isFirstTransmission())
 							{
-								mEventDialogManager.updateText(trmb::Localize::getInstance().getString("transmissionEvent")
-									, trmb::Localize::getInstance().getString(mDidYouKnow.getDidYouKnow()));
+								mEventDialogManager.displayText(trmb::Localize::getInstance().getString("transmissionEvent"));
 								// ALW - This will ignore the rest of the collision pairs and potential malaria transmissions
 								// ALW - for this pass only. This is done, so the user sees exactly one transmission when the
 								// ALW - transmission message appears. Otherwise, there may be multiple transmissions when the
