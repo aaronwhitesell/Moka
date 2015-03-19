@@ -46,6 +46,8 @@ public:
 								DoorNode(const DoorNode &) = delete;
 	DoorNode &					operator=(const DoorNode &) = delete;
 
+	bool						isDoorClosed() const;
+
 	virtual sf::FloatRect		getBoundingRect() const override;
 
 	bool						passThrough() const;

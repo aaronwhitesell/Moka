@@ -39,6 +39,11 @@ DoorNode::DoorNode(const InteractiveObject &interactiveObject, const sf::RenderW
 	mUIElemStates.emplace_back(true);
 }
 
+bool DoorNode::isDoorClosed() const
+{
+	return mIsDoorClosed;
+}
+
 sf::FloatRect DoorNode::getBoundingRect() const
 {
 	return sf::FloatRect(mInteractiveObject.getCollisionBoxXCoord(), mInteractiveObject.getCollisionBoxYCoord()

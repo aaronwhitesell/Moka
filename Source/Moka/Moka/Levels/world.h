@@ -81,12 +81,14 @@ private:
 	bool								isFirstTransmission() const;
 	bool								hasMosquitoPopulationDoubled();
 	bool								existsClinicEventDialog() const;
+	bool								existsDoorEventDialog() const;
 	bool								existsHouseEventDialog() const;
 	bool								existsWindowEventDialog() const;
 
 	void								updateScheduledEventDialog(sf::Time dt);
 	void								calculateTotalScheduledEventDialogs();
 	void								displayClinicEventDialog();
+	void								displayDoorEventDialog();
 	void								displayHouseEventDialog();
 	void								displayWindowEventDialog();
 
@@ -188,9 +190,11 @@ private:
 	DidYouKnow									mDidYouKnow;
 
 	// ALW - Scheduled Event Dialog
+	std::vector<DoorNode *>						mDoors;
 	std::vector<HouseNode *>					mHouses;
 	std::vector<WindowNode *>					mWindows;
 	bool										mDisplayClinicEventDialog;
+	bool										mDisplayDoorEventDialog;
 	bool										mDisplayHouseEventDialog;
 	bool										mDisplayWindowEventDialog;
 

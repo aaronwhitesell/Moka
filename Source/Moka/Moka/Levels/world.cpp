@@ -82,9 +82,11 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mResidentToHouse()
 , mEventDialogManager(mChatBoxUI, mDidYouKnow, soundPlayer)
 , mDidYouKnow(10)			// ALW - Total number of DidYouKnow facts in Text.xml
+, mDoors()
 , mHouses()
 , mWindows()
 , mDisplayClinicEventDialog(false)
+, mDisplayDoorEventDialog(false)
 , mDisplayHouseEventDialog(false)
 , mDisplayWindowEventDialog(false)
 , mTransmissionCount(0)
@@ -223,6 +225,18 @@ bool World::existsClinicEventDialog() const
 	return totalRDTs == 0 || totalACTs == 0;
 }
 
+bool World::existsDoorEventDialog() const
+{
+	bool closedDoors = false;
+
+	for (const DoorNode * const door : mDoors)
+	{
+		closedDoors = closedDoors || door->isDoorClosed();
+	}
+
+	return !closedDoors;
+}
+
 bool World::existsHouseEventDialog() const
 {
 	int totalPurchases = 0;
@@ -257,7 +271,12 @@ void World::updateScheduledEventDialog(sf::Time dt)
 
 	if (mEventDialogManager.isReadyToDisplay())
 	{
-		if (mDisplayWindowEventDialog)
+		if (mDisplayDoorEventDialog)
+		{
+			displayDoorEventDialog();			// ALW - No doors were closed. Remind the player.
+			mDisplayDoorEventDialog = false;	// ALW - Only display once.
+		}
+		else if (mDisplayWindowEventDialog)
 		{
 			displayWindowEventDialog();			// ALW - No windows have screens or were closed. Remind the player.
 			mDisplayWindowEventDialog = false;	// ALW - Only display once.
@@ -282,10 +301,14 @@ void World::calculateTotalScheduledEventDialogs()
 	int totalScheduledEventDialogs = 0;
 
 	mDisplayClinicEventDialog = existsClinicEventDialog();
+	mDisplayDoorEventDialog = existsDoorEventDialog();
 	mDisplayHouseEventDialog = existsHouseEventDialog();
 	mDisplayWindowEventDialog = existsWindowEventDialog();
 
 	if (mDisplayClinicEventDialog)
+		++totalScheduledEventDialogs;
+
+	if (mDisplayDoorEventDialog)
 		++totalScheduledEventDialogs;
 
 	if (mDisplayHouseEventDialog)
@@ -310,6 +333,15 @@ void World::displayClinicEventDialog()
 		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("RDTEvent"));
 	else if (totalACTs == 0)
 		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("ACTEvent"));
+}
+
+void World::displayDoorEventDialog()
+{
+	const bool isEvent = existsDoorEventDialog();
+	assert(("A door reminder is not needed!", isEvent));
+
+	if (isEvent)
+		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("ClosedDoorEvent"));
 }
 
 void World::displayHouseEventDialog()
@@ -681,8 +713,10 @@ void World::buildScene()
 			mSceneLayers[Update]->attachChild(std::move(std::unique_ptr<DoorUpdateNode>(
 				new DoorUpdateNode(*iter, mTextures.get(Textures::ID::Tiles)))));
 
-			mSceneLayers[DoorSelection]->attachChild(std::move(std::unique_ptr<DoorNode>(
-				new DoorNode(*iter, mWindow, mCamera.getView(), mUIBundle, mTextures, mSoundPlayer, mDaylightUI, mChatBoxUI))));
+			std::unique_ptr<DoorNode> door(new DoorNode(*iter, mWindow, mCamera.getView(), mUIBundle, mTextures, mSoundPlayer
+				, mDaylightUI, mChatBoxUI));
+			mDoors.emplace_back(door.get());
+			mSceneLayers[DoorSelection]->attachChild(std::move(door));
 		}
 		else if (iter->getType() == "Window")
 		{
