@@ -2,6 +2,7 @@
 #include "../Resources/resourceIdentifiers.h"
 
 #include "Trambo/Events/event.h"
+#include "Trambo/Localize/localize.h"
 #include "Trambo/Utilities/utility.h"
 
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -24,7 +25,7 @@ CreditState::CreditState(trmb::StateStack &stack, trmb::State::Context context)
 	mBackgroundSprite.setPosition(center);
 
 	mText.setFont(context.fonts->get(Fonts::ID::Title));
-	mText.setString("Credits");
+	mText.setString(trmb::Localize::getInstance().getString("creditTitleUI"));
 	mText.setColor(sf::Color(187, 10, 30, 255));
 	mText.setCharacterSize(125);
 	trmb::centerOrigin(mText);
@@ -36,7 +37,7 @@ CreditState::CreditState(trmb::StateStack &stack, trmb::State::Context context)
 
 	mBackButton = std::make_shared<trmb::Button>(context, Fonts::ID::Main, SoundEffects::ID::Button, Textures::ID::Buttons, 200, 50);
 	mBackButton->setPosition(x, y + buttonHeight);
-	mBackButton->setText("Back");
+	mBackButton->setText(trmb::Localize::getInstance().getString("backButton"));
 	mBackButton->setCallback(std::bind(&CreditState::requestStackPop, this));
 
 	mGUIContainer.pack(mBackButton);

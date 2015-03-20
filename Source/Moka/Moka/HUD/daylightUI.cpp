@@ -67,7 +67,7 @@ DaylightUI::DaylightUI(const sf::RenderWindow &window, trmb::Camera &camera, Fon
 
 	mButton->setFont(font);
 	mButton->setCharacterSize(22u);
-	mButton->setText(trmb::Localize::getInstance().getString("daylightUIButton"));
+	mButton->setText(trmb::Localize::getInstance().getString("daylightButton"));
 	mButton->setVisualScheme(sf::Color(95u, 158u, 160u, 255u), sf::Color(255u, 255u, 255u, 255u), sf::Color(0u, 0u, 0u, 255u)
 		, sf::Color(162u, 181u, 205u, 255u), sf::Color(255u, 255u, 255u, 255u), sf::Color(0u, 0u, 0u, 255u) // Hover
 		, sf::Color(88u, 146u, 148u, 255u), sf::Color(255u, 255u, 255u, 255u), sf::Color(0u, 0u, 0u, 255u)  // Depress

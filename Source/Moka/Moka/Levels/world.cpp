@@ -81,7 +81,7 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mWindowToHouse()
 , mResidentToHouse()
 , mEventDialogManager(mChatBoxUI, mDidYouKnow, soundPlayer)
-, mDidYouKnow(10)			// ALW - Total number of DidYouKnow facts in Text.xml
+, mDidYouKnow(11)			// ALW - Total number of DidYouKnow facts in Text.xml
 , mDoors()
 , mHouses()
 , mWindows()
@@ -328,7 +328,7 @@ void World::displayClinicEventDialog()
 	assert(("A RDT or ACT reminder is not needed!", totalRDTs == 0 || totalACTs == 0));
 
 	if (totalRDTs == 0 && totalACTs == 0)
-		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("RDTandACTEvent"));
+		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("RDTACTEvent"));
 	else if (totalRDTs == 0)
 		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("RDTEvent"));
 	else if (totalACTs == 0)
@@ -341,7 +341,7 @@ void World::displayDoorEventDialog()
 	assert(("A door reminder is not needed!", isEvent));
 
 	if (isEvent)
-		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("ClosedDoorEvent"));
+		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("closedDoorEvent"));
 }
 
 void World::displayHouseEventDialog()
@@ -358,11 +358,11 @@ void World::displayHouseEventDialog()
 	assert(("A bednet reminder is not needed!", totalPurchases == 0 || totalRepairs == 0));
 
 	if (totalPurchases == 0 && totalRepairs == 0)
-		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("PurchaseAndRepairEvent"));
+		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("purchaseRepairEvent"));
 	else if (totalPurchases == 0)
-		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("PurchaseEvent"));
+		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("purchaseEvent"));
 	else if (totalRepairs == 0)
-		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("RepairEvent"));
+		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("repairEvent"));
 }
 
 void World::displayWindowEventDialog()
@@ -379,11 +379,11 @@ void World::displayWindowEventDialog()
 	assert(("A window reminder is not needed!", !anyScreen || !anyClosed));
 
 	if (!anyScreen && !anyClosed)
-		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("ScreenAndClosedEvent"));
+		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("screenClosedWindowEvent"));
 	else if (!anyScreen)
-		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("ScreenEvent"));
+		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("screenEvent"));
 	else if (!anyClosed)
-		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("ClosedEvent"));
+		mEventDialogManager.displayText(trmb::Localize::getInstance().getString("closedWindowEvent"));
 }
 
 void World::initializeDoorToHouseMap()
@@ -623,35 +623,35 @@ void World::configureUIs()
 
 	const unsigned int characterSize = 13;
 
-	mBarrelUI.addUIElem("Cover", "Undo");
+	mBarrelUI.addUIElem(trmb::Localize::getInstance().getString("coverButton"), trmb::Localize::getInstance().getString("undoButton"));
 	mBarrelUI.setSize(sf::Vector2f(75.0f, 20.0f));
 	mBarrelUI.setCharacterSize(characterSize);
 	centerOrigin(mBarrelUI, true, false);
 	mBarrelUI.hide();
 
-	mDoorUI.addUIElem("Close", "Undo");
+	mDoorUI.addUIElem(trmb::Localize::getInstance().getString("closeButton"), trmb::Localize::getInstance().getString("undoButton"));
 	mDoorUI.setSize(sf::Vector2f(75.0f, 20.0f));
 	mDoorUI.setCharacterSize(characterSize);
 	centerOrigin(mDoorUI, true, false);
 	mDoorUI.hide();
 
-	mWindowUI.addUIElem("Screen", "Undo");
-	mWindowUI.addUIElem("Close", "Undo");
+	mWindowUI.addUIElem(trmb::Localize::getInstance().getString("installButton"), trmb::Localize::getInstance().getString("undoButton"));
+	mWindowUI.addUIElem(trmb::Localize::getInstance().getString("closeButton"), trmb::Localize::getInstance().getString("undoButton"));
 	mWindowUI.setSize(sf::Vector2f(75.0f, 20.0f));
 	mWindowUI.setCharacterSize(characterSize);
 	centerOrigin(mWindowUI, true, false);
 	mWindowUI.hide();
 
 	mClinicUI.setTabSize(sf::Vector2f(75.0f, 20.0f));
-	mClinicUI.setLHSTabText("RDTs");
-	mClinicUI.setRHSTabText("ACTs");
+	mClinicUI.setLHSTabText(trmb::Localize::getInstance().getString("RDTButton"));
+	mClinicUI.setRHSTabText(trmb::Localize::getInstance().getString("ACTButton"));
 	mClinicUI.setCharacterSize(characterSize);
 	centerOrigin(mClinicUI, true, false);
 	mClinicUI.hide();
 
 	mHouseUI.setTabSize(sf::Vector2f(75.0f, 20.0f));
-	mHouseUI.setLHSTabText("Bed Net");
-	mHouseUI.setRHSTabText("Repair");
+	mHouseUI.setLHSTabText(trmb::Localize::getInstance().getString("deliverButton"));
+	mHouseUI.setRHSTabText(trmb::Localize::getInstance().getString("repairButton"));
 	mHouseUI.setCharacterSize(characterSize);
 	centerOrigin(mHouseUI, true, false);
 	mHouseUI.hide();

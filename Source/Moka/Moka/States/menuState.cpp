@@ -3,6 +3,7 @@
 #include "../Resources/resourceIdentifiers.h"
 
 #include "Trambo/Events/event.h"
+#include "Trambo/Localize/localize.h"
 #include "Trambo/Sounds/musicPlayer.h"
 #include "Trambo/Utilities/utility.h"
 
@@ -29,7 +30,7 @@ MenuState::MenuState(trmb::StateStack& stack, trmb::State::Context context)
 	mBackgroundSprite.setPosition(center);
 
 	mText.setFont(context.fonts->get(Fonts::ID::Title));
-	mText.setString("Moka Attack");
+	mText.setString(trmb::Localize::getInstance().getString("gameTitleUI"));
 	mText.setColor(sf::Color(187, 10, 30, 255));
 	mText.setCharacterSize(125);
 	trmb::centerOrigin(mText);
@@ -41,7 +42,7 @@ MenuState::MenuState(trmb::StateStack& stack, trmb::State::Context context)
 
 	mPlayButton = std::make_shared<trmb::Button>(context, Fonts::ID::Main, SoundEffects::ID::Button, Textures::ID::Buttons, 200, 50);
 	mPlayButton->setPosition(x, y);
-	mPlayButton->setText("Play");
+	mPlayButton->setText(trmb::Localize::getInstance().getString("playButton"));
 	mPlayButton->setCallback([this] ()
 	{
 		requestStackPop();
@@ -50,7 +51,7 @@ MenuState::MenuState(trmb::StateStack& stack, trmb::State::Context context)
 
 	mCreditButton = std::make_shared<trmb::Button>(context, Fonts::ID::Main, SoundEffects::ID::Button, Textures::ID::Buttons, 200, 50);
 	mCreditButton->setPosition(x, y + buttonHeight);
-	mCreditButton->setText("Credits");
+	mCreditButton->setText(trmb::Localize::getInstance().getString("creditButton"));
 	mCreditButton->setCallback([this]()
 	{
 		requestStackPush(States::ID::Credits);
@@ -58,7 +59,7 @@ MenuState::MenuState(trmb::StateStack& stack, trmb::State::Context context)
 
 	mExitButton = std::make_shared<trmb::Button>(context, Fonts::ID::Main, SoundEffects::ID::Button, Textures::ID::Buttons, 200, 50);
 	mExitButton->setPosition(x, y + 2.0f * buttonHeight);
-	mExitButton->setText("Exit");
+	mExitButton->setText(trmb::Localize::getInstance().getString("exitButton"));
 	mExitButton->setCallback([this]()
 	{
 		requestStackPop();

@@ -2,6 +2,7 @@
 #include "stateIdentifiers.h"
 #include "../Resources/resourceIdentifiers.h"
 
+#include "Trambo/Localize/localize.h"
 #include "Trambo/Utilities/utility.h"
 
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -24,7 +25,7 @@ TitleState::TitleState(trmb::StateStack& stack, trmb::State::Context context)
 	mBackgroundSprite.setPosition(center);
 
 	mText.setFont(context.fonts->get(Fonts::ID::Main));
-	mText.setString("Press any key to start");
+	mText.setString(trmb::Localize::getInstance().getString("pressToStartUI"));
 	trmb::centerOrigin(mText);
 	mText.setPosition(center - sf::Vector2f(0.0f, 50.0f));
 }

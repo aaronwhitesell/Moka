@@ -2,172 +2,205 @@
 <!-- Text -->
 <text>
     <en>
+<!-- UI -->
+		<gameTitleUI			   attribute="Moka Attack!"/>
+		<creditTitleUI             attribute="Credits"/>
+		<pressToStartUI            attribute="Press any key to start!"/>
+		<gamePausedUI              attribute="Game Paused"/>
+		<daylightUI                attribute="Daylight"/>
+		<mosquitoesUI		   	   attribute="Mosquitoes"/>
+		<residentsUI		   	   attribute="Residents"/>
+		<totalUI		           attribute="Total"/>
+		<infectedUI		   		   attribute="Infected"/>
+<!-- Buttons -->
+		<playButton                attribute="Play"/>
+		<creditButton              attribute="Credit"/>
+		<exitButton                attribute="Exit"/>
+		<backButton                attribute="Back"/>
+		<returnButton              attribute="Return"/>
+		<backToMenuButton          attribute="Back to Menu"/>
+		<undoButton                attribute="Undo"/>
+		<coverButton               attribute="Cover"/>
+		<closeButton			   attribute="Close"/>
+		<installButton			   attribute="Install"/>
+		<deliverButton             attribute="Deliver"/>
+		<repairButton              attribute="Repair"/>
+		<RDTButton                 attribute="RDTs"/>
+		<ACTButton                 attribute="ACTs"/>
+		<daylightButton            attribute="Done!"/>
+<!-- Dialog -->
 	    <prompt                    attribute="Press Enter"/>
-		<greeting		           attribute="Congratulations, you have been elected the new mayor of Pleasantville!
-Pleasantville is a wonderful place, but it has one big problem; malaria. Help the residents of your town develop an
-effective strategy to fight malaria. First, have a look around and identify different ways to combat malaria.
-Then spend your resources wisely. Afterwards, we will check the effectiveness of your work."/>
-        <simulationGreeting        attribute="The town darkens as night approaches and the buzz of mosquitoes will soon drown
-everything else out."/>
+		<greeting		           attribute="Congratulations, you have been elected the new mayor of Pleasantville! Pleasantville is a wonderful
+		                                     place, but it has one big problem: malaria. Help the residents of your town develop an effective
+											 strategy to fight malaria. First, have a look around and identify different ways to combat malaria. Then
+											 spend your resources wisely. Afterwards, we will check the effectiveness of your work."/>
         <daylightHours             attribute="There are not enough daylight hours left!"/>
-	    <inspectBarrel             attribute="You see a barrel full of water. Would you like to cover the barrel?"/>
+		<inspectBarrel             attribute="You see a barrel full of water. Would you like to cover the barrel?"/>
 	    <inspectCoveredBarrel      attribute="Would you like to uncover the barrel?"/>
 	    <purchaseCover	  	       attribute="It takes one hour to construct a cover for the barrel."/>
 	    <refundCover	  	       attribute="One hour has been refunded to you."/>
 		<inspectDoor               attribute="You see an open door. Would you like to close it?"/>
 	    <inspectClosedDoor         attribute="Would you like to open the door?"/>
-	    <purchaseClosedDoor	  	   attribute="Fifteen minutes pass as the residents and you discuss the benefits of closing
-their door at night to keep mosquitoes out."/>
-	    <refundClosedDoor	  	   attribute="Fifteen minutes has been refunded to you."/>
+	    <purchaseClosedDoor	  	   attribute="Fifteen minutes pass as the residents and you discuss the benefits of closing their door at night to
+		                                     keep mosquitoes out."/>
+	    <refundClosedDoor	  	   attribute="Fifteen minutes have been refunded to you."/>
 		<inspectWindow             attribute="You see an open window. Would you like to install a mosquito screen or close it?"/>
 	    <inspectScreenWindow       attribute="Would you like to remove the mosquito screen?"/>
 		<inspectClosedWindow       attribute="Would you like to open the window?"/>
 	    <inspectScreenClosedWindow attribute="Would you like to remove the mosquito screen or open the window?"/>
-		<purchaseScreenWindow      attribute="It takes you one hour to construct a mosquito screen."/>
+		<purchaseScreenWindow      attribute="It takes you one hour to install a mosquito screen."/>
 	    <refundScreenWindow	       attribute="One hour has been refunded to you."/>
 	    <purchaseClosedWindow      attribute="The window shutters are rusted in place. It takes you thirty minutes to oil and adjust them."/>
 	    <refundClosedWindow	       attribute="Thirty minutes have been refunded to you."/>
-	    <inspectClinic             attribute="You see a clinic. They stock both rapid diagnostic tests (RDTs) and Artemisinin-based combination
-therapies (ACTs)."/>
-        <purchaseRDT               attribute="It takes two hour to purchase and deliver the RDTs."/>
+	    <inspectClinic             attribute="You see a clinic. You can stock the clinic with both rapid diagnostic tests (RDTs) and
+											 Artemisinin-based combination therapies (ACTs)."/>
+        <purchaseRDT               attribute="It takes two hours to stock the RDTs."/>
 		<refundRDT                 attribute="Two hours have been refunded to you."/>
-        <purchaseACT               attribute="It takes two hour to purchase and deliver the ACTs."/>
+        <purchaseACT               attribute="It takes two hour to stock the ACTs."/>
 		<refundACT                 attribute="Two hours have been refunded to you."/>
-	    <inspectHouse              attribute="You see a house. Would you like to deliver a new insecticide-treated bed net, or if they have a
-damaged bed net it can be repaired?"/>
-		<purchaseNet               attribute="It takes one hour to deliver and hang the insecticide-treated bed net."/>
+	    <inspectHouse              attribute="You see a house. Would you like to deliver a new insecticide-treated mosquito net, or if they have a
+											 damaged mosquito net it can be repaired?"/>
+		<purchaseNet               attribute="It takes one hour to deliver and hang the insecticide-treated mosquito net."/>
 		<refundNet                 attribute="One hour has been refunded to you."/>
 		<purchaseRepair            attribute="You use a needle and thread to sew up each small hole. Thirty minutes have passed."/>
 		<refundRepair              attribute="Thirty minutes have been refunded to you."/>
-		<daylightUI                attribute="Daylight"/>
-		<daylightUIButton          attribute="Done!"/>
-		<mosquitoesUI		   	   attribute="Mosquitoes"/>
-		<residentsUI		   	   attribute="Residents"/>
-		<totalUI		           attribute="Total"/>
-		<infectedUI		   		   attribute="Infected"/>
-		<transmissionEvent         attribute="Malaria has spread from one resident to another!"/>
-		<mosquitoPopulationEvent   attribute="The mosquito population has doubled!"/>
-		<RDTandACTEvent            attribute="The clinic has no RDTs or ACTs! The residents will not go to the clinic to be diagnosed or receive
-treatment."/>
+        <simulationGreeting        attribute="The town darkens as night approaches and the buzz of mosquitoes will soon drown everything else out."/>
+		<transmissionEvent         attribute="Malaria has spread from one resident to another! Everyone with a fever should get tested for malaria."/>
+		<mosquitoPopulationEvent   attribute="The mosquito population has doubled! Mosquitoes lay their eggs in water."/>
 		<RDTEvent                  attribute="The clinic has no RDTs! The residents will not go to the clinic to be diagnosed."/>
 		<ACTEvent                  attribute="The clinic has no ACTs! The residents will not receive treatment."/>
-		<ClosedDoorEvent      	   attribute="No doors have been closed. Simply closing a door can be a very effective way to reduce mosquitoes
-inside a house."/>
-		<PurchaseAndRepairEvent    attribute="No mosquito nets were purchased or repaired. Mosquito nets are one of the most effective ways to
-protect yourself. Repairing a mosquito net with a needle and thread is simple and cheap."/>
-		<PurchaseEvent			   attribute="No mosquito nets were purchased! Mosquito nets are one of the most effective ways to protect yourself."/>
-		<RepairEvent			   attribute="No repairs were made to the mosquito nets! Repairing a mosquito net with a needle and thread is simple
-and cheap."/>
-		<ScreenAndClosedEvent      attribute="No windows have a screen or have been closed. A screen is a great way to reduce the mosquitoes inside
-a house. Simply closing a window can be very effective also."/>
-		<ScreenEvent      		   attribute="No windows have a screen. A screen is a great way to reduce the mosquitoes inside a house."/>
-		<ClosedEvent      		   attribute="No windows have been closed. Simply closing a window can be a very effective way to reduce mosquitoes
-inside a house."/>
- 		<didYouKnow0			   attribute="DID YOU KNOW: Everyone with a fever should get tested for malaria."/>
-		<didYouKnow1			   attribute="DID YOU KNOW: A mosquito needs your blood for her eggs to develop? Squash her!"/>
-		<didYouKnow2			   attribute="DID YOU KNOW: A mosquito net has to be tucked in on all sides of the bed to be effective."/>
-		<didYouKnow3			   attribute="DID YOU KNOW: Women are four times more likely to get malaria while pregnant?"/>
-		<didYouKnow4			   attribute="DID YOU KNOW: If you ever have malaria, remember to take ACTs and not other medicines."/>
-		<didYouKnow5			   attribute="DID YOU KNOW: The most common symptoms of malaria are high fever, vomiting, nausea, weakness,
-and body aches, among others."/>
-		<didYouKnow6			   attribute="DID YOU KNOW: Even if you are young and healthy, you still need to sleep under a net because you
-can spread the disease to others who are not young and healthy."/>
-		<didYouKnow7			   attribute="DID YOU KNOW: Malaria is caused by a parasite carried by the female Anopheles mosquito. When she
-bites someone who has malaria and then bites another person, she transfers the disease."/>
-		<didYouKnow8			   attribute="DID YOU KNOW: If you ever have malaria, remember even after you begin to feel better, you MUST
-continue to take your medicine as the doctor says or the infection will not go away completely."/>
-		<didYouKnow9			   attribute="DID YOU KNOW: If left untreated, malaria can develop into a more virulent form of the disease.
-Symptoms of a complication include jaundice, unconsciousness, inability to sit, convulsions, and shallow breathing. Brain damage may develop."/>
+		<RDTACTEvent               attribute="The clinic has no RDTs or ACTs! The residents will not go to the clinic to be diagnosed or receive
+											 treatment."/>
+		<closedDoorEvent      	   attribute="No doors have been closed! Simply closing a door is an effective way to reduce mosquitoes inside a
+		                                     house."/>
+		<purchaseEvent			   attribute="No mosquito nets were purchased! Mosquito nets are one of the most effective ways to protect yourself."/>
+		<repairEvent			   attribute="No repairs have been made to damaged mosquito nets! A needle and thread can be used to sew up small
+											 holes in a damaged mosquito net."/>
+		<purchaseRepairEvent       attribute="No mosquito nets were purchased or repaired! Mosquito nets are one of the most effective ways to
+											 protect yourself. A needle and thread can be used to sew up small holes in a damaged mosquito net."/>
+		<screenEvent      		   attribute="No windows have a screen! A screen is a permanent way to reduce the mosquitoes inside a house."/>
+		<closedWindowEvent         attribute="No windows have been closed! Simply closing a window is an effective way to reduce mosquitoes inside a
+                                             house."/>
+		<screenClosedWindowEvent   attribute="No windows have a screen or have been closed! A screen is a permanent way to reduce the mosquitoes
+		                                     inside a house. Simply closing a window is effective also."/>
+		<didYouKnow0			   attribute="DID YOU KNOW? A mosquito needs your blood for her eggs to develop? Squash her!"/>
+		<didYouKnow1			   attribute="DID YOU KNOW? A mosquito net has to be tucked in on all sides of the bed to be effective."/>
+		<didYouKnow2			   attribute="DID YOU KNOW? Women are four times more likely to get malaria while pregnant."/>
+		<didYouKnow3			   attribute="DID YOU KNOW? If you ever have malaria, remember to take ACTs and not other medicines."/>
+		<didYouKnow4			   attribute="DID YOU KNOW? The most common symptoms of malaria are high fever, chills, headache, body aches, and
+		                                     tiredness. Nausea, vomiting, and diarrhea may also occur."/>
+		<didYouKnow5			   attribute="DID YOU KNOW? Even if you are young and healthy, you still need to sleep under a mosquito net because
+											 you can spread the disease to others who are not young and healthy."/>
+		<didYouKnow6			   attribute="DID YOU KNOW? Malaria is caused by a parasite carried by the female Anopheles mosquito. When she bites
+											 someone who has malaria and then bites another person, she transfers the disease."/>
+		<didYouKnow7			   attribute="DID YOU KNOW? If you ever have malaria, remember even after you begin to feel better, you MUST continue
+											 to take your medicine as the doctor says or the infection will not go away completely."/>
+		<didYouKnow8			   attribute="DID YOU KNOW? If left untreated, malaria can develop into a more virulent form of the disease. Symptoms
+											 of a complication include jaundice, unconsciousness, inability to sit, convulsions, and shallow
+											 breathing. Brain damage may develop."/>
+		<didYouKnow9               attribute="DID YOU KNOW? The surest way to know whether you have malaria is visit your doctor and take a
+                                             diagnostic test."/>
+		<didYouKnow10              attribute="DID YOU KNOW? Anopheles mosquitoes are most active between dusk and dawn."/>
 	</en>
-    <fr>
-	    <prompt                    attribute="fr: Press Enter"/>
-		<greeting                  attribute="fr: Congratulations, you have been elected the new mayor of Pleasantville!
-Pleasantville is a wonderful place, but it has one big problem; malaria. Help the residents of your town develop an
-effective strategy to fight malaria. First, have a look around and identify different ways to combat malaria.
-Then spend your resources wisely. Afterwards, we will check the effectiveness of your work."/>
-        <simulationGreeting        attribute="fr: The town darkens as night approaches and the buzz of mosquitoes will soon drown
-everything else out."/>
-        <daylightHours             attribute="fr: There are not enough daylight hours left!"/>
-	    <inspectBarrel             attribute="fr: You see a barrel full of water. Would you like to cover the barrel?"/>
-	    <inspectCoveredBarrel      attribute="fr: Would you like to uncover the barrel?"/>
-	    <purchaseCover	  	       attribute="fr: It takes one hour to construct and fasten a cover to the barrel."/>
-	    <refundCover	  	       attribute="fr: One hour has been refunded to you."/>
-		<inspectDoor               attribute="fr: You see a door. Would you like to close it?"/>
-	    <inspectClosedDoor         attribute="fr: Would you like to open the door?"/>
-	    <purchaseClosedDoor	  	   attribute="fr: For fifteen minutes the residents and you discuss the benefits of closing
-their door at night to keep mosquitoes out."/>
-	    <refundClosedDoor	  	   attribute="fr: Fifteen minutes has been refunded to you."/>
-		<inspectWindow             attribute="fr: You see an open window. Would you like to install a mosquito screen or close it?"/>
-	    <inspectScreenWindow       attribute="fr: Would you like to remove the mosquito screen?"/>
-	    <inspectClosedWindow       attribute="fr: Would you like to open the window?"/>
-	    <inspectScreenClosedWindow attribute="fr: Would you like to remove the mosquito screen or open the window?"/>
-		<purchaseScreenWindow      attribute="fr: It takes you one hour to construct a mosquito screen."/>
-	    <refundScreenWindow	       attribute="fr: One hour has been refunded to you."/>
-	    <purchaseClosedWindow      attribute="fr: The window shutters are rusted in place. It takes you thirty minutes to oil and adjust them."/>
-	    <refundClosedWindow	       attribute="fr: Thirty minutes have been refunded to you."/>
-	    <inspectClinic             attribute="fr: You see a clinic. They stock both rapid diagnostic tests (RDTs) and Artemisinin-based combination
-therapies (ACTs)."/>
-        <purchaseRDT               attribute="fr: It takes two hour to purchase and deliver the RDTs."/>
-		<refundRDT                 attribute="fr: Two hours have been refunded to you."/>
-        <purchaseACT               attribute="fr: It takes two hour to purchase and deliver the ACTs."/>
-		<refundACT                 attribute="fr: Two hours have been refunded to you."/>
-	    <inspectHouse              attribute="fr: You see a house. Would you like to deliver a new insecticide-treated bed net, or if they have a
-damaged bed net it can be repaired?"/>
-		<purchaseNet               attribute="fr: It takes one hour to deliver and hang the insecticide-treated bed net."/>
-		<refundNet                 attribute="fr: One hour has been refunded to you."/>
-		<purchaseRepair            attribute="fr: You use a needle and thread to sew up each small hole. Thirty minutes have passed."/>
-		<refundRepair              attribute="fr: Thirty minutes have been refunded to you."/>
-		<daylightUI                attribute="fr: Daylight"/>
-		<daylightUIButton          attribute="fr: Done!"/>
-		<mosquitoesUI		   	   attribute="fr: Mosquitoes"/>
-		<residentsUI		   	   attribute="fr: Residents"/>
-		<totalUI		           attribute="fr: Total"/>
-		<infectedUI		   		   attribute="fr: Infected"/>
-	</fr>
     <mg>
-	    <prompt                    attribute="mg: Press Enter"/>
-		<greeting                  attribute="mg: Congratulations, you have been elected the new mayor of Pleasantville!
-Pleasantville is a wonderful place, but it has one big problem; malaria. Help the residents of your town develop an
-effective strategy to fight malaria. First, have a look around and identify different ways to combat malaria.
-Then spend your resources wisely. Afterwards, we will check the effectiveness of your work."/>
-        <simulationGreeting        attribute="mg: The town darkens as night approaches and the buzz of mosquitoes will soon drown
-everything else out."/>
-        <daylightHours             attribute="mg: There are not enough daylight hours left!"/>
-	    <inspectBarrel             attribute="mg: You see a barrel full of water. Would you like to cover the barrel?"/>
-	    <inspectCoveredBarrel      attribute="mg: Would you like to uncover the barrel?"/>
-	    <purchaseCover	  	       attribute="mg: It takes one hour to construct and fasten a cover to the barrel."/>
-	    <refundCover	  	       attribute="mg: One hour has been refunded to you."/>
-		<inspectDoor               attribute="mg: You see a door. Would you like to close it?"/>
-	    <inspectClosedDoor         attribute="mg: Would you like to open the door?"/>
-	    <purchaseClosedDoor	  	   attribute="mg: For fifteen minutes the residents and you discuss the benefits of closing
-their door at night to keep mosquitoes out."/>
-	    <refundClosedDoor	  	   attribute="mg: Fifteen minutes has been refunded to you."/>
-		<inspectWindow             attribute="mg: You see an open window. Would you like to install a mosquito screen or close it?"/>
-	    <inspectScreenWindow       attribute="mg: Would you like to remove the mosquito screen?"/>
-	    <inspectClosedWindow       attribute="mg: Would you like to open the window?"/>
-	    <inspectScreenClosedWindow attribute="mg: Would you like to remove the mosquito screen or open the window?"/>
-		<purchaseScreenWindow      attribute="mg: It takes you one hour to construct a mosquito screen."/>
-	    <refundScreenWindow	       attribute="mg: One hour has been refunded to you."/>
-	    <purchaseClosedWindow      attribute="mg: The window shutters are rusted in place. It takes you thirty minutes to oil and adjust them."/>
-	    <refundClosedWindow	       attribute="mg: Thirty minutes have been refunded to you."/>
-	    <inspectClinic             attribute="mg: You see a clinic. They stock both rapid diagnostic tests (RDTs) and Artemisinin-based combination
-therapies (ACTs)."/>
-        <purchaseRDT               attribute="mg: It takes two hour to purchase and deliver the RDTs."/>
-		<refundRDT                 attribute="mg: Two hours have been refunded to you."/>
-        <purchaseACT               attribute="mg: It takes two hour to purchase and deliver the ACTs."/>
-		<refundACT                 attribute="mg: Two hours have been refunded to you."/>
-	    <inspectHouse              attribute="mg: You see a house."/>
-	    <inspectHouse              attribute="mg: You see a house. Would you like to deliver a new insecticide-treated bed net, or if they have a
-damaged bed net it can be repaired?"/>
-		<purchaseNet               attribute="mg: It takes one hour to deliver and hang the insecticide-treated bed net."/>
-		<refundNet                 attribute="mg: One hour has been refunded to you."/>
-		<purchaseRepair            attribute="mg: You use a needle and thread to sew up each small hole. Thirty minutes have passed."/>
-		<refundRepair              attribute="mg: Thirty minutes have been refunded to you."/>
+<!-- UI -->
+		<gameTitleUI			   attribute="mg: Moka Attack!"/>
+		<creditTitleUI             attribute="mg: Credits"/>
+		<pressToStartUI            attribute="mg: Press any key to start!"/>
+		<gamePausedUI              attribute="mg: Game Paused"/>
 		<daylightUI                attribute="mg: Daylight"/>
-		<daylightUIButton          attribute="mg: Done!"/>
 		<mosquitoesUI		   	   attribute="mg: Mosquitoes"/>
 		<residentsUI		   	   attribute="mg: Residents"/>
 		<totalUI		           attribute="mg: Total"/>
 		<infectedUI		   		   attribute="mg: Infected"/>
+<!-- Buttons -->
+		<playButton                attribute="mg: Play"/>
+		<creditButton              attribute="mg: Credit"/>
+		<exitButton                attribute="mg: Exit"/>
+		<backButton                attribute="mg: Back"/>
+		<returnButton              attribute="mg: Return"/>
+		<backToMenuButton          attribute="mg: Back to Menu"/>
+		<undoButton                attribute="mg: Undo"/>
+		<coverButton               attribute="mg: Cover"/>
+		<closeButton			   attribute="mg: Close"/>
+		<installButton			   attribute="mg: Install"/>
+		<deliverButton             attribute="mg: Deliver"/>
+		<repairButton              attribute="mg: Repair"/>
+		<RDTButton                 attribute="mg: RDTs"/>
+		<ACTButton                 attribute="mg: ACTs"/>
+		<daylightButton            attribute="mg: Done!"/>
+<!-- Dialog -->
+	    <prompt                    attribute="mg: Press Enter"/>
+		<greeting		           attribute="mg: Congratulations, you have been elected the new mayor of Pleasantville! Pleasantville is a wonderful
+		                                     place, but it has one big problem: malaria. Help the residents of your town develop an effective
+											 strategy to fight malaria. First, have a look around and identify different ways to combat malaria. Then
+											 spend your resources wisely. Afterwards, we will check the effectiveness of your work."/>
+        <daylightHours             attribute="mg: There are not enough daylight hours left!"/>
+		<inspectBarrel             attribute="mg: You see a barrel full of water. Would you like to cover the barrel?"/>
+	    <inspectCoveredBarrel      attribute="mg: Would you like to uncover the barrel?"/>
+	    <purchaseCover	  	       attribute="mg: It takes one hour to construct a cover for the barrel."/>
+	    <refundCover	  	       attribute="mg: One hour has been refunded to you."/>
+		<inspectDoor               attribute="mg: You see an open door. Would you like to close it?"/>
+	    <inspectClosedDoor         attribute="mg: Would you like to open the door?"/>
+	    <purchaseClosedDoor	  	   attribute="mg: Fifteen minutes pass as the residents and you discuss the benefits of closing their door at night to
+		                                     keep mosquitoes out."/>
+	    <refundClosedDoor	  	   attribute="mg: Fifteen minutes have been refunded to you."/>
+		<inspectWindow             attribute="mg: You see an open window. Would you like to install a mosquito screen or close it?"/>
+	    <inspectScreenWindow       attribute="mg: Would you like to remove the mosquito screen?"/>
+		<inspectClosedWindow       attribute="mg: Would you like to open the window?"/>
+	    <inspectScreenClosedWindow attribute="mg: Would you like to remove the mosquito screen or open the window?"/>
+		<purchaseScreenWindow      attribute="mg: It takes you one hour to install a mosquito screen."/>
+	    <refundScreenWindow	       attribute="mg: One hour has been refunded to you."/>
+	    <purchaseClosedWindow      attribute="mg: The window shutters are rusted in place. It takes you thirty minutes to oil and adjust them."/>
+	    <refundClosedWindow	       attribute="mg: Thirty minutes have been refunded to you."/>
+	    <inspectClinic             attribute="mg: You see a clinic. You can stock the clinic with both rapid diagnostic tests (RDTs) and
+											 Artemisinin-based combination therapies (ACTs)."/>
+        <purchaseRDT               attribute="mg: It takes two hours to stock the RDTs."/>
+		<refundRDT                 attribute="mg: Two hours have been refunded to you."/>
+        <purchaseACT               attribute="mg: It takes two hour to stock the ACTs."/>
+		<refundACT                 attribute="mg: Two hours have been refunded to you."/>
+	    <inspectHouse              attribute="mg: You see a house. Would you like to deliver a new insecticide-treated mosquito net, or if they have a
+											 damaged mosquito net it can be repaired?"/>
+		<purchaseNet               attribute="mg: It takes one hour to deliver and hang the insecticide-treated mosquito net."/>
+		<refundNet                 attribute="mg: One hour has been refunded to you."/>
+		<purchaseRepair            attribute="mg: You use a needle and thread to sew up each small hole. Thirty minutes have passed."/>
+		<refundRepair              attribute="mg: Thirty minutes have been refunded to you."/>
+        <simulationGreeting        attribute="mg: The town darkens as night approaches and the buzz of mosquitoes will soon drown everything else out."/>
+		<transmissionEvent         attribute="mg: Malaria has spread from one resident to another! Everyone with a fever should get tested for malaria."/>
+		<mosquitoPopulationEvent   attribute="mg: The mosquito population has doubled! Mosquitoes lay their eggs in water."/>
+		<RDTEvent                  attribute="mg: The clinic has no RDTs! The residents will not go to the clinic to be diagnosed."/>
+		<ACTEvent                  attribute="mg: The clinic has no ACTs! The residents will not receive treatment."/>
+		<RDTACTEvent               attribute="mg: The clinic has no RDTs or ACTs! The residents will not go to the clinic to be diagnosed or receive
+											 treatment."/>
+		<closedDoorEvent      	   attribute="mg: No doors have been closed! Simply closing a door is an effective way to reduce mosquitoes inside a
+		                                     house."/>
+		<purchaseEvent			   attribute="mg: No mosquito nets were purchased! Mosquito nets are one of the most effective ways to protect yourself."/>
+		<repairEvent			   attribute="mg: No repairs have been made to damaged mosquito nets! A needle and thread can be used to sew up small
+											 holes in a damaged mosquito net."/>
+		<purchaseRepairEvent       attribute="mg: No mosquito nets were purchased or repaired! Mosquito nets are one of the most effective ways to
+											 protect yourself. A needle and thread can be used to sew up small holes in a damaged mosquito net."/>
+		<screenEvent      		   attribute="mg: No windows have a screen! A screen is a permanent way to reduce the mosquitoes inside a house."/>
+		<closedWindowEvent         attribute="mg: No windows have been closed! Simply closing a window is an effective way to reduce mosquitoes inside a
+                                             house."/>
+		<screenClosedWindowEvent   attribute="mg: No windows have a screen or have been closed! A screen is a permanent way to reduce the mosquitoes
+		                                     inside a house. Simply closing a window is effective also."/>
+		<didYouKnow0			   attribute="mg: DID YOU KNOW? A mosquito needs your blood for her eggs to develop? Squash her!"/>
+		<didYouKnow1			   attribute="mg: DID YOU KNOW? A mosquito net has to be tucked in on all sides of the bed to be effective."/>
+		<didYouKnow2			   attribute="mg: DID YOU KNOW? Women are four times more likely to get malaria while pregnant."/>
+		<didYouKnow3			   attribute="mg: DID YOU KNOW? If you ever have malaria, remember to take ACTs and not other medicines."/>
+		<didYouKnow4			   attribute="mg: DID YOU KNOW? The most common symptoms of malaria are high fever, chills, headache, body aches, and
+		                                     tiredness. Nausea, vomiting, and diarrhea may also occur."/>
+		<didYouKnow5			   attribute="mg: DID YOU KNOW? Even if you are young and healthy, you still need to sleep under a mosquito net because
+											 you can spread the disease to others who are not young and healthy."/>
+		<didYouKnow6			   attribute="mg: DID YOU KNOW? Malaria is caused by a parasite carried by the female Anopheles mosquito. When she bites
+											 someone who has malaria and then bites another person, she transfers the disease."/>
+		<didYouKnow7			   attribute="mg: DID YOU KNOW? If you ever have malaria, remember even after you begin to feel better, you MUST continue
+											 to take your medicine as the doctor says or the infection will not go away completely."/>
+		<didYouKnow8			   attribute="mg: DID YOU KNOW? If left untreated, malaria can develop into a more virulent form of the disease. Symptoms
+											 of a complication include jaundice, unconsciousness, inability to sit, convulsions, and shallow
+											 breathing. Brain damage may develop."/>
+		<didYouKnow9               attribute="mg: DID YOU KNOW? The surest way to know whether you have malaria is visit your doctor and take a
+                                             diagnostic test."/>
+		<didYouKnow10              attribute="mg: DID YOU KNOW? Anopheles mosquitoes are most active between dusk and dawn."/>
 	</mg>
 </text>

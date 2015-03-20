@@ -3,6 +3,7 @@
 #include "../Resources/resourceIdentifiers.h"
 
 #include "Trambo/Events/event.h"
+#include "Trambo/Localize/localize.h"
 #include "Trambo/Sounds/musicPlayer.h"
 #include "Trambo/Utilities/utility.h"
 
@@ -31,7 +32,7 @@ PauseState::PauseState(trmb::StateStack& stack, trmb::State::Context context)
 
 	sf::Font& font = context.fonts->get(Fonts::ID::Main);
 	mPausedText.setFont(font);
-	mPausedText.setString("Game Paused");
+	mPausedText.setString(trmb::Localize::getInstance().getString("gamePausedUI"));
 	mPausedText.setCharacterSize(70);
 	trmb::centerOrigin(mPausedText);
 	mPausedText.setPosition(0.5f * windowSize.x, 0.4f * windowSize.y);
@@ -41,7 +42,7 @@ PauseState::PauseState(trmb::StateStack& stack, trmb::State::Context context)
 
 	mReturnButton = std::make_shared<trmb::Button>(context, Fonts::ID::Main, SoundEffects::ID::Button, Textures::ID::Buttons, 200, 50);
 	mReturnButton->setPosition(0.5f * windowSize.x - 100, 0.4f * windowSize.y + buttonHeight + buffer);
-	mReturnButton->setText("Return");
+	mReturnButton->setText(trmb::Localize::getInstance().getString("returnButton"));
 	mReturnButton->setCallback([this]()
 	{
 		requestStackPop();
@@ -49,7 +50,7 @@ PauseState::PauseState(trmb::StateStack& stack, trmb::State::Context context)
 
 	mBackToMenuButton = std::make_shared<trmb::Button>(context, Fonts::ID::Main, SoundEffects::ID::Button, Textures::ID::Buttons, 200, 50);
 	mBackToMenuButton->setPosition(0.5f * windowSize.x - 100, 0.4f * windowSize.y + 2.0f * buttonHeight + buffer);
-	mBackToMenuButton->setText("Back to menu");
+	mBackToMenuButton->setText(trmb::Localize::getInstance().getString("backToMenuButton"));
 	mBackToMenuButton->setCallback([this]()
 	{
 		requestStateClear();
