@@ -6,12 +6,14 @@
 #include "../HUD/daylightUI.h"
 #include "../HUD/mainTrackerUI.h"
 #include "../HUD/optionsUI.h"
+#include "../HUD/scoreboardUI.h"
 #include "../HUD/uiBundle.h"
 #include "../HUD/undoUI.h"
 #include "../EventDialog/eventDialogManager.h"
 #include "../GameObjects/objectGroups.h"
 
 #include "Trambo/Camera/camera.h"
+#include "Trambo/Events/event.h"
 #include "Trambo/Events/eventHandler.h"
 #include "Trambo/Resources/resourceHolder.h"
 #include "Trambo/SceneNodes/sceneNode.h"
@@ -36,7 +38,6 @@ namespace sf
 
 namespace trmb
 {
-	class Event;
 	class SoundPlayer;
 }
 
@@ -55,7 +56,7 @@ public:
 										World(const World &) = delete;
 	World &								operator=(const World &) = delete;
 
-	bool								isSimulationFinished() const;
+	bool								isScoreboardFinished() const;
 
 	void								update(sf::Time dt);
 	virtual void						handleEvent(const trmb::Event &gameEvent);
@@ -135,6 +136,7 @@ private:
 
 
 private:
+	const trmb::Event							mBeginScoreboardEvent;   // ALW - Is sent from here.
 	const EventGuid								mFullscreen;			 // ALW - Matches the GUID in the ToggleFullscreen class.
 	const EventGuid								mWindowed;				 // ALW - Matches the GUID in the ToggleFullscreen class.
 	const EventGuid								mCreateTextPrompt;		 // ALW - Matches the GUID in the ChatBoxUI class.
@@ -174,7 +176,7 @@ private:
 	int											mResidentCount;
 
 	bool										mDisableInput;
-	bool										mBeginSimulationMode;
+	bool										mSimulationMode;
 	sf::Time									mTotalCollisionTime;
 	sf::Time									mUpdateCollisionTime;
 	std::vector<std::size_t>					mBarrelIDsToSpawnMosquito;
@@ -197,10 +199,14 @@ private:
 	bool										mDisplayDoorEventDialog;
 	bool										mDisplayHouseEventDialog;
 	bool										mDisplayWindowEventDialog;
+	bool										mDisplaySimulationFinishedEventDialog;
 
 	// ALW - Unscheduled Event Dialog
 	int											mTransmissionCount;
 	bool										mDisableMosquitoPopulationCheck;
+
+	// ALW - Scoreboard
+	ScoreboardUI								mScoreboardUI;
 };
 
 #endif

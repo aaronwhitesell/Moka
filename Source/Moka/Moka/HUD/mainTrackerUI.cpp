@@ -18,6 +18,7 @@
 MainTrackerUI::MainTrackerUI(const sf::RenderWindow &window, Fonts::ID font, const trmb::FontHolder &fonts, SoundEffects::ID soundEffect
 	, trmb::SoundPlayer &soundPlayer)
 : mBeginSimulationEvent(0x5000e550)
+, mBeginScoreboardEvent(0xf5e88b6e)
 , mFullscreen(0x5a0d2314)
 , mWindowed(0x11e3c735)
 , mWindow(window)
@@ -221,6 +222,16 @@ int MainTrackerUI::getMosquitoCount() const
 	return mMosquitoCount;
 }
 
+int MainTrackerUI::getResidentCount() const
+{
+	return mResidentCount;
+}
+
+int MainTrackerUI::getInfectedResidentCount() const
+{
+	return mInfectedResidentCount;
+}
+
 void MainTrackerUI::setMosquitoCount(int count)
 {
 	mMosquitoCount = count;
@@ -289,6 +300,10 @@ void MainTrackerUI::handleEvent(const trmb::Event &gameEvent)
 	else if (mBeginSimulationEvent == gameEvent.getType())
 	{
 		unhide();
+	}
+	else if (mBeginScoreboardEvent == gameEvent.getType())
+	{
+		hide();
 	}
 }
 

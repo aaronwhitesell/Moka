@@ -29,6 +29,7 @@ ChatBoxUI::ChatBoxUI(const sf::RenderWindow &window, trmb::Camera &camera, Fonts
 , mEnter(0xff349d1d)
 , mFullscreen(0x5a0d2314)
 , mWindowed(0x11e3c735)
+, mBeginScoreboardEvent(0xf5e88b6e)
 , mHorizontalSpacing(2.0f)
 , mVerticalSpacing(15.0f)
 , mMaxLinesDrawn(5u)
@@ -40,6 +41,8 @@ ChatBoxUI::ChatBoxUI(const sf::RenderWindow &window, trmb::Camera &camera, Fonts
 , mUIBundle(uiBundle)
 , mLinesToDraw(mMaxLinesDrawn)
 , mForceEndPrompt(false)
+, mDisable(false)
+, mHide(false)
 , mMouseOver(false)
 , mUIBundleDisabled(false)
 {
@@ -92,64 +95,69 @@ sf::FloatRect ChatBoxUI::getRect() const
 
 void ChatBoxUI::handler()
 {
-	// ALW - The ChatBoxUI has an absolute position in the world that is translated by the camera position.
-	sf::Vector2f cameraPosition(mCamera.getViewBounds().left, mCamera.getViewBounds().top);
-	sf::Transform translatedTransform = getTransform();
-	translatedTransform = translatedTransform.translate(cameraPosition);
+	mMouseOver = false;
 
-	const sf::Vector2i relativeToWindow = sf::Mouse::getPosition(mWindow);
-	const sf::Vector2f relativeToWorld = mWindow.mapPixelToCoords(relativeToWindow, mCamera.getView());
-	const sf::Vector2f mousePosition = relativeToWorld;
-
-	sf::FloatRect UIRect(mBackground.getPosition().x, mBackground.getPosition().y, mBackground.getSize().x, mBackground.getSize().y);
-	UIRect = translatedTransform.transformRect(UIRect);
-
-	if (UIRect.contains(mousePosition))
+	if (!mDisable)
 	{
-		mMouseOver = true;
+		// ALW - The ChatBoxUI has an absolute position in the world that is translated by the camera position.
+		sf::Vector2f cameraPosition(mCamera.getViewBounds().left, mCamera.getViewBounds().top);
+		sf::Transform translatedTransform = getTransform();
+		translatedTransform = translatedTransform.translate(cameraPosition);
 
-		if (!mUIBundleDisabled)
+		const sf::Vector2i relativeToWindow = sf::Mouse::getPosition(mWindow);
+		const sf::Vector2f relativeToWorld = mWindow.mapPixelToCoords(relativeToWindow, mCamera.getView());
+		const sf::Vector2f mousePosition = relativeToWorld;
+
+		sf::FloatRect UIRect(mBackground.getPosition().x, mBackground.getPosition().y, mBackground.getSize().x, mBackground.getSize().y);
+		UIRect = translatedTransform.transformRect(UIRect);
+
+		if (UIRect.contains(mousePosition))
 		{
-			mUIBundleDisabled = true;
+			mMouseOver = true;
 
-			if (!mUIBundle.getBarrelUI().isHidden())
-				mUIBundle.getBarrelUI().disable(false);
+			if (!mUIBundleDisabled)
+			{
+				mUIBundleDisabled = true;
 
-			if (!mUIBundle.getDoorUI().isHidden())
-				mUIBundle.getDoorUI().disable(false);
+				if (!mUIBundle.getBarrelUI().isHidden())
+					mUIBundle.getBarrelUI().disable(false);
 
-			if (!mUIBundle.getWindowUI().isHidden())
-				mUIBundle.getWindowUI().disable(false);
+				if (!mUIBundle.getDoorUI().isHidden())
+					mUIBundle.getDoorUI().disable(false);
 
-			if (!mUIBundle.getClinicUI().isHidden())
-				mUIBundle.getClinicUI().disable(false);
+				if (!mUIBundle.getWindowUI().isHidden())
+					mUIBundle.getWindowUI().disable(false);
 
-			if (!mUIBundle.getHouseUI().isHidden())
-				mUIBundle.getHouseUI().disable(false);
+				if (!mUIBundle.getClinicUI().isHidden())
+					mUIBundle.getClinicUI().disable(false);
+
+				if (!mUIBundle.getHouseUI().isHidden())
+					mUIBundle.getHouseUI().disable(false);
+			}
 		}
-	}
-	else
-	{
-		mMouseOver = false;
-
-		if (mUIBundleDisabled)
+		else
 		{
-			mUIBundleDisabled = false;
+			mMouseOver = false;
 
-			if (!mUIBundle.getBarrelUI().isHidden())
-				mUIBundle.getBarrelUI().enable();
+			if (mUIBundleDisabled)
+			{
+				mUIBundleDisabled = false;
 
-			if (!mUIBundle.getDoorUI().isHidden())
-				mUIBundle.getDoorUI().enable();
+				if (!mUIBundle.getBarrelUI().isHidden())
+					mUIBundle.getBarrelUI().enable();
 
-			if (!mUIBundle.getWindowUI().isHidden())
-				mUIBundle.getWindowUI().enable();
+				if (!mUIBundle.getDoorUI().isHidden())
+					mUIBundle.getDoorUI().enable();
 
-			if (!mUIBundle.getClinicUI().isHidden())
-				mUIBundle.getClinicUI().enable();
+				if (!mUIBundle.getWindowUI().isHidden())
+					mUIBundle.getWindowUI().enable();
 
-			if (!mUIBundle.getHouseUI().isHidden())
-				mUIBundle.getHouseUI().enable();
+				if (!mUIBundle.getClinicUI().isHidden())
+					mUIBundle.getClinicUI().enable();
+
+				if (!mUIBundle.getHouseUI().isHidden())
+					mUIBundle.getHouseUI().enable();
+			}
 		}
 	}
 }
@@ -176,6 +184,10 @@ void ChatBoxUI::handleEvent(const trmb::Event &gameEvent)
 	{
 		repositionGUI();
 	}
+	else if (mBeginScoreboardEvent == gameEvent.getType())
+	{
+		hide();
+	}
 }
 
 void ChatBoxUI::updateText(std::string string, bool forceEndPrompt)
@@ -201,29 +213,54 @@ void ChatBoxUI::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
 
-	// ALW - Save then change view
-	sf::View previousView = target.getView();
-	target.setView(target.getDefaultView());
-
-	target.draw(mBackground, states);
-
-	if (!mWordWrapText.empty())
+	if (!mHide)
 	{
-		int count = 0;
-		std::vector<sf::Text>::const_iterator line = begin(mWordWrapText);
-		while (count < mLinesToDraw)
+		// ALW - Save then change view
+		sf::View previousView = target.getView();
+		target.setView(target.getDefaultView());
+
+		target.draw(mBackground, states);
+
+		if (!mWordWrapText.empty())
 		{
-			target.draw(*line, states);
-			++line;
-			++count;
+			int count = 0;
+			std::vector<sf::Text>::const_iterator line = begin(mWordWrapText);
+			while (count < mLinesToDraw)
+			{
+				target.draw(*line, states);
+				++line;
+				++count;
+			}
 		}
+
+		if (isOverFlow() || mForceEndPrompt)
+			target.draw(mPrompt, states);
+
+		// ALW - Restore the view
+		target.setView(previousView);
 	}
+}
 
-	if (isOverFlow() || mForceEndPrompt)
-		target.draw(mPrompt, states);
+void ChatBoxUI::enable()
+{
+	mDisable = false;
+}
 
-	// ALW - Restore the view
-	target.setView(previousView);
+void ChatBoxUI::disable()
+{
+	mDisable = true;
+}
+
+void ChatBoxUI::unhide()
+{
+	mHide = false;
+	enable();
+}
+
+void ChatBoxUI::hide()
+{
+	mHide = true;
+	disable();
 }
 
 void ChatBoxUI::formatText(std::string string)

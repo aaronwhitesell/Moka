@@ -12,6 +12,14 @@
 		<residentsUI		   	   attribute="Residents"/>
 		<totalUI		           attribute="Total"/>
 		<infectedUI		   		   attribute="Infected"/>
+		<successResultUI           attribute="SUCCESS!"/>
+		<failureResultUI           attribute="FAILURE!"/>
+		<barrelResultUI            attribute="Mosquitoes spawned from barrels."/>
+		<doorResultUI              attribute="Mosquitoes deflected by doors."/>
+		<windowResultUI            attribute="Mosquitoes deflected by windows."/>
+		<netResultUI               attribute="Mosquitoes deflected by mosquito nets."/>
+		<curedResultUI             attribute="Provided RDT and ACT treatments."/>
+		<malariaResultUI           attribute="Current cases of malaria."/>
 <!-- Buttons -->
 		<playButton                attribute="Play"/>
 		<creditButton              attribute="Credit"/>
@@ -83,6 +91,8 @@
                                              house."/>
 		<screenClosedWindowEvent   attribute="No windows have a screen or have been closed! A screen is a permanent way to reduce the mosquitoes
 		                                     inside a house. Simply closing a window is effective also."/>
+		<simulationFinishedEvent   attribute="The sound of a rooster crowing replaces the buzz of mosquitoes as morning approaches. Lets check the
+                                             results from last night and see how you did combating malaria!"/>
 		<didYouKnow0			   attribute="DID YOU KNOW? A mosquito needs your blood for her eggs to develop? Squash her!"/>
 		<didYouKnow1			   attribute="DID YOU KNOW? A mosquito net has to be tucked in on all sides of the bed to be effective."/>
 		<didYouKnow2			   attribute="DID YOU KNOW? Women are four times more likely to get malaria while pregnant."/>
@@ -113,6 +123,14 @@
 		<residentsUI		   	   attribute="mg: Residents"/>
 		<totalUI		           attribute="mg: Total"/>
 		<infectedUI		   		   attribute="mg: Infected"/>
+		<successResultUI           attribute="mg: SUCCESS!"/>
+		<failureResultUI           attribute="mg: FAILURE!"/>
+		<barrelResultUI            attribute="mg: Mosquitoes spawned from barrels."/>
+		<doorResultUI              attribute="mg: Mosquitoes deflected by doors."/>
+		<windowResultUI            attribute="mg: Mosquitoes deflected by windows."/>
+		<netResultUI               attribute="mg: Mosquitoes deflected by mosquito nets."/>
+		<curedResultUI             attribute="mg: Provided RDT and ACT treatments."/>
+		<malariaResultUI           attribute="mg: Current cases of malaria."/>
 <!-- Buttons -->
 		<playButton                attribute="mg: Play"/>
 		<creditButton              attribute="mg: Credit"/>
@@ -184,6 +202,8 @@
                                              house."/>
 		<screenClosedWindowEvent   attribute="mg: No windows have a screen or have been closed! A screen is a permanent way to reduce the mosquitoes
 		                                     inside a house. Simply closing a window is effective also."/>
+		<simulationFinishedEvent   attribute="mg: The sound of a rooster crowing replaces the buzz of mosquitoes as morning approaches. Lets check
+                                             the results from last night and see how you did combating malaria!"/>
 		<didYouKnow0			   attribute="mg: DID YOU KNOW? A mosquito needs your blood for her eggs to develop? Squash her!"/>
 		<didYouKnow1			   attribute="mg: DID YOU KNOW? A mosquito net has to be tucked in on all sides of the bed to be effective."/>
 		<didYouKnow2			   attribute="mg: DID YOU KNOW? Women are four times more likely to get malaria while pregnant."/>

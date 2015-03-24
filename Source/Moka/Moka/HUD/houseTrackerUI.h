@@ -54,6 +54,7 @@ private:
 
 private:
 	const EventGuid			mBeginSimulationEvent; // ALW - Matches the GUID in the DaylightUI class.
+	const EventGuid			mBeginScoreboardEvent; // ALW - Matches the GUID in the World class.
 
 	trmb::SoundPlayer	    &mSoundPlayer;
 

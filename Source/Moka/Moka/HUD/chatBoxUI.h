@@ -52,6 +52,10 @@ private:
 	
 private:
 	virtual void			draw(sf::RenderTarget &target, sf::RenderStates states) const final;
+	void					enable();
+	void					disable();
+	void				    unhide();
+	void				    hide();
 
 	void					formatText(std::string string);
 	void					displayMoreText();
@@ -71,11 +75,12 @@ private:
 
 
 private:
-	const EventGuid			mCreateTextPrompt; // ALW - Is sent from here.
-	const EventGuid			mClearTextPrompt;  // ALW - Is sent from here.
-	const EventGuid			mEnter;            // ALW - Matches the GUID in the Controller class.
-	const EventGuid			mFullscreen;	   // ALW - Matches the GUID in the ToggleFullscreen class.
-	const EventGuid			mWindowed;		   // ALW - Matches the GUID in the ToggleFullscreen class.
+	const EventGuid			mCreateTextPrompt;     // ALW - Is sent from here.
+	const EventGuid			mClearTextPrompt;      // ALW - Is sent from here.
+	const EventGuid			mEnter;                // ALW - Matches the GUID in the Controller class.
+	const EventGuid			mFullscreen;	       // ALW - Matches the GUID in the ToggleFullscreen class.
+	const EventGuid			mWindowed;			   // ALW - Matches the GUID in the ToggleFullscreen class.
+	const EventGuid			mBeginScoreboardEvent; // ALW - Matches the GUID in the World class.
 
 	const float				mHorizontalSpacing;
 	const float				mVerticalSpacing;
@@ -95,6 +100,8 @@ private:
 	int						mLinesToDraw;
 
 	bool					mForceEndPrompt;
+	bool					mDisable;
+	bool                    mHide;
 	bool					mMouseOver;
 	bool					mUIBundleDisabled;
 };

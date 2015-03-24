@@ -90,6 +90,7 @@
     <ClInclude Include="HUD\houseTrackerUI.h" />
     <ClInclude Include="HUD\mainTrackerUI.h" />
     <ClInclude Include="HUD\optionsUI.h" />
+    <ClInclude Include="HUD\scoreboardUI.h" />
     <ClInclude Include="HUD\uiBundle.h" />
     <ClInclude Include="HUD\undoUI.h" />
     <ClInclude Include="Levels\world.h" />
@@ -121,7 +122,6 @@
     <ClInclude Include="SceneNodes\windowUpdateNode.h" />
     <ClInclude Include="SceneNodes\windowUINode.h" />
     <ClInclude Include="States\creditState.h" />
-    <ClInclude Include="States\gameOverState.h" />
     <ClInclude Include="States\gameState.h" />
     <ClInclude Include="States\menuState.h" />
     <ClInclude Include="States\pauseState.h" />
@@ -142,6 +142,7 @@
     <ClCompile Include="HUD\houseTrackerUI.cpp" />
     <ClCompile Include="HUD\mainTrackerUI.cpp" />
     <ClCompile Include="HUD\optionsUI.cpp" />
+    <ClCompile Include="HUD\scoreboardUI.cpp" />
     <ClCompile Include="HUD\uiBundle.cpp" />
     <ClCompile Include="HUD\undoUI.cpp" />
     <ClCompile Include="Levels\world.cpp" />
@@ -173,7 +174,6 @@
     <ClCompile Include="SceneNodes\windowUpdateNode.cpp" />
     <ClCompile Include="SceneNodes\windowUINode.cpp" />
     <ClCompile Include="States\creditState.cpp" />
-    <ClCompile Include="States\gameOverState.cpp" />
     <ClCompile Include="States\gameState.cpp" />
     <ClCompile Include="States\menuState.cpp" />
     <ClCompile Include="States\pauseState.cpp" />

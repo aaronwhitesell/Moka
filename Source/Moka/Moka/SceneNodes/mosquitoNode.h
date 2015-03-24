@@ -69,6 +69,7 @@ private:
 
 private:
 	const EventGuid				mBeginSimulationEvent;   // ALW - Matches the GUID in the DaylightUI class.
+	const EventGuid				mBeginScoreboardEvent;   // ALW - Matches the GUID in the World class.
 	const EventGuid				mCreateTextPrompt;		 // ALW - Matches the GUID in the ChatBoxUI class.
 	const EventGuid				mClearTextPrompt;		 // ALW - Matches the GUID in the ChatBoxUI class.
 	const trmb::TextureHolder	&mTextures;
@@ -79,7 +80,7 @@ private:
 	bool						mHasMalaria;
 	bool						mIndoor;
 
-	bool						mBeginSimulationMode;
+	bool						mSimulationMode;
 	bool						mPause;
 	bool						mDelaySet;
 	bool						mActive;

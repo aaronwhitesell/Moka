@@ -38,6 +38,8 @@ public:
 	sf::Vector2f		    getSize() const;
 
 	int						getMosquitoCount() const;
+	int						getResidentCount() const;
+	int						getInfectedResidentCount() const;
 
 	void					setMosquitoCount(int count);
 	void					setResidentCount(int count);
@@ -68,6 +70,7 @@ private:
 
 private:
 	const EventGuid			mBeginSimulationEvent; // ALW - Matches the GUID in the DaylightUI class.
+	const EventGuid			mBeginScoreboardEvent; // ALW - Matches the GUID in the World class.
 	const EventGuid		    mFullscreen;		   // ALW - Matches the GUID in the ToggleFullscreen class.
 	const EventGuid		    mWindowed;		       // ALW - Matches the GUID in the ToggleFullscreen class.
 

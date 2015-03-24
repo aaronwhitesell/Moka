@@ -30,24 +30,13 @@ void GameState::draw()
 bool GameState::update(sf::Time dt)
 {
 	mWorld.update(dt);
-
-//	if (!mWorld.hasAlivePlayer())
-//	{
-//		mPlayer.setMissionStatus(Player::MissionStatus::MissionFailure);
-//		requestStackPush(States::ID::GameOver);
-//	}
-//	else if (mWorld.hasPlayerReachedEnd())
-//	{
-//		mPlayer.setMissionStatus(Player::MissionStatus::MissionSuccess);
-//		requestStackPush(States::ID::GameOver);
-//	}
-
-	if (mWorld.isSimulationFinished())
-	{
-		requestStackPush(States::ID::GameOver);
-	}
-
 	mPlayer.update();
+
+	if (mWorld.isScoreboardFinished())
+	{
+		requestStateClear();
+		requestStackPush(States::ID::Menu);
+	}
 
 	return true;
 }

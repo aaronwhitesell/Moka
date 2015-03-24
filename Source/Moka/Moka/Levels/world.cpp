@@ -38,7 +38,8 @@
 
 
 World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlayer& soundPlayer)
-: mFullscreen(0x5a0d2314)
+: mBeginScoreboardEvent(0xf5e88b6e)
+, mFullscreen(0x5a0d2314)
 , mWindowed(0x11e3c735)
 , mCreateTextPrompt(0x25e87fd8)
 , mClearTextPrompt(0xc1523265)
@@ -70,7 +71,7 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mResidentCount(0)
 , mSpawnPositions()
 , mDisableInput(false)
-, mBeginSimulationMode(false)
+, mSimulationMode(false)
 , mTotalCollisionTime(sf::seconds(1.0))
 , mUpdateCollisionTime()
 , mBarrelIDsToSpawnMosquito()
@@ -89,8 +90,10 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mDisplayDoorEventDialog(false)
 , mDisplayHouseEventDialog(false)
 , mDisplayWindowEventDialog(false)
+, mDisplaySimulationFinishedEventDialog(true)
 , mTransmissionCount(0)
 , mDisableMosquitoPopulationCheck(false)
+, mScoreboardUI(window, mCamera, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
 {
 	mTextures.load(Textures::ID::Tiles, "Data/Textures/Tiles.png");
 	mTextures.load(Textures::ID::InfectedMosquitoAnimation, "Data/Textures/InfectedMosquitoAnimation.png");
@@ -105,9 +108,9 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 	initializeResidentToHouseMap();
 }
 
-bool World::isSimulationFinished() const
+bool World::isScoreboardFinished() const
 {
-	return mEventDialogManager.isFinished();
+	return mScoreboardUI.isFinished();
 }
 
 void World::update(sf::Time dt)
@@ -119,25 +122,23 @@ void World::update(sf::Time dt)
 	mChatBoxUI.handler();
 
 	// ALW - Build Mode
-	if (!mBeginSimulationMode)
-		mDaylightUI.handler();
+	mDaylightUI.handler();
 
 	// ALW - Simulation Mode
-	if (mBeginSimulationMode && !mDisableInput)
+	if (!mDisableInput)
+		updateCollisions(dt);
+
+	// ALW - updateCollisions() can change the value of mDisableInput, so it should be checked again.
+	if (mSimulationMode && !mDisableInput)
 	{
-		if (!mDisableInput)
-			updateCollisions(dt);
+		spawnBarrelMosquitoes();
+		if (hasMosquitoPopulationDoubled())
+			mEventDialogManager.displayText(trmb::Localize::getInstance().getString("mosquitoPopulationEvent"));
 
-		// ALW - updateCollisions() can change the value of mDisableInput, so it should be checked again.
-		if (!mDisableInput)
-		{
-			spawnBarrelMosquitoes();
-			if (hasMosquitoPopulationDoubled())
-				mEventDialogManager.displayText(trmb::Localize::getInstance().getString("mosquitoPopulationEvent"));
-
-			updateScheduledEventDialog(dt);
-		}
+		updateScheduledEventDialog(dt);
 	}
+
+	mScoreboardUI.handler();
 }
 
 void World::handleEvent(const trmb::Event &gameEvent)
@@ -154,19 +155,24 @@ void World::handleEvent(const trmb::Event &gameEvent)
 	{
 		mDisableInput = true;
 
-		if (mBeginSimulationMode)
+		if (mSimulationMode)
 			mEventDialogManager.stop();
 	}
 	else if (mClearTextPrompt == gameEvent.getType())
 	{
 		mDisableInput = false;
 
-		if (mBeginSimulationMode)
+		if (mSimulationMode)
+		{
 			mEventDialogManager.start();
+
+			if (!mDisplaySimulationFinishedEventDialog)
+				sendEvent(mBeginScoreboardEvent);
+		}
 	}
 	else if (mBeginSimulationEvent == gameEvent.getType())
 	{
-		mBeginSimulationMode = true;
+		mSimulationMode = true;
 		mMainTrackerUI.addInfectedResident(); // ALW - Track patient zero
 
 		calculateTotalScheduledEventDialogs();
@@ -181,6 +187,11 @@ void World::handleEvent(const trmb::Event &gameEvent)
 		assert(("The barrel ID is out of range!", barrelID < mBarrels.size()));
 		mBarrelIDsToSpawnMosquito.push_back(barrelID);
 	}
+	else if (mBeginScoreboardEvent.getType() == gameEvent.getType())
+	{
+		mSimulationMode = false;
+		mScoreboardUI.initialize(mMainTrackerUI.getResidentCount());
+	}
 }
 
 void World::draw()
@@ -190,6 +201,7 @@ void World::draw()
 	mTarget.draw(mChatBoxUI);
 	mTarget.draw(mDaylightUI);
 	mTarget.draw(mMainTrackerUI);
+	mTarget.draw(mScoreboardUI);
 }
 
 bool World::isFirstTransmission() const
@@ -293,6 +305,14 @@ void World::updateScheduledEventDialog(sf::Time dt)
 		}
 		else
 			mEventDialogManager.displayText(trmb::Localize::getInstance().getString(mDidYouKnow.getDidYouKnow()));
+	}
+	else if (mEventDialogManager.isFinished())
+	{
+		if (mDisplaySimulationFinishedEventDialog)
+		{
+			mEventDialogManager.displayText(trmb::Localize::getInstance().getString("simulationFinishedEvent"));
+			mDisplaySimulationFinishedEventDialog = false;	// ALW - Only display once.
+		}
 	}
 }
 
@@ -432,7 +452,7 @@ void World::updateCollisions(sf::Time dt)
 {
 	mUpdateCollisionTime += dt;
 
-	if (mBeginSimulationMode && mUpdateCollisionTime >= mTotalCollisionTime)
+	if (mSimulationMode && mUpdateCollisionTime >= mTotalCollisionTime)
 	{
 		mUpdateCollisionTime -= mTotalCollisionTime;
 
@@ -485,6 +505,11 @@ void World::mosquitoDoorCollisions()
 				if (mosquito->hasMalaria())
 					house->addInfectedMosquito();
 			}
+			else
+			{
+				// ALW - Door deflects mosquito
+				mScoreboardUI.addDoorDeflection();
+			}
 		}
 	}
 }
@@ -532,6 +557,11 @@ void World::mosquitoWindowCollisions()
 				if (mosquito->hasMalaria())
 					house->addInfectedMosquito();
 			}
+			else
+			{
+				// ALW - Window deflects mosquito
+				mScoreboardUI.addWindowDeflection();
+			}
 		}
 	}
 }
@@ -563,6 +593,7 @@ void World::mosquitoResidentCollisions()
 							// ALW - Transmit malaria to resident
 							resident->contractMalaria();
 							mMainTrackerUI.addInfectedResident();
+							mScoreboardUI.addInfectedResident();
 							++mTransmissionCount;
 
 							if (isFirstTransmission())
@@ -575,8 +606,12 @@ void World::mosquitoResidentCollisions()
 								break;
 							}
 					}
+					else
+					{
+						// ALW - RDT and ACT cures resident
+						mScoreboardUI.addCuredResident();
+					}
 				}
-
 				if (resident->hasMalaria() && !mosquito->hasMalaria())
 				{
 					// ALW - Transmit malaria to mosquito
@@ -584,6 +619,11 @@ void World::mosquitoResidentCollisions()
 					house->addInfectedMosquito();
 					mMainTrackerUI.addInfectedMosquito();
 				}
+			}
+			else
+			{
+				// ALW - Net deflects mosquito
+				mScoreboardUI.addNetDeflection();
 			}
 		}
 	}
@@ -608,6 +648,7 @@ void World::spawnBarrelMosquito(std::size_t barrelID)
 	mSceneLayers[Mosquitoes]->attachChild(std::move(std::unique_ptr<MosquitoNode>(new MosquitoNode(mTextures
 		, getRandomSpawnPositionNearBarrel(barrelID), true, mWorldBounds, *mSceneLayers[HouseSelection]))));
 	mMainTrackerUI.addMosquito();
+	mScoreboardUI.addMosquitoSpawn();
 }
 
 void World::updateSoundPlayer()

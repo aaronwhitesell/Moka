@@ -17,6 +17,7 @@
 
 HouseTrackerUI::HouseTrackerUI(Fonts::ID font, trmb::FontHolder &fonts, SoundEffects::ID soundEffect, trmb::SoundPlayer &soundPlayer)
 : mBeginSimulationEvent(0x5000e550)
+, mBeginScoreboardEvent(0xf5e88b6e)
 , mSoundPlayer(soundPlayer)
 , mBackground()
 , mMosquitoTextBackground()
@@ -124,6 +125,10 @@ void HouseTrackerUI::handleEvent(const trmb::Event &gameEvent)
 	if (mBeginSimulationEvent == gameEvent.getType())
 	{
 		unhide();
+	}
+	else if (mBeginScoreboardEvent == gameEvent.getType())
+	{
+		hide();
 	}
 }
 

@@ -14,6 +14,7 @@
 MosquitoNode::MosquitoNode(const trmb::TextureHolder& textures, sf::Vector2f position, bool active, sf::FloatRect worldBounds
 	, SceneNode &houseLayer)
 : mBeginSimulationEvent(0x5000e550)
+, mBeginScoreboardEvent(0xf5e88b6e)
 , mCreateTextPrompt(0x25e87fd8)
 , mClearTextPrompt(0xc1523265)
 , mTextures(textures)
@@ -23,7 +24,7 @@ MosquitoNode::MosquitoNode(const trmb::TextureHolder& textures, sf::Vector2f pos
 , mPreviousPosition()
 , mHasMalaria(false)
 , mIndoor(false)
-, mBeginSimulationMode(false)
+, mSimulationMode(false)
 , mPause(false)
 , mDelaySet(false)
 , mActive(active)
@@ -41,6 +42,12 @@ MosquitoNode::MosquitoNode(const trmb::TextureHolder& textures, sf::Vector2f pos
 	mAnimation.setNumFrames(8);
 	mAnimation.setDuration(sf::seconds(1));
 	mAnimation.setRepeating(true);
+
+	if (mActive)
+	{
+		// ALW - A Mosquito will only spawn already active during the simulation mode.
+		mSimulationMode = true;
+	}
 
 	// ALW - Change the range and weights 
 	std::vector<float> intervals = { 0, 1, 2, 3 };
@@ -81,15 +88,18 @@ void MosquitoNode::contractMalaria()
 void MosquitoNode::updateCurrent(sf::Time dt)
 {
 	// ALW - Simulation Mode
-	if (!mPause)
+	if (mSimulationMode)
 	{
-		if (mDelaySet)
-			delaySpawn(dt);
-
-		if (mActive)
+		if (!mPause)
 		{
-			setNextPosition(dt);
-			mAnimation.update(dt);
+			if (mDelaySet)
+				delaySpawn(dt);
+
+			if (mActive)
+			{
+				setNextPosition(dt);
+				mAnimation.update(dt);
+			}
 		}
 	}
 }
@@ -98,7 +108,12 @@ void MosquitoNode::handleEvent(const trmb::Event &gameEvent)
 {
 	if (mBeginSimulationEvent == gameEvent.getType())
 	{
+		mSimulationMode = true;
 		delaySpawn(sf::seconds(0));	// ALW - Each time after this method will be fed the time delta
+	}
+	else if (mBeginScoreboardEvent == gameEvent.getType())
+	{
+		mSimulationMode = false;
 	}
 	else if (mCreateTextPrompt == gameEvent.getType())
 	{
