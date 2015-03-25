@@ -4,7 +4,6 @@
 
 #include "Trambo/Events/event.h"
 #include "Trambo/Localize/localize.h"
-#include "Trambo/Sounds/musicPlayer.h"
 #include "Trambo/Utilities/utility.h"
 
 #include <SFML/Graphics/Color.hpp>
@@ -68,9 +67,6 @@ MenuState::MenuState(trmb::StateStack& stack, trmb::State::Context context)
 	mGUIContainer.pack(mPlayButton);
 	mGUIContainer.pack(mCreditButton);
 	mGUIContainer.pack(mExitButton);
-
-	// Play menu theme
-	context.music->play(Music::ID::MenuTheme);
 }
 
 void MenuState::draw()

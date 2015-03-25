@@ -5,7 +5,6 @@
 <!-- UI -->
 		<gameTitleUI			   attribute="Moka Attack!"/>
 		<creditTitleUI             attribute="Credits"/>
-		<pressToStartUI            attribute="Press any key to start!"/>
 		<gamePausedUI              attribute="Game Paused"/>
 		<daylightUI                attribute="Daylight"/>
 		<mosquitoesUI		   	   attribute="Mosquitoes"/>
@@ -21,6 +20,8 @@
 		<curedResultUI             attribute="Provided RDT and ACT treatments."/>
 		<malariaResultUI           attribute="Current cases of malaria."/>
 <!-- Buttons -->
+		<englishButton             attribute="English"/>
+		<malagasyButton            attribute="Malagasy"/>
 		<playButton                attribute="Play"/>
 		<creditButton              attribute="Credit"/>
 		<exitButton                attribute="Exit"/>
@@ -116,7 +117,6 @@
 <!-- UI -->
 		<gameTitleUI			   attribute="mg: Moka Attack!"/>
 		<creditTitleUI             attribute="mg: Credits"/>
-		<pressToStartUI            attribute="mg: Press any key to start!"/>
 		<gamePausedUI              attribute="mg: Game Paused"/>
 		<daylightUI                attribute="mg: Daylight"/>
 		<mosquitoesUI		   	   attribute="mg: Mosquitoes"/>
@@ -132,6 +132,8 @@
 		<curedResultUI             attribute="mg: Provided RDT and ACT treatments."/>
 		<malariaResultUI           attribute="mg: Current cases of malaria."/>
 <!-- Buttons -->
+		<englishButton             attribute="mg: English"/>
+		<malagasyButton            attribute="mg: Malagasy"/>
 		<playButton                attribute="mg: Play"/>
 		<creditButton              attribute="mg: Credit"/>
 		<exitButton                attribute="mg: Exit"/>
