@@ -9,6 +9,7 @@
 
 #include "Trambo/Localize/localize.h"
 #include "Trambo/Sounds/soundPlayer.h"
+#include "Trambo/Utilities/utility.h"
 
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
@@ -19,8 +20,8 @@
 
 
 ClinicNode::ClinicNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window, const sf::View &view
-	, UIBundle &mUIBundle, std::vector<sf::FloatRect> attachedRects, trmb::SoundPlayer &soundPlayer, DaylightUI &daylightUI
-	, ChatBoxUI &chatBoxUI)
+	, UIBundle &mUIBundle, std::vector<sf::FloatRect> attachedRects, const trmb::TextureHolder &textures, trmb::SoundPlayer &soundPlayer
+	, DaylightUI &daylightUI, ChatBoxUI &chatBoxUI)
 : BuildingNode(interactiveObject, window, view, mUIBundle, attachedRects)
 , mClinicUIActivated(0xcb9e3f21)
 , mDrawClinicUI(0x1363b002)
@@ -36,15 +37,20 @@ ClinicNode::ClinicNode(const InteractiveObject &interactiveObject, const sf::Ren
 , mLeftClickPress(0x6955d309)
 , mRDTCost(2.0f)
 , mACTCost(2.0f)
+, mTextures(textures)
 , mSoundPlayer(soundPlayer)
 , mDaylightUI(daylightUI)
 , mChatBoxUI(chatBoxUI)
+, mRedCross(mTextures.get(Textures::ID::RedCross))
 , mClinicUIActive(false)
 , mRDTCount(0)
 , mACTCount(0)
 {
 	updateRDTDisableState();
 	updateACTDisableState();
+
+	trmb::centerOrigin(mRedCross);
+	mRedCross.setPosition(mInteractiveObject.getAlternateXCoord3(), mInteractiveObject.getAlternateYCoord3());
 }
 
 int ClinicNode::getTotalRDTs() const
@@ -122,6 +128,8 @@ void ClinicNode::handleEvent(const trmb::Event &gameEvent)
 
 void ClinicNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const
 {
+	target.draw(mRedCross, states);
+
 	if (mSelected)
 	{
 		target.draw(mHightlight, states);

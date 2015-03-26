@@ -10,6 +10,7 @@ namespace Textures
 		Heroes,
 		InfectedMosquitoAnimation,
 		MosquitoAnimation,
+		RedCross,
 		Tiles,
 		TitleScreen,
 	};

@@ -98,6 +98,7 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 	mTextures.load(Textures::ID::Tiles, "Data/Textures/Tiles.png");
 	mTextures.load(Textures::ID::InfectedMosquitoAnimation, "Data/Textures/InfectedMosquitoAnimation.png");
 	mTextures.load(Textures::ID::MosquitoAnimation, "Data/Textures/MosquitoAnimation.png");
+	mTextures.load(Textures::ID::RedCross, "Data/Textures/RedCross.png");
 
 	generateSpawnPositions();
 	buildScene();
@@ -776,8 +777,8 @@ void World::buildScene()
 			mSceneLayers[Update]->attachChild(std::move(std::unique_ptr<ClinicUpdateNode>(
 				new ClinicUpdateNode(*iter, mTextures.get(Textures::ID::Tiles)))));
 
-			std::unique_ptr<ClinicNode> clinic(new ClinicNode(*iter, mWindow, mCamera.getView(), mUIBundle, buildAttachedRects(*iter),
-				mSoundPlayer, mDaylightUI, mChatBoxUI));
+			std::unique_ptr<ClinicNode> clinic(new ClinicNode(*iter, mWindow, mCamera.getView(), mUIBundle, buildAttachedRects(*iter)
+				, mTextures, mSoundPlayer, mDaylightUI, mChatBoxUI));
 			mClinic = clinic.get();
 			mSceneLayers[ClinicSelection]->attachChild(std::move(clinic));
 		}

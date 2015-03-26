@@ -5,8 +5,10 @@
 
 #include "Trambo/Events/event.h"
 #include "Trambo/Events/eventStr.h"
+#include "Trambo/Resources/resourceHolder.h"
 
 #include <SFML/Graphics/Rect.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 
 #include <vector>
 
@@ -35,7 +37,8 @@ class ClinicNode : public BuildingNode // inherits SceneNode, EventHandler, and 
 public:
 								ClinicNode(const InteractiveObject &interactiveObject, const sf::RenderWindow &window
 									, const sf::View &view, UIBundle &mUIBundle, std::vector<sf::FloatRect> attachedRects
-									, trmb::SoundPlayer &soundPlayer, DaylightUI &daylightUI, ChatBoxUI &chatBoxUI);
+									, const trmb::TextureHolder &textures, trmb::SoundPlayer &soundPlayer, DaylightUI &daylightUI
+									, ChatBoxUI &chatBoxUI);
 								ClinicNode(const ClinicNode &) = delete;
 	ClinicNode &				operator=(const ClinicNode &) = delete;
 
@@ -99,9 +102,11 @@ private:
 	const EventGuid				mLeftClickPress;   // ALW - Matches the GUID in the Controller class.
 	const float					mRDTCost;
 	const float					mACTCost;
+	const trmb::TextureHolder	&mTextures;
 	trmb::SoundPlayer			&mSoundPlayer;
 	DaylightUI					&mDaylightUI;
 	ChatBoxUI					&mChatBoxUI;
+	sf::Sprite					mRedCross;
 	bool						mClinicUIActive;
 	int							mRDTCount;
 	int							mACTCount;
