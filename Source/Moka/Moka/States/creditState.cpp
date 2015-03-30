@@ -31,7 +31,7 @@ CreditState::CreditState(trmb::StateStack &stack, trmb::State::Context context)
 	trmb::centerOrigin(mText);
 	mText.setPosition(center - sf::Vector2f(0, 225));
 
-	const float x = center.x - 350.0f;
+	const float x = center.x - 355.0f;
 	const float y = center.y - 110.0f;
 	const float buttonHeight = 50.0f;
 
@@ -81,7 +81,7 @@ void CreditState::repositionGUI()
 	mBackgroundSprite.setPosition(center);
 	mText.setPosition(center - sf::Vector2f(0, 225));
 
-	const float x = center.x - 350.0f;
+	const float x = center.x - 355.0f;
 	const float y = center.y - 110.0f;
 	const float buttonHeight = 50.0f;
 

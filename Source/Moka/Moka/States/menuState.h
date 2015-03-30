@@ -50,6 +50,31 @@ private:
 
 	sf::Sprite						mBackgroundSprite;
 	sf::Text						mText;
+
+	sf::Text						mControlsInst;
+	sf::Sprite						mKeyboardArrowUp;
+	sf::Sprite						mKeyboardArrowDown;
+	sf::Sprite						mKeyboardArrowLeft;
+	sf::Sprite						mKeyboardArrowRight;
+	sf::Text						mPlusMouseInst;
+	sf::Sprite						mKeyboardMouseLeft;
+	sf::Sprite						mKeyboardEsc;
+	sf::Text						mEscInst;
+	sf::Sprite						mKeyboardCtrl;
+	sf::Text						mPlusFInst;
+	sf::Sprite						mKeyboardF;
+	sf::Text						mToggleInst;
+
+	sf::Text						mMosquitoInst;
+	sf::Text						mMalariaMosquitoInst;
+	sf::Text						mDamagedNetInst;
+	sf::Text						mNetInst;
+	sf::Text						mBedInst;
+	sf::Text						mResidentInst;
+	sf::Text						mMalariaResidentInst;
+	sf::Text						mMalariaHouseMoquitoInst;
+	sf::Text						mHouseMoquitoInst;
+
 	std::shared_ptr<trmb::Button>	mPlayButton;
 	std::shared_ptr<trmb::Button>	mCreditButton;
 	std::shared_ptr<trmb::Button>	mExitButton;

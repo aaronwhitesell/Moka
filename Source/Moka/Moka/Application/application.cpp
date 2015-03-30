@@ -41,7 +41,16 @@ Application::Application()
 	mFonts.load(Fonts::ID::Title, "Data/Fonts/Lazy Sans.ttf");
 
 	mTextures.load(Textures::ID::TitleScreen, "Data/Textures/TitleScreen.png");
+	mTextures.load(Textures::ID::MenuScreen, "Data/Textures/MenuScreen.png");
 	mTextures.load(Textures::ID::Buttons, "Data/Textures/Buttons.png");
+	mTextures.load(Textures::ID::KeyboardArrowUp, "Data/Textures/KeyboardArrowUp.png");
+	mTextures.load(Textures::ID::KeyboardArrowDown, "Data/Textures/KeyboardArrowDown.png");
+	mTextures.load(Textures::ID::KeyboardArrowLeft, "Data/Textures/KeyboardArrowLeft.png");
+	mTextures.load(Textures::ID::KeyboardArrowRight, "Data/Textures/KeyboardArrowRight.png");
+	mTextures.load(Textures::ID::KeyboardMouseLeft, "Data/Textures/KeyboardMouseLeft.png");
+	mTextures.load(Textures::ID::KeyboardEsc, "Data/Textures/KeyboardEsc.png");
+	mTextures.load(Textures::ID::KeyboardCtrl, "Data/Textures/KeyboardCtrl.png");
+	mTextures.load(Textures::ID::KeyboardF, "Data/Textures/KeyboardF.png");
 
 	mMusic.load(Music::ID::MenuTheme, "Data/Music/MenuTheme.ogg");
 	mMusic.load(Music::ID::MissionTheme, "Data/Music/MissionTheme.ogg");
