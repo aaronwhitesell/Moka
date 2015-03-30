@@ -12,4 +12,10 @@ Font: Lazy Sans
 Author: Soja
 Use: used freely for personal and commercial purposes
 
+Keyboard and Mouse Prompts
+Author: Nicolae Berbece
+Use: used freely for personal and commercial purposes
+License: CC0 (http://creativecommons.org/publicdomain/zero/1.0/)
+Instructions: Credit
+
 
