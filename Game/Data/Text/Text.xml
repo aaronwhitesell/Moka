@@ -18,7 +18,7 @@
 		<escInstUI                 attribute="To Pause or End Game"/>
 		<toggleInstUI              attribute="Toggle between Windowed and Fullscreen Mode"/>
 		<gamePausedUI              attribute="Game Paused"/>
-		<daylightUI                attribute="Daylight"/>
+		<daylightUI                attribute="Daylight Hours Left"/>
 		<mosquitoesUI		   	   attribute="Mosquitoes"/>
 		<residentsUI		   	   attribute="Residents"/>
 		<totalUI		           attribute="Total"/>
@@ -39,7 +39,7 @@
 		<exitButton                attribute="Exit"/>
 		<backButton                attribute="Back"/>
 		<returnButton              attribute="Return"/>
-		<backToMenuButton          attribute="Exit Game"/>
+		<backToMenuButton          attribute="End Game"/>
 		<undoButton                attribute="Undo"/>
 		<coverButton               attribute="Cover"/>
 		<closeButton			   attribute="Close"/>
@@ -48,7 +48,7 @@
 		<repairButton              attribute="Repair"/>
 		<RDTButton                 attribute="RDTs"/>
 		<ACTButton                 attribute="ACTs"/>
-		<daylightButton            attribute="Done!"/>
+		<daylightButton            attribute="Done?"/>
 <!-- Dialog -->
 	    <prompt                    attribute="Press Enter"/>
 		<greeting		           attribute="Congratulations, you have been elected the new mayor of Pleasantville! Pleasantville is a wonderful
@@ -93,7 +93,7 @@
 		<RDTACTEvent               attribute="The clinic has no RDTs or ACTs! The residents cannot be diagnosed or receive treatment for malaria."/>
 		<closedDoorEvent      	   attribute="No doors have been closed! Simply closing a door is an effective way to reduce mosquitoes inside a
 		                                     house."/>
-		<purchaseEvent			   attribute="No mosquito nets were purchased! Mosquito nets are one of the most effective ways to protect people from malaria"/>
+		<purchaseEvent			   attribute="No mosquito nets were purchased! Mosquito nets are one of the most effective ways to protect people from malaria."/>
 		<repairEvent			   attribute="No repairs have been made to damaged mosquito nets! A needle and thread can be used to sew up small
 											 holes in a damaged mosquito net."/>
 		<purchaseRepairEvent       attribute="No mosquito nets were purchased or repaired! Mosquito nets are one of the most effective ways to
@@ -141,7 +141,7 @@
 		<escInstUI                 attribute="mg: To Pause or End Game"/>
 		<toggleInstUI              attribute="mg: Toggle between Windowed and Fullscreen Mode"/>
 		<gamePausedUI              attribute="mg: Game Paused"/>
-		<daylightUI                attribute="mg: Daylight"/>
+		<daylightUI                attribute="mg: Daylight Hours Left"/>
 		<mosquitoesUI		   	   attribute="mg: Mosquitoes"/>
 		<residentsUI		   	   attribute="mg: Residents"/>
 		<totalUI		           attribute="mg: Total"/>
@@ -162,7 +162,7 @@
 		<exitButton                attribute="mg: Exit"/>
 		<backButton                attribute="mg: Back"/>
 		<returnButton              attribute="mg: Return"/>
-		<backToMenuButton          attribute="mg: Exit Game"/>
+		<backToMenuButton          attribute="mg: End Game"/>
 		<undoButton                attribute="mg: Undo"/>
 		<coverButton               attribute="mg: Cover"/>
 		<closeButton			   attribute="mg: Close"/>
@@ -171,7 +171,7 @@
 		<repairButton              attribute="mg: Repair"/>
 		<RDTButton                 attribute="mg: RDTs"/>
 		<ACTButton                 attribute="mg: ACTs"/>
-		<daylightButton            attribute="mg: Done!"/>
+		<daylightButton            attribute="mg: Done?"/>
 <!-- Dialog -->
 	    <prompt                    attribute="mg: Press Enter"/>
 		<greeting		           attribute="mg: Congratulations, you have been elected the new mayor of Pleasantville! Pleasantville is a wonderful
@@ -216,7 +216,7 @@
 		<RDTACTEvent               attribute="mg: The clinic has no RDTs or ACTs! The residents cannot be diagnosed or receive treatment for malaria."/>
 		<closedDoorEvent      	   attribute="mg: No doors have been closed! Simply closing a door is an effective way to reduce mosquitoes inside a
 		                                     house."/>
-		<purchaseEvent			   attribute="mg: No mosquito nets were purchased! Mosquito nets are one of the most effective ways to protect people from malaria"/>
+		<purchaseEvent			   attribute="mg: No mosquito nets were purchased! Mosquito nets are one of the most effective ways to protect people from malaria."/>
 		<repairEvent			   attribute="mg: No repairs have been made to damaged mosquito nets! A needle and thread can be used to sew up small
 											 holes in a damaged mosquito net."/>
 		<purchaseRepairEvent       attribute="mg: No mosquito nets were purchased or repaired! Mosquito nets are one of the most effective ways to
