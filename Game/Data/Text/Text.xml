@@ -126,125 +126,135 @@
 	</en>
     <mg>
 <!-- UI -->
-		<gameTitleUI			   attribute="mg: Moka Attack!"/>
-		<creditTitleUI             attribute="mg: Credits"/>
-		<mosquitoInstUI            attribute="mg: Mosquito"/>
-		<malariaMosquitoInstUI     attribute="mg: Mosquito with Malaria"/>
-		<damagedNetInstUI		   attribute="mg: Damaged Mosquito Net"/>
-		<netInstUI         		   attribute="mg: New/Repaired Mosquito Net"/>
-		<bedInstUI                 attribute="mg: Bed without Net"/>
-		<residentInstUI            attribute="mg: Resident"/>
-		<malariaResidentInstUI	   attribute="mg: Resident with Malaria"/>
-		<malariaHouseMoquitoInstUI attribute="mg: Total Mosquitoes with Malaria inside the House"/>
-	    <houseMoquitoInstUI        attribute="mg: Total Mosquitoes inside the House"/>
-		<controlsInstUI            attribute="mg: Controls"/>
-		<escInstUI                 attribute="mg: To Pause or End Game"/>
-		<toggleInstUI              attribute="mg: Toggle between Windowed and Fullscreen Mode"/>
-		<gamePausedUI              attribute="mg: Game Paused"/>
-		<daylightUI                attribute="mg: Daylight Hours Left"/>
-		<mosquitoesUI		   	   attribute="mg: Mosquitoes"/>
-		<residentsUI		   	   attribute="mg: Residents"/>
-		<totalUI		           attribute="mg: Total"/>
-		<infectedUI		   		   attribute="mg: Infected"/>
-		<successResultUI           attribute="mg: SUCCESS!"/>
-		<failureResultUI           attribute="mg: FAILURE!"/>
-		<barrelResultUI            attribute="mg: Mosquitoes spawned from barrels."/>
-		<doorResultUI              attribute="mg: Mosquitoes deflected by doors."/>
-		<windowResultUI            attribute="mg: Mosquitoes deflected by windows."/>
-		<netResultUI               attribute="mg: Mosquitoes deflected by mosquito nets."/>
-		<curedResultUI             attribute="mg: RDT and ACT treatments used."/>
-		<malariaResultUI           attribute="mg: Current cases of malaria."/>
+		<gameTitleUI			   attribute="Moka Attack!"/>
+		<creditTitleUI             attribute="Fankasitrahana"/>
+		<mosquitoInstUI            attribute="Moka"/>
+		<malariaMosquitoInstUI     attribute="Moka ahazoana tazo moka"/>
+		<damagedNetInstUI		   attribute="Lay maratra"/>
+		<netInstUI         		   attribute="Lay vaovao/voamboatra"/>
+		<bedInstUI                 attribute="Fandriana tsy misy lay"/>
+		<residentInstUI            attribute="Mponina"/>
+		<malariaResidentInstUI	   attribute="Ny olona voan'ny tazo moka"/>
+		<malariaHouseMoquitoInstUI attribute="Ny fitambaranan'ireo moka ahazoana tazo moka anatiny trano"/>
+	    <houseMoquitoInstUI        attribute="Fitambaran'ny moka anatiny trano"/>
+		<controlsInstUI            attribute="Toromarika"/>
+		<escInstUI                 attribute="*Miala sasatra kely sa tamperina ny lalao"/>
+		<toggleInstUI              attribute="*Fifamadiaha ny varavaran kely sy ny fihovana ny fahita lavitra maventy"/>
+		<gamePausedUI              attribute="*Ajanona kely ny lalao"/>
+		<daylightUI                attribute="*Ora mazava sisa"/>
+		<mosquitoesUI		   	   attribute="Moka"/>
+		<residentsUI		   	   attribute="Mponina"/>
+		<totalUI		           attribute="Fitambarana"/>
+		<infectedUI		   		   attribute="*Mifindra"/>
+		<successResultUI           attribute="*Mandresy ianao!"/>
+		<failureResultUI           attribute="*Resy ianao!"/>
+		<barrelResultUI            attribute="Moka niboaka avy tamin'ny barika."/>
+		<doorResultUI              attribute="Moka tsy niditra tamin'ny varavarana."/>
+		<windowResultUI            attribute="Moka tsy niditra tamin'ny varavaran-kely."/>
+		<netResultUI               attribute="Moka tsy niditra tamin'ny lay."/>
+		<curedResultUI             attribute="*TDR sy ACT nampiahaina tamin'ny fitsaboana."/>
+		<malariaResultUI           attribute="*Fomba hahaizana tazo moka."/>
 <!-- Buttons -->
-		<englishButton             attribute="mg: English"/>
-		<malagasyButton            attribute="mg: Malagasy"/>
-		<playButton                attribute="mg: Play"/>
-		<creditButton              attribute="mg: Credit"/>
-		<exitButton                attribute="mg: Exit"/>
-		<backButton                attribute="mg: Back"/>
-		<returnButton              attribute="mg: Return"/>
-		<backToMenuButton          attribute="mg: End Game"/>
-		<undoButton                attribute="mg: Undo"/>
-		<coverButton               attribute="mg: Cover"/>
-		<closeButton			   attribute="mg: Close"/>
-		<installButton			   attribute="mg: Install"/>
-		<deliverButton             attribute="mg: Deliver"/>
-		<repairButton              attribute="mg: Repair"/>
-		<RDTButton                 attribute="mg: RDTs"/>
-		<ACTButton                 attribute="mg: ACTs"/>
-		<daylightButton            attribute="mg: Done?"/>
+		<englishButton             attribute="Angilisy"/>
+		<malagasyButton            attribute="Malagasy"/>
+		<playButton                attribute="Lalao"/>
+		<creditButton              attribute="Fankasitrahana"/>
+		<exitButton                attribute="Miala"/>
+		<backButton                attribute="Miverina"/>
+		<returnButton              attribute="Miverina milalao"/>
+		<backToMenuButton          attribute="Mamarana ny lalao"/>
+		<undoButton                attribute="Foanana"/>
+		<coverButton               attribute="Mararana"/>
+		<closeButton			   attribute="Manidy"/>
+		<installButton			   attribute="Mametaka"/>
+		<deliverButton             attribute="Mizara"/>
+		<repairButton              attribute="Manjaitra"/>
+		<RDTButton                 attribute="*TDRs"/>
+		<ACTButton                 attribute="*ACTs"/>
+		<daylightButton            attribute="Vita?"/>
 <!-- Dialog -->
-	    <prompt                    attribute="mg: Press Enter"/>
-		<greeting		           attribute="mg: Congratulations, you have been elected the new mayor of Pleasantville! Pleasantville is a wonderful
-		                                     place, but it has one big problem: malaria. Help the residents of your town develop an effective
-											 strategy to fight malaria. First, have a look around and identify different ways to combat malaria. Then
-											 spend your resources wisely. Afterwards, we will see how well you protected your town."/>
-        <daylightHours             attribute="mg: There are not enough daylight hours left!"/>
-		<inspectBarrel             attribute="mg: You see a barrel full of water. Would you like to cover the barrel?"/>
-	    <inspectCoveredBarrel      attribute="mg: Would you like to uncover the barrel?"/>
-	    <purchaseCover	  	       attribute="mg: It takes one hour to construct a cover for the barrel."/>
-	    <refundCover	  	       attribute="mg: One hour has been refunded to you."/>
-		<inspectDoor               attribute="mg: You see an open door. Would you like to close it?"/>
-	    <inspectClosedDoor         attribute="mg: Would you like to open the door?"/>
-	    <purchaseClosedDoor	  	   attribute="mg: Fifteen minutes pass as the residents and you discuss the benefits of closing their door at night to
-		                                     keep mosquitoes out."/>
-	    <refundClosedDoor	  	   attribute="mg: Fifteen minutes have been refunded to you."/>
-		<inspectWindow             attribute="mg: You see an open window. Would you like to install a mosquito screen or close it?"/>
-	    <inspectScreenWindow       attribute="mg: Would you like to remove the mosquito screen?"/>
-		<inspectClosedWindow       attribute="mg: Would you like to open the window?"/>
-	    <inspectScreenClosedWindow attribute="mg: Would you like to remove the mosquito screen or open the window?"/>
-		<purchaseScreenWindow      attribute="mg: It takes you one hour to install a mosquito screen."/>
-	    <refundScreenWindow	       attribute="mg: One hour has been refunded to you."/>
-	    <purchaseClosedWindow      attribute="mg: The window shutters are rusted in place. It takes you thirty minutes to oil and adjust them."/>
-	    <refundClosedWindow	       attribute="mg: Thirty minutes have been refunded to you."/>
-	    <inspectClinic             attribute="mg: You see a clinic. You can stock the clinic with both rapid diagnostic tests (RDTs) and
-											 Artemisinin-based combination therapies (ACTs)."/>
-        <purchaseRDT               attribute="mg: It takes two hours to stock the RDTs."/>
-		<refundRDT                 attribute="mg: Two hours have been refunded to you."/>
-        <purchaseACT               attribute="mg: It takes two hour to stock the ACTs."/>
-		<refundACT                 attribute="mg: Two hours have been refunded to you."/>
-	    <inspectHouse              attribute="mg: You see a house. Would you like to deliver a new mosquito net, or if there is a damaged mosquito net
-		                                     it can be repaired?"/>
-		<purchaseNet               attribute="mg: It takes one hour to deliver and hang the mosquito net."/>
-		<refundNet                 attribute="mg: One hour has been refunded to you."/>
-		<purchaseRepair            attribute="mg: You use a needle and thread to sew up each small hole. Thirty minutes have passed."/>
-		<refundRepair              attribute="mg: Thirty minutes have been refunded to you."/>
-        <simulationGreeting        attribute="mg: The town darkens as night approaches and the buzz of mosquitoes drowns out all other noises."/>
-		<transmissionEvent         attribute="mg: Malaria has spread from one resident to another! Everyone with a fever should be tested for malaria."/>
-		<mosquitoPopulationEvent   attribute="mg: The mosquito population has doubled! Mosquitoes lay their eggs in water. Make sure to cover those barrels!"/>
-		<RDTEvent                  attribute="mg: The clinic has no RDTs! The residents cannot be diagnosed."/>
-		<ACTEvent                  attribute="mg: The clinic has no ACTs! The residents cannot receive treatment for malaria."/>
-		<RDTACTEvent               attribute="mg: The clinic has no RDTs or ACTs! The residents cannot be diagnosed or receive treatment for malaria."/>
-		<closedDoorEvent      	   attribute="mg: No doors have been closed! Simply closing a door is an effective way to reduce mosquitoes inside a
-		                                     house."/>
-		<purchaseEvent			   attribute="mg: No mosquito nets were purchased! Mosquito nets are one of the most effective ways to protect people from malaria."/>
-		<repairEvent			   attribute="mg: No repairs have been made to damaged mosquito nets! A needle and thread can be used to sew up small
-											 holes in a damaged mosquito net."/>
-		<purchaseRepairEvent       attribute="mg: No mosquito nets were purchased or repaired! Mosquito nets are one of the most effective ways to
-											 protect yourself. A needle and thread can be used to sew up small holes in a damaged mosquito net."/>
-		<screenEvent      		   attribute="mg: No windows have screens! A screen is a permanent way to reduce the mosquitoes inside a house."/>
-		<closedWindowEvent         attribute="mg: No windows have been closed! Simply closing a window is an effective way to reduce mosquitoes inside a
-                                             house."/>
-		<screenClosedWindowEvent   attribute="mg: No windows have a screen or have been closed! A screen is a permanent way to reduce the mosquitoes
-		                                     inside a house. Simply closing a window is effective as well."/>
-		<simulationFinishedEvent   attribute="mg: The sound of a rooster crowing replaces the buzz of mosquitoes as morning approaches. Let's check the
-                                             results and see how you did combating malaria!"/>
-		<didYouKnow0			   attribute="mg: DID YOU KNOW? A mosquito needs your blood for her eggs to develop? Squash her!"/>
-		<didYouKnow1			   attribute="mg: DID YOU KNOW? A mosquito net has to be tucked in on all sides of the bed to be effective."/>
-		<didYouKnow2			   attribute="mg: DID YOU KNOW? Women are four times more likely to get malaria while pregnant."/>
-		<didYouKnow3			   attribute="mg: DID YOU KNOW? If you ever have malaria, remember to take ACTs and not other medicines."/>
-		<didYouKnow4			   attribute="mg: DID YOU KNOW? The most common symptoms of malaria are high fever, chills, headache, body aches, and
-		                                     tiredness. Nausea, vomiting, and diarrhea may also occur."/>
-		<didYouKnow5			   attribute="mg: DID YOU KNOW? Even if you are young and healthy, you still need to sleep under a mosquito net because
-											 you can spread the disease to others who are not young and healthy."/>
-		<didYouKnow6			   attribute="mg: DID YOU KNOW? Malaria is caused by a parasite carried by the female Anopheles mosquito. When she bites
-											 someone who is infected with malaria and then bites another person, she transfers the disease."/>
-		<didYouKnow7			   attribute="mg: DID YOU KNOW? If you ever have malaria, remember that even if you begin to feel better, you MUST continue
-											 to take your medicine as the doctor says or the infection will not go away completely."/>
-		<didYouKnow8			   attribute="mg: DID YOU KNOW? If left untreated, malaria can develop into a more virulent form of the disease. Symptoms
-											 of a complication include jaundice, unconsciousness, inability to sit, convulsions, and shallow
-											 breathing. Brain damage may develop."/>
-		<didYouKnow9               attribute="mg: DID YOU KNOW? The surest way to know whether you have malaria is visit your doctor and take a
-                                             diagnostic test."/>
-		<didYouKnow10              attribute="mg: DID YOU KNOW? Anopheles mosquitoes are most active between dusk and dawn."/>
+	    <prompt                    attribute="Tsindrio miditra"/>
+		<greeting		           attribute="Arahabaina, ianao dia voafidy ho ben'ny tananan'ny Tsaratanana! Tsaratanana dia toerana iray
+								             mahafinaritra, kanefa manana olana goavana iray: tazomoka. Ampio ireo mponina ao amin'ny tanana
+											 misy anao mba hampandroso tetikady iray hiadiana amin'ny tazomoka. Voalohany, jereo ny manodidina
+											 ary fantaro ireo fomba samihafa hiadiana amin'ny tazomoka. Ampiasao ampahendrena ny fanananao.
+											 Rehefa avy eo, ho hitanay eo ahoana no mba fiarovanao ny tanananao."/>
+        <daylightHours             attribute="Efa tsy misy hazavana be intsomy sisa!"/>
+		<inspectBarrel             attribute="Mahita barika feno rano ianao. Afaka mandrakotra ilay barika ve ianao?"/>
+	    <inspectCoveredBarrel      attribute="Afaka manokotria ilay barika ve ianao?"/>
+	    <purchaseCover	  	       attribute="Eo amin'ny ora iray eo ny fotoana lany hanamboatra nakotra barika."/>
+	    <refundCover	  	       attribute="Ora iray no haverina aminao."/>
+		<inspectDoor               attribute="Mahita varavarana misokatra ianao. Afaka mamody azy ve ianao?"/>
+	    <inspectClosedDoor         attribute="Afaka manokatra varavarana ve ianao?"/>
+	    <purchaseClosedDoor	  	   attribute="Efa naharitra dimy ambin'ny folo minitra ny fotoana ninesahanao sy ilay tompontrano momba ny 
+		                                     tombotsoan'ny famodiany ny varavarana mandritra ny alina mba hiarovana ny moka tsy hotafiditra 
+											 an-trano. "/>
+	    <refundClosedDoor	  	   attribute="Manana dimy ambiny folo minitra ianao."/>
+		<inspectWindow             attribute="Mahita varavaran-kely misokatra ianao. Afaka mametaka giriazy na mamody ilay varavaran-kely ve
+		                                     ianao?"/>
+	    <inspectScreenWindow       attribute="Afaka manala ilay giriazy ve ianao?"/>
+		<inspectClosedWindow       attribute="Afaka manokatra varavaran-kely ve ianao?"/>
+	    <inspectScreenClosedWindow attribute="Afaka ve ny hanaisotra io giriazy na koa hanokatra ny varavaran-kely?"/>
+		<purchaseScreenWindow      attribute="Maharitra eo amin'ny ora iray ny fametahana lay."/>
+	    <refundScreenWindow	       attribute="Ora iray no haverina aminao."/>
+	    <purchaseClosedWindow      attribute="Harafesina ampitoerana ny varavaran-kely misy ridao. Mila telopolo minitra ianao hanosorana
+		                                     diloilo azy mba hampandeha azy tsara."/>
+	    <refundClosedWindow	       attribute="Telopolo minitra no haverina aminao."/>
+	    <inspectClinic             attribute="*Mahita hopitaly ianao. Azonao tehirizina ao ny TDRs fitaovam-pitiliana malaky sy ny fanofody ACTs."/>
+        <purchaseRDT               attribute="Ora roa no fitehirizana ny TDRs."/>
+		<refundRDT                 attribute="Ora roa no haverina aminao."/>
+        <purchaseACT               attribute="Mila roa ora ny fitehirizana ny ACTs."/>
+		<refundACT                 attribute="Ora roa no haverina aminao."/>
+	    <inspectHouse              attribute="Mahita trano iray ianao. Moa ve afaka manatitra lay vaovao iray ianao, na manjaitra raha misy
+		                                     lay rovitra."/>
+		<purchaseNet               attribute="Ora iray no ilaina amin'ny fanaterana sy ny fametahana ny lay."/>
+		<refundNet                 attribute="Ora roa no haverina aminao."/>
+		<purchaseRepair            attribute="Fanjaitra sy kofehy no entina hanampenana ny lavaka kely tsirairay. Telopolo minitra no lasa izay."/>
+		<refundRepair              attribute="Telopolo minitra no haverina aminao."/>
+        <simulationGreeting        attribute="Mihamaizana ny tanana raha tonga ny hariva ary tsy zavatra heno afa tsy ny feon'ny moka."/>
+		<transmissionEvent         attribute="Ny tazo mahery dia avy amin'ny olona ka mifindra any amin'ny hafa. Ny olona izay tratra ny tazo
+		                                     dia tokony hanaovana fitiliana momba ny tazo mahery."/>
+		<mosquitoPopulationEvent   attribute="Nitombo avo roa eny ny habetsahan'ny moka. Anatiny rano no ametrahan'ny moka ny atodiny. Aza hadinoina 
+                                             ny manarona ireny fitaovana ireny."/>
+		<RDTEvent                  attribute="Ny toeram-pitsaboana manokana dia tsy manana ireny fitaovam-pitiliana malaky ireny! Tsy afaka atao
+                                             ny mitily ny olona."/>
+		<ACTEvent                  attribute="Tsy manana ACTs ny tobi-pahasalamanana! Tsy afaka mandray fitsaboana ho hiarovana aretina tazo moka
+		                                     ireo mponina ireo."/>
+		<RDTACTEvent               attribute="Tsy manana TDRs na ACTs ny tobi-pahasalamanana! Tsy afaka mitily na mahazo fitsaboana ireo ponina
+		                                     amin'ny aretina tazomoka."/>
+		<closedDoorEvent      	   attribute="Tsy misy varavarana mihidy! Ny famodiana fotsiny ny varavarana dia fomba iray mahomby hiarovana ny
+		                                     fanaroan'ny moka ao an-trano."/>
+		<purchaseEvent			   attribute="Tsy misy lay ialam-bola! Ny lay dia anisan'ny fomba iray mahomby miara ny olona amin'ny tazo moka."/>
+		<repairEvent			   attribute="Tsy misy fanamboarina tamin'ny lay izay simba! Ny fanjaitra sy filo (taretry) mety ampiasana mba
+		                                     hanjahirana ireo rovitra."/>
+		<purchaseRepairEvent       attribute="Tsy misy lay ialam-bola na amboarina! Ny lay dia anisan'ny ireo fomba tena mahomby hafahanao miaro
+		                                     tena. Ny fanjaitra sy ny bofehy dia afaka ampiasaina mba hanampenana ireo lavaka bely amin'ny lay. "/>
+		<screenEvent      		   attribute="Tsy misy varavaran-kely misy fitaratra! Ny Fitaratra dia fomba iray maharitra entina ampihenana ny
+		                                     moka ao antrano."/>
+		<closedWindowEvent         attribute="Tsy misy mihidy ny varavaran-kely. Ny fanidihana ny varavaran-kely dia fomba tsotra sady mahomby
+		                                     manena ny moka ao an-trano."/>
+		<screenClosedWindowEvent   attribute="Tsy misy giriazy na mihidy ny varavaran-kely! Ny giriazy dia fomba maharitra manena ny moka ao
+		                                     an-trano. Fomba mahomby iany koa ny fanidihana ny varavaran-kely."/>
+		<simulationFinishedEvent   attribute="Misolo ny feon'ny akoholahy ny feon'ny moka rehefa akaiky ny maraina. Ndeha hojerena ny voketra
+		                                     sy ny fomba hidadihanao any tazo moka!"/>
+		<didYouKnow0			   attribute="Fantatrao ve? Mila ny ranao ny moka hitombon'ny atodiny."/>
+		<didYouKnow1			   attribute="Fantatrao ve? Ny lay dia tsy maintsy apetaka amin'ny zoron'ny fandriana avy mba hahomby."/>
+		<didYouKnow2			   attribute="Fantatrao ve? Ny vehivavy bevohoka dia mora tratry ny tazo moka."/>
+		<didYouKnow3			   attribute="Fantatrao ve? Raha efa voan'ny tazo moka ianao, aza adino mihinana ACTs fa tsy fanafody hafa."/>
+		<didYouKnow4			   attribute="Fantatrao ve? Ny ahafantarana ny tazo moka matetika dia tazo moka mahery vaika, mangatsiaka,
+		                                     aretin'andoha, marary vatana, reraka, te handoa, avy indraindray fivalanana."/>
+		<didYouKnow5			   attribute="Fantatrao ve? Na tanora salama aza ianao dia ilaina ihany ny fatoriana ao anaty lay misy fanafody
+		                                     moka satria mety miely any amin'ny olon-drehetra na tanora sy salama aza ny aretina."/>
+		<didYouKnow6			   attribute="Fantatrao ve? Ny tazo moka dia azo avy amin'ny kaikitra ny mokavavy. Rehefa manaikitra olona
+		                                     marary ilay moka dia mamindra aretina any amin'ny olona salama indray amin'ny alalan'ny kaikitra."/>
+		<didYouKnow7			   attribute="Fantatrao ve? Raha mbola tsy voan'ny tazo mihintsy ianao, tadidio fa na dia mahatsapa miha salama
+		                                     ianao dia tokony hanoy hatrany ny fihimanana fanafody toromasiky ny mpitsabro satria mety mbola tsy
+											 sitrana tanteraka ianao."/>
+		<didYouKnow8			   attribute="Fantatrao ve? Raha tsy tsaboina ny tazo moka dia mety lasa tazo mahery vaika. Soritra iray
+		                                     ahafantarana ny fiombron'ny aretina ny angorosy, tsy fahatsiasovana tena, tsy fihetezana mipetraka,
+											 fanintona ary faharivon'ny fiaina. Izany dia mety hampitombo ny fahasimban'ny atidoha."/>
+		<didYouKnow9               attribute="Fantatrao ve? Ny fomba azo antoka ahafantarano,fa voan'ny tazo moka ianao dia ny manatana dokotera
+		                                     sy manao fitiliana."/>
+		<didYouKnow10              attribute="Fantatrao ve? Ny mokavavy Anopheles dia matetika mivoaka eo anelanelan'ny harivariva sy divaraina."/>
 	</mg>
 </text>
