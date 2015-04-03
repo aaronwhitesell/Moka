@@ -18,6 +18,7 @@
 #include <SFML/Window/Mouse.hpp>
 
 #include <cassert>
+#include <cmath>
 
 
 DaylightUI::DaylightUI(const sf::RenderWindow &window, trmb::Camera &camera, Fonts::ID font, trmb::FontHolder &fonts
@@ -37,6 +38,8 @@ DaylightUI::DaylightUI(const sf::RenderWindow &window, trmb::Camera &camera, Fon
 , mSoundPlayer(soundPlayer)
 , mUIBundle(uiBundle)
 , mBackground()
+, mDaylightBackground()
+, mHourBackground()
 , mDaylightText()
 , mHoursText()
 , mHourCount(mMaxHours)
@@ -47,27 +50,50 @@ DaylightUI::DaylightUI(const sf::RenderWindow &window, trmb::Camera &camera, Fon
 , mMouseOver(false)
 , mUIBundleDisabled(false)
 {
-	mBackground.setSize(sf::Vector2f(60.0f, 41.0f));
-	mBackground.setFillColor(sf::Color(0u, 0u, 0u, 200u));
-	mBackground.setOutlineColor(sf::Color(0u, 0u, 0u, 255u));
-	mBackground.setOutlineThickness(1.0f);
+	const float buffer = 3;
+	const sf::Vector2f daylightBackgroundSize = sf::Vector2f(130.0f, 20.0f);
+	const sf::Vector2f hourBackgroundSize = sf::Vector2f(50.0f, 40.0f + buffer);
+	const sf::Vector2f buttonSize = sf::Vector2f(daylightBackgroundSize.x, daylightBackgroundSize.y);
+	const sf::Vector2f backgroundSize = sf::Vector2f(daylightBackgroundSize.x + buffer + hourBackgroundSize.x, hourBackgroundSize.y);
+	const sf::Color translucentColor = sf::Color(0u, 0u, 0u, 0u);
+	const sf::Color backgroundColor = sf::Color(0u, 0u, 0u, 200u);
+	const sf::Color outlineColor = sf::Color(0u, 0u, 0u, 255u);
+	const float outlineThickness = 1.0f;
+
+	mBackground.setSize(backgroundSize);
+	mBackground.setFillColor(translucentColor);
+	mBackground.setOutlineColor(outlineColor);
+	mBackground.setOutlineThickness(outlineThickness);
 	mBackground.setPosition(0.0f, 0.0f);
 
+	mDaylightBackground.setSize(daylightBackgroundSize);
+	mDaylightBackground.setFillColor(backgroundColor);
+	mDaylightBackground.setOutlineColor(outlineColor);
+	mDaylightBackground.setOutlineThickness(outlineThickness);
+	mDaylightBackground.setPosition(0.0f, 0.0f);
+
+	mHourBackground.setSize(hourBackgroundSize);
+	mHourBackground.setFillColor(backgroundColor);
+	mHourBackground.setOutlineColor(outlineColor);
+	mHourBackground.setOutlineThickness(outlineThickness);
+	mHourBackground.setPosition(daylightBackgroundSize.x + buffer, 0.0f);
+
 	mDaylightText.setFont(mFonts.get(font));
-	mDaylightText.setCharacterSize(14u);
+	mDaylightText.setCharacterSize(13u);
 	mDaylightText.setString(trmb::Localize::getInstance().getString("daylightUI"));
-	trmb::centerOrigin(mDaylightText, true, false);
-	mDaylightText.setPosition(sf::Vector2f(mBackground.getSize().x / 2.0f, 0.0f));
+	trmb::centerOrigin(mDaylightText, true, true);
+	mDaylightText.setPosition(sf::Vector2f(std::floor(daylightBackgroundSize.x / 2.0f), std::floor(daylightBackgroundSize.y / 2.0f)));
 
 	mHoursText.setFont(mFonts.get(font));
 	mHoursText.setCharacterSize(22u);
 	mHoursText.setString(trmb::toStringWithPrecision(mHourCount, mFloatPrecision));
-	trmb::centerOrigin(mHoursText, true, false);
-	mHoursText.setPosition(sf::Vector2f(mBackground.getSize().x / 2.0f, 15.0f));
+	trmb::centerOrigin(mHoursText, true, true);
+	mHoursText.setPosition(sf::Vector2f(std::floor(daylightBackgroundSize.x + buffer + hourBackgroundSize.x / 2.0f), std::floor(hourBackgroundSize.y / 2.0f)));
 
 	mButton->setFont(font);
-	mButton->setCharacterSize(22u);
-	mButton->setText(trmb::Localize::getInstance().getString("daylightButton"));
+	mButton->setSize(buttonSize, false);
+	mButton->setText(trmb::Localize::getInstance().getString("daylightButton"), false);
+	mButton->setCharacterSize(13u);
 	mButton->setVisualScheme(sf::Color(95u, 158u, 160u, 255u), sf::Color(255u, 255u, 255u, 255u), sf::Color(0u, 0u, 0u, 255u)
 		, sf::Color(162u, 181u, 205u, 255u), sf::Color(255u, 255u, 255u, 255u), sf::Color(0u, 0u, 0u, 255u) // Hover
 		, sf::Color(88u, 146u, 148u, 255u), sf::Color(255u, 255u, 255u, 255u), sf::Color(0u, 0u, 0u, 255u)  // Depress
@@ -77,7 +103,7 @@ DaylightUI::DaylightUI(const sf::RenderWindow &window, trmb::Camera &camera, Fon
 	mButton->setPosition(0.0f, 0.0f);
 
 	mContainer.pack(mButton);
-	mContainer.setPosition(0.0f, 0.0f);
+	mContainer.setPosition(0.0f, daylightBackgroundSize.y + buffer);
 
 	// ALW - Calculate x, y coordinates relative to the center of the window,
 	// ALW - so GUI elements are equidistance from the center in any resolution.
@@ -113,7 +139,7 @@ void DaylightUI::add(float addend)
 	assert(("ALW - Logic Error: The hour count exceeds the max hours!", mMaxHours >= mHourCount));
 
 	mHoursText.setString(trmb::toStringWithPrecision(mHourCount, mFloatPrecision));
-	trmb::centerOrigin(mHoursText, true, false);
+	trmb::centerOrigin(mHoursText, true, true);
 }
 
 bool DaylightUI::subtract(float subtrahend)
@@ -126,7 +152,7 @@ bool DaylightUI::subtract(float subtrahend)
 		ret = true;
 		mHourCount -= subtrahend;
 		mHoursText.setString(trmb::toStringWithPrecision(mHourCount, mFloatPrecision));
-		trmb::centerOrigin(mHoursText, true, false);
+		trmb::centerOrigin(mHoursText, true, true);
 	}
 
 	return ret;
@@ -231,12 +257,13 @@ void DaylightUI::draw(sf::RenderTarget &target, sf::RenderStates states) const
 	if (!mHide)
 	{
 		target.draw(mBackground, states);
+		target.draw(mDaylightBackground, states);
+		target.draw(mHourBackground, states);
+
 		target.draw(mDaylightText, states);
 		target.draw(mHoursText, states);
-	}
-
-	if (!mHide && mMouseOver)
 		target.draw(mContainer, states);
+	}
 
 	// ALW - Restore the view
 	target.setView(previousView);
@@ -251,7 +278,7 @@ void DaylightUI::enable()
 void DaylightUI::disable()
 {
 	mDisable = true;
-	mContainer.disable(true);
+	mContainer.disable(false);
 }
 
 void DaylightUI::hide()

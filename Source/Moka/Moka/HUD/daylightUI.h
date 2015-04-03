@@ -87,6 +87,8 @@ private:
 	UIBundle			    &mUIBundle;
 
 	sf::RectangleShape	    mBackground;
+	sf::RectangleShape	    mDaylightBackground;
+	sf::RectangleShape	    mHourBackground;
 	sf::Text			    mDaylightText;
 	sf::Text			    mHoursText;
 	float				    mHourCount;
