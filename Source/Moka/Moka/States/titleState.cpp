@@ -39,11 +39,11 @@ TitleState::TitleState(trmb::StateStack& stack, trmb::State::Context context)
 	mText.setPosition(center - sf::Vector2f(0, 225));
 
 	const float x = center.x - 355.0f;
-	const float y = center.y - 110.0f;
+	const float y = center.y - 130.0f;
 	const float buttonHeight = 50.0f;
 
 	mEnglishButton = std::make_shared<trmb::Button>(context, Fonts::ID::Main, SoundEffects::ID::Button, Textures::ID::Buttons, 200, 50);
-	mEnglishButton->setPosition(x, y);
+	mEnglishButton->setPosition(x, y + buttonHeight);
 	mEnglishButton->setText(trmb::Localize::getInstance().getString("englishButton"));
 	mEnglishButton->setCallback([this]()
 	{
@@ -53,7 +53,7 @@ TitleState::TitleState(trmb::StateStack& stack, trmb::State::Context context)
 	});
 
 	mMalagasyButton = std::make_shared<trmb::Button>(context, Fonts::ID::Main, SoundEffects::ID::Button, Textures::ID::Buttons, 200, 50);
-	mMalagasyButton->setPosition(x, y + buttonHeight);
+	mMalagasyButton->setPosition(x, y + 2.0f * buttonHeight);
 	mMalagasyButton->setText(trmb::Localize::getInstance().getString("malagasyButton"));
 	mMalagasyButton->setCallback([this]()
 	{
@@ -108,9 +108,9 @@ void TitleState::repositionGUI()
 	mText.setPosition(center - sf::Vector2f(0, 225));
 
 	const float x = center.x - 355.0f;
-	const float y = center.y - 110.0f;
+	const float y = center.y - 130.0f;
 	const float buttonHeight = 50.0f;
 
-	mEnglishButton->setPosition(sf::Vector2f(x, y));
-	mMalagasyButton->setPosition(sf::Vector2f(x, y + buttonHeight));
+	mEnglishButton->setPosition(sf::Vector2f(x, y + buttonHeight));
+	mMalagasyButton->setPosition(sf::Vector2f(x, y + 2.0f * buttonHeight));
 }

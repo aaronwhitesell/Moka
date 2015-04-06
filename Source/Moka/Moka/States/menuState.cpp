@@ -51,8 +51,8 @@ MenuState::MenuState(trmb::StateStack& stack, trmb::State::Context context)
 	mControlsInst.setColor(sf::Color::Black);
 	mControlsInst.setStyle(sf::Text::Bold);
 	trmb::centerOrigin(mControlsInst);
-//  mControlsInst.setPosition(151, 360);
-	mControlsInst.setPosition(center.x - 249, center.y + 60);
+//	mControlsInst.setPosition(151, 355);
+	mControlsInst.setPosition(center.x - 249, center.y + 55);
 
 	mKeyboardArrowUp.setTexture(context.textures->get(Textures::ID::KeyboardArrowUp));
 	trmb::centerOrigin(mKeyboardArrowUp);
@@ -93,8 +93,8 @@ MenuState::MenuState(trmb::StateStack& stack, trmb::State::Context context)
 	mEscInst.setColor(sf::Color::Black);
 	mEscInst.setStyle(sf::Text::Bold);
 	trmb::centerOrigin(mEscInst, false, true);
-//  mEscInst.setPosition(78, 485);
-	mEscInst.setPosition(center.x - 322, center.y + 185);
+//	mEscInst.setPosition(92, 485);
+	mEscInst.setPosition(center.x - 308, center.y + 185);
 
 	mKeyboardCtrl.setTexture(context.textures->get(Textures::ID::KeyboardCtrl));
 	trmb::centerOrigin(mKeyboardCtrl);
@@ -115,18 +115,22 @@ MenuState::MenuState(trmb::StateStack& stack, trmb::State::Context context)
 	mToggleInst.setColor(sf::Color::Black);
 	mToggleInst.setStyle(sf::Text::Bold);
 	trmb::centerOrigin(mToggleInst, false, true);
-//  mToggleInst.setPosition(130, 525);
-	mToggleInst.setPosition(center.x - 270, center.y + 225);
+//	mToggleInst.setPosition(144, 525);
+	mToggleInst.setPosition(center.x - 256, center.y + 225);
 
 	mMosquitoInst.setColor(sf::Color::Black);
 	mMosquitoInst.setStyle(sf::Text::Bold);
 //	mMosquitoInst.setPosition(630, 153);
 	mMosquitoInst.setPosition(center.x + 230, center.y - 147);
+	if (trmb::Localize::getInstance().getLanguage() == "mg")
+		mMosquitoInst.setPosition(center.x + 255, center.y - 147);
 
 	mMalariaMosquitoInst.setColor(sf::Color::Black);
 	mMalariaMosquitoInst.setStyle(sf::Text::Bold);
 //	mMalariaMosquitoInst.setPosition(543, 180);
 	mMalariaMosquitoInst.setPosition(center.x + 143, center.y - 120);
+	if (trmb::Localize::getInstance().getLanguage() == "mg")
+		mMalariaMosquitoInst.setPosition(center.x + 110, center.y - 120);
 
 	mDamagedNetInst.setColor(sf::Color::Black);
 	mDamagedNetInst.setStyle(sf::Text::Bold);
@@ -152,19 +156,25 @@ MenuState::MenuState(trmb::StateStack& stack, trmb::State::Context context)
 	mMalariaResidentInst.setStyle(sf::Text::Bold);
 //	mMalariaResidentInst.setPosition(477, 396);
 	mMalariaResidentInst.setPosition(center.x + 77, center.y + 96);
+	if (trmb::Localize::getInstance().getLanguage() == "mg")
+		mMalariaResidentInst.setPosition(center.x + 28, center.y + 96);
 
 	mMalariaHouseMoquitoInst.setColor(sf::Color::Black);
 	mMalariaHouseMoquitoInst.setStyle(sf::Text::Bold);
 //	mMalariaHouseMoquitoInst.setPosition(292, 550);
 	mMalariaHouseMoquitoInst.setPosition(center.x - 108, center.y + 250);
+	if (trmb::Localize::getInstance().getLanguage() == "mg")
+		mMalariaHouseMoquitoInst.setPosition(center.x - 208, center.y + 250);
 
 	mHouseMoquitoInst.setColor(sf::Color::Black);
 	mHouseMoquitoInst.setStyle(sf::Text::Bold);
 //	mHouseMoquitoInst.setPosition(378, 573);
 	mHouseMoquitoInst.setPosition(center.x - 22, center.y + 273);
+	if (trmb::Localize::getInstance().getLanguage() == "mg")
+		mHouseMoquitoInst.setPosition(center.x - 17, center.y + 273);
 
 	const float x = center.x - 355.0f;
-	const float y = center.y - 110.0f;
+	const float y = center.y - 130.0f;
 	const float buttonHeight = 50.0f;
 
 	mPlayButton = std::make_shared<trmb::Button>(context, Fonts::ID::Main, SoundEffects::ID::Button, Textures::ID::Buttons, 200, 50);
@@ -261,7 +271,7 @@ void MenuState::repositionGUI()
 	mBackgroundSprite.setPosition(center);
 	mText.setPosition(center - sf::Vector2f(0, 225));
 
-	mControlsInst.setPosition(center.x - 249, center.y + 60);
+	mControlsInst.setPosition(center.x - 249, center.y + 55);
 	mKeyboardArrowUp.setPosition(center.x - 307, center.y + 85);
 	mKeyboardArrowDown.setPosition(center.x - 307, center.y + 120);
 	mKeyboardArrowLeft.setPosition(center.x - 342, center.y + 120);
@@ -269,24 +279,34 @@ void MenuState::repositionGUI()
 	mPlusMouseInst.setPosition(center.x - 231, center.y + 102);
 	mKeyboardMouseLeft.setPosition(center.x - 190, center.y + 102);
 	mKeyboardEsc.setPosition(center.x - 342, center.y + 185);
-	mEscInst.setPosition(center.x - 322, center.y + 185);
+	mEscInst.setPosition(center.x - 308, center.y + 185);
 	mKeyboardCtrl.setPosition(center.x - 342, center.y + 225);
 	mPlusFInst.setPosition(center.x - 315, center.y + 225);
 	mKeyboardF.setPosition(center.x - 290, center.y + 225);
-	mToggleInst.setPosition(center.x - 270, center.y + 225);
+	mToggleInst.setPosition(center.x - 256, center.y + 225);
 
 	mMosquitoInst.setPosition(center.x + 230, center.y - 147);
+	if (trmb::Localize::getInstance().getLanguage() == "mg")
+		mMosquitoInst.setPosition(center.x + 255, center.y - 147);
 	mMalariaMosquitoInst.setPosition(center.x + 143, center.y - 120);
+	if (trmb::Localize::getInstance().getLanguage() == "mg")
+		mMalariaMosquitoInst.setPosition(center.x + 110, center.y - 120);
 	mDamagedNetInst.setPosition(center.x + 97, center.y - 95);
 	mNetInst.setPosition(center.x + 97, center.y - 68);
 	mBedInst.setPosition(center.x + 97, center.y - 39);
 	mResidentInst.setPosition(center.x + 162, center.y + 68);
 	mMalariaResidentInst.setPosition(center.x + 77, center.y + 96);
+	if (trmb::Localize::getInstance().getLanguage() == "mg")
+		mMalariaResidentInst.setPosition(center.x + 28, center.y + 96);
 	mMalariaHouseMoquitoInst.setPosition(center.x - 108, center.y + 250);
+	if (trmb::Localize::getInstance().getLanguage() == "mg")
+		mMalariaHouseMoquitoInst.setPosition(center.x - 208, center.y + 250);
 	mHouseMoquitoInst.setPosition(center.x - 22, center.y + 273);
+	if (trmb::Localize::getInstance().getLanguage() == "mg")
+		mHouseMoquitoInst.setPosition(center.x - 17, center.y + 273);
 
 	const float x = center.x - 355.0f;
-	const float y = center.y - 110.0f;
+	const float y = center.y - 130.0f;
 	const float buttonHeight = 50.0f;
 
 	mPlayButton->setPosition(sf::Vector2f(x, y));

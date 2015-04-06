@@ -32,7 +32,7 @@ CreditState::CreditState(trmb::StateStack &stack, trmb::State::Context context)
 	mText.setPosition(center - sf::Vector2f(0, 225));
 
 	const float x = center.x - 355.0f;
-	const float y = center.y - 110.0f;
+	const float y = center.y - 130.0f;
 	const float buttonHeight = 50.0f;
 
 	mBackButton = std::make_shared<trmb::Button>(context, Fonts::ID::Main, SoundEffects::ID::Button, Textures::ID::Buttons, 200, 50);
@@ -82,7 +82,7 @@ void CreditState::repositionGUI()
 	mText.setPosition(center - sf::Vector2f(0, 225));
 
 	const float x = center.x - 355.0f;
-	const float y = center.y - 110.0f;
+	const float y = center.y - 130.0f;
 	const float buttonHeight = 50.0f;
 
 	mBackButton->setPosition(sf::Vector2f(x, y + buttonHeight));
