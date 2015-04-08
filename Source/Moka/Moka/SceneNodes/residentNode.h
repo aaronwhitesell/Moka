@@ -6,6 +6,9 @@
 #include "Trambo/SceneNodes/sceneNode.h"
 
 #include <SFML/Graphics/Rect.hpp>
+// #include <SFML/Graphics/CircleShape.hpp>  // ALW - mDebugShape
+// #include <SFML/Graphics/RenderStates.hpp> // ALW - mDebugShape
+// #include <SFML/Graphics/RenderTarget.hpp> // ALW - mDebugShape
 
 
 namespace sf
@@ -64,6 +67,8 @@ private:
 
 
 private:
+//	virtual void			drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const override; // ALW - mDebugShape
+
 	bool					isNetDamaged(int totalDamagedNets) const;
 	bool					isNetMint(int totalMintNets, int totalDamagedNets) const;
 
@@ -97,6 +102,7 @@ private:
 	const int				mResidentID;
 	const HouseNode * const mHouseNode;
 	bool					mHasMalaria;
+//	sf::CircleShape			mDebugShape;
 };
 
 #endif

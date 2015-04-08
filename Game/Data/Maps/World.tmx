@@ -1908,7 +1908,7 @@
     <property name="Color" value="Tan"/>
     <property name="Nets" value="0"/>
     <property name="Residents" value="2"/>
-    <property name="Style" value="na"/>
+    <property name="Style" value="Narrow"/>
    </properties>
   </object>
   <object name="House 1" type="House" x="256" y="320" width="64" height="192">
@@ -1928,7 +1928,7 @@
     <property name="Color" value="Tan"/>
     <property name="Nets" value="0"/>
     <property name="Residents" value="2"/>
-    <property name="Style" value="na"/>
+    <property name="Style" value="Narrow"/>
    </properties>
   </object>
   <object name="House 2" type="House" x="192" y="576" width="64" height="192">
@@ -1948,7 +1948,7 @@
     <property name="Color" value="Slate"/>
     <property name="Nets" value="0"/>
     <property name="Residents" value="2"/>
-    <property name="Style" value="na"/>
+    <property name="Style" value="Narrow"/>
    </properties>
   </object>
   <object name="House 3" type="House" x="320" y="576" width="64" height="192">
@@ -1968,7 +1968,7 @@
     <property name="Color" value="Slate"/>
     <property name="Nets" value="1"/>
     <property name="Residents" value="3"/>
-    <property name="Style" value="na"/>
+    <property name="Style" value="Narrow"/>
    </properties>
   </object>
   <object name="House 4" type="House" x="448" y="576" width="64" height="192">
@@ -1988,7 +1988,7 @@
     <property name="Color" value="Slate"/>
     <property name="Nets" value="1"/>
     <property name="Residents" value="4"/>
-    <property name="Style" value="na"/>
+    <property name="Style" value="Narrow"/>
    </properties>
   </object>
   <object name="House 5" type="House" x="576" y="576" width="64" height="192">
@@ -2008,7 +2008,7 @@
     <property name="Color" value="Slate"/>
     <property name="Nets" value="0"/>
     <property name="Residents" value="2"/>
-    <property name="Style" value="na"/>
+    <property name="Style" value="Narrow"/>
    </properties>
   </object>
   <object name="House 6" type="House" x="896" y="256" width="128" height="256">
@@ -2028,7 +2028,7 @@
     <property name="Color" value="Tan"/>
     <property name="Nets" value="2"/>
     <property name="Residents" value="6"/>
-    <property name="Style" value="na"/>
+    <property name="Style" value="Wide"/>
    </properties>
   </object>
   <object name="House 7" type="House" x="832" y="704" width="128" height="192">
@@ -2048,7 +2048,7 @@
     <property name="Color" value="Tan"/>
     <property name="Nets" value="1"/>
     <property name="Residents" value="5"/>
-    <property name="Style" value="na"/>
+    <property name="Style" value="Wide"/>
    </properties>
   </object>
   <object name="House 8" type="House" x="192" y="896" width="128" height="256">
@@ -2068,7 +2068,7 @@
     <property name="Color" value="Slate"/>
     <property name="Nets" value="2"/>
     <property name="Residents" value="6"/>
-    <property name="Style" value="na"/>
+    <property name="Style" value="Wide"/>
    </properties>
   </object>
   <object name="Clinic 0" type="Clinic" x="512" y="1024" width="512" height="320">

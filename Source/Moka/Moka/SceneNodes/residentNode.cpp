@@ -9,8 +9,7 @@
 #include <SFML/System/Vector2.hpp>
 
 #include <cassert>
-#include <cmath>
-#include <random>
+#include <string>
 
 
 ResidentNode::ResidentNode(int residentID, bool hasMalaria, const HouseNode * const houseNode)
@@ -32,8 +31,15 @@ ResidentNode::ResidentNode(int residentID, bool hasMalaria, const HouseNode * co
 , mResidentID(residentID)
 , mHouseNode(houseNode)
 , mHasMalaria(hasMalaria)
+//, mDebugShape(5.0f, 30u)
 {
 	generateSpawnPosition(houseNode->getCollisionBox());
+
+	// ALW - Uncomment to draw a magenta circle at the resident's actual position.
+//	mDebugShape.setFillColor(sf::Color(255u, 0u, 255u, 255u));
+//	mDebugShape.setOutlineColor(sf::Color(0u, 0u, 0u, 255u));
+//	mDebugShape.setOutlineThickness(1.0f);
+//	mDebugShape.setPosition(getPosition());
 }
 
 bool ResidentNode::hasMalaria() const
@@ -105,7 +111,12 @@ void ResidentNode::handleEvent(const trmb::Event &gameEvent)
 			sendMalariaMsg(); // ALW - Display patient zero
 	}
 }
-
+/*
+void ResidentNode::drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const
+{
+	target.draw(mDebugShape);
+}
+*/
 bool ResidentNode::isNetDamaged(int totalDamagedNets) const
 {
 	bool ret = false;
@@ -271,28 +282,28 @@ void ResidentNode::sendMalariaMsg()
 
 void ResidentNode::generateSpawnPosition(sf::FloatRect houseBoundingRect)
 {
-	std::random_device					randomDevice;
-	std::mt19937						generator(randomDevice());
-	std::uniform_int_distribution<>		distribution;
-
 	const float tileWidth = 64.0f;
-	assert(("The width of the house should divide evenly with the tileWidth!"
-		, std::floor(houseBoundingRect.width / tileWidth) == houseBoundingRect.width / tileWidth));
-	const int columns = static_cast<int>(houseBoundingRect.width / tileWidth);
-
-	decltype(distribution.param()) newWidthRange(0, columns - 1);
-	distribution.param(newWidthRange);
-	const int column = distribution(generator);
-
 	const float tileHeight = 64.0f;
-	assert(("The height of the house should divide evenly with the tileHeight!"
-		, std::floor(houseBoundingRect.height / tileHeight) == houseBoundingRect.height / tileHeight));
-	const int rows = static_cast<int>(houseBoundingRect.height / tileHeight);
 
-	decltype(distribution.param()) newHeightRange(0, rows - 1);
-	distribution.param(newHeightRange);
-	const int row = distribution(generator);
-	
+	const std::string style = mHouseNode->getInteractiveObject().getStyle();
+	const int row = trmb::randomInt(2);
+	int column = 0;
+
+	if (style == "Narrow")
+	{
+		// ALW - 1 tile wide
+		column = 0;
+	}
+	else if (style == "Wide")
+	{
+		// ALW - 2 tiles wide
+		column = trmb::randomInt(2);
+	}
+	else
+	{
+		assert(("Unkown style property.", false));
+	}
+
 	const float xResident = houseBoundingRect.left + column * tileWidth;
 	const float yResident = houseBoundingRect.top + row * tileHeight;
 	setPosition(sf::Vector2f(xResident, yResident));
