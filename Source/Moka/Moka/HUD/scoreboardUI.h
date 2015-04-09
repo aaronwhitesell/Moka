@@ -70,12 +70,15 @@ private:
 
 private:
 	virtual void		    draw(sf::RenderTarget &target, sf::RenderStates states) const final;
+	float					getMaxResultTextLength();
+	float					getMaxDescTextLength();
+	void					leftJustify(sf::Text &text);
+
 	void					enable();
 	void					disable();
 	void				    unhide();
 	void				    hide();
 
-	std::string             formatResult(int result);
 	void				    repositionGUI();
 
 
@@ -92,12 +95,12 @@ private:
 	sf::RectangleShape	    mBackground;
 	sf::Text				mResultText;
 	sf::RectangleShape	    mStatsBackground;
-	sf::Text				mBarrelText;
-	sf::Text				mDoorText;
-	sf::Text				mWindowText;
-	sf::Text				mNetText;
-	sf::Text				mCuredText;
-	sf::Text				mMalariaText;
+	sf::Text				mBarrelDescText;
+	sf::Text				mDoorDescText;
+	sf::Text				mWindowDescText;
+	sf::Text				mNetDescText;
+	sf::Text				mCuredDescText;
+	sf::Text				mMalariaDescText;
 
 	sf::Text				mBarrelResultText;
 	sf::Text				mDoorResultText;
