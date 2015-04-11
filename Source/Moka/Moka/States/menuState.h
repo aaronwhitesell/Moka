@@ -76,7 +76,7 @@ private:
 	sf::Text						mHouseMoquitoInst;
 
 	std::shared_ptr<trmb::Button>	mPlayButton;
-	std::shared_ptr<trmb::Button>	mCreditButton;
+//	std::shared_ptr<trmb::Button>	mCreditButton;
 	std::shared_ptr<trmb::Button>	mExitButton;
 	trmb::Container					mGUIContainer;
 };

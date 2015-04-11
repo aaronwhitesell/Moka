@@ -47,7 +47,7 @@ MenuState::MenuState(trmb::StateStack& stack, trmb::State::Context context)
 	mText.setColor(sf::Color(187, 10, 30, 255));
 	mText.setCharacterSize(125);
 	trmb::centerOrigin(mText);
-	mText.setPosition(center - sf::Vector2f(0, 225));
+	mText.setPosition(center - sf::Vector2f(0, 228));
 
 	mControlsInst.setColor(sf::Color::Black);
 	mControlsInst.setStyle(sf::Text::Bold);
@@ -175,7 +175,7 @@ MenuState::MenuState(trmb::StateStack& stack, trmb::State::Context context)
 		mHouseMoquitoInst.setPosition(center.x - 17, center.y + 273);
 
 	const float x = center.x - 355.0f;
-	const float y = center.y - 130.0f;
+	const float y = center.y - 105.0f;
 	const float buttonHeight = 50.0f;
 
 	mPlayButton = std::make_shared<trmb::Button>(context, Fonts::ID::Main, SoundEffects::ID::Button, Textures::ID::Buttons, 200, 50);
@@ -186,7 +186,7 @@ MenuState::MenuState(trmb::StateStack& stack, trmb::State::Context context)
 		requestStackPop();
 		requestStackPush(States::ID::Game);
 	});
-
+/*
 	mCreditButton = std::make_shared<trmb::Button>(context, Fonts::ID::Main, SoundEffects::ID::Button, Textures::ID::Buttons, 200, 50);
 	mCreditButton->setPosition(x, y + buttonHeight);
 	mCreditButton->setText(trmb::Localize::getInstance().getString("creditButton"));
@@ -194,9 +194,9 @@ MenuState::MenuState(trmb::StateStack& stack, trmb::State::Context context)
 	{
 		requestStackPush(States::ID::Credits);
 	});
-
+*/
 	mExitButton = std::make_shared<trmb::Button>(context, Fonts::ID::Main, SoundEffects::ID::Button, Textures::ID::Buttons, 200, 50);
-	mExitButton->setPosition(x, y + 2.0f * buttonHeight);
+	mExitButton->setPosition(x, y + buttonHeight);
 	mExitButton->setText(trmb::Localize::getInstance().getString("exitButton"));
 	mExitButton->setCallback([this]()
 	{
@@ -204,7 +204,7 @@ MenuState::MenuState(trmb::StateStack& stack, trmb::State::Context context)
 	});
 
 	mGUIContainer.pack(mPlayButton);
-	mGUIContainer.pack(mCreditButton);
+//	mGUIContainer.pack(mCreditButton);
 	mGUIContainer.pack(mExitButton);
 
 	// ALW - If you are coming from the Title Menu the music will be playing. However,
@@ -275,7 +275,7 @@ void MenuState::repositionGUI()
 	const sf::Vector2f center = sf::Vector2f(getContext().window->getSize() / 2u);
 
 	mBackgroundSprite.setPosition(center);
-	mText.setPosition(center - sf::Vector2f(0, 225));
+	mText.setPosition(center - sf::Vector2f(0, 228));
 
 	mControlsInst.setPosition(center.x - 249, center.y + 55);
 	mKeyboardArrowUp.setPosition(center.x - 307, center.y + 85);
@@ -312,10 +312,10 @@ void MenuState::repositionGUI()
 		mHouseMoquitoInst.setPosition(center.x - 17, center.y + 273);
 
 	const float x = center.x - 355.0f;
-	const float y = center.y - 130.0f;
+	const float y = center.y - 105.0f;
 	const float buttonHeight = 50.0f;
 
 	mPlayButton->setPosition(sf::Vector2f(x, y));
-	mCreditButton->setPosition(sf::Vector2f(x, y + buttonHeight));
-	mExitButton->setPosition(sf::Vector2f(x, y + 2.0f * buttonHeight));
+//	mCreditButton->setPosition(sf::Vector2f(x, y + buttonHeight));
+	mExitButton->setPosition(sf::Vector2f(x, y + buttonHeight));
 }

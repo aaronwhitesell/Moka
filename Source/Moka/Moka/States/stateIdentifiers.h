@@ -9,7 +9,7 @@ namespace States
 		None,
 		Title,
 		Menu,
-		Credits,
+//		Credits,
 		Game,
 		Pause,
 	};
