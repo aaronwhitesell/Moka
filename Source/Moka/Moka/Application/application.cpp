@@ -37,8 +37,8 @@ Application::Application()
 {
 	mWindow.setKeyRepeatEnabled(false);
 
-	mFonts.load(Fonts::ID::Main, "Data/Fonts/Sansation.ttf");
-	mFonts.load(Fonts::ID::Title, "Data/Fonts/Lazy Sans.ttf");
+	mFonts.load(Fonts::ID::Main, "Data/Fonts/Sansation-Regular.ttf");
+	mFonts.load(Fonts::ID::Title, "Data/Fonts/Flavors-Regular.ttf");
 
 	mTextures.load(Textures::ID::TitleScreen, "Data/Textures/TitleScreen.png");
 	mTextures.load(Textures::ID::MenuScreen, "Data/Textures/MenuScreen.png");
