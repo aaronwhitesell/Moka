@@ -35,13 +35,13 @@ PauseState::PauseState(trmb::StateStack& stack, trmb::State::Context context)
 	mPausedText.setString(trmb::Localize::getInstance().getString("gamePausedUI"));
 	mPausedText.setCharacterSize(70);
 	trmb::centerOrigin(mPausedText);
-	mPausedText.setPosition(0.5f * windowSize.x, 0.4f * windowSize.y);
+	mPausedText.setPosition(std::floor(0.5f * windowSize.x), std::floor(0.3f * windowSize.y));
 
 	const float buttonHeight = 50.0f;
 	const float buffer = 25.0f;
 
 	mReturnButton = std::make_shared<trmb::Button>(context, Fonts::ID::Main, SoundEffects::ID::Button, Textures::ID::Buttons, 200, 50);
-	mReturnButton->setPosition(0.5f * windowSize.x - 100, 0.4f * windowSize.y + buttonHeight + buffer);
+	mReturnButton->setPosition(std::floor(0.5f * windowSize.x - 100), std::floor(0.3f * windowSize.y + 0.5f * buttonHeight + buffer));
 	mReturnButton->setText(trmb::Localize::getInstance().getString("returnButton"));
 	mReturnButton->setCallback([this]()
 	{
@@ -50,7 +50,7 @@ PauseState::PauseState(trmb::StateStack& stack, trmb::State::Context context)
 	});
 
 	mBackToMenuButton = std::make_shared<trmb::Button>(context, Fonts::ID::Main, SoundEffects::ID::Button, Textures::ID::Buttons, 200, 50);
-	mBackToMenuButton->setPosition(0.5f * windowSize.x - 100, 0.4f * windowSize.y + 2.0f * buttonHeight + buffer);
+	mBackToMenuButton->setPosition(std::floor(0.5f * windowSize.x - 100), std::floor(0.3f * windowSize.y + 1.5f * buttonHeight + buffer));
 	mBackToMenuButton->setText(trmb::Localize::getInstance().getString("backToMenuButton"));
 	mBackToMenuButton->setCallback([this]()
 	{
@@ -83,6 +83,14 @@ bool PauseState::update(sf::Time)
 bool PauseState::handleEvent(const sf::Event& event)
 {
 	mGUIContainer.handleEvent(event);
+
+	// ALW - Escape pressed, return to the game (same as pressing the Return button)
+	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+	{
+		getContext().music->setPaused(false);
+		requestStackPop();
+	}
+
 	return false;
 }
 
@@ -102,11 +110,11 @@ void PauseState::repositionGUI()
 	const sf::Vector2f windowSize = sf::Vector2f(getContext().window->getSize());
 
 	mBackgroundShape.setSize(windowSize);
-	mPausedText.setPosition(0.5f * windowSize.x, 0.4f * windowSize.y);
+	mPausedText.setPosition(std::floor(0.5f * windowSize.x), std::floor(0.3f * windowSize.y));
 
 	const float buttonHeight = 50.0f;
 	const float buffer = 25.0f;
 
-	mReturnButton->setPosition(0.5f * windowSize.x - 100, 0.4f * windowSize.y + buttonHeight + buffer);
-	mBackToMenuButton->setPosition(0.5f * windowSize.x - 100, 0.4f * windowSize.y + 2.0f * buttonHeight + buffer);
+	mReturnButton->setPosition(std::floor(0.5f * windowSize.x - 100), std::floor(0.3f * windowSize.y + 0.5f * buttonHeight + buffer));
+	mBackToMenuButton->setPosition(std::floor(0.5f * windowSize.x - 100), std::floor(0.3f * windowSize.y + 1.5f * buttonHeight + buffer));
 }
