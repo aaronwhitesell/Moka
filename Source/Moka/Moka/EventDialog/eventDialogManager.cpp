@@ -52,7 +52,7 @@ bool EventDialogManager::isReadyToDisplay()
 void EventDialogManager::displayText(std::string string)
 {
 	mChatBoxUI.updateText(string, true);
-	mSoundPlayer.play(SoundEffects::ID::Button);
+	mSoundPlayer.play(SoundEffects::ID::Chat);
 }
 
 void EventDialogManager::start()

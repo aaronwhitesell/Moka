@@ -45,6 +45,7 @@ PauseState::PauseState(trmb::StateStack& stack, trmb::State::Context context)
 	mReturnButton->setText(trmb::Localize::getInstance().getString("returnButton"));
 	mReturnButton->setCallback([this]()
 	{
+		getContext().music->setPaused(false);
 		requestStackPop();
 	});
 
@@ -53,6 +54,7 @@ PauseState::PauseState(trmb::StateStack& stack, trmb::State::Context context)
 	mBackToMenuButton->setText(trmb::Localize::getInstance().getString("backToMenuButton"));
 	mBackToMenuButton->setCallback([this]()
 	{
+		getContext().music->stop();
 		requestStateClear();
 		requestStackPush(States::ID::Menu);
 	});
@@ -61,11 +63,6 @@ PauseState::PauseState(trmb::StateStack& stack, trmb::State::Context context)
 	mGUIContainer.pack(mBackToMenuButton);
 
 	getContext().music->setPaused(true);
-}
-
-PauseState::~PauseState()
-{
-	getContext().music->setPaused(false);
 }
 
 void PauseState::draw()

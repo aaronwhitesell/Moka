@@ -29,7 +29,6 @@ class PauseState : public trmb::State, public trmb::EventHandler
 {
 public:
 						PauseState(trmb::StateStack& stack, trmb::State::Context context);
-						~PauseState();
 
 	virtual void		draw();
 	virtual bool		update(sf::Time dt);

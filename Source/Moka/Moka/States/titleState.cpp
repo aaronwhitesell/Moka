@@ -66,7 +66,7 @@ TitleState::TitleState(trmb::StateStack& stack, trmb::State::Context context)
 	mGUIContainer.pack(mMalagasyButton);
 
 	// Play menu theme
-	context.music->play(Music::ID::MenuTheme);
+	context.music->play(Music::ID::WaitingII);
 }
 
 void TitleState::draw()

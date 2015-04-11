@@ -4,6 +4,7 @@
 
 #include "Trambo/Events/event.h"
 #include "Trambo/Localize/localize.h"
+#include "Trambo/Sounds/musicPlayer.h"
 #include "Trambo/Utilities/utility.h"
 
 #include <SFML/Graphics/Color.hpp>
@@ -205,6 +206,11 @@ MenuState::MenuState(trmb::StateStack& stack, trmb::State::Context context)
 	mGUIContainer.pack(mPlayButton);
 	mGUIContainer.pack(mCreditButton);
 	mGUIContainer.pack(mExitButton);
+
+	// ALW - If you are coming from the Title Menu the music will be playing. However,
+	// ALW - if you are coming from the pause menu then the music will be stopped.
+	if (sf::SoundSource::Stopped == context.music->getStatus())
+		context.music->play(Music::ID::WaitingII);
 }
 
 void MenuState::draw()

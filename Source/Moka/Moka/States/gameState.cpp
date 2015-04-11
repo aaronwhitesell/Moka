@@ -13,13 +13,10 @@
 
 GameState::GameState(trmb::StateStack &stack, trmb::State::Context context)
 : trmb::State(stack, context)
-, mWorld(*context.window, *context.fonts, *context.sounds)
+, mWorld(*context.window, *context.fonts, *context.sounds, *context.music)
 , mPlayer(*context.player)
 {
 	mPlayer.setMissionStatus(Player::MissionStatus::MissionRunning);
-
-	// Play game theme
-	context.music->play(Music::ID::MissionTheme);
 }
 
 void GameState::draw()
@@ -34,6 +31,7 @@ bool GameState::update(sf::Time dt)
 
 	if (mWorld.isScoreboardFinished())
 	{
+		getContext().music->stop();
 		requestStateClear();
 		requestStackPush(States::ID::Menu);
 	}

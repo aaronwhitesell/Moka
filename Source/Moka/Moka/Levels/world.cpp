@@ -26,6 +26,7 @@
 #include "Trambo/Localize/localize.h"
 #include "Trambo/SceneNodes/mapLayerNode.h"
 #include "Trambo/SceneNodes/spriteNode.h"
+#include "Trambo/Sounds/musicPlayer.h"
 #include "Trambo/Sounds/soundPlayer.h"
 #include "Trambo/Utilities/utility.h"
 
@@ -37,7 +38,7 @@
 #include <cassert>
 
 
-World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlayer& soundPlayer)
+World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlayer& soundPlayer, trmb::MusicPlayer& musicPlayer)
 : mBeginScoreboardEvent(0xf5e88b6e)
 , mFullscreen(0x5a0d2314)
 , mWindowed(0x11e3c735)
@@ -49,6 +50,7 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mTarget(window)
 , mFonts(fonts)
 , mSoundPlayer(soundPlayer)
+, mMusicPlayer(musicPlayer)
 , mTextures()
 , mSceneGraph()
 , mSceneLayers()
@@ -59,7 +61,7 @@ World::World(sf::RenderWindow& window, trmb::FontHolder& fonts, trmb::SoundPlaye
 , mHeroPosition(mWorldBounds.width / 2.f, mWorldBounds.height / 2.f)
 , mHero(nullptr)
 , mUIBundle(mChatBoxUI, mDaylightUI, mBarrelUI, mDoorUI, mWindowUI, mClinicUI, mHouseUI)
-, mChatBoxUI(window, mCamera, Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, mUIBundle)
+, mChatBoxUI(window, mCamera, Fonts::ID::Main, fonts, SoundEffects::ID::Chat, soundPlayer, mUIBundle)
 , mDaylightUI(window, mCamera, Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, mUIBundle, 0x6955d309, 0x128b8b25)
 , mMainTrackerUI(window, Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer)
 , mBarrelUI(Fonts::ID::Main, fonts, SoundEffects::ID::Button, soundPlayer, 0x6955d309, 0x128b8b25)
@@ -168,7 +170,9 @@ void World::handleEvent(const trmb::Event &gameEvent)
 			mEventDialogManager.start();
 
 			if (!mDisplaySimulationFinishedEventDialog)
+			{
 				sendEvent(mBeginScoreboardEvent);
+			}
 		}
 	}
 	else if (mBeginSimulationEvent == gameEvent.getType())
@@ -178,6 +182,7 @@ void World::handleEvent(const trmb::Event &gameEvent)
 
 		calculateTotalScheduledEventDialogs();
 		mEventDialogManager.start();
+		mMusicPlayer.play(Music::ID::Krakatoa);
 	}
 	else if (mSpawnMosquitoEvent == gameEvent.getType())
 	{

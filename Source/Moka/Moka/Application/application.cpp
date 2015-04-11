@@ -52,10 +52,12 @@ Application::Application()
 	mTextures.load(Textures::ID::KeyboardCtrl, "Data/Textures/KeyboardCtrl.png");
 	mTextures.load(Textures::ID::KeyboardF, "Data/Textures/KeyboardF.png");
 
-	mMusic.load(Music::ID::MenuTheme, "Data/Music/MenuTheme.ogg");
-	mMusic.load(Music::ID::MissionTheme, "Data/Music/MissionTheme.ogg");
+	mMusic.load(Music::ID::WaitingII, "Data/Music/WaitingII.ogg");
+	mMusic.load(Music::ID::Krakatoa, "Data/Music/Krakatoa.ogg");
 
 	mSounds.load(SoundEffects::ID::Button, "Data/Sounds/Button.wav");
+	mSounds.load(SoundEffects::ID::Chat, "Data/Sounds/Chat.wav");
+	mSounds.load(SoundEffects::ID::Object, "Data/Sounds/Object.wav");
 
 	mStatisticsText.setFont(mFonts.get(Fonts::ID::Main));
 	mStatisticsText.setPosition(5.f, 5.f);

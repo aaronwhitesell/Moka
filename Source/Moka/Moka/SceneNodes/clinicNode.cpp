@@ -155,7 +155,7 @@ void ClinicNode::updateCurrent(sf::Time)
 void ClinicNode::activate()
 {
 	updateOptionsUI();
-	mSoundPlayer.play(SoundEffects::ID::Button);
+	mSoundPlayer.play(SoundEffects::ID::Object);
 	InteractiveNode::sendEvent(mClinicUIActivated);
 	// ALW - ChatBoxUI::UpdateText() can generate a mCreatePrompt event when an interactive object
 	// ALW - is selected. This asynchronous event will force InteractiveNode classes to ignore

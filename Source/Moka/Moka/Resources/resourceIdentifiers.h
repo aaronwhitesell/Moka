@@ -39,6 +39,8 @@ namespace SoundEffects
 	enum class ID
 	{
 		Button,
+		Chat,
+		Object,
 	};
 }
 
@@ -46,8 +48,8 @@ namespace Music
 {
 	enum class ID
 	{
-		MenuTheme,
-		MissionTheme,
+		WaitingII,
+		Krakatoa,
 	};
 }
 

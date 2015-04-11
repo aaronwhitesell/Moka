@@ -38,6 +38,7 @@ namespace sf
 
 namespace trmb
 {
+	class MusicPlayer;
 	class SoundPlayer;
 }
 
@@ -52,7 +53,8 @@ class WindowNode;
 class World : public trmb::EventHandler
 {
 public:
-										World(sf::RenderWindow &window, trmb::FontHolder &fonts, trmb::SoundPlayer &soundPlayer);
+										World(sf::RenderWindow &window, trmb::FontHolder &fonts, trmb::SoundPlayer &soundPlayer
+											, trmb::MusicPlayer &MusicPlayer);
 										World(const World &) = delete;
 	World &								operator=(const World &) = delete;
 
@@ -148,6 +150,7 @@ private:
 	sf::RenderTarget							&mTarget;
 	trmb::FontHolder							&mFonts;
 	trmb::SoundPlayer							&mSoundPlayer;
+	trmb::MusicPlayer							&mMusicPlayer;
 	trmb::TextureHolder							mTextures;
 	
 	trmb::SceneNode								mSceneGraph;
