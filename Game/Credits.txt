@@ -1,36 +1,30 @@
 Tiles: RPG Pack
-Author: Kenney
+Author: Kenney - www.kenney.nl
 License: http://creativecommons.org/publicdomain/zero/1.0/
-Instructions: Credit Kenney.nl or www.kenney.nl
 Link: http://opengameart.org/content/rpg-pack-base-set
-
-Font: Flavors (Titles)
-Author: Sideshow
-License: http://www.fontsquirrel.com/fonts/flavors
-Instructions: Include license
-Link: http://www.fontsquirrel.com/fonts/flavors
-
-Font: Sansation (Buttons & Chat Dialog)
-Author: Bernd Montag
-License: http://www.fontsquirrel.com/license/sansation
-Instructions: Include license
-Link: http://www.fontsquirrel.com/fonts/sansation
 
 Images (Keyboard and Mouse Prompts)
 Author: Nicolae Berbece / xelu
 License: http://creativecommons.org/publicdomain/zero/1.0/
-Instructions: None
 Link: http://opengameart.org/content/free-keyboard-and-controllers-prompts-pack
 
 Sound Effects (Button, Chat Dialog, and Object Selection)
 Author: eklee & qubodup
 License: http://creativecommons.org/licenses/by/3.0/
-Instructions: Credit eklee & qubodup
 Link: http://opengameart.org/content/single-key-press-sounds
 
 Music (Krakatoa & Waiting II)
 Author: Joseph Gilbert / Kistol
 License: http://creativecommons.org/licenses/by/3.0/
-Instructions: Credit Joseph Gilbert / Kistol.
 Link: http://opengameart.org/content/krakatoa
 Link: http://opengameart.org/content/waiting-ii
+
+Font: Flavors (Titles)
+Author: Sideshow
+License: http://www.fontsquirrel.com/license/flavors
+Link: http://www.fontsquirrel.com/fonts/flavors
+
+Font: Sansation (Buttons & Chat Dialog)
+Author: Bernd Montag
+License: http://www.fontsquirrel.com/license/sansation
+Link: http://www.fontsquirrel.com/fonts/sansation
