@@ -32,7 +32,7 @@ InstallDir "$PROGRAMFILES\${APPNAME}"
 # Name "${COMPANYNAME} - ${APPNAME}"
 Name "${APPNAME}"
 Icon "Moka.ico"
-outFile "Moka_Attack.exe"
+outFile "Moka_Attack_Installer.exe"
  
 !include LogicLib.nsh
  
@@ -68,7 +68,9 @@ section "install"
 	file "sfml-graphics-2.dll"
 	file "sfml-system-2.dll"
 	file "sfml-window-2.dll"
+	file "Credits.txt"
 	file /r "Data"
+	file /r "Licenses"
  
 	# Uninstaller - See function un.onInit and section "uninstall" for configuration
 	writeUninstaller "$INSTDIR\uninstall.exe"
@@ -130,7 +132,9 @@ section "uninstall"
 	delete $INSTDIR\sfml-graphics-2.dll
 	delete $INSTDIR\sfml-system-2.dll
 	delete $INSTDIR\sfml-window-2.dll
+	delete $INSTDIR\Credits.txt
 	RMDir /r $INSTDIR\Data
+	RMDir /r $INSTDIR\Licenses
 	
 	# Always delete uninstaller as the last action
 	delete $INSTDIR\uninstall.exe
