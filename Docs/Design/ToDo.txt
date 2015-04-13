@@ -7,8 +7,7 @@
 07. Finished 10/16/2014 - Localization scheme
 08. Finished 12/18/2014 - Implement interactive objects
 09. Finished 12/27/2014 - HUD
-10. Simulation mode
-11. Scoreboard
-12. Display malaria facts
-13. Research malaria strings
-
+10. Finished 03/19/2015 - Simulation mode
+11. Finished 03/24/2015 - Scoreboard
+12. Finished 04/06/2015 - Localized
+13. Finished 04/12/2015 - Installer
