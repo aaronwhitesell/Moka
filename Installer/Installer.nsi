@@ -19,7 +19,7 @@
 # !define UPDATEURL "https://mokaattack.wordpress.com/" # "Product Updates" link
 # !define ABOUTURL "https://mokaattack.wordpress.com/" # "Publisher" link
 # This is the size (in kB) of all the files copied into "Program Files"
-!define INSTALLSIZE 10000
+!define INSTALLSIZE 10500
  
 RequestExecutionLevel admin ;Require admin rights on NT6+ (When UAC is turned on)
  
@@ -63,6 +63,8 @@ section "install"
 	file "Moka.exe"
 	file "Moka.ico"
 	file "libsndfile-1.dll"
+	file "msvcp120.dll"
+	file "msvcr120.dll"
 	file "openal32.dll"
 	file "sfml-audio-2.dll"
 	file "sfml-graphics-2.dll"
@@ -127,6 +129,8 @@ section "uninstall"
 	delete $INSTDIR\Moka.exe
 	delete $INSTDIR\Moka.ico
 	delete $INSTDIR\libsndfile-1.dll
+	delete $INSTDIR\msvcp120.dll
+	delete $INSTDIR\msvcr120.dll
 	delete $INSTDIR\openal32.dll
 	delete $INSTDIR\sfml-audio-2.dll
 	delete $INSTDIR\sfml-graphics-2.dll
